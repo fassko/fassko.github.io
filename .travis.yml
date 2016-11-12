@@ -3,6 +3,8 @@ python:
   - "3.5"
 install:
   - pip install awscli
+script:
+  -
 deploy:
   on:
     repo: fassko/fassko.github.com
