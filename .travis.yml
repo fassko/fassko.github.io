@@ -1,0 +1,15 @@
+language: generic
+
+deploy:
+  provider: s3
+  access_key_id: AKIAIFQ6DJAUYXMZ7RSA
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: kristaps.me
+  acl: public_read
+  region: eu-west-1
+  endpoint: kristaps.me.s3-website-eu-west-1.amazonaws.com
+  on:
+    repo: fassko/fassko.github.com
+    branch: master
+notifications:
+  email: false
