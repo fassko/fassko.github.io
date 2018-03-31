@@ -1,0 +1,46 @@
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+#Icon?
+ehthumbs.db
+Thumbs.db
+
+# Sass Cache remove
+.sass-cache/
+
+# Ignore CSS & Map File
+*.css
+*.map
+
+# Ignore node_modules
+node_modules/
+
+# Ignore any bower_components
+bower_components/
+
+# Ignore dist
+dist/
+
+# Ignore tmp
+tmp
