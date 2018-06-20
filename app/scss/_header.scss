@@ -1,3 +1,20 @@
-body {
-	background-color: blue;
+.header {
+	&__heading-container {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 50px 16px 20px;
+		text-align: center;
+	}
+	&__heading--lg {
+		font-size: 40px;
+		font-weight: 400;
+		color: #0C253D;
+	}
+	&__heading--sm {
+		font-size: 24px;
+		padding-top: 8px;
+		font-weight: 300;
+		color: #fff;
+	}
 }

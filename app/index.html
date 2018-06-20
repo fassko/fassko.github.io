@@ -1,44 +1,157 @@
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
-
-		<!-- dont mix these up, order matters -->
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<!-- general page info -->
-		<title></title>
-		<meta name="title" content=""> <!-- max 64 char -->
-		<meta name="author" content="">
-		<meta name="description" content=""><!-- max 160 char -->
-
-		<!-- web crawlers -->
-		<meta name="robots" content="index, follow"><!-- or noindex, nofollow. Should have robots.txt file along -->
-		<meta name="googlebot" content="index,follow"><!-- Google Specific -->
-
-		<!-- social sharing -->
-		<meta property="og:site_name" content="">
-		<meta property="og:title" content="">
-		<meta property="og:description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Kristaps Grinbergs Swift developer</title>
+		<meta name="title" content="Kristaps Grinbergs">
+		<meta name="author" content="Lota Plezere">
+		<meta name="description" content="Kristaps Grinbergs Swift developer, co-founder at Qminder">
+		<meta property="og:site_name" content="Kristaps Grinbergs">
+		<meta property="og:title" content="Kristaps Grinbergs Swift developer">
+		<meta property="og:description" content="Kristaps Grinbergs Swift developer, co-founder at Qminder">
 		<meta property="og:image" content="https://nortal.com..."><!-- min 600x315, better 1200x630 or more (1.91:1 ratio), less than 1mb -->
-		<meta property="og:type" content="website"><!--needed for Facebook sharing -->
-		<meta property="og:url" content="https://nortal.com/..."><!-- url of what you are referring to (your website, usually)
-		<meta name="twitter:image" content="https://nortal.com/..."><!-- ratio of 2:1, min 300x157, max 4096x4096, less than 5MB. JPG, PNG, WEBP and GIF supported. GIF only shows the first frame. SVG not supported. -->
-		<meta name="twitter:image:alt" content="..."><!-- maximum 420 characters -->
-		<meta name="twitter:card" content="summary_large_image">  <!-- best to stick to this option. Also available "summary", "app" and "player" (more rules apply) -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://nortal.com/...">
+		<meta name="twitter:card" content="summary_large_image">
 
-		<!-- favicons - basic set - use a generator for better results, drop the favicon files into the root of your site -->
-		<link rel="icon" href="path/to/favicon.png">
-		<link rel="apple-touch-icon-precomposed" href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png">
+		<!-- <link rel="preload" href="/images/..." as="image" media="(min-width: 64em)"> -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
-		<!-- styles -->
-		<!-- <link rel="stylesheet" href="css/normalize.css"> -->
+		<!--build:css css/main.min.css -->
 		<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+		<!-- endbuild -->
+		<!-- favicons - basic set - use a generator for better results, drop the favicon files into the root of your site -->
+		<!-- <link rel="icon" href="path/to/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href=""> -->
+
 	</head>
 	<body>
-		HI
-		
-		<!-- your script tags go at the bottom of the body, except modernizr(or other polyfill), if you use one (that goes to the head) -->
+		<div class="wrapper">
+			<div class="header">
+				<h1 class="header__heading-container">
+					<span class="header__heading--lg">Kristaps Grinbergs</span>
+					<span class="header__heading--sm">Swift developer</span>
+				</h1>
+			</div>
+			<div class="container">
+				<div class="about">
+					<div class="about__section">
+						<h2>
+							<span class="highlight-heading">About</span>
+						</h2>
+						<p class="txt txt--dark">Co-Founder, mobile developer at Qminder. Passionate about mobile applications. Loves cats. </p>
+						<p class="txt txt--dark">I have bachelors, masters and unfinished PhD in Computer science. Strong in iOS, tvOS, watchOS development. Passionate about mobile applications. Right now working on the easiest waiting line management in the world - Qminder.</p>
+					</div>
+					<div class="about__section">
+						<h2>
+							<span class="highlight-heading">Work experience</span>
+						</h2>
+						<div class="about__content-entry">
+							<div class="about__work-header">
+								<div class="about__work-position">
+									<h3>Co-founder and Swift developer</h3>
+									<a href="" class="about__work-company">Qminder, United Kingdom</a>
+								</div>
+								<div class="about__work-date">
+									Aug 2011 - present
+								</div>
+							</div>
+							<div class="about__work-description txt txt--dark">
+								Building waiting list management for physical locations (iOS, tvOS).
+							</div>
+						</div>
+						<div class="about__content-entry">
+							<div class="about__work-header">
+								<div class="about__work-position">
+									<h3>Senior Software Engineer</h3>
+									<a href="" class="about__work-company">Tieto, Latvia</a>
+								</div>
+								<div class="about__work-date">
+									Oct 2007 – Sep 2012
+								</div>
+							</div>
+							<div class="about__work-description txt txt--dark">
+								Participated in one of the biggest life insurance projects in Latvia and developet and maintained the Rural Support Service information system.
+							</div>
+						</div>
+					</div>
+					<div class="about__section">
+						<h2>
+							<span class="highlight-heading">Projects</span>
+						</h2>
+            <div class="about__content-entry">
+              <h3>Qminder iOS app & tvOS</h3>
+              <p class="txt txt--dark">text here</p>
+            </div>
+            <div class="about__content-entry">
+              <h3>MeteoTartu app for iOS, tvOS, watchOS</h3>
+              <p class="txt txt--dark">Application to show data from the weather station that has been working since the Ocober of 1999 in Tartu, Estonia, at the roof of the Physics department on the University of Tartu.</p>
+            </div>
+          </div>
+				</div>
+
+				<div class="additional-info">
+					<div class="additional-info__section">
+						<div class="additional-info__content-entry">
+							<h2>
+								<span class="highlight-heading">Contacts</span>
+							</h2>
+              <div class="additional-info__contacts txt txt--dark">
+                <a href="" class="additional-info__contact">
+                  <span class="additional-info__icon"><i class="far fa-envelope"></i></span>
+                  fassko@gmail.com
+                </a>
+                <a href="" class="additional-info__contact">
+                  <span class="additional-info__icon"><i class="fas fa-phone"></i></span>
+                  +372 58576560
+                </a>
+                <a href="#" class="additional-info__contact">
+                  <span class="additional-info__icon"><i class="fab fa-linkedin-in"></i></span>
+                  kristapsgrinbergs
+                </a>
+                <a href="" class="additional-info__contact">
+                  <span class="additional-info__icon"><i class="fab fa-github"></i></span>
+                  fassko
+                </a>
+                <a href="" class="additional-info__contact">
+                  <span class="additional-info__icon"><i class="fab fa-twitter"></i></span>
+                  @fassko
+                </a>
+              </div>
+						</div>
+					</div>
+          <div class="additional-info__section">
+            <div class="additional-info__content-entry">
+              <h2>
+                <span class="highlight-heading">Education</span>
+              </h2>
+              <div class="additional-info__education-list txt txt--dark">
+                <div class="additional-info__education-entry">
+                  <span class="additional-info__education-entry-item additional-info__education-title">Phd in Computer Science (unfinished)</span>
+                  <a href="" class="additional-info__education-entry-item additional-info__education-school">University of Latvia</a>
+                  <span class="additional-info__education-entry-item additional-info__education-year">2010 – 2012</span>
+                </div>
+                <div class="additional-info__education-entry">
+                  <span class="additional-info__education-entry-item additional-info__education-title">MSc in Computer Science</span>
+                  <a href="" class="additional-info__education-entry-item additional-info__education-school">University of Latvia</a>
+                  <span class="additional-info__education-entry-item additional-info__education-year">2008 – 2010</span>
+                </div>
+                <div class="additional-info__education-entry">
+                  <span class="additional-info__education-entry-item additional-info__education-title">BSc in Computer Science</span>
+                  <a href="" class="additional-info__education-entry-item additional-info__education-school">University of Latvia</a>
+                  <span class="additional-info__education-entry-item additional-info__education-year">2004 – 2008</span>
+                </div>
+              </div>
+            </div>
+          </div>
+				</div>
+			</div>
+		</div>
+		<!--build:js js/main.min.js -->
+		<script src="js/main.js"></script>
+		<!-- endbuild -->
 	</body>
 </html>

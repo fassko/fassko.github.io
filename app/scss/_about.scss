@@ -1,0 +1,32 @@
+.about {
+	width: 68%;
+	border-right: solid 1px #fff;
+	padding: 10px 40px 10px 10px;
+	&__section {
+		margin: 20px 0;
+	}
+	&__content-entry {
+		margin-bottom: 22px;
+	}
+	&__work-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 12px;
+	}
+	&__work-position {
+		display: flex;
+		flex-direction: column;
+    padding-right: 8px;
+	}
+	&__work-company {
+		font-size: 14px;
+		color: #484848;
+    text-decoration: none;
+	}
+	&__work-date {
+		font-size: 14px;
+    margin-top: 4px;
+	}
+
+}

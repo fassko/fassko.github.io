@@ -39,8 +39,5 @@ node_modules/
 # Ignore any bower_components
 bower_components/
 
-# Ignore dist
-dist/
-
 # Ignore tmp
 tmp
