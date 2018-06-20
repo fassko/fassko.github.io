@@ -2,6 +2,9 @@
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
 	letter-spacing: 0.4px;
+  @media(max-width: 767px) {
+    line-height: 1.4;
+  }
 }
 
 body {

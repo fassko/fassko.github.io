@@ -2,6 +2,11 @@
 	width: 68%;
 	border-right: solid 1px #fff;
 	padding: 10px 40px 10px 10px;
+  @media(max-width: 767px) {
+    width: 100%;
+    border: 0;
+    padding: 10px 10px 0;
+  }
 	&__section {
 		margin: 20px 0;
 	}
@@ -13,6 +18,9 @@
 		justify-content: space-between;
 		align-items: baseline;
 		margin-bottom: 12px;
+    @media(max-width: 767px) {
+      flex-direction: column;
+    }
 	}
 	&__work-position {
 		display: flex;
@@ -23,10 +31,17 @@
 		font-size: 14px;
 		color: #484848;
     text-decoration: none;
+    @media(max-width: 767px) {
+      padding: 10px 0;
+      text-decoration: underline;
+      font-size: 16px;
+    }
 	}
 	&__work-date {
 		font-size: 14px;
     margin-top: 4px;
+    @media(max-width: 767px) {
+      font-size: 16px;
+    }
 	}
-
 }
