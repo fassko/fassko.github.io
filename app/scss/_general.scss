@@ -1,15 +1,15 @@
 * {
 	box-sizing: border-box;
-	font-family: 'Roboto', sans-serif;
 	letter-spacing: 0.4px;
+	font-family: 'Roboto', sans-serif;
   @media(max-width: 767px) {
     line-height: 1.4;
   }
 }
 
 body {
-	margin: 0;
 	height: 100%;
+	margin: 0;
 }
 
 p {
@@ -20,35 +20,36 @@ a {
 	color: inherit;
 }
 a:hover {
-	opacity: 0.7;
   cursor: pointer;
+	opacity: 0.7;
 }
 
 h1 {
 	margin: 0;
 }
+
 h2 {
+	position: relative;
 	margin: 6px 0 14px 0;
 	color: #fff;
 	font-weight: 300;
-	position: relative;
 }
+
 .highlight-heading {
-	box-shadow: inset 0 -10px limegreen;
 	opacity: 0.8;
+	box-shadow: inset 0 -10px limegreen;
 }
 
 h3 {
 	margin: 4px 0 6px;
 	color: #0C253D;
 	font-size: 18px;
-
 }
 
 .txt {
+	letter-spacing: 0.4px;
 	color: #0C253D;
 	font-weight: 300;
-	letter-spacing: 0.4px;
 }
 
 .txt--regular {

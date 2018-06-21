@@ -5,19 +5,16 @@
 		margin: 0;
 		padding: 50px 16px 20px;
 		text-align: center;
-    @media(max-width: 767px) {
-      padding-bottom: 4px;
-    }
 	}
 	&__heading--lg {
+		color: #0C253D;
 		font-size: 40px;
 		font-weight: 400;
-		color: #0C253D;
 	}
 	&__heading--sm {
-		font-size: 24px;
 		padding-top: 8px;
-		font-weight: 300;
 		color: #fff;
+		font-size: 24px;
+		font-weight: 300;
 	}
 }

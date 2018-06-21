@@ -42,8 +42,6 @@ gulp.task('browserSync', function() {
 gulp.task('useref', function(){
   return gulp.src('app/*.html')
     .pipe(useref())
-    // Minifies only if it's a JavaScript file
-    .pipe(gulpIf('*.js', uglify()))
 		.pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
 });
@@ -87,7 +85,7 @@ gulp.task('build', function(callback) {
 
 
 gulp.task('default', () =>
-    gulp.src('app/css/*.css') 
+    gulp.src('app/css/*.css')
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false

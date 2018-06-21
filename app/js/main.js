@@ -15,38 +15,3 @@ function renderSkilltoDOM(skill) {
   SKILLS.forEach((skill) => {
     renderSkilltoDOM(skill);
   });
-
-
-
-
-
-// };
-//
-// items.forEach(function(item){
-//   copy.push(item)
-// });
-
-
-// function logArrayElements(element, index, array) {
-//   console.log('a[' + index + '] = ' + element);
-// }
-//
-// array.forEach(function(currentValue, index, arr), thisValue);
-//
-// arr.forEach((num, index) => {
-//     return arr[index] = num * 2;
-// });
-//
-// data.messages.forEach((message) => {
-//   const author = message.author;
-//   const msg = message.content;
-//   const time = message.created_at;
-//   allMessages.insertAdjacentHTML("afterbegin",
-//     `<li>
-//     <span class="time">${time.substring(11, 16)}</span>
-//     <span class="author">${author}:</span>
-//     ${msg}
-//     </li>`);
-// });
-// });
-// }
