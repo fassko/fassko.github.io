@@ -4,7 +4,7 @@
   @media(max-width: 767px) {
     width: 100%;
     border: 0;
-    padding: 0 10px 10px;
+    padding: 0;
   }
 	&__section {
 		margin: 20px 0;
@@ -32,11 +32,16 @@
   }
   &__education-entry {
     padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 
-  &__education-entry-item {
-    display: block;
-  }
+  // &__education-entry-item {
+  //   display: block;
+  // }
   &__education-title {
     font-weight: bold;
   }

@@ -5,6 +5,9 @@
 		margin: 0;
 		padding: 50px 16px 20px;
 		text-align: center;
+    @media(max-width: 767px) {
+      padding-bottom: 4px;
+    }
 	}
 	&__heading--lg {
 		font-size: 40px;

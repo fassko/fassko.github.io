@@ -1,11 +1,11 @@
 .about {
 	width: 68%;
-	border-right: solid 1px #fff;
+	border-right: solid 1px #c4ccd3;
 	padding: 10px 40px 10px 10px;
   @media(max-width: 767px) {
     width: 100%;
     border: 0;
-    padding: 10px 10px 0;
+    padding: 0;
   }
 	&__section {
 		margin: 20px 0;
@@ -44,4 +44,7 @@
       font-size: 16px;
     }
 	}
+  &__subproject {
+    padding-top: 10px;
+  }
 }
