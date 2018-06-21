@@ -26,6 +26,9 @@
 ehthumbs.db
 Thumbs.db
 
+gulpfile.js
+package.json
+
 # Sass Cache remove
 .sass-cache/
 
@@ -35,6 +38,9 @@ Thumbs.db
 
 # Ignore node_modules
 node_modules/
+
+# Ignore app
+app/
 
 # Ignore any bower_components
 bower_components/
