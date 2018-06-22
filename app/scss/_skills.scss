@@ -1,0 +1,39 @@
+.skills {
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+  @media(max-width: 767px) {
+    padding: 0;
+  }
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @media(max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+  &__title {
+    width: 30%;
+    @media(max-width: 767px) {
+      width: 100%
+    }
+  }
+  &__bar {
+    width: 100%;
+    width: 70%;
+    height: 8px;
+    margin: 2px 0 16px 10px;
+    background-color: RGBA(255,255,255, 0.2);
+    background-color: RGBA(133, 148, 162, 0.8);
+    @media(max-width: 767px) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  &__progress {
+    height: 8px;
+    background-color: RGB(133, 148, 162);
+    background-color: RGB(255,255,255, 0.5);
+  }
+}

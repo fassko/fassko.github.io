@@ -1,0 +1,51 @@
+.about {
+	width: 68%;
+	padding: 10px 40px 10px 10px;
+	border-right: solid 1px #c4ccd3;
+  @media(max-width: 767px) {
+    width: 100%;
+    padding: 0;
+    border: 0;
+  }
+	&__section {
+		margin: 20px 0;
+	}
+	&__content-entry {
+		margin-bottom: 22px;
+	}
+	&__work-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 12px;
+    @media(max-width: 767px) {
+      flex-direction: column;
+    }
+	}
+	&__work-position {
+		display: flex;
+		flex-direction: column;
+    padding-right: 8px;
+	}
+	&__work-company {
+    text-decoration: none;
+		color: #484848;
+		font-size: 14px;
+    @media(max-width: 767px) {
+      padding: 10px 0;
+      text-decoration: underline;
+      font-size: 16px;
+    }
+	}
+	&__work-date {
+    margin-top: 4px;
+
+		font-size: 14px;
+    @media(max-width: 767px) {
+      font-size: 16px;
+    }
+	}
+  &__subproject {
+    padding-top: 10px;
+  }
+}
