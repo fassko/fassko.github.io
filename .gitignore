@@ -33,10 +33,10 @@ Thumbs.db
 *.css
 *.map
 
-# Ignore node_modules
+# Ignore node_modules, app
 node_modules/
 
-# Ignore any bower_components
+# Ignore any bower_components and package files
 bower_components/
 
 # Ignore tmp
