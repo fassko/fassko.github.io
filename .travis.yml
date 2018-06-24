@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "lts/*"
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
+before_script:
+  - npm install -g gulp-cli
+script:
+  - gulp
+  - gulp deploy
+branches:
+  only:
+    - develop
