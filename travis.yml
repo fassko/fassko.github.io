@@ -1,11 +1,12 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "8.11.3"
+  - "lts/*"
 cache:
   yarn: true
   directories:
     - "node_modules"
 before_script:
   - npm install -g gulp-cli
-script: gulp deploy
+script:
+  - gulp
+  - gulp deploy
