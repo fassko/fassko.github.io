@@ -8,8 +8,7 @@ cache:
 before_script:
   - npm install -g gulp-cli
 script:
-  - gulp
-  - gulp deploy
+  - gulp build
 branches:
   only:
     - develop
