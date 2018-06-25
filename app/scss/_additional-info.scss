@@ -3,8 +3,8 @@
 	padding: 10px 10px 10px 40px;
   @media(max-width: 767px) {
     width: 100%;
-    border: 0;
     padding: 0;
+    border: 0;
   }
 	&__section {
 		margin: 20px 0;
@@ -26,22 +26,22 @@
     }
   }
   &__avatar {
-    border-radius: 50%;
-    height: 100px;
     width: 100px;
+    height: 100px;
     margin-bottom: 10px;
+    border-radius: 50%;
     @media(max-width: 767px) {
       display: none;
     }
   }
   & i {
-    color: #fff;
     margin-right: 4px;
+    color: #fff;
   }
   &__education-entry {
-    padding-bottom: 12px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 12px;
     &:last-child {
       padding-bottom: 0;
     }
@@ -50,11 +50,12 @@
     font-weight: bold;
   }
   &__education-school {
-		font-size: 14px;
-		color: #484848;
-    text-decoration: none;
     padding-top: 4px;
     padding-bottom: 4px;
+    text-decoration: none;
+		color: #484848;
+
+		font-size: 14px;
     @media(max-width: 767px) {
       padding: 10px 0;
       text-decoration: underline;
