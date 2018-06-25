@@ -30,7 +30,6 @@ Thumbs.db
 .sass-cache/
 
 # Ignore CSS & Map File
-*.css
 *.map
 
 # Ignore node_modules
