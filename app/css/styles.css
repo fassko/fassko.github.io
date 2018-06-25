@@ -132,8 +132,8 @@ h3 {
   @media (max-width: 767px) {
     .additional-info {
       width: 100%;
-      border: 0;
-      padding: 0; } }
+      padding: 0;
+      border: 0; } }
   .additional-info__section {
     margin: 20px 0; }
   @media (max-width: 767px) {
@@ -157,22 +157,22 @@ h3 {
       .additional-info__avatar {
         display: none; } }
   .additional-info i {
-    color: #fff;
-    margin-right: 4px; }
+    margin-right: 4px;
+    color: #fff; }
   .additional-info__education-entry {
-    padding-bottom: 12px;
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    padding-bottom: 12px; }
     .additional-info__education-entry:last-child {
       padding-bottom: 0; }
   .additional-info__education-title {
     font-weight: bold; }
   .additional-info__education-school {
-    font-size: 14px;
-    color: #484848;
-    text-decoration: none;
     padding-top: 4px;
-    padding-bottom: 4px; }
+    padding-bottom: 4px;
+    text-decoration: none;
+    color: #484848;
+    font-size: 14px; }
     @media (max-width: 767px) {
       .additional-info__education-school {
         padding: 10px 0;
