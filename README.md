@@ -4,7 +4,7 @@
 
 **+372 58576560**
 
-[LinedIn](https://www.linkedin.com/in/kristapsgrinbergs/)
+[LinkedIn](https://www.linkedin.com/in/kristapsgrinbergs/)
 
 [Github](https://github.com/fassko)
 
