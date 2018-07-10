@@ -40,15 +40,17 @@ h3 {
   font-size: 18px; }
 
 .txt {
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
   color: #0C253D;
-  font-weight: 300; }
+  font-weight: 300;
+  line-height: 24px; }
 
 .txt--regular {
   font-weight: 400; }
 
 .header__heading-container {
   display: flex;
+  align-items: center;
   flex-direction: column;
   margin: 0;
   padding: 50px 16px 20px;
@@ -59,10 +61,10 @@ h3 {
   font-size: 40px;
   font-weight: 400; }
 
-.header__heading--sm {
-  padding-top: 8px;
+.header__heading--md {
+  padding-top: 12px;
   color: #fff;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 300; }
 
 .wrapper {
