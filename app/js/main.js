@@ -17,9 +17,6 @@ function renderSkilltoDOM(skill) {
   SKILLS_CONT.insertAdjacentHTML("beforeend",
     `<div class="skills__item">
       <span class="txt txt--dark skills__title">${skill[0]}</span>
-      <div class="skills__bar">
-        <div class="skills__progress" style="width:${skill[1]}%"></div>
-      </div>
     </div>`
   );
 }

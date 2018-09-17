@@ -43,7 +43,7 @@ h3 {
   letter-spacing: 0.5px;
   color: #0C253D;
   font-weight: 300;
-  line-height: 24px; }
+  line-height: 26px; }
 
 .txt--regular {
   font-weight: 400; }
@@ -196,7 +196,8 @@ h3 {
       .skills__item {
         flex-direction: column; } }
   .skills__title {
-    width: 30%; }
+    width: 30%;
+    padding-bottom: 8px; }
     @media (max-width: 767px) {
       .skills__title {
         width: 100%; } }
