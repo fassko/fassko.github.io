@@ -10,8 +10,8 @@ before_script:
 script:
   - gulp build
 branches:
-  only:
-    - develop
+  except:
+    - master
 deploy:
   provider: pages
   skip-cleanup: true
