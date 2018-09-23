@@ -20,3 +20,5 @@ deploy:
   target-branch: master
   on:
     branch: develop
+after_deploy:
+  - ./clear_cache.sh
