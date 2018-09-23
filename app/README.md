@@ -12,4 +12,4 @@
 
 ## Contributing
 
-For every new feature create a new branch from **develop** and make a PR against **develop**. **master** and **developer** branches are protected.
+For every new feature create a new branch from **develop** and make a PR against **develop**.
