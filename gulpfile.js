@@ -52,6 +52,11 @@ gulp.task("cname", function(){
   .pipe(gulp.dest('dist/'))
 });
 
+gulp.task("readme", function(){
+  return gulp.src('app/README.md')
+  .pipe(gulp.dest('dist/'))
+});
+
 gulp.task('images', function(){
   return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
   // Caching images that ran through imagemin
@@ -84,7 +89,7 @@ gulp.task('build', function(callback) {
   runSequence(
     'clean:dist',
     'sass',
-    ['useref', 'images', 'fonts', 'cname'],
+    ['useref', 'images', 'fonts', 'cname', 'readme'],
     callback
   )
 })
