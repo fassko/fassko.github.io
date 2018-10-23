@@ -10,5 +10,15 @@ before_script:
 script:
   - gulp build
 branches:
-  only:
-    - develop
+  except:
+    - master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: dist
+  target-branch: master
+  on:
+    branch: develop
+after_deploy:
+  - ./clear_cache.sh
