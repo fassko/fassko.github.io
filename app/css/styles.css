@@ -83,11 +83,12 @@ h3 {
       width: 100%;
       padding: 0px 30px 0 30px; } }
   .container:last-child {
-    padding-bottom: 60px; }
+    padding-bottom: 60px;
+    padding-top: 0; }
 
 .about {
   width: 68%;
-  padding: 10px 40px 10px 10px;
+  padding: 10px 40px 0 0;
   border-right: solid 1px #c4ccd3; }
   @media (max-width: 767px) {
     .about {
@@ -96,8 +97,12 @@ h3 {
       border: 0; } }
   .about__section {
     margin: 20px 0; }
+    .about__section:last-child {
+      margin-bottom: 0; }
   .about__content-entry {
     margin-bottom: 22px; }
+    .about__content-entry:last-child {
+      margin-bottom: 0; }
   .about__work-header {
     display: flex;
     align-items: baseline;
@@ -183,8 +188,7 @@ h3 {
 
 .skills {
   width: 100%;
-  padding-right: 10px;
-  padding-left: 10px; }
+  margin-top: 20px; }
   @media (max-width: 767px) {
     .skills {
       padding: 0; } }
