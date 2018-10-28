@@ -1,6 +1,6 @@
 .about {
 	width: 68%;
-	padding: 10px 40px 10px 10px;
+	padding: 10px 40px 0 0;
 	border-right: solid 1px #c4ccd3;
   @media(max-width: 767px) {
     width: 100%;
@@ -9,9 +9,15 @@
   }
 	&__section {
 		margin: 20px 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
 	}
 	&__content-entry {
 		margin-bottom: 22px;
+    &:last-child {
+      margin-bottom: 0;
+    }
 	}
 	&__work-header {
 		display: flex;
