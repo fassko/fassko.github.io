@@ -1,24 +1,33 @@
-language: node_js
-node_js:
-  - "lts/*"
-cache:
-  yarn: true
-  directories:
-    - "node_modules"
-before_script:
-  - npm install -g gulp-cli
+language: ruby
+sudo: false
+cache: bundler
+rvm: 2.5.1
+
 script:
-  - gulp build
-branches:
-  except:
-    - master
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local-dir: dist
-  target-branch: master
-  on:
-    branch: develop
-after_deploy:
-  - ./clear_cache.sh
+  - bundle exec jekyll build --future --drafts
+
+#
+# language: node_js
+# node_js:
+#   - "lts/*"
+# cache:
+#   yarn: true
+#   directories:
+#     - "node_modules"
+# before_script:
+#   - npm install -g gulp-cli
+# script:
+#   - gulp build
+# branches:
+#   except:
+#     - master
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   local-dir: dist
+#   target-branch: master
+#   on:
+#     branch: develop
+# after_deploy:
+#   - ./clear_cache.sh
