@@ -4,7 +4,7 @@ cache: bundler
 rvm: 2.5.3
 
 script:
-  - bundle exec jekyll build --future --drafts
+  - bundle exec jekyll build
 
 branches:
   except:
