@@ -6,16 +6,16 @@ rvm: 2.5.3
 script:
   - bundle exec jekyll build --future --drafts
 
-# branches:
-#   except:
-#     - master
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   github-token: $GITHUB_TOKEN
-#   local-dir: dist
-#   target-branch: master
-#   on:
-#     branch: develop
-# after_deploy:
-#   - ./clear_cache.sh
+branches:
+  except:
+    - master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: _site
+  target-branch: master
+  on:
+    branch: develop
+after_deploy:
+  - ./clear_cache.sh
