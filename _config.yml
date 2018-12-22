@@ -21,7 +21,7 @@ email: "fassko@gmail.com" # This is my real email address. Please don't email me
 sass:
    style: compressed
 
-exclude: [vendor, .scss, README.md, node_modules, gruntfile.js, package.json, Gemfile, Gemfile.lock, favicon.sketch, "*.sh"]
+exclude: [vendor, .scss, node_modules, gruntfile.js, package.json, Gemfile, Gemfile.lock, favicon.sketch, "*.sh"]
 
 # baseurl: /
 
