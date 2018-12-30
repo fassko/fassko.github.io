@@ -34,18 +34,15 @@
     padding-right: 8px;
 	}
 	&__work-company {
-    text-decoration: none;
 		color: #484848;
 		font-size: 14px;
     @media(max-width: 767px) {
       padding: 10px 0;
-      text-decoration: underline;
       font-size: 16px;
     }
 	}
 	&__work-date {
     margin-top: 4px;
-
 		font-size: 14px;
     @media(max-width: 767px) {
       font-size: 16px;
