@@ -15,7 +15,7 @@ Websockets are widely used in chat apps, streaming real time notifications and s
 
 ### Shaking hands with the server
 
-The [handshake](https://tools.ietf.org/html/rfc6455#section-4) app is the Web part in WebSockets. It's the bridge from HTTP to WebSocket. Client sends to the server a pretty standard HTTP GET [request](https://tools.ietf.org/html/rfc6455#section-4.2.1):
+The [handshake](https://tools.ietf.org/html/rfc6455#section-4) app is the Web part in WebSockets. It's the bridge from HTTP to WebSocket. Client sends a pretty standard HTTP GET [request](https://tools.ietf.org/html/rfc6455#section-4.2.1) to the server:
 
 ```
     GET /chat HTTP/1.1
@@ -28,7 +28,7 @@ The [handshake](https://tools.ietf.org/html/rfc6455#section-4) app is the Web pa
 
 The most interesting thing here is `Sec-WebSocket-Key` which is needed for security reasons and is generated according to the (WebSocket standard)[http://tools.ietf.org/html/rfc6455#page-7].
 
-Server will validate the request and if everything is fine it sends back HTTP [response](https://tools.ietf.org/html/rfc6455#section-4.2.2):
+Server validates the request and if everything is fine it sends back an HTTP [response](https://tools.ietf.org/html/rfc6455#section-4.2.2):
 
 ```
     HTTP/1.1 101 Switching Protocols
@@ -39,23 +39,23 @@ Server will validate the request and if everything is fine it sends back HTTP [r
 
 ### Exchange the information
 
-At any time server or client can send data with follows specific format:
+At any time server or client can send data that follows this specific format:
 
 ![Websocket Frame Format](assets/img/websocket-frame-format.png)
 
-I will not go over each part but you can read it more in the [standard](https://tools.ietf.org/html/rfc6455#section-5.6).
+I will not go over each of the parts but you can find out more in the [standard](https://tools.ietf.org/html/rfc6455#section-5.6).
 
 ### Pings and pongs
 
-At any point either client of the server can send a [ping](https://tools.ietf.org/html/rfc6455#section-5.5.2) and other party should send back a [pong](https://tools.ietf.org/html/rfc6455#section-5.5.3).
+At any point client or the server can send a [ping](https://tools.ietf.org/html/rfc6455#section-5.5.2) and other party must send back a [pong](https://tools.ietf.org/html/rfc6455#section-5.5.3).
 
 ### Closing
 
-Connection can be closed by any party by [sending](https://tools.ietf.org/html/rfc6455#section-5.5.1) a specified control sequence.
+Connection can be closed by any party by sending a [specified control sequence](https://tools.ietf.org/html/rfc6455#section-5.5.1).
 
 # Implementing WebSockets in iOS
 
-Implementing Websockets in iOS, macOS, tvOS or watchOS isn’t a trivial task. New [Network.framework](https://developer.apple.com/documentation/network) can simplify that but you still need to deal underlying tasks like upgrading connection and setting up websocket frame.
+Implementing Websockets in iOS, macOS, tvOS or watchOS isn’t a trivial task. New [Network.framework](https://developer.apple.com/documentation/network) can simplify that but you still need to deal with underlying tasks like upgrading connection and setting up a websocket frame.
 
 ## Starscream
 
@@ -76,7 +76,7 @@ After that create a connection and set up the delegate.
 
 ### Setting up delegation
 
-Then we need to set up delegate methods. Library offers also option to use closures, but in this example we will not cover it.
+Then we need to set up delegate methods. Starscream also offers an option to use closures, but I will not cover it in this example.
 
 - websocketDidConnect
 - websocketDidDisconnect
@@ -107,7 +107,7 @@ Easiest way is to just send a string:
 
 ### Closing the connection
 
-At any point we can check if connection is still open and also close it when it’s not needed anymore.
+At any point we can check if the connection is still open and close it if it’s not needed anymore.
 
 ```swift
     if socket.isConnected {
@@ -117,7 +117,7 @@ At any point we can check if connection is still open and also close it when it�
 
 # TL;DR
 
-WebSockets isn’t a first class citizen in iOS, macOS, tvOS and watchOS. It can be quite overwhelming to implement, use and understand it. But using Swift library Starscream it can take care of all the tasks.
+WebSockets isn’t a first class citizen in iOS, macOS, tvOS and watchOS. It can be quite overwhelming to implement, use and understand it, but Swift library Starscream can help you to take care of all these tasks.
 
 
 # Links
