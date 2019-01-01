@@ -1,6 +1,8 @@
 ---
 layout: post
 title: ! "Websockets in iOS using Swift"
+categories: [swift, networking]
+tags: [websocket, swift, starscream, networking]
 ---
 
 WebSockets allow extremely fast two-way networking communication, meaning that you can securely send and receive updates quicker and more often. WebSockets is a communication protocol using sockets, providing duplex communication over a single TCP connection. It was standardized by the [IETF](https://tools.ietf.org/html/rfc6455) in 2011 and is a different protocol from HTTP.
@@ -116,3 +118,13 @@ At any point we can check if connection is still open and also close it when itâ
 # TL;DR
 
 WebSockets isnâ€™t a first class citizen in iOS, macOS, tvOS and watchOS. It can be quite overwhelming to implement, use and understand it. But using Swift library Starscream it can take care of all the tasks.
+
+
+# Links
+
+- [The WebSocket Protocol](The WebSocket Protocol)
+- [Writing WebSocket servers](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
+- [Starscream Swift WebSocket library](https://github.com/daltoniam/Starscream)
+- [Websocket Frame implementation in Swift](https://github.com/ZewoGraveyard/WebSocket/blob/master/Sources/WebSocket/Frame.swift)
+- [WebSockets 101](http://lucumr.pocoo.org/2012/9/24/websockets-101/)
+- [WebSocket Security](https://devcenter.heroku.com/articles/websocket-security)
