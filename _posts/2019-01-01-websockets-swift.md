@@ -122,7 +122,7 @@ WebSockets isn’t a first class citizen in iOS, macOS, tvOS and watchOS. It can
 
 # Links
 
-- [The WebSocket Protocol](The WebSocket Protocol)
+- [The WebSocket Protocol](https://tools.ietf.org/html/rfc6455)
 - [Writing WebSocket servers](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
 - [Starscream Swift WebSocket library](https://github.com/daltoniam/Starscream)
 - [Websocket Frame implementation in Swift](https://github.com/ZewoGraveyard/WebSocket/blob/master/Sources/WebSocket/Frame.swift)
