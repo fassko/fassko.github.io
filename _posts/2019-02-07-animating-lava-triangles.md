@@ -1,10 +1,11 @@
 ---
 layout: post
-title: ! "Combining multiple CABasicAnimations"
+title: ! "Combining CAShapeLayer animations"
 categories: [swift, animations]
-tags: [animations, CABasicAnimation, CGPath
-]
+tags: [animations, CABasicAnimation, UIBezierPath, CAShapeLayer, CAAnimationGroup]
 ---
+
+
 
 
 
