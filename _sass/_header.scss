@@ -1,4 +1,7 @@
 .header {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
 	&__heading-container {
 		display: flex;
     align-items: center;
@@ -6,6 +9,10 @@
 		margin: 0;
 		padding: 50px 16px 20px;
 		text-align: center;
+    &--left {
+      align-items: flex-start;
+      padding-left: 0;
+    }
 	}
 	&__heading--lg {
 		color: #0C253D;
