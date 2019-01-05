@@ -41,7 +41,7 @@ The server validates the request and, if everything is fine, sends back an HTTP 
 
 At any time, the server or client can send data that follows this specific format:
 
-![Websocket Frame Format](assets/img/websocket-frame-format.png)
+![Websocket Frame Format](/assets/img/websocket-frame-format.png)
 
 I will not go over each part, but you can find out more in the [standard](https://tools.ietf.org/html/rfc6455#section-5.6).
 
