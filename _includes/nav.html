@@ -1,4 +1,5 @@
 <nav class="nav">
-  <a class="nav__item txt {% if page.path  == 'index.html' %}nav__item--active{% endif %}" href="/" >About</a>
-  <a class="nav__item txt {% if page.path  == 'blog.html' %}nav__item--active{% endif %}" href="blog.html">Blog</a>
+{% for item in site.data.pagelist.docs %}
+  <a class="nav__item txt {% if item.url == page.url %}nav__item--active{% endif %}" href="{{ item.url }}" >{{ item.title }}</a>
+{% endfor %}
 </nav>

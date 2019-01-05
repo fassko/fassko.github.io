@@ -1,0 +1,8 @@
+docs_list_title: Pages
+docs:
+
+- title: About
+  url: /
+
+- title: Blog
+  url: /blog.html
