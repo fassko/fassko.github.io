@@ -53,11 +53,11 @@ At any point, the client or server can send a [ping](https://tools.ietf.org/html
 
 Connection can be closed by any party via sending a [specified control sequence](https://tools.ietf.org/html/rfc6455#section-5.5.1).
 
-# Implementing WebSockets in iOS
+## Implementing WebSockets in iOS
 
 Implementing WebSockets in iOS, macOS, tvOS or watchOS isn’t a trivial task. New [Network.framework](https://developer.apple.com/documentation/network) can simplify that but you still need to deal with underlying tasks like upgrading connection and setting up a WebSocket frame.
 
-## Starscream
+### Starscream
 
 The Swift WebSocket client library [Startscream](https://github.com/daltoniam/Starscream) simplifies all the heavy-lifting tasks. Install the library and import it in any Swift file.
 
@@ -115,12 +115,12 @@ At any point, we can check whether the connection is still open, and close it if
     }
 ```
 
-# TL;DR
+## TL;DR
 
 WebSocket isn’t a first-class citizen in iOS, macOS, tvOS and watchOS. It can be quite overwhelming to implement, use and understand it, but the Swift library Starscream can help you take care of all these tasks.
 
 
-# Links
+## Links
 
 - [The WebSocket Protocol](https://tools.ietf.org/html/rfc6455)
 - [Writing WebSocket servers](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
