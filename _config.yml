@@ -1,0 +1,35 @@
+#Dependencies
+markdown: kramdown
+highlighter: rouge
+
+# Site settings
+title: Kristaps Grinbergs
+tagline: "Swift dev"
+url: "https://kristaps.me"
+description: "Kristaps Grinbergs iOS, tvOS, watchOS, macOS developer, co-founder at Qminder"
+
+# Social
+twitter: fassko
+github: fassko
+linkedin: kristapsgrinbergs
+
+# Contact
+phone: "+372 58576560" # This is my real number. You should text me.
+email: "fassko@gmail.com" # This is my real email address. Please don't email me.
+
+# Use this for production
+sass:
+   style: compressed
+
+exclude: [vendor, .scss, node_modules, gruntfile.js, package.json, Gemfile, Gemfile.lock, favicon.sketch, "*.sh"]
+
+# baseurl: /
+
+kramdown:
+  auto_ids: true
+  parse_block_html: true
+
+# Permalinks
+# permalink: /:title/
+
+excerpt_separator: <!--more-->

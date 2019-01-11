@@ -1,0 +1,5 @@
+<nav class="nav">
+{% for item in site.data.pagelist.docs %}
+  <a class="nav__item txt {% if item.url == page.url %}nav__item--active{% endif %}" href="{{ item.url }}" >{{ item.title }}</a>
+{% endfor %}
+</nav>

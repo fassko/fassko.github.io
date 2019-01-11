@@ -1,0 +1,16 @@
+---
+layout: default
+---
+{% include header.html %}
+<div class="container">
+  {% include nav.html %}
+</div>
+<div class="container bloglist">
+  {% for post in site.posts %}
+    <div class="bloglist__item">
+      <a class="bloglist__title txt" href="{{ post.url }}">{{ post.title }}</a>
+      <div class="bloglist__excerpt txt">{{ post.excerpt }}</div>
+      <p class="bloglist__date">{{ post.date | date_to_string }}</p>
+    </div>
+  {% endfor %}
+</div>
