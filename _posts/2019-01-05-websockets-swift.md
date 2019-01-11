@@ -1,7 +1,6 @@
 ---
 layout: post
 title: ! "Websockets in iOS using Swift"
-categories: [swift, networking]
 tags: [websocket, swift, starscream, networking]
 ---
 
