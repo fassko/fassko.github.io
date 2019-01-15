@@ -33,3 +33,9 @@ kramdown:
 # permalink: /:title/
 
 excerpt_separator: <!--more-->
+
+plugins:
+  - jekyll-feed
+
+author:
+  twitter: fassko
