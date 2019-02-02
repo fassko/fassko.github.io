@@ -110,7 +110,7 @@ At any point, we can check whether the connection is still open, and close it if
 
 ```swift
     if socket.isConnected {
-        	socket.disconnect()
+      socket.disconnect()
     }
 ```
 
