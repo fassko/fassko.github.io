@@ -3,188 +3,186 @@ layout: default
 ---
 
 <div class="wrapper">
-			<div class="header">
-				<h1 class="header__heading-container">
-					<span class="header__heading--lg">Kristaps Grinbergs</span>
-          <span class="header__heading--md">iOS, tvOS, watchOS, macOS in Swift</span>
-				</h1>
+  {% include header.html %}
+  <div class="container">
+    {% include nav.html %}
+  </div>
+	<div class="container">
+		<div class="about">
+			<div class="about__section">
+				<h2>
+					<span class="highlight-heading">About</span>
+				</h2>
+
+        <p class="txt txt--dark">Co-Founder, Swift developer at <a href="https://www.qminder.com/" target="_blank">Qminder</a>. Passionate about mobile applications and open source. 14+ years’ worth of experience in programming, Bachelors and Masters in Computer Science. Currently leading mobile development for the easiest waiting line management system in the world — Qminder.</p>
+        <p class="txt txt--dark">Involved in <a href="https://github.com/fassko" target="_blank">open source</a> by maintaining libraries and apps and contributing to <a href="https://swiftweekly.github.io/" target="_blank">Swift Weekly Brief</a>.</p>
 			</div>
-			<div class="container">
-				<div class="about">
-					<div class="about__section">
-						<h2>
-							<span class="highlight-heading">About</span>
-						</h2>
-						<p class="txt txt--dark">Co-Founder, mobile developer at Qminder. Passionate about mobile applications. I love open source and cats.</p>
-						<p class="txt txt--dark">I have bachelors, masters and unfinished PhD in Computer science. Strong in iOS, tvOS, watchOS development. Right now working on the easiest waiting line management in the world - Qminder.</p>
-					</div>
-					<div class="about__section">
-						<h2>
-							<span class="highlight-heading">Work experience</span>
-						</h2>
-						<div class="about__content-entry">
-							<div class="about__work-header">
-								<div class="about__work-position">
-									<h3>Co-founder and Swift developer</h3>
-									<a href="https://www.qminder.com/" target="_blank" class="about__work-company">Qminder, United Kingdom</a>
-								</div>
-								<div class="about__work-date">
-									Aug 2011 - present
-								</div>
-							</div>
-							<div class="about__work-description txt txt--dark">
-								Building waiting list management for physical locations (iOS, tvOS).
-							</div>
+			<div class="about__section">
+				<h2>
+					<span class="highlight-heading">Work experience</span>
+				</h2>
+				<div class="about__content-entry">
+					<div class="about__work-header">
+						<div class="about__work-position">
+							<h3>Co-founder and Swift developer</h3>
+							<a href="https://www.qminder.com/" target="_blank" class="about__work-company">Qminder, United Kingdom</a>
 						</div>
-						<div class="about__content-entry">
-							<div class="about__work-header">
-								<div class="about__work-position">
-									<h3>Senior Software Engineer</h3>
-									<a href="https://www.tieto.lv/" target="_blank" class="about__work-company">Tieto, Latvia</a>
-								</div>
-								<div class="about__work-date">
-									Oct 2007 – Sep 2012
-								</div>
-							</div>
-							<div class="about__work-description txt txt--dark">
-								Participated in one of the biggest life insurance projects in Latvia - developed and maintained the Rural Support Service information system.
-							</div>
+						<div class="about__work-date">
+							Aug 2011 - present
 						</div>
 					</div>
-					<div class="about__section">
-						<h2>
-							<span class="highlight-heading">Projects</span>
-						</h2>
-            <div class="about__content-entry">
-              <h3>Qminder iOS app & tvOS</h3>
-              <p class="txt txt--dark">
-                Applications for iPhone, iPad and Apple TV for easy customer sign-in and service.
-                  <p class="txt txt--dark about__subproject">
-                    <span class="txt--regular">
-                    Dashboard app</span> is a hybrid app with options to communicate between native and web, push notifications, data export and fast actions. It helps managers be up to date with their location.
-                  </p>
-                  <p class="txt txt--dark about__subproject">
-                    <span class="txt--regular">Qminder Sign-In</span> provides self-service sign-in for customers. It uses native and web. Native side interacts with the server using in-house built JavaScript bridge. Background animations are fully native and use GPU.
-                  </p>
-                  <p class="txt txt--dark about__subproject">
-                    <span class="txt--regular">Qminder TV </span> is native Apple TV app for the waiting list. It uses open sourced Qminder Swift API and latest Swift features such as codable and keypaths. App keeps active network connection using websockets and upates the UI using reactive approach and RxSwift.
-                  </p>
-              </div>
-            <div class="about__content-entry">
-              <h3>MeteoTartu app for iOS, tvOS, watchOS</h3>
-              <p class="txt txt--dark">
-                Application to show data from the weather station that has been working since the Ocober of 1999 in Tartu, Estonia, at the roof of the Physics department on the University of Tartu.</p>
-            </div>
-            <div class="about__content-entry">
-              <h3>Dodies.lv iOS app</h3>
-              <p class="txt txt--dark">
-                The idea behind Dodies.lv is to help plan one's outdoor activities in Latvia. In the map one can find Latvian nature trails, birdwatching towers, parks, campsites and picnic sites. Hiking trails in Latvia are usually shorter and marked, long distance trekking and hiking is not done on specific routes. Dodies.lv lists only marked hiking trails and paths, specifically targeted towards casual hikers.
-              </p>
-            </div>
-            <div class="about__content-entry">
-              <h3>Weather Latvia iOS app</h3>
-              <p class="txt txt--dark">
-                Meteo Latvia shows current weather observations in Latvia. Data comes from Latvian Environment, Geology and Meteorology Centre and Latvian State Roads.
-              </p>
-            </div>
-          </div>
+					<div class="about__work-description txt txt--dark">
+						Building waiting list management for physical locations (iOS, tvOS).
+					</div>
 				</div>
-				<div class="additional-info">
-					<div class="additional-info__section">
-              <img class="additional-info__avatar" src="img/kristaps.jpeg" alt="Photo of Kristaps">
-						<div class="additional-info__content-entry">
-							<h2>
-								<span class="highlight-heading">Contacts</span>
-							</h2>
-              <div class="additional-info__contacts txt txt--dark">
-                <a href="mailto:{{ site.email }}" class="additional-info__contact">
-                  <span class="additional-info__icon"><i class="far fa-envelope"></i></span>
-                  {{ site.email }}
-                </a>
-                <a href="tel:{{ site.phone }}" class="additional-info__contact">
-                  <span class="additional-info__icon"><i class="fas fa-phone"></i></span>
-                  {{ site.phone }}
-                </a>
-                <a href="https://www.linkedin.com/in/{{ site.linkedin }}/" class="additional-info__contact target="_blank"">
-                  <span class="additional-info__icon"><i class="fab fa-linkedin-in"></i></span>
-                  {{ site.linkedin }}
-                </a>
-                <a href="https://github.com/{{ site.github }}" class="additional-info__contact" target="_blank">
-                  <span class="additional-info__icon"><i class="fab fa-github"></i></span>
-                  {{ site.github }}
-                </a>
-                <a href="https://twitter.com/{{ site.twitter }}" class="additional-info__contact" target="_blank">
-                  <span class="additional-info__icon"><i class="fab fa-twitter"></i></span>
-                  @{{ site.twitter }}
-                </a>
-              </div>
+				<div class="about__content-entry">
+					<div class="about__work-header">
+						<div class="about__work-position">
+							<h3>Senior Software Engineer</h3>
+							<a href="https://www.tieto.lv/" target="_blank" class="about__work-company">Tieto, Latvia</a>
+						</div>
+						<div class="about__work-date">
+							Oct 2007 – Sep 2012
 						</div>
 					</div>
-          <div class="additional-info__section">
-            <div class="additional-info__content-entry">
-              <h2>
-                <span class="highlight-heading">Education</span>
-              </h2>
-              <div class="additional-info__education-list txt txt--dark">
-                <div class="additional-info__education-entry">
-                  <span class="additional-info__education-title">Phd in Computer Science (unfinished)</span>
-                  <a href="https://www.lu.lv/eng/" class="additional-info__education-school" target="_blank">University of Latvia</a>
-                  <span class="additional-info__education-year">2010 – 2012</span>
-                </div>
-                <div class="additional-info__education-entry">
-                  <span class=" additional-info__education-title">MSc in Computer Science</span>
-                  <a href="https://www.lu.lv/eng/" class=" additional-info__education-school" target="_blank">University of Latvia</a>
-                  <span class=" additional-info__education-year">2008 – 2010</span>
-                </div>
-                <div class="additional-info__education-entry">
-                  <span class=" additional-info__education-title">BSc in Computer Science</span>
-                  <a href="https://www.lu.lv/eng/" class=" additional-info__education-school" target="_blank">University of Latvia</a>
-                  <span class=" additional-info__education-year">2004 – 2008</span>
-                </div>
-              </div>
-            </div>
-          </div>
+					<div class="about__work-description txt txt--dark">
+						Participated in one of the biggest life insurance projects in Latvia - developed and maintained the Rural Support Service information system.
+					</div>
 				</div>
 			</div>
-      <div class="container">
-        <div class="skills">
-          <h2>
-            <span class="highlight-heading">Skills &amp; proficiency</span>
-          </h2>
-
-
-          <ul class="skills__section" id="skills__section">
-            <li class="skills__title txt txt--dark">
-              Swift, Objective-C, React Native
-            </li>
-            <li class="skills__title txt txt--dark">
-              Xcode, Cocoapods, Carthage
-            </li>
-            <li class="skills__title txt txt--dark">
-              iOS, tvOS, watchOS, macOS
-            </li>
-            <li class="skills__title txt txt--dark">
-              Bitrise, Circle CI, Travis CI, fastlane
-            </li>
-            <li class="skills__title txt txt--dark">
-              RxSwift, MVVM
-            </li>
-            <li class="skills__title txt txt--dark">
-              Javascript, Angular, ReactJS
-            </li>
-            <li class="skills__title txt txt--dark">
-              HTML, CSS
-            </li>
-            <li class="skills__title txt txt--dark">
-              PostgreSQL, Oracle, MongoDB, SQlite
-            </li>
-            <li class="skills__title txt txt--dark">
-              Java, Ruby, Python, PHP
-            </li>
-            <li class="skills__title txt txt--dark">
-              Sketch
-            </li>
-          </ul>
+			<div class="about__section">
+				<h2>
+					<span class="highlight-heading">Projects</span>
+				</h2>
+        <div class="about__content-entry">
+          <h3><a href="https://www.qminder.com/" target="_blank">Qminder iOS & tvOS apps</a></h3>
+          <p class="txt txt--dark">
+            Applications for iPhone, iPad and Apple TV for easy customer sign-in and service.
+              <p class="txt txt--dark about__subproject">
+                <span class="txt--regular"><a href="http://support.qminder.com/tv/what-is-qminder-tv/qminder-on-tv" target="_blank">Qminder TV</a></span> is native Apple TV app for the waiting list. It uses open sourced Qminder Swift API and latest Swift features such as codable and keypaths. App keeps active network connection using websockets and upates the UI using reactive approach and RxSwift.
+              </p>
+              <p class="txt txt--dark about__subproject">
+                <span class="txt--regular"><a href="https://itunes.apple.com/us/app/queue-management-software/id533847552?mt=8" target="_blank">Qminder Sign-In</a></span> provides self-service sign-in for customers. It uses native and web. Native side interacts with the server using in-house built JavaScript bridge. Background animations are fully native and use GPU.
+              </p>
+              <p class="txt txt--dark about__subproject">
+                <span class="txt--regular">
+                <a href="https://itunes.apple.com/us/app/qminder-dashboard/id1060050461?mt=8" target="_blank">Dashboard app</a></span> is a hybrid app with options to communicate between native and web, push notifications, data export and fast actions. It helps managers be up to date with their location.
+              </p>
+          </div>
+        <div class="about__content-entry">
+          <h3><a href="https://itunes.apple.com/ee/app/meteo-tartu/id1082204986?mt=8" target="_blank">MeteoTartu app for iOS, tvOS, watchOS</a></h3>
+          <p class="txt txt--dark">
+            Application to show data from the weather station that has been working since the Ocober of 1999 in Tartu, Estonia, at the roof of the Physics department on the University of Tartu.</p>
+        </div>
+        <div class="about__content-entry">
+          <h3><a href="https://itunes.apple.com/ee/app/dodies-lv/id1080800199?mt=8" target="_blank">Dodies.lv iOS app</a></h3>
+          <p class="txt txt--dark">
+            The idea behind Dodies.lv is to help plan one's outdoor activities in Latvia. In the map one can find Latvian nature trails, birdwatching towers, parks, campsites and picnic sites. Hiking trails in Latvia are usually shorter and marked, long distance trekking and hiking is not done on specific routes. Dodies.lv lists only marked hiking trails and paths, specifically targeted towards casual hikers.
+          </p>
+        </div>
+        <div class="about__content-entry">
+          <h3><a href="https://itunes.apple.com/ee/app/weather-latvia/id1350252673?mt=8" target="_blank">Weather Latvia iOS app</a></h3>
+          <p class="txt txt--dark">
+            Meteo Latvia shows current weather observations in Latvia. Data comes from Latvian Environment, Geology and Meteorology Centre and Latvian State Roads.
+          </p>
         </div>
       </div>
 		</div>
+		<div class="additional-info">
+			<div class="additional-info__section">
+          <img class="additional-info__avatar" src="img/kristaps.jpeg" alt="Photo of Kristaps">
+				<div class="additional-info__content-entry">
+					<h2>
+						<span class="highlight-heading">Contacts</span>
+					</h2>
+          <div class="additional-info__contacts txt txt--dark">
+            <a href="mailto:{{ site.email }}" class="additional-info__contact">
+              <span class="additional-info__icon"><i class="far fa-envelope"></i></span>
+              {{ site.email }}
+            </a>
+            <a href="tel:{{ site.phone }}" class="additional-info__contact">
+              <span class="additional-info__icon"><i class="fas fa-phone"></i></span>
+              {{ site.phone }}
+            </a>
+            <a href="https://www.linkedin.com/in/{{ site.linkedin }}/" class="additional-info__contact target="_blank"">
+              <span class="additional-info__icon"><i class="fab fa-linkedin-in"></i></span>
+              {{ site.linkedin }}
+            </a>
+            <a href="https://github.com/{{ site.github }}" class="additional-info__contact" target="_blank">
+              <span class="additional-info__icon"><i class="fab fa-github"></i></span>
+              {{ site.github }}
+            </a>
+            <a href="https://twitter.com/{{ site.twitter }}" class="additional-info__contact" target="_blank">
+              <span class="additional-info__icon"><i class="fab fa-twitter"></i></span>
+              @{{ site.twitter }}
+            </a>
+          </div>
+				</div>
+			</div>
+      <div class="additional-info__section">
+        <div class="additional-info__content-entry">
+          <h2>
+            <span class="highlight-heading">Education</span>
+          </h2>
+          <div class="additional-info__education-list txt txt--dark">
+            <div class="additional-info__education-entry">
+              <span class="additional-info__education-title">Phd in Computer Science (unfinished)</span>
+              <a href="https://www.lu.lv/eng/" class="additional-info__education-school" target="_blank">University of Latvia</a>
+              <span class="additional-info__education-year">2010 – 2012</span>
+            </div>
+            <div class="additional-info__education-entry">
+              <span class=" additional-info__education-title">MSc in Computer Science</span>
+              <a href="https://www.lu.lv/eng/" class=" additional-info__education-school" target="_blank">University of Latvia</a>
+              <span class=" additional-info__education-year">2008 – 2010</span>
+            </div>
+            <div class="additional-info__education-entry">
+              <span class=" additional-info__education-title">BSc in Computer Science</span>
+              <a href="https://www.lu.lv/eng/" class=" additional-info__education-school" target="_blank">University of Latvia</a>
+              <span class=" additional-info__education-year">2004 – 2008</span>
+            </div>
+          </div>
+        </div>
+      </div>
+		</div>
+	</div>
+
+  <div class="container">
+    <div class="skills">
+      <h2>
+        <span class="highlight-heading">Skills &amp; proficiency</span>
+      </h2>
+      <ul class="skills__section" id="skills__section">
+        <li class="skills__title txt txt--dark">
+          Swift, Objective-C, React Native
+        </li>
+        <li class="skills__title txt txt--dark">
+          Xcode, Cocoapods, Carthage, SPM
+        </li>
+        <li class="skills__title txt txt--dark">
+          iOS, tvOS, watchOS, macOS
+        </li>
+        <li class="skills__title txt txt--dark">
+          Bitrise, Circle CI, Travis CI, fastlane
+        </li>
+        <li class="skills__title txt txt--dark">
+          RxSwift, MVVM, Coordinators
+        </li>
+        <li class="skills__title txt txt--dark">
+          Javascript, Angular, ReactJS
+        </li>
+        <li class="skills__title txt txt--dark">
+          HTML, CSS
+        </li>
+        <li class="skills__title txt txt--dark">
+          PostgreSQL, Oracle, MongoDB, SQlite
+        </li>
+        <li class="skills__title txt txt--dark">
+          Java, Ruby, Python, PHP
+        </li>
+        <li class="skills__title txt txt--dark">
+          Sketch, Photoshop
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

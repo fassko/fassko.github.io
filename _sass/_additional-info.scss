@@ -52,13 +52,10 @@
   &__education-school {
     padding-top: 4px;
     padding-bottom: 4px;
-    text-decoration: none;
-		color: #484848;
-
+		// color: red;
 		font-size: 14px;
     @media(max-width: 767px) {
       padding: 10px 0;
-      text-decoration: underline;
       font-size: 16px;
     }
   }
