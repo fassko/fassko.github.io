@@ -9,8 +9,6 @@ Animating `UIBezierPath` drawing is quite trivial task. But how to animate from 
 
 <!--more-->
 
-## Animating from one shape to another
-
 At first let’s see which `CAShapeLayer`‘s properties can be animated with Core Graphics:
 
 - Path
@@ -21,17 +19,19 @@ At first let’s see which `CAShapeLayer`‘s properties can be animated with Co
 - Stroke color
 - Stroke start and end
 
-To animate from one shape to another we need to change the `path` property. Keep in mind that both shapes need to have same count of points they consist of. Otherwise we can get quite ugly animation. 
+## Animating from one shape to another
 
-/// ugly animation gif
+To animate from one shape to another we need to change the `path` property. Keep in mind that both shapes need to have same count of points they consist of. Otherwise we can get quite ugly animation.
 
-Even Apple’s official documentation is warning about that.
+![Ugly animation from square to triangle](/assets/img/ugly-animation-from-square-to-triangle.gif)
+
+Even [Apple’s official documentation](https://developer.apple.com/documentation/quartzcore/cashapelayer/1521904-path?language=objc) is warning us about that.
 
 > Paths will interpolate as a linear blend of the "on-line" points; ”off-line” points may be interpolated non-linearly (e.g. to preserve continuity of the curve's derivative). If the two paths have a different number of control points or segments the results are undefined. If the path extends outside the layer bounds it will not automatically be clipped to the layer, only if the normal layer masking rules cause that.
 
 If we have same amount of points for both paths we can achieve much nicer animation.
 
-/// gif with nice animation
+![Nice animation from square to triangle](/assets/img/nice-animation-from-square-to-triangle.gif)
 
 ## Combining multiple animations
 
@@ -47,7 +47,7 @@ animationGroup.repeatCount = .greatestFiniteMagnitude
 animationGroup.duration = 2.0
 ````
 
-/// gif with animation group animation
+![Animation with multiple shapes](/assets/img/animation-multiple-shapes.gif)
 
 ## TL;DR
 
@@ -56,5 +56,5 @@ animationGroup.duration = 2.0
 
 ## Links
 
-- https://developer.apple.com/documentation/quartzcore/cashapelayer/1521904-path
-- https://calayer.com/core-animation/2017/12/25/cashapelayer-in-depth-part-ii.html
+- [Apple's CAShapeLayer path documentation](https://developer.apple.com/documentation/quartzcore/cashapelayer/1521904-path)
+- [CAShapeLayer in Depth](https://calayer.com/core-animation/2017/12/25/cashapelayer-in-depth-part-ii.html)
