@@ -5,11 +5,11 @@ categories: [swift, animations]
 tags: [animations, CABasicAnimation, UIBezierPath, CAShapeLayer, CAAnimationGroup]
 ---
 
-Animating `UIBezierPath` drawing is quite trivial task. But how to animate from one shape to another? For instance animating from a triangle to a square. To accomplish that we need to use `CAShapeLayer` and animate it’s properties using Core Animation capabilities.
+Animating a `UIBezierPath` drawing is a pretty trivial task. But how to animate shape morphing, i.e. make one shape change into another? (For instance, morphing a triangle into a square.) To accomplish this, we need to use `CAShapeLayer` and animate its properties using Core Animation capabilities.
 
 <!--more-->
 
-At first let’s see which `CAShapeLayer`‘s properties can be animated with Core Graphics:
+First things first, let’s see which properties of `CAShapeLayer` can be animated with Core Graphics:
 
 - Path
 - Fill color
@@ -17,11 +17,11 @@ At first let’s see which `CAShapeLayer`‘s properties can be animated with Co
 - Line width
 - Miter limit
 - Stroke color
-- Stroke start and end
+- Stroke start and end.
 
-## Animating from one shape to another
+## Shape morphing
 
-To animate from one shape to another we need to change the `path` property. Keep in mind that both shapes need to have same count of points they consist of. Otherwise we can get quite ugly animation.
+To animate shape morphing, we need to change the `path` property. Keep in mind that both shapes need to have the same number of points that comprise them. Otherwise, the animation would end up looking clunky and unnatural.
 
 ![Ugly animation from square to triangle](/assets/img/ugly-animation-from-square-to-triangle.gif)
 
@@ -35,9 +35,9 @@ If we have same amount of points for both paths we can achieve much nicer animat
 
 ## Combining multiple animations
 
-Next step is to combine multiple `CGPath` animations together.  For that we can use the `CAAnimationGroup`. That allows multiple animations to be grouped and run concurrently.
+The next step is to combine multiple `CGPath` animations together. To accomplish this, we can use `CAAnimationGroup`, which allows multiple animations to be grouped and run concurrently.
 
-Be aware that you need to set correctly `beginTime` for each animation so they start one after another. Animation properties like `duration`, `autoReverses`, `repeatCount` and others need to set on animation group object.
+Be aware that you need to set correct `beginTime` for each animation so that they would start one after another. Animation properties like `duration`, `autoReverses`, `repeatCount` and others need to be set on the animation group object.
 
 ````swift
 let animationGroup = CAAnimationGroup()
@@ -51,8 +51,7 @@ animationGroup.duration = 2.0
 
 ## TL;DR
 
-`CAAnimationGroup` is a powerful feature from Core Animation to group multiple `CABasicAnimation`s together. If you want to animate from one path to another be aware that from and to paths should have same amount of points. Otherwise animation would look off because animation algorithm can’t interpolate these points correctly.
-
+`CAAnimationGroup` is a powerful feature that allows for several uses, from Core Animation to grouping multiple `CABasicAnimation`s together. If you want to animate from one path to another, be aware that _from_ and _to_ paths should have the same amount of points. Otherwise, the animation would look off because the animation algorithms can’t interpolate these points correctly.
 
 ## Links
 
