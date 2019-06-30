@@ -30,7 +30,7 @@ kramdown:
   parse_block_html: true
 
 # Permalinks
-# permalink: /:title/
+permalink: /:title/
 
 excerpt_separator: <!--more-->
 
