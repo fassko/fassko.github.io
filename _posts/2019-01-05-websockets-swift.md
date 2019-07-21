@@ -25,7 +25,8 @@ The [handshake](https://tools.ietf.org/html/rfc6455#section-4) app is the web pa
     Sec-WebSocket-Version: 1
 ```
 
-The most interesting thing here is `Sec-WebSocket-Key` which is needed for security reasons and is generated according to the (WebSocket standard)[http://tools.ietf.org/html/rfc6455#page-7].
+The most interesting thing here is `Sec-WebSocket-Key` which is needed for security reasons and is generated according to the 
+[WebSocket standard](http://tools.ietf.org/html/rfc6455#page-7).
 
 The server validates the request and, if everything is fine, sends back an HTTP [response](https://tools.ietf.org/html/rfc6455#section-4.2.2):
 
