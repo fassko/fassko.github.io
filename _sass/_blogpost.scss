@@ -17,13 +17,16 @@
   }
   &__heading {
       padding-top: 14px;
-      padding-bottom: 24px;
       font-size: 30px;
     }
   & h2:not(&__heading) {
       padding-top: 10px;
       color: #0C253D;
     }
+  &__date {
+    font-size: 14px;
+    display: block;
+  }
   code {
     padding: 20px 0px;
     letter-spacing: 1px;
