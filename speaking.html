@@ -9,86 +9,29 @@ redirect_from:
   <div class="container">
     {% include nav.html %}
   </div>
-
+  
   <div class="container">
     <div class="talks-list">
-      <div class="talks-list__row">
-        <div class="talks-list__date talks-list__item txt txt--regular">
-          <p class="txt txt--dark">04 Jun, 2019</p>
-        </div>
-
-        <div class="talks-list__title talks-list__item txt txt--dark">
-          <a class="talks-list__event-name" href="http://altconf.com/" target="blank">
-            AltConf, San Jose
-          </a>
-          <h3>How to tame Core Animation</h3>
-        </div>
-
-        <div class="talks-list__additional talks-list__item txt txt--small">
-          <a href="https://www.youtube.com/watch?v=qiwdPs_nPYs" target="blank">
-            watch video
-          </a>
-        </div>
-      </div>
-      <div class="talks-list__row">
-        <div class="talks-list__date talks-list__item txt txt--regular">
-          <p class="txt txt--dark">30 Apr, 2019</p>
-        </div>
-
-        <div class="talks-list__title talks-list__item txt txt--dark">
-          <a class="talks-list__event-name" href="https://appbuilders.ch/" target="blank">
-            AppBuilders Conference in Lugano
-          </a>
-          <h3>How to tame Core Animation</h3>
-        </div>
-
-        <div class="talks-list__additional talks-list__item txt txt--small">
-          <a href="https://www.youtube.com/watch?v=kiRaJhA_L30" target="blank">
-            watch video
-          </a>
-        </div>
-      </div>
-      <div class="talks-list__row">
-        <div class="talks-list__date talks-list__item txt txt--regular">
-          <p class="txt txt--dark">14 Jan, 2019</p>
-        </div>
-        <div class="talks-list__title talks-list__item txt txt--dark">
-          
-          <a class="talks-list__event-name" href="https://podcasts.apple.com/ee/podcast/ios-dev-discussions-sean-allen/id1426167395" target="blank">
-            iOS Dev Discussions
-          </a>
-          <h3>Origin Stories #3 - Kristaps Grinbergs - Founder of Qminder</h3>
-        </div>
-        <div class="talks-list__additional talks-list__item txt txt--small">
-          <a href="https://podcasts.apple.com/ee/podcast/origin-stories-3-kristaps-grinbergs-founder-of-qminder/id1426167395?i=1000427651404" target="blank">
-            listen on iTunes
-          </a>
-          <a href="https://anchor.fm/seanallen/episodes/Origin-Stories---Kristaps-Grinbergs---Founder-of-Qminder-e2uk0l" target="blank">
-            listen on Anchor
-          </a>
-        </div>
-      </div>
-      <div class="talks-list__row">
-        <div class="talks-list__date talks-list__item txt txt--regular">
-          <p class="txt txt--dark">23 Jan 2019</p>
-        </div>
-
-        <div class="talks-list__title talks-list__item txt txt--dark">
-          <a class="talks-list__event-name" href="https://www.facebook.com/groups/XcodersRiga/" target="blank">
-            Xcoders Riga
-          </a>
-          <h3>RxSwift Introduction to reactive programming</h3>
-        </div>
-
-        <div class="talks-list__additional talks-list__item txt txt--small">
-          <a href="https://www.youtube.com/watch?v=o_6H3XGRAWY" target="blank">
-            watch video
-          </a>
-          <a href="https://github.com/fassko/presentations/blob/master/RxSwift_Xcoders_Riga_23.01.2019.pdf" target="blank">
-            slides
-          </a>
-        </div>
-      </div>
+        {% for speak in site.data.speaking %}
+        <div class="talks-list__row">
+            <div class="talks-list__date talks-list__item txt txt--regular">
+              <p class="txt txt--dark">{{ speak.date | date_to_string }}</p>
+            </div>
+            <div class="talks-list__title talks-list__item txt txt--dark">
+              <a class="talks-list__event-name" href="{{ speak.event.url }}" target="blank">
+                {{ speak.event.title }}
+              </a>
+              <h3>{{ speak.title }}</h3>
+            </div>
+            <div class="talks-list__additional talks-list__item txt txt--small">
+              {% for link in speak.links %}
+              <a href="{{ link.url }}" target="blank">
+                {{ link.title }}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
     </div>
   </div>
 </div>

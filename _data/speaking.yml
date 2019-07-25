@@ -1,0 +1,36 @@
+- date: 2019-06-04
+  event: 
+    title: AltConf, San Jose
+    url: http://altconf.com/
+  title: How to tame Core Animation
+  links:
+    - url: https://www.youtube.com/watch?v=qiwdPs_nPYs
+      title: watch video
+- date: 2019-04-30
+  event: 
+    title: AppBuilders Conference in Lugano
+    url: https://appbuilders.ch
+  title: How to tame Core Animation
+  links:
+    - url: https://www.youtube.com/watch?v=kiRaJhA_L30
+      title: watch video
+- date: 2019-01-23
+  event: 
+    title: Xcoders Riga
+    url: https://www.facebook.com/groups/XcodersRiga/
+  title: RxSwift Introduction to reactive programming
+  links:
+    - url: https://www.youtube.com/watch?v=o_6H3XGRAWY
+      title: watch video
+    - url: https://github.com/fassko/presentations/blob/master/RxSwift_Xcoders_Riga_23.01.2019.pdf
+      title: see slides
+- date: 2019-01-14
+  event: 
+    title: iOS Dev Discussions
+    url: https://podcasts.apple.com/ee/podcast/ios-dev-discussions-sean-allen/id1426167395
+  title: "Origin Stories #3 - Kristaps Grinbergs - Founder of Qminder"
+  links:
+    - url: https://podcasts.apple.com/ee/podcast/origin-stories-3-kristaps-grinbergs-founder-of-qminder/id1426167395?i=1000427651404
+      title: listen on iTunes
+    - url: https://anchor.fm/seanallen/episodes/Origin-Stories---Kristaps-Grinbergs---Founder-of-Qminder-e2uk0l
+      title: listen on Anchor
