@@ -1,0 +1,38 @@
+---
+layout: default
+redirect_from:
+  - /talks
+---
+
+<div class="wrapper">
+  {% include header.html %}
+  <div class="container">
+    {% include nav.html %}
+  </div>
+  
+  <div class="container">
+    <div class="talks-list">
+        {% for speak in site.data.speaking %}
+        <div class="talks-list__row">
+            <div class="talks-list__date talks-list__item txt txt--regular">
+              <p class="txt txt--dark">{{ speak.date | date_to_string }}</p>
+            </div>
+            <div class="talks-list__title talks-list__item txt txt--dark">
+              <a class="talks-list__event-name" href="{{ speak.event.url }}" target="blank">
+                {{ speak.event.title }}
+              </a>
+              <h3>{{ speak.title }}</h3>
+            </div>
+            <div class="talks-list__additional talks-list__item txt txt--small">
+              {% for link in speak.links %}
+              <a href="{{ link.url }}" target="blank">
+                {{ link.title }}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+

@@ -36,6 +36,7 @@ excerpt_separator: <!--more-->
 
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
 
 author:
   twitter: fassko

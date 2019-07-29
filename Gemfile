@@ -8,3 +8,4 @@ gem "jekyll"
 gem 'jekyll-sitemap'
 gem 'colorize'
 gem 'jekyll-feed'
+gem 'jekyll-redirect-from'
