@@ -5,7 +5,7 @@ categories: [swift, websockets, xcode11, ios13]
 tags: [swift, apple, websockets, ios, xcode]
 ---
 
-Websockets in iOS 13, macOS 10.15, tvOS 13, watchOS 6 and Mac Catalyst has gained first-class citizen status in networking stack. Apple has finally added support in [URLSession](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask) and for lower level in [Network.framework](https://developer.apple.com/documentation/network/nwprotocolwebsocket) for their platforms.
+Websockets in iOS 13, macOS 10.15, tvOS 13, watchOS 6 and Mac Catalyst have gained first-class citizen status in networking stack. Apple has finally added support in [URLSession](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask) and for lower level in [Network.framework](https://developer.apple.com/documentation/network/nwprotocolwebsocket) for their platforms.
 
 This time we will focus on implementing Websockets using URLSession capabilities.
 
@@ -13,9 +13,9 @@ This time we will focus on implementing Websockets using URLSession capabilities
 
 ## Before iOS 13
 
-Previosly if you wanted to use Websockets in Apple platforms you had to rely on [CFNetwork](https://developer.apple.com/documentation/cfnetwork) which was added in iOS 2.0 times. It is using C based foundation streams. You have to deal then with pointers and memory allocation issues which is quite common in C language.
+Previosly if you wanted to use Websockets in Apple platforms you had to rely on [CFNetwork](https://developer.apple.com/documentation/cfnetwork) which was added in iOS 2.0. It is using C based foundation streams. You then have to deal with pointers and memory allocation issues which is quite common in C language.
 
-Another way was to use third part solutions like [Starscream](https://github.com/daltoniam/Starscream) what have we [discussed before](/websockets-swift/).
+Another way was to use third party solutions like [Starscream](https://github.com/daltoniam/Starscream) which I have [described before](/websockets-swift/).
 
 ## Websockets using URLSession
 
@@ -33,7 +33,7 @@ func webSocketTask(with: URL, protocols: [String]) -> URLSessionWebSocketTask
 
 ### Opening connection
 
-To create and open Websocket connection you can achieve like this:
+To create and open Websocket connection:
 
 ```swift
 
@@ -61,7 +61,7 @@ webSocketTask.send(message) { error in
 
 ### Receiving messages
 
-To receive messages from the server you need to use [URLSessionWebSocketTask.receive](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3281789-receive) method. It accepts completion handler which a [Result](https://developer.apple.com/documentation/swift/result) of [Message](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/message) type.
+To receive messages from the server you need to use [URLSessionWebSocketTask.receive](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3281789-receive) method. It accepts completion handler which is a [Result](https://developer.apple.com/documentation/swift/result) of [Message](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/message) type.
 
 ```swift
 
@@ -75,13 +75,13 @@ webSocketTask.receive { result in
 		    print("Received string: \(text)")
 	    case .data(let data):
 		    print("Received data: \(data)")
-	    }                
+	    }
 	}
 }
 
 ```
 
-Be aware that if you want to receive continuously messages you need to call this again once you done with receiving a message. One way is to wrap this in a function and call the same function recursively.
+Be aware that if you want to receive messages continuously you need to call this again once you are done with receiving a message. One way is to wrap this in a function and call the same function recursively.
 
 ```swift
 
@@ -116,7 +116,7 @@ func sendPing() {
 		if let error = error {
 	    print("Sending PING failed: \(error)")
     }
-		
+
 		DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
 	    self.sendPing()
 		}
@@ -125,7 +125,7 @@ func sendPing() {
 
 ```
 
-Here again you need to take care of next PING sending yourself. Easiest way is to just use DispatchQueue or Timer functionality.
+Here again you need to take care of the next PING sending yourself. Easiest way is to just use DispatchQueue or Timer functionality.
 
 ### Close connection
 
@@ -139,7 +139,7 @@ webSocketTask.cancel(closeCode: .goingAway, reason: nil)
 
 ### Checking connection state
 
-To monitor connection status you can do using [URLSessionWebSocketDelegate](https://developer.apple.com/documentation/foundation/urlsessionwebsocketdelegate) protocol. You can check once connection has been opened or closed.
+To monitor connection status you can use [URLSessionWebSocketDelegate](https://developer.apple.com/documentation/foundation/urlsessionwebsocketdelegate) protocol. You can check once connection has been opened or closed.
 
 ```swift
 
@@ -153,7 +153,7 @@ func urlSession(URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithP
 
 ## TL;DR
 
-Finally Apple has added Websockets as first-class citzen to their platforms. Of course there are small quirks and rough edges. For instance you can’t receive messages continously, but you don’t need to mess with constructing Websocket frame anymore which is a big win.
+Apple has finally added Websockets as first-class citzen to its platforms. Of course there are small quirks and rough edges. For instance, you can’t receive messages continously, but you don’t need to mess with constructing Websocket frame anymore which is a big win.
 
 Right now it is available only for latest betas and if you support older versions of iOS, tvOS, watchOS or macOS you need to think about backwards compatibility yourself.
 
