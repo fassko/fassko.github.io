@@ -144,5 +144,5 @@ Right now it is available only for latest betas and if you support older version
 * [URLsession documentation](https://developer.apple.com/documentation/foundation)
 * [URLSessionWebSocketTask documentation](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask)
 * [URLSessionWebSocketDelegate documentation](https://developer.apple.com/documentation/foundation/urlsessionwebsocketdelegate)
-* (Blogpost by AppSpector)[https://appspector.com/blog/websockets-in-ios-using-urlsessionwebsockettask]
+* [Blogpost by AppSpector](https://appspector.com/blog/websockets-in-ios-using-urlsessionwebsockettask)
 * [My previous blogpost about using Websockets](/websockets-swift/)
