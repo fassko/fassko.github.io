@@ -22,9 +22,9 @@ Another way was to use third party solutions like [Starscream](https://github.co
 Here are three ways how you can construct a Websocket using [URLSessionWebSocketTask](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask) class provided by [URLSession](https://developer.apple.com/documentation/foundation/urlsession):
 
 ```swift
-	func webSocketTask(with: URL) -> URLSessionWebSocketTask
-	func webSocketTask(with: URLRequest) -> URLSessionWebSocketTask
-	func webSocketTask(with: URL, protocols: [String]) -> URLSessionWebSocketTask
+  func webSocketTask(with: URL) -> URLSessionWebSocketTask
+  func webSocketTask(with: URLRequest) -> URLSessionWebSocketTask
+  func webSocketTask(with: URL, protocols: [String]) -> URLSessionWebSocketTask
 ```
 
 ### Opening connection
@@ -32,9 +32,9 @@ Here are three ways how you can construct a Websocket using [URLSessionWebSocket
 To create and open Websocket connection:
 
 ```swift
-	let urlSession = URLSession(configuration: .default)
-	let webSocketTask = urlSession.webSocketTask(with: "wss://echo.websocket.org")
-	webSocketTask.resume()
+  let urlSession = URLSession(configuration: .default)
+  let webSocketTask = urlSession.webSocketTask(with: "wss://echo.websocket.org")
+  webSocketTask.resume()
 ```
 
 
@@ -43,12 +43,12 @@ To create and open Websocket connection:
 When connection has been established you can send `Data` or `String` message using [URLSessionWebSocketTask.send](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3281790-send) function. You need to construct message with [URLSessionWebSocketTask.Message](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/message) enum type.
 
 ```swift
-	let message = URLSessionWebSocketTask.Message.string("Hello World”)
-	webSocketTask.send(message) { error in
-		if let error = error {                
-			print("WebSocket couldn’t send message because: \(error)")
-		}
-	}
+  let message = URLSessionWebSocketTask.Message.string("Hello World")
+  webSocketTask.send(message) { error in
+    if let error = error {                
+      print("WebSocket couldn’t send message because: \(error)")
+    }
+  }
 ```
 
 ### Receiving messages
@@ -56,41 +56,41 @@ When connection has been established you can send `Data` or `String` message usi
 To receive messages from the server you need to use [URLSessionWebSocketTask.receive](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3281789-receive) method. It accepts completion handler which is a [Result](https://developer.apple.com/documentation/swift/result) of [Message](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/message) type.
 
 ```swift
-	webSocketTask.receive { result in
-		switch result {
-		case .failure(let error):
-			print("Error in receiving message: \(error)")
-		case .success(let message):
-			switch message {
-		    case .string(let text):
-			    print("Received string: \(text)")
-		    case .data(let data):
-			    print("Received data: \(data)")
-		    }
-		}
-	}
+  webSocketTask.receive { result in
+    switch result {
+    case .failure(let error):
+      print("Error in receiving message: \(error)")
+    case .success(let message):
+      switch message {
+        case .string(let text):
+          print("Received string: \(text)")
+        case .data(let data):
+          print("Received data: \(data)")
+        }
+    }
+  }
 ```
 
 Be aware that if you want to receive messages continuously you need to call this again once you are done with receiving a message. One way is to wrap this in a function and call the same function recursively.
 
 ```swift
-	func receiveMessage() {
-		webSocketTask.receive { result in
-			switch result {
-			case .failure(let error):
-				print("Error in receiving message: \(error)")
-			case .success(let message):
-				switch message {
-				case .string(let text):
-					print("Received string: \(text)")
-				case .data(let data):
-					print("Received data: \(data)")
-				}
-				
-				self.receiveMessage()                
-			}
-		}	
-	}
+  func receiveMessage() {
+    webSocketTask.receive { result in
+      switch result {
+      case .failure(let error):
+        print("Error in receiving message: \(error)")
+      case .success(let message):
+        switch message {
+        case .string(let text):
+          print("Received string: \(text)")
+        case .data(let data):
+          print("Received data: \(data)")
+        }
+        
+        self.receiveMessage()                
+      }
+    }	
+  }
 ```
 
 ### Pings and pongs
@@ -98,17 +98,17 @@ Be aware that if you want to receive messages continuously you need to call this
 To keep connection active with the server it is a good approach to send PING message with an interval. You can achieve that with [URLSessionWebSocketTask.sendPing](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3181206-sendping) function.
 
 ```swift
-	func sendPing() {
-		webSocketTask.sendPing { (error) in
-			if let error = error {
-		    print("Sending PING failed: \(error)")
-	    }
+  func sendPing() {
+    webSocketTask.sendPing { (error) in
+      if let error = error {
+        print("Sending PING failed: \(error)")
+      }
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-		    self.sendPing()
-			}
-		}
-	}
+      DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        self.sendPing()
+      }
+    }
+  }
 ```
 
 Here again you need to take care of the next PING sending yourself. Easiest way is to just use DispatchQueue or Timer functionality.
@@ -118,7 +118,7 @@ Here again you need to take care of the next PING sending yourself. Easiest way 
 Once you’re done and would like to close the Websocket connection you need to send a close code which is a [URLSessionWebSocketTask.CloseCode](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/closecode) enum type.
 
 ```swift
-	webSocketTask.cancel(closeCode: .goingAway, reason: nil)
+  webSocketTask.cancel(closeCode: .goingAway, reason: nil)
 ```
 
 ### Checking connection state
@@ -126,11 +126,16 @@ Once you’re done and would like to close the Websocket connection you need to 
 To monitor connection status you can use [URLSessionWebSocketDelegate](https://developer.apple.com/documentation/foundation/urlsessionwebsocketdelegate) protocol. You can check once connection has been opened or closed.
 
 ```swift
-	// connection disconnected
-	func urlSession(URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith: URLSessionWebSocketTask.CloseCode, reason: Data?)
+  /// connection disconnected
+  func urlSession(_ session: URLSession, 
+                  webSocketTask: URLSessionWebSocketTask,
+                  didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
+                  reason: Data?)
 
-	// connection established
-	func urlSession(URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol: String?)
+  // connection established
+  func urlSession(_ session: URLSession,
+                  webSocketTask: URLSessionWebSocketTask,
+                  didOpenWithProtocol protocol: String?)
 ```
 
 ## TL;DR
