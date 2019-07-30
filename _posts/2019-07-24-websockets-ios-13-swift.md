@@ -62,11 +62,11 @@ To receive messages from the server you need to use [URLSessionWebSocketTask.rec
       print("Error in receiving message: \(error)")
     case .success(let message):
       switch message {
-        case .string(let text):
-          print("Received string: \(text)")
-        case .data(let data):
-          print("Received data: \(data)")
-        }
+      case .string(let text):
+        print("Received string: \(text)")
+      case .data(let data):
+        print("Received data: \(data)")
+      }
     }
   }
 ```
