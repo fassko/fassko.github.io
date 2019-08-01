@@ -1,3 +1,11 @@
+- date: 2019-07-31
+  event: 
+    title: SwiftCraft podcast
+    url: https://swiftcraft.io/
+  title: https://swiftcraft.io/websockets-with-kristaps-grinbergs/
+  links:
+    - url: https://swiftcraft.io/websockets-with-kristaps-grinbergs/
+      title: listen
 - date: 2019-06-04
   event: 
     title: AltConf, San Jose
