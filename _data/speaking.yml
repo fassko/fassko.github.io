@@ -14,6 +14,14 @@
   links:
     - url: https://www.youtube.com/watch?v=qiwdPs_nPYs
       title: watch video
+- date: 2019-06-03
+  event: 
+    title: MacVoices
+    url: http://www.macvoices.com/
+  title: Qminder Helps You Maintain Your Place In Line
+  links:
+    - url: https://www.youtube.com/watch?v=1GHFjOkcS0I
+      title: watch video
 - date: 2019-04-30
   event: 
     title: AppBuilders Conference in Lugano
