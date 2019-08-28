@@ -5,7 +5,7 @@ categories: [swift, graphql, xcode, ios]
 tags: [swift, apple, graphql, ios, xcode]
 ---
 
-GraphQL is an alternative to the commonly used REST API approach. Using [GraphQL](https://graphql.org/) you get only one single endpoint to the server and need to specify what data exactly do you need to use in your apps. It was created by Facebook in 2012 and open-sourced in 2015.
+GraphQL is an alternative to the commonly used REST API approach. When using [GraphQL](https://graphql.org/) you only get one single endpoint to the server and through that endpoint you need to specify the exact data you need. It was created by Facebook in 2012 and open-sourced in 2015.
 
 Using GraphQL in your Swift applications is not that hard. The easiest way is to use [Apollo iOS](https://github.com/apollographql/apollo-ios) client which recently has seen a lot of great improvements and bug fixes. Apollo iOS is a strongly-typed, caching GraphQL client for iOS, macOS, iPadOS, watchOS, and tvOS. It is written in Swift programming language.
 
@@ -19,7 +19,7 @@ REST API exposes one endpoint for each specific type of information. For example
 
 * `/visitors/ID/` - concrete visitor details with ID
 
-Imagine you would like to get a visitor by name. At first, you need to get the visitors list and search by name. Once you find specific visitor ID you can get rest of the visitor details from another endpoint.
+Imagine you would like to get a visitor by his name. At first, you need to get the visitors list and search by name. Once you find specific visitor ID you can get the rest of the visitor details from another endpoint.
 
 Using GraphQL you could do this with just one request to the server. You just need to specify what kind of data would you like to get in declarative GraphQL syntax:
 
@@ -41,19 +41,19 @@ This is just one simple example. In reality, you could get multiple levels of da
 
 ## Setting up GraphQL using Swift in iOS
 
-Using GraphQL in your iOS, iPadOS, macOS, watchOS and tvOS apps is not that hard. The easiest way is to use [Apollo iOS SDK](https://github.com/apollographql/apollo-ios) which is a strongly-typed, caching GraphQL client. It is written in Swift programming language.
+You can use GraphQL in your iOS, iPadOS, macOS, watchOS and tvOS apps. The easiest way is to use [Apollo iOS SDK](https://github.com/apollographql/apollo-ios) which is a strongly-typed, caching GraphQL client. It is written in Swift programming language.
 
 ### Installation
 
 To set up Apollo client you need to [install Apollo framework](https://www.apollographql.com/docs/ios/installation/#installing-the-apollo-framework) and [generate schema file](https://www.apollographql.com/docs/ios/installation/#adding-a-schema-file-to-your-target-directory) which describes how you can get information from the server and add to your Xcode app target.
 
-Then you [can create](https://www.apollographql.com/docs/ios/installation/#creating-graphql-files-with-your-queries-or-mutations) `.graphql` files with your queries or mutations how you would like to get or change data from the server. After that, you need to add [code generation](https://www.apollographql.com/docs/ios/installation/#adding-a-code-generation-build-step) build step in Xcode build process to generate type-safe Swift code to use for communication with your server.
+Then you [can create](https://www.apollographql.com/docs/ios/installation/#creating-graphql-files-with-your-queries-or-mutations) `.graphql` files with your queries or mutations on how you would like to get or change data from the server. After that, you need to add [code generation](https://www.apollographql.com/docs/ios/installation/#adding-a-code-generation-build-step) build step in Xcode build process to generate type-safe Swift code to use for communication with your server.
 
 Build your Xcode app target and [add generated](https://www.apollographql.com/docs/ios/installation/#adding-the-generated-api-file-to-your-target) API file to use it.
 
 ### Communicate with the server
 
-After the installation process is done you can set up `ApolloClient` instance and point to your GraphQL server.
+Once the installation process is done you can set up `ApolloClient` instance and point to your GraphQL server.
 
 ```swift
   import Apollo
@@ -82,11 +82,11 @@ This is just a simple example in some of the next posts we will look into how we
 
 ## GraphQL pros and cons
 
-Every technology has its pluses and minuses. You need to understand if the tradeoffs are worth to switch away from regular REST API.
+Every technology has its pros and cons. You need to understand if the tradeoffs are worth switching away from regular REST API.
 
 ### Pros
 
-Using GrapHQL it is faster to implement, change and maintain your applications. You don’t need to communicate every smaller detail with your backend or even create new endpoints.
+GraphQL makes it faster to implement, change and maintain your applications. You don’t need to communicate every smaller detail with your backend or even create new endpoints.
 
 Using Apollo iOS framework helps a lot to use GraphQL in your Swift applications. It does support iOS, iPadOS, watchOS, macOS and tvOS. You can use Swift type safety and other great features like Result type and more. 
 
@@ -94,11 +94,11 @@ Lately, Apollo iOS framework has seen a lot of great updates and more bugs are b
 
 ### Cons
 
-Using GraphQL is not that straight forward especially if you have used to REST API approach. Switching your thinking and adapting a new way can take some time. It also adds an extra layer between server and your apps which you need to maintain in the future.
+Using GraphQL is not that straight forward especially if you are used to REST API approach. Switching your thinking and adapting a new way can take some time. It also adds an extra layer between server and your apps which you need to maintain in the future.
 
 With Apollo iOS SDK you need to be very careful with [caching](https://www.apollographql.com/docs/ios/watching-queries/). There are several ways to deal with cache and when to not cache at all. Just to be sure to check out official documentation before or if you run into any data inconsistency issues.
 
-Apollo helps a lot to use GraphQL using Swift, but one downside is optionals. If you have the freedom to tell what kind of data you want from the server that comes with optionality tradeoff. It is a minor issue, just you need to deal with that when you construct your models and get data back from the server.
+Apollo helps a lot to use GraphQL with Swift, but one downside is optionals. If you have the freedom to tell what kind of data you want from the server that comes with optionality tradeoff. It is a minor issue, just you need to deal with that when you construct your models and get data back from the server.
 
 ## TL;DR
 
