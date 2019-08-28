@@ -44,3 +44,4 @@ tmp
 .DS_Store
 _site/
 .jekyll-metadata
+/.jekyll-cache
