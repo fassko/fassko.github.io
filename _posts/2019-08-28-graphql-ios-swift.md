@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ! "Using GraphQL in iOS using Swift"
+title: ! "Using GraphQL in iOS with Swift"
 categories: [swift, graphql, xcode, ios]
 tags: [swift, apple, graphql, ios, xcode]
 ---
