@@ -1,8 +1,8 @@
 ---
 layout: post
 title: ! "Dark Side of the AppStore"
-categories: [swift, websockets, xcode11, ios13]
-tags: [swift, apple, websockets, ios, xcode]
+categories: [appstore, apple]
+tags: [appstore, apple, ios]
 ---
 
 I am an Apple fanboy and I can admit that. But one of the most frustrating things being app developer is dealing with the App Store review and compliance teams. This time I would like to share my experience with these problems.
