@@ -17,7 +17,7 @@ Quite recently I jumped on a project which promotes vegan diet food places in Ri
 
 So far this app has been released with 5 version updates each time adding extra features to it. People love and use it a lot. Even data shows that app retention, ratings and feedback from social media is very good.
 
-image with rejected
+![Reject app](/assets/img/dark-side-appstore/rejected-app-appstoreconnect.png)
 
 But sadly Apple App Store review team thinks differently. They have reject last update for iOS 13 which introduces dark mode and other updates because of *minimum functionality*.
 
@@ -28,9 +28,11 @@ App is free and isn’t tricking with any adds or such. It uses only iOS standar
 
 ## App Store Scams
 
+![Copycat](/assets/img/dark-side-appstore/copycat-search.png)
+
 For quite a while I have been working on a [project](https://apps.apple.com/ee/app/dodies-lv/id1080800199) which lists hiking paths in Baltic states. Most of them have been reviewed by the project team and have great pictures. App has been out sourced in [Github](https://github.com/fassko/Dodies.lv) and everyone can participate to it. Recently I found that someone has copied it and released even in App Store with the same name. I understand it is public in Github, but how App Store team did let it go trough the review process?
 
-IMAGE with scam
+![Copycat](/assets/img/dark-side-appstore/copycat.png)
 
 I have filed a complaint on August 12 and right now it has been more than one month. There has been email conversation, but Apple can’t reach out this copycat or take this app down. It is obviously that even screenshots have been copied.
 
