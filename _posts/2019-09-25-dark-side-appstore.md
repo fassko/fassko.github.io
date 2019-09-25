@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ! "Dark Side of the AppStore"
+title: ! "Dark Side of the App Store"
 categories: [appstore, apple]
 tags: [appstore, apple, ios]
 ---
@@ -19,9 +19,9 @@ So far this app has been released with 5 version updates each time adding extra 
 
 ![Reject app](/assets/img/dark-side-appstore/rejected-app-appstoreconnect.png)
 
-But sadly Apple App Store review team thinks differently. They have rejected last update for iOS 13 which introduces dark mode and other updates due to *minimum functionality*.
+But sadly Apple App Store review team thinks differently. They have rejected last update due to *minimum functionality*. I had a call with Apple representative and they even explained that approving this app has been a mistake by them.
 
-> **Guideline 4.2 - Design - Minimum Functionality**
+> **[Guideline 4.2 - Design - Minimum Functionality](https://developer.apple.com/app-store/review/guidelines/#4.2)**
 > We found that the usefulness of your app is limited by the minimal amount of content or features it includes.
 
 App is free and it does not include any adds. It uses only iOS standard UI elements. App Store has plenty of scams and very bad apps so treating an app which complies to all user interface guidelines, supports new iOS 13 and is widely used is not understandable to me. Not to mention that this project tries to solve environmental and animal rights issues which is a big topic right now.
