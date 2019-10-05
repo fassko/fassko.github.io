@@ -1,3 +1,13 @@
+- date: 2019-10-04
+  event: 
+    title: Share IT
+    url: https://shareit.lv
+  title: The A - Z Guide Of iOS App Development
+  links:
+    - url: https://youtu.be/-hlOUlqYZy0
+      title: watch video
+    - url: https://github.com/fassko/presentations/blob/master/Share-IT.pdf
+      title: see slides
 - date: 2019-07-31
   event: 
     title: SwiftCraft podcast
