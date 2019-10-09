@@ -44,6 +44,8 @@ App Store guidelines state that if you process any payments trough App Store you
 
 I have been talking with App Store review team a few times: the solution is to not have any marks of registration or links in your apps. Otherwise you lose 30% of your revenue since you have the same pricing on the App Store and outside of it. There have been [news](https://www.theverge.com/2018/12/28/18159373/netflix-in-app-subscriptions-iphone-ipad-ios-apple) that because of this issue Netflix has stopped to process new sign ups via App Store. Amazon only has a sign-in form in their apps without any information how to sign up and are now introducing [credits system](https://twitter.com/stevemoser/status/1174408011965747201). The list goes on and on.
 
+Apple is trying to [defend themselves](https://www.theverge.com/2019/5/29/18644045/apple-defends-app-store-policies-antitrust-eu-spotify) by creating a new page about [App Store principles and practices](https://www.apple.com/ios/app-store/principles-practices/). Some people like how they speak openly, but others pointed that they have failed to address any of real issues what developers are facing.
+
 ## TL;DR;
 
 App Store review process is one of the most painful parts of iOS development. It is done by real humans and that means it can be inconsistent and error prone.
