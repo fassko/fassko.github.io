@@ -7,7 +7,7 @@ tags: [passkit, apple, ios, wallet]
 
 Apple [PassKit](https://developer.apple.com/documentation/passkit) framework is responsible for Apple Pay and managing user passes in Wallet app.
 
-This time let’s talk about passes, how to create and distribute them. Wallet app allows iOS users to organize boarding passes, tickets or gift, business and loyalty cards. In short, passes are a digital representations of information that usually is printed on paper or used as plastic cards.
+This time let’s talk about passes, how to create and distribute them. Wallet app allows iOS users to organize boarding passes, tickets or gifts, business and loyalty cards. In short, passes are digital representations of information that usually is printed on paper or used as plastic cards.
 
 <!--more-->
 
@@ -27,7 +27,7 @@ Passes are created as packages (or bundles) with extension `.pass` and consists 
 
 ### Required fields creating a pass
 
-When creating a pass you need to provide the [pass type identifier](https://developer.apple.com/documentation/passkit/pkpass/1618783-passtypeidentifier) and [serial number](https://developer.apple.com/documentation/passkit/pkpass/1618788-serialnumber). Type identifier is a String value using reverse DNS style - for example, `pass.com.example.loyalty-card`. Serial number is a string value that has a unique value in the scope of the pass type, like a membership number or ticket identifier.
+When creating a pass you need to provide the [pass type identifier](https://developer.apple.com/documentation/passkit/pkpass/1618783-passtypeidentifier) and [serial number](https://developer.apple.com/documentation/passkit/pkpass/1618788-serialnumber). Type identifier is a String value using reverse DNS style - for example, `pass.com.example.loyalty-card`. Serial number is a string value that has a unique value in the scope of the pass type, like a membership number or a ticket identifier.
 
 Other mandatory fields are:
 
@@ -40,13 +40,13 @@ Other mandatory fields are:
 
 Passes can have different visual appearance:
 
-* `boardingPass` - pass for flight, train, bus or any other type of transit
-* `coupon` - coupons, special offers or discount 
+* `boardingPass` - pass for a flight, train, bus or any other type of transit
+* `coupon` - coupons, special offers or discounts
 * 	`eventTicket` - pass to enter any kind of event
 * 	`storeCard` - loyalty card style
 * 	`generic` - style appropriate for any pass
 
-Wallet app is using different layout to each of these styles. It is much easier for your users to distinguish passes and find the right now faster.
+Wallet app is using different layout to each of these styles. It is much easier for your users to distinguish passes and find the right one faster.
 
 ## Creating passes
 
@@ -64,7 +64,7 @@ After creating, signing and compressing a pass into a bundle you can distribute 
 
 ## Using passes
 
-Now you provide not only barcode information but NFC data as well. Using NFC your users can just hold the authorized device near the NFC reader and authorize the pass either it is a flight boarding, student ID, gym membership or even ticket for [WWDC](https://kristaps.me/wwdc-2019/).
+Now you can provide not only barcode information but NFC data as well. When using NFC your users can simply hold the authorized device near the NFC reader and authorize the pass regardless - whether it's a flight boarding, student ID, gym membership or even a ticket for the [WWDC](https://kristaps.me/wwdc-2019/).
 
 ![Using pass from Apple Watch](/assets/img/passkit/scanning-pass-apple-watch.jpg)
  
@@ -80,4 +80,4 @@ It is a secure way to provide a more modern way to your users using Wallet app o
 * [Archived Wallet Developer Guide](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/index.html#//apple_ref/doc/uid/TP40012195-CH1-SW1)
 * [Wallet Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/wallet/overview/pass-design/)
 * [Video how to create passes](https://www.youtube.com/watch?v=g5KRJgO7yJE)
-* Outdate but still relevant tutorial, [Part 1](https://www.raywenderlich.com/2855-beginning-passbook-in-ios-6-part-1-2) and [Part 2](https://www.raywenderlich.com/2853-beginning-passbook-in-ios-6-part-2-2)
+* Outdated but still relevant tutorial, [Part 1](https://www.raywenderlich.com/2855-beginning-passbook-in-ios-6-part-1-2) and [Part 2](https://www.raywenderlich.com/2853-beginning-passbook-in-ios-6-part-2-2)
