@@ -1,3 +1,11 @@
+- date: 2019-11-08
+  event: 
+    title: Mobile Era
+    url: https://mobileera.rocks/
+  title: How to tame Core Animation
+  links:
+    - url: https://speakerdeck.com/fassko/how-to-tame-core-animation
+      title: see slides
 - date: 2019-10-04
   event: 
     title: Share IT
