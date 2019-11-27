@@ -1,21 +1,21 @@
 ---
 layout: post
 title: ! "How to use subscriptions with GraphQL using Apollo iOS SDK and Swift?"
-categories: [graphql, apple]
-tags: [graphql, apple, ios, wallet]
+categories: [graphql, swift]
+tags: [graphql, apple, ios, apollo]
 ---
 
 GraphQL main functionality is to fetch and update data from the server. In addition to that subscriptions allow us to listen and to send messages from and to the server in real-time. It is similar to regular queries, but the answer will be received when an event happens either on the server or on the client.
 
-Apollo iOS SDK library supports subscriptions and it is powered by the Swift WebSocket library [Starscream](/websockets-swift/) to connect to the server. We will look into how to set it up and start using it right now.
+Apollo iOS SDK library supports subscriptions and it is powered by the Swift WebSocket library [Starscream](/websockets-swift/) behind the scenes to connect to the server. We will look into how to set it up and start using it right now.
 
 <!--more-->
 
 ## Schema and code generation
 
-Subscriptions are already supported once you download your schema file from the GraphQL server and perform the code generation. It will generate all the subscriptions using GraphQLSubscription protocol which allows passing parameters that subscription you want to implement takes.
+Subscriptions are already supported once you download your schema file from the GraphQL server and perform the code generation. It will generate all the subscriptions using `GraphQLSubscription` protocol which allows passing parameters to subscription you want to implement.
 
-Let’s imagine we have chat application and GraphQL server can get messages for a specific thread as soon as they are sent. We need to create a GraphQL query in our .graphql file like this:
+Let’s imagine we have a chat application and GraphQL server can get messages for a specific thread as soon as they are sent. We need to create a GraphQL query in our `.graphql` file like this:
 
 ```graphql
   subscription messagesReceived($threadID: ID!) {
@@ -29,6 +29,8 @@ Let’s imagine we have chat application and GraphQL server can get messages for
 ```
 
 Once this is done we use Apollo iOS SDK to auto-generate type-safe Swift code. Which can be used in our app.
+
+More about using Apollo iOS SDK you can read in previous [post](/graphql-ios-swift/).
 
 ## Setting up the client
 
@@ -89,7 +91,7 @@ Each time when a message has been sent code inside closure is executed with new 
 
 GraphQL is not only for fetching data from the server and updating data on the server. You can be using GraphQL subscription feature to listen and send real-time messages using WebSockets.
 
-Apollo iOS SDK library has the functionality to support subscriptions in your Swift applications. It is using WebSocket library Starscream behind the scenes to offload this cumbersome task. Leveraging code generation you can use strictly typed Swift code to interact with your GraphQL server in real-time in your iOS apps.
+Apollo iOS SDK library has the functionality to support subscriptions in your Swift applications. It is using WebSocket library Starscream behind the scenes to offload this cumbersome task. Leveraging code generation you can use strictly typed Swift code to interact with your GraphQL server in real-time in your iOS, iPadOS, macOS and tvOS apps.
 
 ## Links
 
