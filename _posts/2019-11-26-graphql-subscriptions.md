@@ -52,7 +52,7 @@ Then an HTTP transport instance will help us to use queries and mutations.
   let httpTransport = HTTPNetworkTransport(url: URL(string: "http://messaging.app/graphql")!)
 ```
 
-A split network transport to allow the use of HTTP Transport and WebSocket transport protocols. That allows us to avoid any potential issues of having multiple client objects.
+A split network transport allows the use of HTTP Transport and WebSocket transport protocols. That enables us to avoid any potential issues of having multiple client objects.
 
 ```swift
   let splitNetworkTransport = SplitNetworkTransport(
