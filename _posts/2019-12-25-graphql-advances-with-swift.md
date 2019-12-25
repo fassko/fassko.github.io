@@ -95,7 +95,7 @@ You can use this initializer when you fetch data and transform from GraphQL type
 
 ## Links
 
-* fragments
-* code generation tool
-* Fetching data
+* [Using GraphQL fragments](https://www.apollographql.com/docs/ios/fragments/)
+* [Tooling for development and production Apollo workflows](https://github.com/apollographql/apollo-tooling)
+* [Fetching queries](https://www.apollographql.com/docs/ios/fetching-queries/)
 * [Mapping GraphQL types to Swift](https://blog.apollographql.com/mapping-graphql-types-to-swift-aa85e5693db4)
