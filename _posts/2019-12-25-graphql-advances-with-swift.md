@@ -98,3 +98,4 @@ You can use this initializer when you fetch data and transform from GraphQL type
 * fragments
 * code generation tool
 * Fetching data
+* [Mapping GraphQL types to Swift](https://blog.apollographql.com/mapping-graphql-types-to-swift-aa85e5693db4)
