@@ -5,15 +5,15 @@ categories: [graphql, swift]
 tags: [graphql, apple, ios, apollo]
 ---
 
-In previous articles, we discussed how to [get started](/graphql-ios-swift/) and use [subscriptions](/graphql-subscriptions/) with GraphQL in iOS (and iPadOS, tvOS, and macOS) using Swift programing language.
+In previous articles, we discussed how to [get started] with (/graphql-ios-swift/) and use [subscriptions](/graphql-subscriptions/) with GraphQL in iOS (and iPadOS, tvOS, and macOS) using Swift programming language.
 
-This time I want to discuss some advanced topics using GraphQL with Apollo SDK and Swift. How to use GraphQL fragments and Swift scalar types? As well I would like to talk about optionality with GraphQL it’s pluses and minuses.
+This time I want to discuss some advanced topics using GraphQL with Apollo SDK and Swift: usage of GraphQL fragments and Swift scalar types; optionality with GraphQL and it’s pros and cons.
 
 <!--more-->
 
 ## Using fragments
 
-At first, what is a **fragment** in GraphQL? It is a reusable piece of the query. For instance, if you need same fields in multiple queries you can extract into a reusable piece called [GraphQL fragment](https://graphql.org/learn/queries/#fragments).
+At first, what is a **fragment** in GraphQL? It is a reusable piece of the query. For instance, if you need the same field in multiple queries you can extract that into a reusable piece called [GraphQL fragment](https://graphql.org/learn/queries/#fragments).
 
 ```graphql
   query Users($id: userID) {
@@ -33,7 +33,7 @@ At first, what is a **fragment** in GraphQL? It is a reusable piece of the query
   }
 ```
 
-When you use fragments in your Swift project queries then Apollo iOS SDK [generates separate result types](https://www.apollographql.com/docs/ios/fragments/). It is a good way to divide UI, for instance, UITableViewCell or UICollectionViewCell. This way a child view can be reused and only depends on a parent - UITableView or UICollectionView.
+When you use fragments in your Swift project queries, Apollo iOS SDK [generates separate result types](https://www.apollographql.com/docs/ios/fragments/). It is a good way to divide UI, for instance, UITableViewCell or UICollectionViewCell. This way a child view can be reused and only depends on the parent - UITableView or UICollectionView.
 
 ## GraphQL scalar types in Swift
 
@@ -51,7 +51,7 @@ Using Apollo code generation argument `--passthroughCustomScalars` you can use y
 
 Swift `Date` type from Foundation framework is a good example. If you want to convert GraphQL Date type to Swift using Apollo iOS SDK, just pass `--passthroughCustomScalars` when generating the Swift code.
 
-You car use custom formats for `Date` like `ISO8601` or use milliseconds. Just need to extend `Date` type and conform to `JSONDecodable` which requires implementing initialize method.
+You can use custom formats for `Date` like `ISO8601` or use milliseconds. You just need to extend `Date` type and conform to `JSONDecodable` which requires implementing the initializing method.
 
 ```swift
   extension Date: JSONDecodable {
@@ -81,7 +81,7 @@ You car use custom formats for `Date` like `ISO8601` or use milliseconds. Just n
 
 ## Dealing with optionals with GraphQL
 
-Optional type properties I think is one of the biggest downsides of the GraphQL with Apollo iOS SDK. It is because in many cases GraphQL type field can not be specified, basically it can be null.
+I think that optional type properties is one of the biggest downsides of the GraphQL with Apollo iOS SDK. It is so because in many cases GraphQL type field can not be specified, so it can be null.
 
 When you are [fetching queries](https://www.apollographql.com/docs/ios/fetching-queries/) with Apollo iOS SDK `GraphQLResult` type has optional property `data`. This property is a typed result data which means it has fetched type properties and those can be also optional.
 
@@ -102,7 +102,7 @@ extension User {
 }
 ```
 
-You can use this initializer when you fetch data and transform it from GraphQL types to your app models. By abstracting this with another layer you can hide it away and return let’s say a Swift Result type.
+You can use this initializer when you fetch data and transform it from GraphQL types to your app models. By abstracting this with another layer you can hide it away and return, let’s say, a Swift Result type.
 
 ## TL;DR
 
