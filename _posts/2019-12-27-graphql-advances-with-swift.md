@@ -5,7 +5,7 @@ categories: [graphql, swift]
 tags: [graphql, apple, ios, apollo]
 ---
 
-In previous articles, we discussed how to [get started] with (/graphql-ios-swift/) and use [subscriptions](/graphql-subscriptions/) with GraphQL in iOS (and iPadOS, tvOS, and macOS) using Swift programming language.
+In previous articles, we discussed how to [get started](/graphql-ios-swift/) with  and use [subscriptions](/graphql-subscriptions/) with GraphQL in iOS (and iPadOS, tvOS, and macOS) using Swift programming language.
 
 This time I want to discuss some advanced topics using GraphQL with Apollo SDK and Swift: usage of GraphQL fragments and Swift scalar types; optionality with GraphQL and it’s pros and cons.
 
