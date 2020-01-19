@@ -7,13 +7,13 @@ tags: [cache, apple, ios, apollo]
 
 Caching and invalidating cache is one of the hardest things in computer science [according to](https://martinfowler.com/bliki/TwoHardThings.html) Martin Fowler.
 
-Recently I was dealing with cache and invalidating it in three of my applications. I had some serious issues with that and wanted to dig deeper. This time we will discuss  `URLRequest` caching strategies and how to use it in your apps. I will share some of my learnings and problems I found.
+Recently I was dealing with cache and invalidating it in three of my applications. I had some serious issues with that and wanted to dig deeper. This time we will discuss  `URLRequest` caching strategies and how to use it in your apps. I will share some of my learnings and problems that I found.
 
 <!--more-->
 
 ## Creating URLRequest with cache
 
-Not so many of us use a caching strategy when creating `URLRequest` and hitting the network. If the server you’re accessing doesn’t have caching strategy implemented then making network requests can cause data corruption in your apps.
+Not so many of us use caching strategy when creating `URLRequest` and hitting the network. If the server you’re accessing doesn’t have caching strategy implemented then making network requests can cause data corruption in your apps.
 
 I had these issues with just a simple request and getting new `JSON` data from the network. For some reason, `URLRequest` thought that nothing has changed and returned data from internal app cache rather than the network.
 
@@ -32,17 +32,17 @@ The reason for this is that `NSURLCache` is set for the application by default a
 * `static var reloadIgnoringCacheData: NSURLRequest.CachePolicy`
 > Replaced by NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
 * `case returnCacheDataElseLoad`
-> Use existing cache data, regardless or age or expiration date, loading from originating source only if there is no cached data.
+> Use existing cache data, regardless of age or expiration date, loading from originating source only if there is no cached data.
 * 	`case returnCacheDataDontLoad`
-> Use existing cache data, regardless or age or expiration date, and fail if no cached data is available.
+> Use existing cache data, regardless of age or expiration date, and fail if no cached data is available.
 * `case reloadRevalidatingCacheData`
 > Use cache data if the origin source can validate it; otherwise, load from the origin
 
-If you just read the documentation then all of these constants look confusing and hard to choose the right now. Let’s try to understand which of the caching policy you need to choose and when for your `URLRequest`.
+If you just read the documentation then all of these constants look confusing and hard to choose the right now. Let’s try to understand which of the caching policy you need to choose for your `URLRequest` and when.
 
 ## Which one to choose?
 
-The default policy for URL load requests is `useProtocolCachePolicy`. If a cached response does not exist then  it is fetched from the originating source. Otherwise, if a response doesn’t tell to revalidate then a response is returned from the cache. For more detailed information you can go to [RFC 2616 detailed documentation](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13). Here is an image to illustrate how this policy works.
+The default policy for URL load requests is `useProtocolCachePolicy`. If a cached response does not exist then it is fetched from the originating source. Otherwise, if a response doesn’t tell to revalidate then a response is returned from the cache. For more detailed information you can go to [RFC 2616 detailed documentation](https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13). Here is an image to illustrate how this policy works.
 
 ![How useProtocolCachePolicy works](/assets/img/cache/cache-determination.png)
 
@@ -52,9 +52,9 @@ With `returnCacheDataElseLoad` you tell to use cache no matter how out of date i
 
 Option `returnCacheDataDontLoad` is the most confusion one. It means offline mode. Only cached data will be used and it won’t load from the network.
 
-But the story doesn’t end here, if we check `reloadRevalidatingCacheData` [documentation](https://developer.apple.com/documentation/foundation/nsurlrequest/cachepolicy/reloadrevalidatingcachedata) then we see that previous versions than macOS 15, iOS 13, watchOS 6, and tvOS 13 don’t implement this constant. [Mattt](https://twitter.com/mattt) is [warning](https://nshipster.com/nsurlcache/) us about that years ago. There is a [radar](http://openradar.appspot.com/radar?id=1755401) opened in May 2012.
+But the story doesn’t end here, if we check `reloadRevalidatingCacheData` [documentation](https://developer.apple.com/documentation/foundation/nsurlrequest/cachepolicy/reloadrevalidatingcachedata) then we see that previous versions than macOS 15, iOS 13, watchOS 6, and tvOS 13 don’t implement this constant. [Mattt](https://twitter.com/mattt) was [warning](https://nshipster.com/nsurlcache/) us about that years ago. There is a [radar](http://openradar.appspot.com/radar?id=1755401) opened in May 2012.
 
-At the end which one you need to choose? There isn’t a right or wrong answer, but as rule of thumb if you want partial cache with default settings then choose `useProtocolCachePolicy`. If you want to load a request without cache then choose either `reloadIgnoringLocalCacheData` or `reloadIgnoringLocalAndRemoteCacheData`.
+So which one to choose? There isn’t a right or wrong answer, but the rule of thumb is - if you want partial cache with default settings then choose `useProtocolCachePolicy`. If you want to load a request without cache then choose either `reloadIgnoringLocalCacheData` or `reloadIgnoringLocalAndRemoteCacheData`.
 
 ## TL;DR
 
