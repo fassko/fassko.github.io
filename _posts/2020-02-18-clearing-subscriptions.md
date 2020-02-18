@@ -11,19 +11,6 @@ Previously we have looked into how to use WebSockets using [Starscream library](
 
 If you don’t close the connection and clean up then various problems can arise like memory leaks, server overwork and data corruptions.
 
-
-
-* why need to clear websocket subscription
-    * Clean up after yourself
-    * Don’t overwork the server
-    * What is close code?
-* clear subscriptions with URLSessionWebSocketTask
-    * https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3181200-cancel
-    * Close code type
-* Clear subscription with Starscream
-* clear subscriptions with GraphQL
-    * https://www.apollographql.com/docs/ios/subscriptions/
-
 <!--more-->
 
 # Closing the WebSocket
