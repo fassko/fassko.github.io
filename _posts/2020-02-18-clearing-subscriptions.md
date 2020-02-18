@@ -64,16 +64,41 @@ socket.disconnect(closeCode: CloseCode.normal.rawValue)
 ```
 
 
-# Clear subscriptions with GraphQL
+# Cancel subscriptions with GraphQL
 
+When using GraphQL with subscriptions Apollo protocol handles all the heavy duty work behind the scene. Clients can get immediate data changes from the server.
+
+With Apollo iOS SDK library subscriptions are `Cancellable` [protocol](https://github.com/apollographql/apollo-ios/Sources/Apollo/Cancellable.swift). It is an object that can be cancelled when in progress. It has just one method `cancel`.
+
+In order to clean up after GraphQL subscriptions are not needed anymore the easiest way is to keep track of all subscriptions and cancel them when needed or upon object deinitilization.
+
+```swift
+
+
+var subscriptions: [Cancellable]
+
+// ...
+
+let newPricesSubcriprion = ApolloClient.subscribe(NewPricesSubscription()) { ... }
+
+// ...
+
+subscriptions.forEach { subscription in
+    subscription.cancel()
+}
+
+```
 
 
 ## TL;DR
 
+When working with WebSockets we need to remember to close connections and clean up. Forgetting to to so we can run into multiple issues which might be hard to debug and pin point.
 
+We can use WebSockets in our Swift projects in multiple ways and it requires a different approach to close the connection. But most importantly as WebSocket protocol tells us we need to do it either connection is closed from the user or server side.
 
 ## Links
 
 * [Closing the connection from WebSocket protocol](https://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76#section-6)
 * [Cancel URLSessionWebSocketTask](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3181200-cancel)
+* [Starscream library documentation](https://github.com/daltoniam/Starscream)
 * [GraphQL subscriptions](https://www.apollographql.com/docs/ios/subscriptions/)
