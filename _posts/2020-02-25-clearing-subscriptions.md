@@ -13,13 +13,13 @@ If you leave the connection open and don’t clean up properly various problems 
 
 <!--more-->
 
-# Closing the WebSocket
+## Closing the WebSocket
 
 As we are looking at how to close connection from user agent there are couple of things to consider. When closing the connection we need to inform server about the reason using "close" code which can be useful for server developers. There are several "close" codes which you can check out in [RFC 6455](https://tools.ietf.org/html/rfc6455#section-7.4.1) specification or simplified version [here](https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent).
 
 If anything goes wrong with the connection on user side connection should be closed. It is important to note that when user agent notices that server has closed its connection, it should do the same on the other side. That means you need to explicitly inform the server about such event (regardless of the closure on the user side). That is clearly [stated](https://tools.ietf.org/html/draft-hixie-thewebsocketprotocol-76#section-6.3) in the official WebSocket protocol.
 
-# Cancel the URLSessionWebSocketTask
+## Cancel the URLSessionWebSocketTask
 
 To cancel a `URLSessionWebSocketTask` you need to call a `cancel` [method](https://developer.apple.com/documentation/foundation/urlsessionwebsockettask/3181200-cancel).
 
@@ -36,7 +36,7 @@ webSocketTask.cancel(with: .goingAway, reason: nil)
 
 ```
 
-# Disconnect with Starscream
+## Disconnect with Starscream
 
 To close a WebSocket created with library [Starscream](https://github.com/daltoniam/Starscream) you need to call a `disconnect` method. If you want to specify it in the close code you can do so, but it is optional.
 
@@ -51,7 +51,7 @@ socket.disconnect(closeCode: CloseCode.normal.rawValue)
 ```
 
 
-# Cancel subscriptions with GraphQL
+## Cancel subscriptions with GraphQL
 
 When using GraphQL with subscriptions Apollo protocol handles all the heavy duty work behind the scenes. Clients can get immediate data changes from the server.
 
@@ -75,7 +75,6 @@ subscriptions.forEach { subscription in
 }
 
 ```
-
 
 ## TL;DR
 
