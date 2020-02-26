@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ! "Clearing up after subscribing to Swift WeabSockets"
+title: ! "Clearing up after subscribing to Swift WebSockets"
 categories: [websockets, swift]
 tags: [websockets, apple, ios, apollo]
 ---
