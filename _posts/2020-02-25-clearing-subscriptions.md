@@ -27,12 +27,12 @@ When calling this instance method you need to provide a [close code](https://dev
 
 ```swift
 
-let url = URL(string: "wss://echo.websocket.org")!
-let webSocketTask = URLSession.shared.webSocketTask(with: url)
+  let url = URL(string: "wss://echo.websocket.org")!
+  let webSocketTask = URLSession.shared.webSocketTask(with: url)
 
-// ...
+  // ...
 
-webSocketTask.cancel(with: .goingAway, reason: nil)
+  webSocketTask.cancel(with: .goingAway, reason: nil)
 
 ```
 
@@ -42,11 +42,11 @@ To close a WebSocket created with library [Starscream](https://github.com/dalton
 
 ```swift
 
-let socket = WebSocket(url: URL(string: "ws://localhost:8080/")!)
+  let socket = WebSocket(url: URL(string: "ws://localhost:8080/")!)
 
-// ...
+  // ...
 
-socket.disconnect(closeCode: CloseCode.normal.rawValue)
+  socket.disconnect(closeCode: CloseCode.normal.rawValue)
 
 ```
 
@@ -61,18 +61,17 @@ In order to clean up after GraphQL subscriptions are not needed anymore the easi
 
 ```swift
 
+  var subscriptions: [Cancellable]
 
-var subscriptions: [Cancellable]
+  // ...
 
-// ...
+  let newPricesSubcriprion = ApolloClient.subscribe(NewPricesSubscription()) { ... }
 
-let newPricesSubcriprion = ApolloClient.subscribe(NewPricesSubscription()) { ... }
+  // ...
 
-// ...
-
-subscriptions.forEach { subscription in
-    subscription.cancel()
-}
+  subscriptions.forEach { subscription in
+      subscription.cancel()
+  }
 
 ```
 
