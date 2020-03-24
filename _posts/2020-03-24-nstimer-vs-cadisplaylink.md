@@ -98,15 +98,11 @@ Unless `CADisplayLink` is tied to screen refresh rate which is either 60 or 120 
 
 * [NSTimer official documentation](https://developer.apple.com/documentation/foundation/nstimer?language=objc)
 * [CADisplayLink official documentation](https://developer.apple.com/documentation/quartzcore/cadisplaylink)
+* [Timer tutorial](https://www.raywenderlich.com/113835-ios-timer-tutorial)
+* [How to use Timer](https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer)
+* [How to use CADisplayLink](https://www.hackingwithswift.com/example-code/system/how-to-synchronize-code-to-drawing-using-cadisplaylink)
+* [In depth article about CADisplayLink](https://medium.com/@dmitryivanov_54099/cadisplaylink-and-its-applications-bfafb760d738?source=linkShare-edb1354ca2c4-1583337923)
+* [Discussion about CADisplayLink and animations](https://stackoverflow.com/questions/30955847/ios-animation-cadisplaylink-vs-cashapelayer)
 
-* https://stackoverflow.com/questions/30955847/ios-animation-cadisplaylink-vs-cashapelayer
 
 
-https://www.raywenderlich.com/113835-ios-timer-tutorial
-
-
-https://www.hackingwithswift.com/example-code/system/how-to-synchronize-code-to-drawing-using-cadisplaylink
-
-https://www.hackingwithswift.com/articles/117/the-ultimate-guide-to-timer
-
-https://medium.com/@dmitryivanov_54099/cadisplaylink-and-its-applications-bfafb760d738?source=linkShare-edb1354ca2c4-1583337923
