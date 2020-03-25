@@ -92,7 +92,9 @@ Unless `CADisplayLink` is tied to screen refresh rate which is either 60 or 120 
 
 ## TL;DR
 
+We all might now `NSTimer` (or just `Timer`) which is good for executing piece of code after an interval with or without repeating it.
 
+In some cases it’s worth to consider `CADisplayLink` especially if you want to work with animations and get most of the time between screen redraws itself.
 
 ## Links
 
