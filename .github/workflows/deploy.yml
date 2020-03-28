@@ -52,4 +52,4 @@ jobs:
       env:
         CF_ZONE: ${{ secrets.CF_ZONE }}
         CF_API_EMAIL: ${{ secrets.CF_API_EMAIL }}
-        CF_API_KEY: {{ secrets.CF_API_KEY }}
+        CF_API_KEY: ${{ secrets.CF_API_KEY }}
