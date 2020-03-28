@@ -39,6 +39,7 @@ jobs:
       with:
         target_branch: master
         build_dir: _site
+        allow_empty_commit: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
