@@ -26,3 +26,7 @@ jobs:
       uses: crazy-max/ghaction-github-pages@v1
       with:
         target_branch: master
+        build_dir: _site
+
+    - name: Clear cache
+      run: ./clear_cache.sh
