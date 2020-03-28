@@ -13,6 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Install bundler
+      run: |
+        gem install bundler
+        bundle install
         
     - name: Build with Jekyll
       run: bundle exec jekyll build
