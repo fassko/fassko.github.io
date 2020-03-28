@@ -1,4 +1,4 @@
-name: Jekyll site CI
+name: Deploy site
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ develop ]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
