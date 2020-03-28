@@ -2,9 +2,9 @@ name: Jekyll site CI
 
 on:
   push:
-    branches-ignore: [master]
+    branches-ignore: [master, develop]
   pull_request:
-    branches-ignore: [master]
+    branches-ignore: [master, develop]
 
 jobs:
   build:
