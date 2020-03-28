@@ -49,3 +49,7 @@ jobs:
           -H "X-Auth-Key: $CF_API_KEY" \
           -H "Content-Type: application/json" \
           --data '{"purge_everything":true}'
+      env:
+        CF_ZONE: ${{ secrets.CF_ZONE }}
+        CF_API_EMAIL: ${{ secrets.CF_API_EMAIL }}
+        CF_API_KEY: {{ secrets.CF_API_KEY }}
