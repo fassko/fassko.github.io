@@ -62,7 +62,7 @@ Implementing WebSockets in iOS, macOS, tvOS or watchOS isn’t a trivial task. N
 The Swift WebSocket client library [Startscream](https://github.com/daltoniam/Starscream) simplifies all the heavy-lifting tasks. Install the library and import it in any Swift file.
 
 ```swift
-    import Starscream
+  import Starscream
 ```
 
 ### Creating the connection
@@ -70,24 +70,46 @@ The Swift WebSocket client library [Startscream](https://github.com/daltoniam/St
 After that, create a connection and set up the delegate.
 
 ```swift
-    socket = WebSocket(url: URL(string:”ws:echo.websocket.org”)!)
-    socket.delegate = self
+  let url = URl(string: "ws://echo.websocket.org")!
+  let request = URLRequest(url: url)
+  let websocket = WebSocket(request: request)
 ```
 
 ### Setting up delegation
 
-Then we need to set up delegate methods. Starscream also provides an option to use closures, but I will not be covering it here.
+Then we need to set up delegate and implement `didReceive` method with event `WebSocektEvent` type.
 
-- websocketDidConnect
-- websocketDidDisconnect
-- websocketDidReceiveMessage
-- websocketDidReceiveData
-- websocketDidReceivePong (optional)
+```swift
+  func didReceive(event: WebSocketEvent, client: WebSocket) {
+    switch event {
+    case .connected(let headers):
+      print("connected \(headers)")
+    case .disconnected(let reason, let closeCode):
+      print("disconnected \(reason) \(closeCode)")
+    case .text(let text):
+      print("received text: \(text)")
+    case .binary(let data):
+      print("received data: \(data)")
+    case .pong(let pongData):
+      print("received pong: \(pongData)")
+    case .ping(let pingData):
+      print("received ping: \(pingData)")
+    case .error(let error):
+      print("error \(error)")
+    case .viabilityChanged:
+      print("viabilityChanged")
+    case .reconnectSuggested:
+      print("reconnectSuggested")
+    case .cancelled:
+      print("cancelled")
+    }
+  }
+```
 
 Once this is done, we can start the connection. Making the handshake and upgrading connection is done behind the scenes by the library.
 
 ```swift
-    socket.connect();
+  socket.connect();
 ```
 
 ### Sending data
@@ -102,17 +124,15 @@ There are several ways to send data:
 The easiest way is to just send a string:
 
 ```swift
-    socket.write(string: "Hi Server!")
+  socket.write(string: "Hi Server!")
 ```
 
 ### Closing the connection
 
-At any point, we can check whether the connection is still open, and close it if it’s not needed anymore.
+At any point, we can check close it if it’s not needed anymore.
 
 ```swift
-    if socket.isConnected {
-      socket.disconnect()
-    }
+  websocket.disconnect(closeCode: CloseCode.goingAway.rawValue)
 ```
 
 ## TL;DR
