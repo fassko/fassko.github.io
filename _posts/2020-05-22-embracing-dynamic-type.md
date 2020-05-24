@@ -11,7 +11,7 @@ Every year third Thursday of May is the [Global Accessibility Awareness Day (GAA
 
 [More than 40%](https://twitter.com/browgrammer/status/1031630345551065089) of users have changed the font size to non-default one. It isn’t just a bigger font size. Quite a large chunk of folks have set it to smaller just because more information fits on the screen.
 
-We should take into account how users want to interact with the apps we build. Apple which is a huge accessibility advocate has written in Human Interface Guidelines that we should use text styles that provide flexibility and adaptability by default.
+We should take into account how users want to interact with the apps we build. Apple which is a huge accessibility advocate has written in [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/accessibility/overview/introduction/) that we should use text styles that provide flexibility and adaptability by default.
 
 ## What is Dynamic Type
 
