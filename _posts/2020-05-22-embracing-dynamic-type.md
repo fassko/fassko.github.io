@@ -5,13 +5,13 @@ categories: [swift]
 tags: [dynamic type, accessibility, apple, ios]
 ---
 
-Every year third Thursday of May is the [Global Accessibility Awareness Day (GAAD)](https://en.wikipedia.org/wiki/Global_Accessibility_Awareness_Day). This time I want to focus on Dynamic Type in our iOS, iPadOS, and macOS projects. Implementing font scaling we can improve lives for more than one billion people with disabilities and impairments.
+Every year the third Thursday of May is the [Global Accessibility Awareness Day (GAAD)](https://en.wikipedia.org/wiki/Global_Accessibility_Awareness_Day). This time I want to focus on Dynamic Type in our iOS, iPadOS, and macOS projects. By implementing font scaling we can improve lives for loads of people with disabilities and impairments.
 
 <!--more-->
 
 [More than 40%](https://twitter.com/browgrammer/status/1031630345551065089) of iOS users have changed the font size to non-default one. It isn’t just a bigger font size. Quite a large chunk of folks have set it to smaller just because more information fits on the screen.
 
-We should take into account how users want to interact with the apps we build. Apple which is a huge accessibility advocate has written in [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/accessibility/overview/introduction/) that we should use text styles that provide flexibility and adaptability by default.
+We should take into account how users want to interact with the apps we build. Apple - a huge accessibility advocate has written in [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/accessibility/overview/introduction/) that we should use text styles that provide flexibility and adaptability by default.
 
 ## What is Dynamic Type
 
@@ -23,7 +23,7 @@ Users can change text size in Settings app > General > Accessibility > Larger Te
 
 ## How to support Dynamic Type
 
-The easiest way to support Dynamic Type in your apps is to use system provided text styles. By using this option we get Dynamic Type support for free. For our disposal there are many text styles for titles, body, captions, and more.
+The easiest way to support Dynamic Type in your apps is to use system provided text styles. By using this option we get Dynamic Type support without putting in any extra effort. For our disposal there are many text styles for titles, body, captions, and more.
 
 Starting from iOS 11 we can implement scaling for custom fonts with UIFontMetrics. During this post, we won’t look into that.
 
@@ -31,7 +31,7 @@ Let’s see how we can use system text styles using UIKit and SwiftUI.
 
 ### UIKit
 
-With good old UIKit we can use Dynamic Text Styles either with  Storyboard or programmatically. We will not start a battle which is better during this post. :)
+With good old UIKit we can use Dynamic Text Styles either with Storyboard or programmatically. We will not start a battle on which one is better during this post. :)
 
 #### Storyboard
 
@@ -47,7 +47,7 @@ Once that is done then just change the font by selecting one of the provided Tex
 
 #### Programmatically
 
-If you like to create the user interface from code then we need to use `preferredFont(forTextStyle:)` and set `adjustsFontForContentSizeCategory` to true. It does the same what we saw with Storyboard approach.
+If we wish to create the user interface from code we need to use `preferredFont(forTextStyle:)` and set `adjustsFontForContentSizeCategory` to true. It does the same that we saw with Storyboard approach.
 
 ```swift
   label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -85,7 +85,7 @@ The second option is to use the Accessibility Inspector tool. This option is tai
   
 ## TL;DR
 
-Accessibility has been an important topic in last couple of WWDC and overall in technology. By making our apps and solutions accessible we help our current users and could tackle new users who previously couldn’t use our apps.
+Accessibility has been an important topic in last couple of WWDC and overall in technology. By making our apps and solutions accessible we help our current users and support new users who previously couldn’t use our apps.
 
 Dynamic Type is an iOS feature that scales font according to the user settings. More than 40% of iOS users have changed the default system font size. Both larger and smaller. 
 
