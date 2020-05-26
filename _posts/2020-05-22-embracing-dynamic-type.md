@@ -95,6 +95,7 @@ The easiest way to support Dynamic Type is to use System Font Styles either from
 
 * [Apple Human Interface Guidelines](https://developer.apple.com/documentation/uikit/uifont/scaling_fonts_automatically)
 * [Building Apps with Dynamic Type - WWDC 2017](https://developer.apple.com/videos/play/wwdc2017/245/)
+* [Supporting Dynamic Type with Custom Fonts on iOS](https://blog.timroesner.com/supporting-dynamic-type)
 * [Introduction to supporting Dynamic Type](https://fluffy.es/introduction-to-dynamic-type/)
 * [Improving Dynamic Type Support](https://pspdfkit.com/blog/2018/improving-dynamic-type-support/)
 * [Dynamic Type in SwiftUI](https://swiftwithmajid.com/2019/10/09/dynamic-type-in-swiftui/)
