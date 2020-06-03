@@ -101,3 +101,4 @@ The easiest way to support Dynamic Type is to use System Font Styles either from
 * [Dynamic Type in SwiftUI](https://swiftwithmajid.com/2019/10/09/dynamic-type-in-swiftui/)
 * [How to use Dynamic Type with a custom font](https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-dynamic-type-with-a-custom-font)
 * [Dynamic Type project with UIKit and SwiftUI](https://github.com/fassko/DynamicType)
+* [iPS 288: Accessibility, Dynamic Type, and Voiceover with Jeff Watkins](https://devchat.tv/iphreaks/ips-288-accessibility-dynamic-type-and-voiceover-with-jeff-watkins/)
