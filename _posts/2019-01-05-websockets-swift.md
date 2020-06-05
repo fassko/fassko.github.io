@@ -77,7 +77,7 @@ After that, create a connection and set up the delegate.
 
 ### Setting up delegation
 
-Then we need to set up delegate and implement `didReceive` method with event `WebSocektEvent` type.
+Then we need to set up delegate and implement `didReceive` method with event `WebSocketEvent` type.
 
 ```swift
   func didReceive(event: WebSocketEvent, client: WebSocket) {
