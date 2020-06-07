@@ -1,3 +1,13 @@
+- date: 2020-05-19
+  event: 
+    title: UIKonf
+    url: https://uikonf.com/
+  title: We need to talk about Websockets
+  links:
+    - url: https://youtu.be/qiEbr-mebTc
+      title: watch video
+    - url: https://speakerdeck.com/fassko/we-need-to-talk-about-websockets
+      title: see slides
 - date: 2020-05-08
   event: 
     title: Empower Apps podcast
