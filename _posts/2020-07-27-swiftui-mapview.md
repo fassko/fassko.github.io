@@ -5,9 +5,9 @@ categories: [swift, swiftui]
 tags: [swiftui, swift, apple, ios]
 ---
 
-Finding places, navigating our way or just checking what's around are essential things nowadays that smartphones can help. This year Apple added maps functionality to the SwiftUI framework. Let's check out how we can use and what are the current problems with it.
+Finding places, navigating our way, or just checking what's around are essential things nowadays that smartphones can help. This year Apple added maps functionality to the SwiftUI framework. Let's check out how we can use and what are the current problems with it.
 
-> I would like to point out that this covers Xcode 12 beta software and it can changed in future releases.
+> I would like to point out that this covers Xcode 12 beta software and it can change in future releases.
 
 <!--more-->
 
@@ -15,9 +15,9 @@ Finding places, navigating our way or just checking what's around are essential 
 
 To show MapView we need to use MapKit's structure `Map` that is specifically designed to use with SwiftUI. It is a view that displays an embedded map interface. We can use it to configure user-allowed interactions, show and track current location, and add annotations on the map.
 
-It comes with several [initialize methods](https://developer.apple.com/documentation/mapkit/map). Let's see how how to create a map specifying the map visible map region and add annotations.
+It comes with several [initialize methods](https://developer.apple.com/documentation/mapkit/map). Let's see how to create a map specifying the map visible map region and add annotations.
 
-Coordinate region defines the area what is visible on the map. It is a `Binding` that takes a `MKCoordinateRegion` object that is a combination of center coordinate and a coordinate span around it.
+The coordinate region defines the area that is visible on the map. It is a `Binding` that takes an `MKCoordinateRegion` object that is a combination of center coordinate and a coordinate span around it.
 
 ```swift
 
@@ -34,19 +34,21 @@ Coordinate region defines the area what is visible on the map. It is a `Binding`
 
 ```
 
-Now we have a map showing capital city of Latvia Riga. With this init method we can specify other things like interaction capabilities, showing user location and more.
+Now we have a map showing the capital city of Latvia Riga. With this init method we can specify other things like interaction capabilities, showing user location, and more.
+
+![SwiftUI Map view](/assets/img/swiftui-map/mapview.png)
 
 ## Add annotations on the map
 
-If we want to add annotation on the map we need to use a different initilizer method that takes `MKCoordinateRegion`, identifiable collection of annoations and block that creates returns `MapAnnotationProtocol` protocol object.
+If we want to add annotation on the map we need to use a different initializer method that takes `MKCoordinateRegion`, identifiable collection of annotations and block that creates returns `MapAnnotationProtocol` protocol object.
 
-Right now MapKit offers three simple annoation views:
+Right now MapKit offers three simple annotation views:
 
-* `MapPin` - pin shaped annotation
-* `MapMarker` - ballon shaped annoation
+* `MapPin` - pin-shaped annotation
+* `MapMarker` - balloon-shaped annotation
 * `MapAnnoation` - custom view annoation
 
-Simplest way is to use first two annotation types, in this blog post we're going to look into `MapMarker` annoation type. To [initalize](https://developer.apple.com/documentation/mapkit/mapmarker/3601335-init) it we need to pass a coordinate and optional tint color.
+The simplest way is to use the first two annotation types, in this blog post we're going to look into `MapMarker` annotation type. To [initalize](https://developer.apple.com/documentation/mapkit/mapmarker/3601335-init) need to pass a coordinate and optional tint color.
 
 ```swift
   MapMarker(coordinate: place.coordinate, tint: .green)
@@ -75,7 +77,7 @@ Putting it all together we can show couple of annoations on the map like this:
   }
 ```
 
-Let's not forget that collection elements should conform to `Identifiable` that means it should provide `ID` value. The easiest way is to just use the `UUID` like this:
+Let's not forget those collection elements should conform to `Identifiable` that means it should provide `ID` value. The easiest way is to just use the `UUID` like this:
 
 ```swift
   struct VeganFoodPlace: Identifiable {
@@ -90,24 +92,24 @@ Let's not forget that collection elements should conform to `Identifiable` that 
   }
 ```
 
-As we see that there is no way how to initialize an annoation with title right now. For that we need to use `MapAnnoation` that allows us to create custom map annoation.
+As we see that there is no way how to initialize an annotation with the title right now. For that, we need to use `MapAnnoation` that allows us to create custom map annotation.
 
 ## Current drawbacks
 
+Adding Map view with SwiftUI is a very straight forward task, but current implementation lacks some important components. Let's discuss some of the drawbacks.
 
+Adding a callout view for map annotation is one of the most essential things that is lacking with the current implementation.
 
+After clicking on an annotation and showing a callout usually, there is the navigation or a modal view is presented. With a custom `MapAnnoation` we can partially do it, but for sure it is not a great solution.
 
-* No Callout view
-* struggle with navigation
-* no support for polyline
-
+Right now you can add only add annotations on the map. There isn't support for polyline or other elements.
   
 ## TL;DR
 
-
+Adding Map view with SwiftUI is a very simple way. It comes with ways to add binding to the map region, specify annotation list, track user's location, and more. Sadly with current Xcode Beta 3, it lacks features like showing titles for annotations, callout view, and SwiftUI way of navigation. Let's hope Apple will add it in the future.
 
 ## Links
 
-* https://developer.apple.com/documentation/mapkit/map
-* https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view
-* https://www.hackingwithswift.com/books/ios-swiftui/advanced-mkmapview-with-swiftui
+* [https://developer.apple.com/documentation/mapkit/map](Map official documentation)
+* [https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view](Hacking with Swift article)
+* [https://github.com/fassko/RigaVeganMap](SwiftUI Map view implementation)
