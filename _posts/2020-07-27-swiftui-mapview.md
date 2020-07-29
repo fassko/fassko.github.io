@@ -5,7 +5,7 @@ categories: [swift, swiftui]
 tags: [swiftui, swift, apple, ios]
 ---
 
-Finding places, navigating our way, or just checking what's around are essential things nowadays that smartphones can help. This year Apple added maps functionality to the SwiftUI framework. Let's check out how we can use and what are the current problems with it.
+Finding places, navigating our way, or simply checking what's around - these are essential things that smartphones can help with. This year Apple added maps functionality to the SwiftUI framework. Let's check out how we can use it and what are the current problems.
 
 > I would like to point out that this covers Xcode 12 beta software and it can change in future releases.
 
@@ -34,7 +34,7 @@ The coordinate region defines the area that is visible on the map. It is a `Bind
 
 ```
 
-Now we have a map showing the capital city of Latvia Riga. With this init method we can specify other things like interaction capabilities, showing user location, and more.
+Now we have a map showing the capital city of Latvia - Riga. With this init method we can specify other things like interaction capabilities, showing user location, and more.
 
 ![SwiftUI Map view](/assets/img/swiftui-map/mapview.png)
 
@@ -54,7 +54,7 @@ The simplest way is to use the first two annotation types, in this blog post we'
   MapMarker(coordinate: place.coordinate, tint: .green)
 ```
 
-Putting it all together we can show couple of annoations on the map like this:
+By putting it all together, we can show couple of annoations on the map like this:
 
 ```swift
   struct MapViewWithAnnotations: View {
@@ -77,7 +77,7 @@ Putting it all together we can show couple of annoations on the map like this:
   }
 ```
 
-Let's not forget those collection elements should conform to `Identifiable` that means it should provide `ID` value. The easiest way is to just use the `UUID` like this:
+Let's not forget those collection elements should conform to `Identifiable` - provide `ID` value. The easiest way is to just use the `UUID` like this:
 
 ```swift
   struct VeganFoodPlace: Identifiable {
@@ -106,7 +106,7 @@ Right now you can add only add annotations on the map. There isn't support for p
   
 ## TL;DR
 
-Adding Map view with SwiftUI is a very simple way. It comes with ways to add binding to the map region, specify annotation list, track user's location, and more. Sadly with current Xcode Beta 3, it lacks features like showing titles for annotations, callout view, and SwiftUI way of navigation. Let's hope Apple will add it in the future.
+Adding Map view with SwiftUI is simple. It comes with ways to add binding to the map region, specify annotation list, track user's location, and more. Sadly with current Xcode Beta 3, it lacks features like showing titles for annotations, callout view, and SwiftUI way of navigation. Let's hope Apple will add it in the future.
 
 ## Links
 
