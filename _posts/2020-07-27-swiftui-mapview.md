@@ -92,7 +92,7 @@ Let's not forget those collection elements should conform to `Identifiable` - pr
   }
 ```
 
-As we see that there is no way how to initialize an annotation with the title right now. For that, we need to use `MapAnnoation` that allows us to create custom map annotation.
+As we see that there is no way how to initialize an annotation with the title right now. For that, we need to use `MapAnnotation` that allows us to create custom map annotation.
 
 ## Current drawbacks
 
