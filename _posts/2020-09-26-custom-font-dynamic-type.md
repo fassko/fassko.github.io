@@ -82,9 +82,12 @@ Using the `UIFontMetrics` utility object we can scale our custom font according 
 
 ## Links
 
+* [Example app](https://github.com/fassko/custom-font-dynamic-type)
+
 * [Building Apps with Dynamic Type](https://developer.apple.com/videos/play/wwdc2017/245/)
 * [How to resize a custom font using UIFontMetrics](https://www.hackingwithswift.com/example-code/uikit/how-to-resize-a-custom-font-using-uifontmetrics)
 * [Using A Custom Font With Dynamic Type](https://useyourloaf.com/blog/using-a-custom-font-with-dynamic-type/)
 * [The iOS Font Size Guidelines](https://learnui.design/blog/ios-font-size-guidelines.html)
 * [Adding a Custom Font to Your App](https://developer.apple.com/documentation/uikit/text_display_and_fonts/adding_a_custom_font_to_your_app)
 * [Typography - Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/)
+
