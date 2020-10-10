@@ -5,7 +5,7 @@ categories: [swift, dynamic type]
 tags: [dynamic type, swift, apple, ios]
 ---
 
-A while back we [looked into](/embracing-dynamic-type/) how to embrace the dynamic type with the system font. This time we are going to check out how to use the dynamic type with a custom font in our iOS apps. Apple provides us great APIs to make our apps accessible even if we're using custom font styles.
+A while back we [looked into](/embracing-dynamic-type/) dynamic type with the system font. This time we are going to check out how to use the dynamic type with a custom font in our iOS apps. Apple provides great APIs to make our apps accessible even if we're using custom font styles.
 
 <!--more-->
 
@@ -13,11 +13,11 @@ A while back we [looked into](/embracing-dynamic-type/) how to embrace the dynam
 
 At first, we need to add our custom font to the project. There are several steps involved so let's go over them.
 
-We need to add a font file to the Xcode app project. Currently **True Type Font** (.ttf) and **Open Type Font** (.otf) files are being supported. Just drag and drop files in your XCode project. Be careful and select targets you want to use this font.
+We need to add a font file to the Xcode app project. Currently **True Type Font** (.ttf) and **Open Type Font** (.otf) files are being supported. Just drag and drop files in your XCode project. Be careful and select targets you want to use this font in.
 
 ![Add custom font to Xcode](/assets/img/custom-dynamic-type/add-custom-font-to-xcode.gif)
 
-If you forget to add the font to specific target membership in your Xcode project then you will run into an issue when the font file is not found.
+If you forget to add the font to specific target membership in your Xcode project, you will run into an issue when the font file is not found.
 
 ![Custom font not found](/assets/img/custom-dynamic-type/error-font-file-not-found.png)
 
@@ -25,9 +25,9 @@ To fix that just check the checkbox and add it to your designated target.
 
 ![Add custom font to target membership](/assets/img/custom-dynamic-type/custom-font-xcode-target-membership.png)
 
-After that is done head down to the `Info.plist` file and add a new entry with key `Fonts provided by application`. There we need to provide an array with all the font files we have been added to the project.
+After that is done head down to the `Info.plist` file and add a new entry with key `Fonts provided by application`. There we need to provide an array with all the font files we have added to the project.
 
-To check if the font files have been added and we can use this piece of code to print all available font families and names.
+Check that the font files have been added and that we can use this piece of code to print all available font families and names:
 
 ```swift
   UIFont.familyNames.sorted().forEach { fontFamily in
@@ -49,7 +49,7 @@ To do it at first we need to initialize an instance of a custom font with a conc
 
 ![Dynamic Type Sizes in iOS](/assets/img/custom-dynamic-type/dynamic-type-sizes-ios.png)
 
-Let’s say we have added a label that has a large title behavior, so it means we need to use a 34 point size font. Then we use `UIFontMetrics` and initialize an instance for a specific text style. In the end, we set the font for our label using the `scaledFont` function and providing our custom font.
+Let’s say we have added a label that has a large title behavior, so it means we need to use a 34 point size font. Then we use `UIFontMetrics` and initialize an instance for a specific text style. In the end, we set the font for our label using the `scaledFont` function and provide our custom font.
 
 ```swift
   guard let font = UIFont(name: "Proxima Nova-Regular", size: 34) else {
@@ -62,11 +62,11 @@ Let’s say we have added a label that has a large title behavior, so it means w
 
 ## Update upon Text Size changes
 
-To test how everything works we can simply enable text size in  Xcode Environment Overrides.
+To test how everything works we can enable text size in Xcode Environment Overrides.
 
 ![Enable Dynamic Type in Xcode Environment OVerrides](/assets/img/custom-dynamic-type/xcode-environment-overrides-dynamic-type.png)
 
-If you change it you can notice that nothing is happening in our app. To enable automatic change we need to set 	`adjustsFontForContentSizeCategory`. It indicates if the object should automatically update it’s font when device category changes.
+If you change it you can notice that nothing is happening in our app. To enable automatic change we need to set `adjustsFontForContentSizeCategory`. It indicates that the object should automatically update it’s font when device category changes.
 
 
 ```swift
@@ -77,7 +77,7 @@ Now we can fully test and we should see that our label font adjusts according to
   
 ## TL;DR
 
-Supporting Dynamic Type with custom font might sound like a tricky task to do. Actually, it is a quite straightforward task.
+Supporting Dynamic Type with custom font might sound like a tricky task to do, but it doesn't have to be.
 Using the `UIFontMetrics` utility object we can scale our custom font according to what the user has specified in text size or accessibility settings.
 
 ## Links
