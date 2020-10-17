@@ -114,3 +114,4 @@ Adding Map view with SwiftUI is simple. It comes with ways to add binding to the
 * [https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-a-map-view](Hacking with Swift article)
 * [https://github.com/fassko/RigaVeganMap](SwiftUI Map view implementation)
 * [https://swiftwithmajid.com/2020/07/29/using-mapkit-with-swiftui/](Using MapKit with SwiftUI)
+* [https://codakuma.com/swiftui-mapkit-fun/](Adventures in SwiftUI 2's MapKit support)
