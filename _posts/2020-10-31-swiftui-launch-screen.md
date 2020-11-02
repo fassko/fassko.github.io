@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ! "Launch screen with SwiftUI"
+title: ! "Launch Screen with SwiftUI"
 categories: [swift, swiftui]
 tags: [swift, apple, ios, swiftui]
 ---
