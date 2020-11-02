@@ -5,9 +5,9 @@ categories: [swift, swiftui]
 tags: [swift, apple, ios, swiftui]
 ---
 
-Launch  Screen is the first interaction that users would see when using our apps. That's why investing time in making our app launch screens feel responsive and visually appealing is important. We are playing with the perceived time and it can be a great first impression.
+Launch  Screen is the first interaction that users see when using our apps. That's why investing time in making our app launch screens feel responsive and visually appealing is important. We are playing with the perceived time and it can be a great first impression.
 
-Apple in the last WWDC 2020 introduced a new way how to implement launch screen for SwiftUI apps in iOS 14 using Xcode 12. When we create a new SwiftUI app this the new way how we can create launch screens. We can still use the old way with the Storyboard launch screen with our existing apps.
+Apple in the last WWDC 2020 introduced a new way how to implement launch screen for SwiftUI apps in iOS 14 using Xcode 12. When we create a new SwiftUI app, this is the new way to make launch screens. We can still use the old way with the Storyboard launch screen with our existing apps.
 
 <!--more-->
 
@@ -17,7 +17,7 @@ All the setup is done in the Info.plist file. We can see that there is an empty 
 
 ![Info.plist Launch Screen Dictionary options](/assets/img/swiftui-launch-screen/launch-screen-info.plist.png)
 
-Now let's go over all of these options and how we can use them to set up our Launch Screens.
+Now let's go over all of these options and learn how we can use them to set up our Launch Screens.
 
 ## Background color
 
@@ -34,9 +34,9 @@ Then we can add a new key `launchScreenBackground` to the `Launch Screen` dictio
 After the background color is set let's show an image in front of it. There are two options we can use to configure that:
 
 * `Image Name` is an image name from the Assets catalog.
-* `Image respects safe area insets` is a `Boolean` describing if the image needs to respect the safe area, respectively it won't go outside the safe are borders.
+* `Image respects safe area insets` is a `Boolean` describing if the image needs to respect the safe area, respectively it won't go outside the safe area borders.
 
-Let's say we have a Swift logo in the Assets catalog which is an SVG file format. In Xcode 12 SVG images are fully supported (finally). The name for this image is `swift`:
+Let's say we have a Swift logo in the Assets catalog which is an SVG file. In Xcode 12 SVG images are fully supported (finally). The name for this image is `swift`:
 
 ![Swift logo in Assets Catalog](/assets/img/swiftui-launch-screen/swift-logo-assets.png)
 
@@ -58,11 +58,11 @@ This time we won't look more into these options, because most of the time the la
 
 ## TL;DR
 
-A launch screen is one of the most important things in our apps. The perceived time should feel fast by the users.
+Launch screen "perceived time" should feel fast for the user.
 
 In WWDC 2020 Apple introduced a new way for SwiftUI apps on how to create the launch screens by using Info.plist and Assets catalog capabilities.
 
-The old way with storyboard launch screens still works fine, but we can assume that in the future it can be deprecated.
+The old way with storyboard launch screens still works fine, but we can assume that in the future it may be deprecated.
 
 ## Links
 
