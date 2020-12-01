@@ -274,3 +274,5 @@ Showing multiple sheets can be achieved either with multiple sheet modifiers or 
 * [How to present a new view using sheets](https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-new-view-using-sheets)
 * [How to manage multiple sheets in SwiftUI](https://masilotti.com/multiple-sheets-swiftui/)
 * [Thread in StackOverflow](https://stackoverflow.com/questions/58837007/multiple-sheetispresented-doesnt-work-in-swiftui)
+* [Enums for Multiple Sheets](https://www.youtube.com/watch?feature=player_embedded&v=7dZfpAn_P2g)
+* [MultiSheet](https://github.com/davdroman/MultiSheet)
