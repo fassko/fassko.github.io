@@ -5,21 +5,25 @@ categories: [swift, swiftui]
 tags: [swift, apple, ios, swiftui, modal, sheet]
 ---
 
-Showing a modal view is essential if we want to present a little piece of extra information on the screen. With UIKit we could do it with `presentViewController:animated:completion:` [function](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-presentviewcontroller).
+When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with `presentViewController:animated:completion:` [function](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-presentviewcontroller).
 
-Using SwiftUI, we need to twist our thinking towards using view or environment state, and the modal view is now called a sheet.  Let's check it out in detail.
+However, using SwiftUI, we need to twist our thinking towards using view or environment state, as the modal view is now called a sheet.  
+
+Let's check it out in detail.
 
 <!--more-->
 
-## Open modal view a.k.a. sheet
+## Open modal view (a.k.a. sheet)
 
-SwiftUI sheets help us show a modal view to our users. `sheet` is an instance method to the [View Presentation](https://developer.apple.com/documentation/swiftui/view-presentation). It describes how we can show our SwiftUI views covering specific user journey scenarios.
+SwiftUI sheets help us show a modal view to users. `sheet` is an instance method to the [View Presentation](https://developer.apple.com/documentation/swiftui/view-presentation). It describes how we can show our SwiftUI views, covering specific user journey scenarios.
 
-Let's say we want to display information about our app to the users. 
+Let's say we want to display information about our app to users. 
 
-Firstly, we need to bind with `Bool` value whether the app should show the modal view or not. The keyword here is "should" because once we dismiss, the presented view value is set back to `false`. This value is decorated with `@State` property wrapper or could come from `ObservableObject` ViewModel. For simplicity reasons, we're not going to talk about ViewModels in this post.
+Firstly, we need to define whether the app should show a modal view or not, binding this with the `Bool` value. 
 
-Secondly, we need to change the view or, in some cases, the environment state. Once we are using the `@State` property wrapper, we can just set it to `true`, and SwiftUI will do the rest to present the modal view.
+The keyword here is 'should' because once we dismiss, the presented view value is set back to `false`. This value is decorated with a `@State` property wrapper, or could come from `ObservableObject` ViewModel. For simplicity reasons, we're not going to talk about ViewModels in this post.
+
+Secondly, we need to change the view or, in some cases, the environment state. Once we are using the `@State` property wrapper, we can just set it to `true` and SwiftUI will do the rest to present the modal view.
 
 Let’s look how we can do it in the code:
 
@@ -51,7 +55,7 @@ When we run the app, we can now open the modal view and see the detailed informa
 
 ## Close modal view programmatically
 
-Our app users can simply slide the modal view down, and it will hide with a nice animation. If we want to hide it from the view responsible for showing the modal view, we just set the state to false.
+Our app users can simply slide the modal view down, and it will hide with a nice animation. Set the state to false to hide this from the view responsible for showing the modal view. 
 
 Now is the question of how to do it from the modal view itself? We have these two options at our disposal:
 
@@ -60,7 +64,8 @@ Now is the question of how to do it from the modal view itself? We have these tw
 
 ### Using Environment
 
-Property wrapper `@Environment` allows us to read and change the values of the view environment state. To hide the modal view, we need to change the `presentationMode` property. At first, we need to define, in our view. To do it, we should add it to the modal view properties. To dismiss the modal view, we need to alter the presentation mode wrapped value.
+Property wrapper `@Environment` allows us to read and change the values of the view environment state. To hide the modal view, we need to change the `presentationMode` property. 
+At first, we need to define our view. To do this, we add it to the modal view properties. To dismiss the modal view, we need to alter the presentation mode wrapped value.
 
 ```swift
   struct InfoView: View {
@@ -81,13 +86,13 @@ Property wrapper `@Environment` allows us to read and change the values of the v
   }
 ```
 
-This method is quite cumbersome, and dealing with environmental properties can cause accidental issues that are very hard to track down and debug.
+This method is quite cumbersome, and dealing with environmental properties can cause accidental issues that are difficult to track down and debug.
 
 ### Using a binding
 
 Using a binding between the view that is presenting the modal view and the modal view itself is another method to hide it from the code.
 
-First, we need to add a new property to the modal view struct using `@Binding` property wrapper. It describes that this value comes from somewhere else outside the view scope.
+First, we need to add a new property to the modal view structure using `@Binding` property wrapper. This describes that this value comes from somewhere else outside the view scope.
 
 ```swift
   struct InfoView: View {
@@ -116,13 +121,15 @@ Now when we are initializing the `ModalView` we need to pass the  `isPresented`:
   }
 ```
 
-Using this approach, we are sure that this variable belongs only to these two views. It is more straightforward to test and debug.
+Using this approach, we are sure that this variable only belongs to these two views. It is more straightforward to test and debug.
 
 ## Multiple sheets on one SwiftUI view
 
-Now we know how to present a modal view, but how can we show multiple modal views? Imagine, we would like to present from the primary app view information about the app and the settings view.
+Now we know how to present a modal view, but how can we show multiple modal views? 
 
-We can do it using these two approaches:
+Imagine we would like to present information about the app and the settings view from the primary app view.  
+
+We can do this using these two approaches:
 
 * using multiple sheets presenting functions;
 * using `Identifiable` enum to keep the state of the currently shown sheet.
@@ -163,11 +170,11 @@ We can attach `sheet` function to any SwiftUI view or control, for instance to t
   }
 ```
 
-If we have two buttons, it can be fine, but let's say we have more than that. It can get quite messy, and we should deal with many `@State` variables.
+It can be fine to have two buttons, but let's say we have more than that. It can get quite messy, so we should deal with many `@State` variables.
 
 ### Using enumeration of all modal views
 
-If we head down to Apple official documentation, there is another [function](https://developer.apple.com/documentation/swiftui/view/actionsheet(item:content:)) to show a sheet. Let's try to use it.
+If we look at Apple's official documentation, there is another [function](https://developer.apple.com/documentation/swiftui/view/actionsheet(item:content:)) to show a sheet. Let's try to use it.
 
 At first, we will define an `enum` with all modal view options:
 
@@ -178,7 +185,7 @@ At first, we will define an `enum` with all modal view options:
   }
 ```
 
-Now we can use it in the SwiftUI view. For that, we need a new `@State` variable with the optional type `Sheet` and use it to determine which modal view we would like to present.
+Now we can use this in the SwiftUI view. We need a new `@State` variable with the optional type `Sheet` and  to use this to determine which modal view we would like to present.
 
 ```swift
   enum Sheet: Identifiable {
@@ -222,7 +229,7 @@ Now we can use it in the SwiftUI view. For that, we need a new `@State` variable
   }
 ```
 
-We don't need to stop. We can declutter this code by adding a computed property to `Sheet` enum:
+We don't need to stop here. We can declutter this code by adding a computed property to `Sheet` enum:
 
 ```swift
   extension Sheet {
@@ -243,15 +250,15 @@ Then we can use it when opening the sheet:
   .sheet(item: $activeSheet) { $0.modalView }
 ```
 
-Or using the new fancy keypaths functionality in closures to simplify it even more:
+Using the fancy new keypaths functionality in closures, we can simplify this even more:
 
 ```swift
   .sheet(item: $activeSheet, content: \.modalView)
 ```
 
-One caveat with this approach is that we need to change a bit of our process hiding the view from the code. To do that, we just set it to `nil` instead of `false`.
+One caveat to this approach is that we need to change part of our process to hide the view from the code. To do this, we set it to `nil` instead of `false`.
 
-That approach is much safer because we use the enumeration type and keep everything well organized.
+This approach is much safer, because we use the enumeration type to keep everything well organized.
 
 Let's see it in action.
 
