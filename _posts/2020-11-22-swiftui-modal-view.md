@@ -11,6 +11,8 @@ However, using SwiftUI, we need to twist our thinking towards using view or envi
 
 Let's check it out in detail.
 
+> Thank you [Jānis Kiršteins](https://twitter.com/janiskirsteins) for a great [suggestion](https://twitter.com/janiskirsteins/status/1337398222386434053) to use `@ViewBuilder` instead of `AnyView`.
+
 <!--more-->
 
 ## Open modal view (a.k.a. sheet)
@@ -233,12 +235,13 @@ We don't need to stop here. We can declutter this code by adding a computed prop
 
 ```swift
   extension Sheet {
-    var modalView: AnyView {
+    @ViewBuilder
+    var modalView: some View {
       switch self {
       case .info:
-        return AnyView(InfoView())
+        InfoView()
       case .settings:
-        return AnyView(SettingsView())
+        SettingsView()
       }
     }
   }
