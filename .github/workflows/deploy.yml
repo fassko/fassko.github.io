@@ -22,7 +22,6 @@ jobs:
     - name: Install bundler
       run: |
         sudo gem install bundler
-        bundle install
 
     - name: Bundle install
       run: |
