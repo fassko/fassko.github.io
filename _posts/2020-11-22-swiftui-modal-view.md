@@ -11,9 +11,9 @@ However, using SwiftUI, we need to twist our thinking towards using view or envi
 
 Let's check it out in detail.
 
-> Thank you [Jānis Kiršteins](https://twitter.com/janiskirsteins) for a great [suggestion](https://twitter.com/janiskirsteins/status/1337398222386434053) to use `@ViewBuilder` instead of `AnyView`.
-
 <!--more-->
+
+> Thank you [Jānis Kiršteins](https://twitter.com/janiskirsteins) for a great [suggestion](https://twitter.com/janiskirsteins/status/1337398222386434053) to use `@ViewBuilder` instead of `AnyView`.
 
 ## Open modal view (a.k.a. sheet)
 
