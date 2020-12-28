@@ -1,44 +1,25 @@
-name: Deploy site
+name: Deploy
 
 on:
   push:
     branches: [ develop ]
 
 jobs:
-  deploy:
-
-    runs-on: ubuntu-latest
+  build:
+    name: Deploy
+    runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-
-    - name: Install bundler
+    - name: Install Publish
       run: |
-        sudo gem install bundler
+        git clone https://github.com/JohnSundell/Publish.git
+        cd Publish
+        make
 
-    - name: Bundle install
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-        
-    - name: Build with Jekyll
-      run: bundle exec jekyll build
-    
-    - name: Deploy
-      uses: crazy-max/ghaction-github-pages@v1
-      with:
-        target_branch: master
-        build_dir: _site
-        allow_empty_commit: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Deploy with Publish
+      run: publish deploy
 
     - name: Clear cache
       run: |
