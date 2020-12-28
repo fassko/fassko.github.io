@@ -1,0 +1,48 @@
+- date: 2020-05-19
+  event: UIKonf, Berlin, Germany
+  title: We need to talk about Websockets
+  video: https://www.youtube.com/embed/qiEbr-mebTc
+  slides: dd18e4f9ac4042b893aeab18a0c030a4
+- date: 2020-05-08
+  event: Empower Apps Podcast
+  title: Alternative Backends with Kristaps Grinbergs
+  audio: https://pdcn.co/e/media.transistor.fm/fca974ca/efd4ebea.mp3
+- date: 2020-02-27
+  event: Vidzeme University of Applied Sciences, Latvia
+  title: How not to die while running a startup
+  video: https://www.youtube.com/embed/2I--7Znb8iU
+- date: 2019-11-08
+  event: Mobile Era, Oslo, Norway
+  title: How to tame Core Animation
+  video: https://www.youtube.com/embed/x1dKG_7eke4
+  slides: f9247ff1a91b471caa1198d88f2556f0
+- date: 2019-10-04
+  event: Share IT, Latvia
+  title: The A - Z Guide Of iOS App Development
+  video: https://www.youtube.com/embed/-hlOUlqYZy0
+  slides: 55aa5152a1354d6e9e193f095022312e
+- date: 2019-07-31
+  event: SwiftCraft podcast
+  title: WebSockets with Kristaps Grinbergs
+  audio: https://media.blubrry.com/swiftcraft_podcast/content.blubrry.com/swiftcraft_podcast/Kristaps_on_Websockets.mp3
+- date: 2019-06-04
+  event: AltConf, San Jose, USA
+  title: How to tame Core Animation
+  video: https://www.youtube.com/embed/qiwdPs_nPYs
+- date: 2019-06-03
+  event: MacVoices, USA
+  title: Qminder Helps You Maintain Your Place In Line
+  video: https://www.youtube.com/embed/1GHFjOkcS0I
+- date: 2019-04-30
+  event: AppBuilders Conference in Lugano
+  title: How to tame Core Animation
+  video: https://www.youtube.com/embed/kiRaJhA_L30
+- date: 2019-01-23
+  event: Xcoders, Riga, Latvia
+  title: RxSwift Introduction to reactive programming
+  video: https://www.youtube.com/embed/o_6H3XGRAWY
+  slides: 771ce257419448a6bbefe547ce7b22e9
+- date: 2019-01-14
+  event: iOS Dev Discussions podcast
+  title: "Origin Stories #3 - Kristaps Grinbergs - Founder of Qminder"
+  audio: https://anchor.fm/s/5971378/podcast/play/2100693/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2020-02-14%2Fa74e2a8b38022e04c61dfc1bb09f681b.m4a
