@@ -43,7 +43,7 @@ h3 {
 /* --- HEADER --- */
 
 .header {
-  background-color: #1F1F1F;
+  background-color: #292929;
   margin-top: 0;
   padding: 0;
   position: sticky;
@@ -193,7 +193,7 @@ h3 {
 
 .divider {
   margin: 40px 0;
-  background-color: #1F1F1F;
+  background-color: #292929;
 }
 
 .divider-wrapper {
