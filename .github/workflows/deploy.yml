@@ -12,14 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Install Publish
-      run: |
-        git clone https://github.com/JohnSundell/Publish.git
-        cd Publish
-        make
-
     - name: Deploy with Publish
-      run: publish generate
+      run: swift run
     
     - name: Swift Publish Generate Static Site
       uses: joeblau/publish-generate-action@1.0.0
@@ -27,7 +21,6 @@ jobs:
         ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         PUBLISH_BRANCH: master
         PUBLISH_DIR: ./Output
-
 
     - name: Clear cache
       run: |

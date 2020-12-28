@@ -45,3 +45,6 @@ tmp
 _site/
 .jekyll-metadata
 /.jekyll-cache
+/.build
+/Output
+/.publish
