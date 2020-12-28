@@ -19,9 +19,15 @@ jobs:
         make
 
     - name: Deploy with Publish
-      run: |
-        ssh -T git@github.com
-        publish deploy
+      run: publish generate
+    
+    - name: Swift Publish Generate Static Site
+      uses: joeblau/publish-generate-action@1.0.0
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: master
+        PUBLISH_DIR: ./Output
+
 
     - name: Clear cache
       run: |
