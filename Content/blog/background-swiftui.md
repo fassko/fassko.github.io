@@ -2,7 +2,7 @@
 date: 2020-12-27 00:00
 title: Background Color with SwiftUI
 tags: swift, apple, ios, swiftui
-description: 
+description: Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let's look into that today.
 ---
 ​
 Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let's look into that today.
