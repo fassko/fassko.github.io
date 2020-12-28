@@ -4,15 +4,15 @@ title: Background Color with SwiftUI
 tags: swift, apple, ios, swiftui
 description: Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let's look into that today.
 ---
-​
+
 Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let's look into that today.
-​
+
 In this article, we will talk about different techniques that we can use to change the default background for our SwiftUI views.
-​
+
 ## Using modifier
-​
-First approach that comes in mind is using `.background()` [modifier](http://apple.co/3mSzqar). Sadly Apple hasn't provided documentation for this. It takes in a view that is set as a background for the view we are adding this modifier to. 
-​
+
+First approach that comes in mind is using `.background()` [modifier](http://apple.co/3mSzqar). Sadly Apple hasn't provided documentation for this. It takes in a view that is set as a background for the view we are adding this modifier to.
+
 In this case, we want to change the background color. We can pass in, for instance, `Color.gray`.
 
 ```swift
@@ -45,7 +45,7 @@ It looks a bit better, but we want to set it for the whole screen, ignoring the 
 ```
 
 ![Text background color fullscreen](/assets/swiftui-background-color/text-background-color-fullscreen.png)
-​
+
 It looks exactly how we wanted. The issue is that the code is quite cumbersome and has a lot of nesting views and spacers. Let's look at it in another way.
 ​
 ## Using `ZStack`
@@ -66,7 +66,7 @@ The code looks much cleaner now, and we have a gray background and text on top o
 ![Background color with ZStack](/assets/swiftui-background-color/zstack-color.png)
 
 ## Multiple colors
-​
+
 Now that we know how to change background color to one single color, how about setting it to two colors vertically and horizontally? 
 ​
 We could achieve that by using the approach with `ZStack` and wrapping colors in a `VStack` [view](https://developer.apple.com/documentation/swiftui/vstack) for vertical alignment or `HStack` [view](https://developer.apple.com/documentation/swiftui/hstack) for vertical alignment.
@@ -133,7 +133,7 @@ Here we see the power of the SwiftUI layout engine and Swift code combined.
 ![Chess table background](/assets/swiftui-background-color/chess-background.png)
 
 ## TL;DR
-​
+
 SwiftUI views come with default background color - white on light mode and black in dark mode. In many cases, we would like to change it to something else. The first way would be to use the `.background` modifier and pass `Color`which is a view in SwiftUI. The second approach would be using `ZStack` and add one color or multiple colors wrapped in `VStack` for vertical and `HStack` for horizontal layout.
 ​
 If you have other ideas about changing the background color for a SwiftUI view, let me know. Thank you for reading.
