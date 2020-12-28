@@ -19,7 +19,9 @@ jobs:
         make
 
     - name: Deploy with Publish
-      run: publish deploy
+      run: |
+        ssh -T git@github.com
+        publish deploy
 
     - name: Clear cache
       run: |
