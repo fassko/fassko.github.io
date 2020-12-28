@@ -15,15 +15,14 @@ jobs:
     - name: Deploy with Publish
       run: swift run
 
-    - name: Deploy Content
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        PERSONAL_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        EXTERNAL_REPOSITORY: GITHUB_USER_NAME/GITHUB_USER_NAME.github.io
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./Output
+    - name: Deploy
+      uses: crazy-max/ghaction-github-pages@v1
       with:
-        commitMessage: ${{ github.event.head_commit.message }}
+        target_branch: master
+        build_dir: Output
+        allow_empty_commit: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Clear cache
       run: |
