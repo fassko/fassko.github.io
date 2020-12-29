@@ -206,21 +206,40 @@ h3 {
 }
 
 .divider-left-element {
-  width: 60%;
+  width: 50%;
+}
+
+@media only screen and (max-width: 480px) {
+  .divider-left-element {
+    width: 40%;
+  }
 }
 
 .divider-title {
   padding: 10px 20px;
-  width: 20%;
+  width: 30%;
   background-color: #121212;
   text-align: center;
   min-width: 130px;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 26px;
+}
+
+@media only screen and (max-width: 480px) {
+  .divider-title {
+    width: 50%;
+    min-width: 200px;
+  }
 }
 
 .divider-right-element {
   width: 20%;
+}
+
+@media only screen and (max-width: 480px) {
+  .divider-right-element {
+    width: 10%;;
+  }
 }
 
 /*  --- ABOUT --- */
