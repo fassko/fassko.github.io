@@ -194,6 +194,13 @@ extension Node where Context == HTML.BodyContext {
     )
   }
   
+  static func textParagraph(_ members: Node...) -> Node {
+    .p(
+      .class("text-paragraph"),
+      .group(members)
+    )
+  }
+  
   static func divider(for title: String) -> Node {
     .div(
       .class("divider"),

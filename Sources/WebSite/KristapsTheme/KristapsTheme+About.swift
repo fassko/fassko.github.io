@@ -53,9 +53,25 @@ internal extension Node where Context == HTML.BodyContext {
         .class("about"),
         .div(
           .class("text"),
-          .textParagraph("Executed as co-founder at global scale company Qminder that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Lead Apple technology efforts and worked on technical sales, integrations, and AppStore marketing."),
+          .textParagraph(
+            .text("Executed as co-founder at global scale company "),
+            .a(
+              .href("https://www.qminder.com"),
+              .target(.blank),
+              .text("Qminder")
+            ),
+            .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Lead Apple technology efforts and worked on technical sales, integrations, and AppStore marketing.")
+          ),
           .textParagraph("Extensive knowledge of how and what to build on all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS."),
-          .textParagraph("Active iOS community member. Running well-known newsletter Swift Weekly Brief that is read by thousands of developers. He writes a blog, speaking at conferences, teaching, and mentoring.")
+          .textParagraph(
+            .text("Active iOS community member. Running well-known newsletter "),
+            .a(
+              .href("https://swiftweekly.github.io/"),
+              .target(.blank),
+              .text("Swift Weekly Brief")
+            ),
+            .text(" that is read by thousands of developers. He writes a blog, speaking at conferences, teaching, and mentoring.")
+          )
         ),
         .div(
           .class("social-items"),
@@ -63,6 +79,7 @@ internal extension Node where Context == HTML.BodyContext {
         )
       )
     )
+    
   }
   
   static func socialItem(_ socialItem: SocialItems) -> Node {
