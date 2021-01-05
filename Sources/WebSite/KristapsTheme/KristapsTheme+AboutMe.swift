@@ -22,16 +22,17 @@ internal extension Node where Context == HTML.BodyContext {
         .class("page-title"),
         .text("About")
       ),
+      .p("Kristaps has extensive knowledge of all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS. He is an active iOS community member."),
       .p(
-        .text(
-          "Kristaps has extensive knowledge of all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS. He is an active iOS community member. He is running a well-known newsletter "),
+        .text("He is running a well-known newsletter "),
         .a(
           .href("https://swiftweekly.github.io"),
           .target(.blank),
           .text("Swift Weekly Brief")
         ),
-        .text(" that is read by thousands of developers. He writes a mobile development blog, speaks at conferences, teaches and mentors.")
-      )
+        .text(" that is read by thousands of developers.")
+      ),
+      .p("He writes a mobile development blog, speaks at conferences, teaches and mentors.")
     )
   }
   

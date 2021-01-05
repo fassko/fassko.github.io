@@ -25,7 +25,7 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
         .aboutSection(),
         .divider(for: "projects"),
         .projectsSection(),
-        .footer(.class("footer"), "Copyright © Kristaps Grinbergs. 2020")
+        .customFooter()
       )
     )
   }
@@ -47,7 +47,7 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
             .itemList(for: section.items, on: context.site)
           )
         ),
-        .footer(.class("footer"), "Copyright © Kristaps Grinbergs. 2020")
+        .customFooter()
       )
     )
   }
@@ -79,7 +79,7 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
             )
           )
         ),
-        .footer(.class("footer"), "Copyright © Kristaps Grinbergs. \(Date().currentYear)")
+        .customFooter()
       )
     )
   }
@@ -96,7 +96,7 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
         .header(for: context, selectedSection: nil),
         .`if`(page.path == "talks", .talks()),
         .`if`(page.path == "about", .about()),
-        .footer(.class("footer"), "Copyright © Kristaps Grinbergs. 2020")
+        .customFooter()
       )
     )
   }
