@@ -14,12 +14,16 @@ internal extension Node where Context == HTML.BodyContext {
           .target(.blank),
           .text("Twitter")
         ),
-        .text("●"),
+        .footerDivider(),
         .a(
           .href(Path.defaultForRSSFeed),
           .text("RSS")
         )
       )
     )
+  }
+  
+  private static func footerDivider() -> Node {
+    .text("•")
   }
 }

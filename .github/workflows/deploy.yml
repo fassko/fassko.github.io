@@ -15,6 +15,9 @@ jobs:
     - name: Deploy with Publish
       run: swift run
 
+    - name: Copy RSS feed to old link
+      run: cp Output/feed.rss Output/feed.xml
+
     - name: Deploy
       uses: crazy-max/ghaction-github-pages@v1
       with:
