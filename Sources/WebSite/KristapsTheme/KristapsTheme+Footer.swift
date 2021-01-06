@@ -18,6 +18,11 @@ internal extension Node where Context == HTML.BodyContext {
         .a(
           .href(Path.defaultForRSSFeed),
           .text("RSS")
+        ),
+        .footerDivider(),
+        .a(
+          .href("/about"),
+          .text("Contact")
         )
       )
     )
