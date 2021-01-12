@@ -5,7 +5,7 @@ description: Selecting images from our iPhone library is needed when changing a 
 tags: swift, apple, ios, swiftui, images
 ---
 
-Selecting images from our iPhone library is needed when changing a profile picture, posting an update, or sharing the photo of your pet. In this post, we are going to look into how to use `PHPickerViewController` with SwiftUI. Apple announced this view controller at WWDC2020.
+Selecting images from our iPhone library is needed when changing a profile picture, posting an update, or sharing the photo of your pet. In this post, we are going to look into how to use `PHPickerViewController` with SwiftUI. Apple announced this view controller at [WWDC2020](https://developer.apple.com/wwdc20/).
 
 ## What is PHPickerViewController?
 
