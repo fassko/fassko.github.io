@@ -155,3 +155,4 @@ To use the `PHPickerViewController` with SwiftUI, we need to implement the `UIVi
 * [Checking out the new PHPickerViewController in iOS 14](https://nemecek.be/blog/30/checking-out-the-new-phpickerviewcontroller-in-ios-14-to-select-photos-or-videos)
 * [Replacing UIImagePickerController with PHPickerViewController](https://ohmyswift.com/blog/2020/08/29/replacing-uiimagepickercontroller-with-phpickerviewcontroller/)
 * [Using PHPickerViewController Images in a Memory-Efficient Way](https://christianselig.com/2020/09/phpickerviewcontroller-efficiently/)
+* [Accessing the photo library in SwiftUI](https://codakuma.com/the-library-is-open/)
