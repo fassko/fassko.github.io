@@ -1,13 +1,13 @@
 ---
 date: 2021-01-24 00:00
 title: How to show text inside a circle with SwiftUI
-description: This time, we will check out several ways to show a text label inside a circle using SwiftUI. We will dig deeper into three different ways using the `ZStack` view and `.background` and `.overlay` modifiers. As a small bonus, we will check out how to present a text label over a circle using the `.clipShape` modifier.
+description: This time, we will look at several ways to show a text label inside a circle using SwiftUI. We will dig deeper into three different ways using the `ZStack` view and `.background` and `.overlay` modifiers. As a small bonus, we will check out how to present a text label over a circle using the `.clipShape` modifier.
 tags: swift, circle, ios, swiftui, images
 ---
 
-This time, we will check out a couple of ways to show a text label inside a circle using SwiftUI. We will dig deeper into three different ways using the `ZStack` view, `.background` and `.overlay` modifiers. In the end, as a small bonus, we will check out how to present a text label over a circle using the `.clipShape` modifier.
+This time, we will look at a couple of ways to show a text label inside a circle using SwiftUI. We will dig deeper into three different ways using the `ZStack` view, `.background` and `.overlay` modifiers. In the end, as a small bonus, we will check out how to present a text label over a circle using the `.clipShape` modifier.
 
-Our end goal what we want to achieve something like this:
+Our end goal is something like this:
 
 ![Text inside a circle](/assets/text-inside-circle-swiftui/text-inside-circle-swiftui.png)
 
@@ -70,7 +70,7 @@ This time Apple hasn't provided documentation explanation again. Let's read the 
 func overlay<Overlay>(_ overlay: Overlay, alignment: Alignment = .center) -> some View where Overlay : View
 ```
 
-How it works is it places the view on top of it, not under. We should not forget about the `.padding()` modifier to have a gap between the number and the circle. Using the previous example and changing `background` to `overlay` we have the same outcome.
+It places the view on top of it, not under. We should not forget about the `.padding()` modifier to have a gap between the number and the circle. Using the previous example and changing `background` to `overlay` we have the same outcome.
 
 ```swift
 Text("13")
@@ -86,7 +86,7 @@ Although it looks identical, it works differently. This approach comes in handy 
 
 ## Bonus: Clipping as Shape
 
-As a bonus tip, let's check out how we can use the `.clipShape` modifier to show a text field inside the circle filled with a color. The `.clipShape` modifier clips the view to a specific shape that we should pass as a parameter. For that, we can use a couple of shapes provided by Apple like circles, capsules, rectangles, and [more](https://developer.apple.com/documentation/swiftui/shape). Or we can draw a shape ourselves with the help of the `Path` outline. Drawing custom shapes we are leaving out of the scope of this blog post.
+As a bonus tip, let's check out how we can use the `.clipShape` modifier to show a text field inside the circle filled with a color. The `.clipShape` modifier clips the view to a specific shape that we should pass as a parameter. For that, we can use a couple of shapes provided by Apple like circles, capsules, rectangles, and [more](https://developer.apple.com/documentation/swiftui/shape). Or we can draw a shape ourselves with the help of the `Path` outline. Custom shapes we are leaving out of the scope of this blog post.
 
 ```swift
 Text("13")
