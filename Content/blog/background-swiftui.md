@@ -65,6 +65,8 @@ The code looks much cleaner now, and we have a gray background and text on top o
 
 ![Background color with ZStack](/assets/swiftui-background-color/zstack-color.png)
 
+> [Dimi Chakarov](https://twitter.com/gimly) [posted](https://twitter.com/gimly/status/1347300659691999233) about how to create [a `ViewModifier` to apply to a view](https://gist.github.com/dchakarov/d841e709ccb0bcc961302b2a248912ec).
+
 ## Multiple colors
 
 Now that we know how to change background color to one single color, how about setting it to two colors vertically and horizontally? 
