@@ -32,9 +32,9 @@ In the previous example, we saw that the `showAlert` state variable keeps a `boo
 
 ![Alert with SwiftUI](/assets/swiftui-alert/alert.png)
 
-We can see that by default, the alert has an OK button to dismiss it. How to add more buttons we will look into later in this post.
+We can see that by default, the alert has an OK button to dismiss it. We will try to add more buttons later in this post.
 
-For the `Alert` view, we can provide not only `title` but also a `message` field that is one under one another.
+For the `Alert` view, we can provide not only `title` but also a `message` field that is one under another.
 
 ```swift
 Alert(title: Text("Title"),
@@ -45,7 +45,7 @@ Alert(title: Text("Title"),
 
 ## Alert with identifiable item
 
-Another way how to present an alert in the SwiftUI is by using an identifiable view state variable. Using this approach SwiftUI layout system passes the value of this state variable, and we can populate the alert title, message, or event buttons using its contents. The bonus is that once this item changes, the SwiftUI layout system would update the alert with the new value, which is a pretty neat feature that we get for free.
+Another way to present an alert in the SwiftUI is by using an identifiable view state variable. Using this approach SwiftUI layout system passes the value of this state variable, and we can populate the alert title, message, or event buttons using its contents. The bonus is that once this item changes, the SwiftUI layout system would update the alert with the new value, which is a pretty neat feature that we get for free.
 
 Let's see how to do it in the code. At first, we need to set up an object that implements the `Identifiable` protocol. Let's create a user structure. We need to create an `id` constant, and we could use the `UUID` structure that represents a globally unique value that can identify values between them.
 
@@ -83,7 +83,7 @@ When using the `.alert` view modifier, we have the closure with an input variabl
 
 Now we know how to show an alert on the screen using SwiftUI with two different approaches. But how to show more than one button and customize them?
 
-To add buttons for the alert, we could use either the `Alert` initializer specifying the dismiss button, or we have the way to initialize the `Alert`, providing the primary and secondary button. 
+To add buttons for the alert, we could use either the `Alert` initializer specifying the dismiss button, or have the way to initialize the `Alert`, providing the primary and secondary button. 
 
 Let's create a confirmation alert that would ask our users if they want to delete something from a list.
 
@@ -126,7 +126,7 @@ To show multiple alerts on a view, we have two ways.
 
 ### Using state variables
 
-The first is to keep a view state variable per each alert, but we need to add the `.alert` modifier, not for the full view, but we can add it, for example, for the button that invokes to show the alert. If we add two `.alert` modifiers one after another, the SwiftUI layout engine will show only the first one.
+The first is to keep a view state variable per each alert. But we need to add the `.alert` modifier, not for the full view, but we can add it, for example, for the button that invokes the alert. If we add two `.alert` modifiers one after another, the SwiftUI layout engine will show only the first one.
 
 ```swift
 @State var firstAlertShown = false
@@ -153,7 +153,7 @@ var body: some View {
 
 ### Using identifiable state variable
 
-The second approach, which I like much better, and is more type safety, let's dig into details. At first, we need to set up a structure representing the alert that conforms to the `Identifiable` protocol. Inside this structure, we have a local enumeration type representing all alerts types we would like to show and return the specific alert view. Ideally, it should be separated, but to show this example, I kept it like this.
+I like the second approach much better - it is more type safe. At first, we need to set up a structure representing the alert that conforms to the `Identifiable` protocol. Inside this structure, we have a local enumeration type representing all alerts types we would like to show and return the specific alert view. Ideally, it should be separated, but to show this example, I kept it like this.
 
 ```swift
 struct AlertIdentifier: Identifiable {
@@ -175,7 +175,7 @@ struct AlertIdentifier: Identifiable {
 }
 ```
 
-Next, we want to create the SwiftUI view and use it. Our view would have the local state variable with our new `AlertIdentifier` type when invoking and constructing the alert. We can use it and the computed `alertView` property that we had before built inside the `ActiveAlert` enum.
+Next, we want to create the SwiftUI view and use it. Our view would have the local state variable with our new `AlertIdentifier` type when invoking and constructing the alert. We can use it and the computed `alertView` property that we had built before inside the `ActiveAlert` enum.
 
 ```swift
 struct MultipleAlertsViewIdentifiable: View {
@@ -198,7 +198,7 @@ struct MultipleAlertsViewIdentifiable: View {
 }
 ```
 
-Here is a lot to unpack, but the main point is that it is safe to show multiple alerts on the same view without adding a state variable for each alert. Using this approach, we don't need to worry if our alert would be shown to the user because we don't have multiple `.alert` view modifiers scattered around the view itself.
+A lot to unpack here, but the main point is that it's safe to show multiple alerts on the same view without adding a state variable for each alert. Using this approach, we don't need to worry if our alert would be shown to the user because we don't have multiple `.alert` view modifiers scattered around the view itself.
 
 ## TL;DR
 
@@ -206,7 +206,7 @@ Showing an alert to inform our app users or ask for confirmation is essential fo
 
 We can set up multiple types of buttons for the alert. If we would like to show more than two, we need to use the SwiftUI sheets.
 
-To present multiple alerts in the same view, we can achieve it either by multiple view state variables. Or using one identifiable structure that would be responsible for creating the alert itself.
+To present multiple alerts in the same view, we can achieve it either by multiple view state variables or by using one identifiable structure that would be responsible for creating the alert itself.
 
 ## Links
 
