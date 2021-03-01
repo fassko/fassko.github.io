@@ -2,7 +2,7 @@
 date: 2021-02-14 00:00
 title: How to use Alert with SwiftUI
 description: Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer.
-tags: swift, apple, ios, swiftui, images
+tags: swift, ios, swiftui, alert
 ---
 
 Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer.
