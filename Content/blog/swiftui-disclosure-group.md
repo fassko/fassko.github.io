@@ -11,9 +11,9 @@ Now with new SwiftUI capabilities, we can collapse content with `DisclosureGroup
 
 ## Display a collapsable content
 
-Let's start with the most straightforward way to set up a collapsable view that we could show or hide. It comes with an excellent disclosure arrow indicator and animation.
+Let's start with the most straightforward way to set up a collapsable view that we could show or hide. It comes with a disclosure arrow indicator and nice animation.
 
-During this blog post, let's use an example showing weather conditions that would be a SwiftUI view `WeatherDetailsView` and show temperature and wind information.
+In this blog post, let's use an example showing weather conditions that would be a SwiftUI view `WeatherDetailsView` and show temperature and wind information.
 
 If we would like to show or hide that information, we can use the `DisclosureGroup` initializer by just passing a string value and content out the `WeatherDetailsView` view.
 
@@ -50,13 +50,13 @@ So far, we have only changed the inner content of the disclosure group view. How
 
 ```swift
 DisclosureGroup(
-content: {
-  WeatherDetailsView()
-},
-label: {
-  Label("Current Weather Details", systemImage: "thermometer")
-    .font(.headline)
-}
+  content: {
+    WeatherDetailsView()
+  },
+  label: {
+    Label("Current Weather Details", systemImage: "thermometer")
+      .font(.headline)
+  }
 )
 ```
 
