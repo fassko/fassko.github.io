@@ -1,13 +1,13 @@
 ---
 date: 2021-03-20 00:00
 title: How to show and hide content with DisclosureGroup using SwiftUI
-description: Showing and hiding some parts of information is a vital feature in mobile apps. Taking into consideration that screens for our phones are much smaller than for the laptops or desktop computers. Now with new SwiftUI capabilities, we can collapse content with `DisclosureGroup`. Let's see how we could use it in various ways.
+description: Showing and hiding some parts of information is a vital feature in mobile apps, especially considering that phone screens are much smaller than those on laptops or desktop computers. Now with the new SwiftUI capabilities, we can collapse content with `DisclosureGroup`. Let's see how we could use it in various ways.
 tags: swift, ios, swiftui, DisclosureGroup
 ---
 
-Showing and hiding some parts of information is a vital feature in mobile apps. Taking into consideration that screens for our phones are much smaller than for the laptops or desktop computers.
+Showing and hiding some parts of information is a vital feature in mobile apps, especially considering that phone screens are much smaller than those on laptops or desktop computers.
 
-Now with new SwiftUI capabilities, we can collapse content with `DisclosureGroup`. Let's see how we could use it in various ways.
+Now with the new SwiftUI capabilities, we can collapse content with `DisclosureGroup`. Let's see how we could use it in various ways.
 
 ## Display a collapsable content
 
@@ -27,7 +27,7 @@ DisclosureGroup("Current Weather Details") {
 
 ## Modify `DisclosureGroup`
 
-Now let's check out how we can modify the `DisclosureGroup`. Currently, we can't do much right now, and it is pretty limited, but we can change the accent color and disable it.
+Now let's check out how we can modify the `DisclosureGroup`. Currently, we can't do much, and it is pretty limited, but we can change the accent color and disable it.
 
 Let's start with disabling the option to show and hide the weather information. We could do this by using the `disabled` modifier.
 
@@ -40,13 +40,13 @@ DisclosureGroup("Current Weather Details") {
 
 ![SwiftUI DisclosureGroup](/assets/disclosuregroup-swiftui/disclosuregroup-disabled.png)
 
-By default, the disclosure arrow comes in blue color. By using the `accentColor` modifier, we could change to our desired color. We could use a system color or a defined color in the Assets catalog.
+By default, the disclosure arrow comes in blue color. By using the `accentColor` modifier, we could switch to our desired color. We could use a system color or a defined color in the Assets catalog.
 
 ![SwiftUI DisclosureGroup](/assets/disclosuregroup-swiftui/disclosuregroup-accent-color.png)
 
 ## Configure `DisclosureGroup` title
 
-So far, we have only changed the inner content of the disclosure group view. How about if you would like to change the title to a label view. The new [Label](https://developer.apple.com/documentation/swiftui/label) comes with an initializer to pass the textual title and a system image's use that. For that, we can use a special `DisclosureGroup` initializer providing a custom label.
+So far, we have only changed the inner content of the disclosure group view. How about if you would like to change the title to a label view? The new [Label](https://developer.apple.com/documentation/swiftui/label) comes with an initializer to pass the textual title and a system image's use that. For that, we can use a special `DisclosureGroup` initializer providing a custom label.
 
 ```swift
 DisclosureGroup(
@@ -64,32 +64,32 @@ DisclosureGroup(
 
 ## Manually control show/hide state
 
-To either show or hide the disclosure group's content, we relied on the user to click on the arrow. There can be cases where we would like to change this behavior using a toggle button. To do this, we could use a state boolean variable that indicates either the disclosure group is expanded or isn't.
+To either show or hide the disclosure group's content, we relied on the user to click on the arrow. There can be cases where we would like to change this behavior using a toggle button. To do this, we could use a state boolean variable that indicates either the disclosure group is expanded or not.
 
 ```swift
-@State private var isExanded = false
+@State private var isExpanded = false
 
 /// ...
 
-Toggle("Show Current Weather Details", isOn: $isExanded)
+Toggle("Show Current Weather Details", isOn: $isExpanded)
 
-DisclosureGroup("Current Weather Details", isExpanded: $isExanded1) {
+DisclosureGroup("Current Weather Details", isExpanded: $isExpanded1) {
   WeatherDetailsView()
 }
 ```
 
 ![SwiftUI DisclosureGroup](/assets/disclosuregroup-swiftui/disclosuregroup-isExpanded-toggle.gif)
 
-It is pretty weird that once you press on the title, it does not expand; instead, we need to point our finger and press on the disclosure arrow button. We could fix it by implementing the title as a button and control the `isExpaned` property.
+It is odd that once you press on the title, it does not expand; instead, we need to point our finger and press on the disclosure arrow button. We could fix it by implementing the title as a button and control the `isExpanded` property.
 
 ```swift
 DisclosureGroup(
-  isExpanded: $isExanded,
+  isExpanded: $isExpanded,
   content: { WeatherDetailsView() },
   label: {
     Button("Current Weather Details") {
       withAnimation {
-        isExanded.toggle()
+        isExpanded.toggle()
       }
     }
   }
