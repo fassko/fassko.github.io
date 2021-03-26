@@ -73,7 +73,7 @@ To either show or hide the disclosure group's content, we relied on the user to 
 
 Toggle("Show Current Weather Details", isOn: $isExpanded)
 
-DisclosureGroup("Current Weather Details", isExpanded: $isExpanded1) {
+DisclosureGroup("Current Weather Details", isExpanded: $isExpanded) {
   WeatherDetailsView()
 }
 ```
