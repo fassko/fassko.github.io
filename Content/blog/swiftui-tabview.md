@@ -2,13 +2,13 @@
 date: 2021-04-22 00:00
 title: The hidden secrets of TabView in iOS with SwiftUI
 description: TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to switch between different views or functions quickly.
-It is an extremely major element of Apple's apps like Music, Podcasts, and App Store.
+It is a major element of Apple's apps like Music, Podcasts, and App Store.
 tags: swift, ios, swiftui, tabview
 ---
 
 TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to switch between different views or functions quickly.
 
-It is an extremely major element of Apple's apps like Music, Podcasts, and App Store.
+It is a major element of Apple's apps like Music, Podcasts, and App Store.
 
 ![SwiftUI DisclosureGroup](/assets/swiftui-tabview/appstore-tabview.png)
 
@@ -16,11 +16,11 @@ In SwiftUI, we have a new element name `TabView` instead of `UITabBar` in UIKit.
 
 ## Ways to initialize TabView in SwiftUI
 
-Right we have two options to create a tab view with SwiftUI. We can either take control of the selected tab or avoid that's whatsoever. Let's look into both of these approaches.
+Right now we have two options to create a tab view with SwiftUI. We can either take control of the selected tab or avoid it whatsoever. Let's look into both of these approaches.
 
 ### Create the TabView with SwiftUI
 
-To create a `TabView` element, we need to pass the `Content` that is a list of SwiftUI views. To mark this view as a tab bar item, we need to use the 	`tabItem` view modifier passing inside a `Label`  that describes a title and image.
+To create a `TabView` element, we need to pass the `Content` that is a list of SwiftUI views. To mark this view as a tab bar item, we need to use the `tabItem` view modifier passing inside a `Label` that describes a title and image.
 
 Let's now put all this together in the code.
 
@@ -95,9 +95,9 @@ Then we are using the `tag` modifier for each of the tab items. We are using the
 
 ## Customize TabView
 
-Sadly there isn't much how we can customize the `TabView` in SwiftUI. We can change the image and title for the tabs, but that is quite understandable.
+Sadly there aren't many options for customizing the `TabView` in SwiftUI. We can change the image and title for the tabs, but that is quite understandable.
 
-We can change the default accent color. Let's change it to purple color.
+We can change the default accent color. Let's change it to purple.
 
 ```
 TabView {
@@ -142,11 +142,11 @@ TabView {
 
 ## TL;DR
 
-TabBar on the bottom of the screen is one of the most important building blocks for modern iOS applications. Apple themselves is using a lot in their apps.
+TabBar on the bottom of the screen is one of the most important building blocks for modern iOS applications. Apple themselves is using it frequently in their apps.
 
 With SwiftUI, this element now has the new name `TabView`. It allows us to add the tab view and control the currently selected tab programmatically.
 
-The hidden feature of the `TabView` is that we can use it to show the multiple tabs with page indicators, and those can be controller by scrolling between them. In UIKit, it was `UIPageViewController`.
+The hidden feature of the `TabView` is that we can use it to show the multiple tabs with page indicators, and those can be controlled by scrolling between them. In UIKit, it was `UIPageViewController`.
 
 ## Links
 
