@@ -54,6 +54,15 @@ internal extension Node where Context == HTML.BodyContext {
         .div(
           .class("text"),
           .textParagraph(
+            .text("Currently, the big thing in my life is "),
+            .a(
+              .href("https://sharentic.com/"),
+              .target(.blank),
+              .text("Sharentic")
+            ),
+            .text(". I am working to create a new model of sustainable consumption through seamless rentals. Our mission is to help people live lightly, with no compromises.")
+          ),
+          .textParagraph(
             .text("Executed as co-founder at global scale company "),
             .a(
               .href("https://www.qminder.com"),
