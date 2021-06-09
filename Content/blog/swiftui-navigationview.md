@@ -9,7 +9,7 @@ Navigating from one view to another or just showing a title and buttons is one o
 
 ## Showing Navigation View
 
-To show a Navigation Bar using SwiftUI, we should use the `NavigationView` component that is responsible for this purpose. It requires just that we need provide the `Content` that is a `View` type. The `Content` can be anything starting from a text field and ending with scrollable content. In short, it can be any SwiftUI view.
+To show a Navigation Bar using SwiftUI, we should use the `NavigationView` component that is responsible for this purpose. It requires that we provide the `Content` that is a `View` type. The `Content` can be anything starting from a text field and ending with scrollable content. In short, it can be any SwiftUI view.
 
 To show a title for the navigation, SwiftUI has a completely different approach like we have used to with UIKit. We should set it as a view modifier, not for the `NavigationView` but the `Content`.
 
@@ -54,7 +54,7 @@ NavigationView {
 
 ## Add Navigation View Buttons
 
-Now that we know how to show the `NavigationView` let's explore how to add buttons. I want to the point that previously with SwiftUI, we used the `.navigationBarItems` view modifier, but now it is deprecated. With the latest SwiftUI version, we should call the `.toolbar` modifier. Let's dig deeper into how to use it in various scenarios.
+Now that we know how to show the `NavigationView` let's explore how to add buttons. I want to point out that previously with SwiftUI, we used the `.navigationBarItems` view modifier, but now it is deprecated. With the latest SwiftUI version, we should call the `.toolbar` modifier. Let's dig deeper in how to use it in various scenarios.
 
 ### Add a Single Button
 
