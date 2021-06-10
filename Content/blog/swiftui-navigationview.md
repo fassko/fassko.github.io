@@ -1,7 +1,7 @@
 ---
 date: 2021-05-25 00:00
 title: Cracking the Navigation Bar Secrets with SwiftUI
-description: How to make most of NavigationView with SwiftUI
+description: Navigating from one view to another, or simply showing a title and buttons, is one of the most crucial building blocks of modern iOS applications. Almost every app has this feature. SwiftUI brings some new approaches for how to show the Navigation Bar, set the title, and add buttons. So let's check it out.
 tags: swift, ios, swiftui, navigationview
 ---
 
