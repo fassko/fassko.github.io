@@ -1,7 +1,7 @@
 ---
 date: 2021-06-30 00:00
 title: How to master grid layout in iOS with SwiftUI
-description: 
+description: Grid layouts enable us to show views in a grid that expands either vertically or horizontally. We've all seen it, for instance, in the iOS Photos application. Those who have worked with UIKit might recognize it as [UICollectionView](https://developer.apple.com/documentation/uikit/uicollectionview).
 tags: swift, ios, swiftui, gridview
 ---
 
