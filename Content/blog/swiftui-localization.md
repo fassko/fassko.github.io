@@ -1,7 +1,8 @@
 ---
 date: 2021-07-10 00:00
-title: 
+title: How to translate SwiftUI applications
 tags: swift, ios, swiftui, localization
+description:
 ---
 
 Localizing our applications is more critical than we think. We usually stick with English as the primary language. Only 4.9% of the world’s 7.8 billion inhabitants speak English. Most of the people aren’t native English speakers. In the grand scheme of things, only 360 million people speak English as their first language.
@@ -10,7 +11,7 @@ SwiftUI gives us great and easy-to-use options to translate our applications int
 
 As well, Xcode has the option to change build settings and change the default language without changing the system language itself.
 
-![Change language in Xcode build settings]()
+![Change language in Xcode build settings](/assets/swiftui-localization/xcode-build-settings.png)
 
 In this article, we will check how to translate our SwiftUI apps by checking out built-in features. As well, we will see how to translate dynamically changing text.
 
@@ -41,20 +42,22 @@ Now we know how static translations work but how it is with dynamically created 
 In the example above, we should add in the `Localizable.strings` file entry `Hello, %@!` and the `%@` would be a `String` parameter we pass in when creating the `LocalizedStringKey` like this:
 
 ```swift
-
-// code string interpolation
-
+Text("Hello, \(name)!")
 ```
 
 Behind the scenes, it is using the String formatting that can format numbers, dates, currency, and more, taking into consideration your user’s locale. In this blog post, we are not going to dig deeper into that topic.
 
 ## TL;DR
 
+Only 4.9% out of all people on the planet speak English as their first language. This means that we have to translate our apps to reach a wider audience and make them more accessible.
 
+SwiftUI has a great set of built-in features to facilitate translations. Most of the view elements can be translated by adding translations to the `Localizable.strings` file.
+
+With dynamic text, we should use the string interpolation and format it accordingly either passed in the parameter is a text, number, or date. And SwiftUI will format that in user's defined locale.
 
 ## Links
 
-* [Sample code](https://github.com/fassko/fassko.github.io)
+* [Sample code](https://github.com/fassko/SwiftUILocalization)
 
 * [Localization guide by Apple](https://developer.apple.com/documentation/xcode/localization)
 * [Localization in SwiftUI](https://swiftwithmajid.com/2019/10/16/localization-in-swiftui/)
