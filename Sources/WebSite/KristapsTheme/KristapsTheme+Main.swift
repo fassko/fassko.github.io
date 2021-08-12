@@ -16,7 +16,7 @@ internal extension Node where Context == HTML.BodyContext {
           ),
           .h2(
             .class("tagline"),
-            .text("iOS and Apple technology developer.\nStartup founder. Conference speaker.")
+            .text("iOS and Apple technology developer and consultant.\nStartup founder. Conference speaker.")
           )
         ),
         .img(
