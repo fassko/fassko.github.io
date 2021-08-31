@@ -9,16 +9,10 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Install Publish
-      run: |
-        git clone https://github.com/JohnSundell/Publish.git
-        cd Publish
-        make
-
-    - name: Generate with Publish
-      run: publish generate
+    - name: Deploy with Publish
+      run: swift run
