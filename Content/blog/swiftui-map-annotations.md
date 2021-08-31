@@ -5,13 +5,13 @@ tags: swift, ios, swiftui, localization
 description: 
 ---
 
-A while back, we [explored](https://kristaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI. This time, we will look into creating custom map annotations, the limitations, and how to overcome some of them.
+We [explored](https://karistaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them.
 
 Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications.
 
 ## MapAnnotation protocol
 
-In SwiftUI working with custom map annotations, we need to look into the [MapAnnotation](https://developer.apple.com/documentation/mapkit/mapannotation). It is a map annotation that we can customize how we want and then place on the map.
+We need to look into the [MapAnnotation](https://developer.apple.com/documentation/mapkit/mapannotation), when working with custom map annotations in SwiftUI. We can customize it exactly how we want and then place it on the map.
 
 As a reminder, to show annotations on the map we need a list of places that conform to the `Identifiable` protocol and then use it when initializing the `Map` view in an array.
 
@@ -59,10 +59,10 @@ struct PlaceAnnotationView: View {
 
 ![Custom map pin view](/assets/swiftui-custom-map-annotations/map-pin.png)
 
-Now we can use it in our 'Map' closure block.
+We can use it in our 'Map' closure block now.
 
 ```Swift
-	Map(coordinateRegion: $region,
+  Map(coordinateRegion: $region,
         annotationItems: [empireStateBuilding]
     ) { place in
       MapAnnotation(coordinate: place.coordinate) {
@@ -73,15 +73,15 @@ Now we can use it in our 'Map' closure block.
 
 ![Empire State Building custom annotation](/assets/swiftui-custom-map-annotations/empire-state-building-annotation.png)
 
-When we zoom in or out, we can see that annotation is placed precisely where the Empire State Building is located.
+When zooming in or out, we see that annotation is placed precisely where the Empire State Building is located.
 
-Now that we have the annotation on the map, we would like to somehow interact with it. We will see how to show an annotation title and navigate when clicking on it in the following sections.
+After we have the annotation on the map, we would like to somehow interact with it. Let's explore in the following sections how to show an annotation title and navigate when clicking on it.
 
 ## Show and hide the annotation title
 
 To show (and hide) the annotation title, we need to include it in the custom annotation view because we are constructing it manually.
 
-We can add the title in the `PlaceAnnotationView` `VStack` and show or hide when a user taps on it.
+We can add the title in the `PlaceAnnotationView` `VStack` and show or hide it when a user taps it.
 
 ```swift
 struct PlaceAnnotationView: View {
@@ -116,11 +116,11 @@ struct PlaceAnnotationView: View {
 }
 ```
 
-To make it appear and disappear with animation, we could use the view state variable and change the opacity accordingly. It would give that nice additional touch.
+We can make it appear and disappear with animation using the view state variable and changing the opacity accordingly. It would give that additional nice touch.
 
 ![Show and hide custom annotation title](/assets/swiftui-custom-map-annotations/show-hide-annotation-title.gif)
 
-Another option is to show the annotation title all the time. In that case, our app users would understand what this place is without tapping on it.
+Another option is to show the annotation title all the time. In that case, our app users would understand without tapping what this place is.
 
 ```swift
 struct PlaceAnnotationView: View {
@@ -149,7 +149,7 @@ struct PlaceAnnotationView: View {
 
 ## Navigation from map annotation
 
-When a user taps on the annotation, we would like to navigate to a different view and show extra information about this place on the map. To do so, we can put the custom annotation view inside the `NavigationLink` and then navigate to the location details view.
+When a user taps the annotation, we would like to navigate to a different view and show extra information about this place on the map. To do so, we can put the custom annotation view inside the `NavigationLink` and then navigate to the location details view.
 
 ```swift
 MapAnnotation(coordinate: place.coordinate) {
@@ -161,15 +161,15 @@ MapAnnotation(coordinate: place.coordinate) {
 }
 ```
 
-Now when a user taps on the annotation, they will be brought to the details screen. That's it!
+A user will be brought to the details screen after tapping the annotation. That's it!
 
 ![Navigate from the custom annotation](/assets/swiftui-custom-map-annotations/navigate.gif)
 
 ## TL;DR
 
-Marking a place on the map with annotation is a significant feature when using a map view in iOS apps. In many cases, we want to do it with a custom annotation view.
+Marking a place on the map with annotation is a significant feature when using a map view in iOS apps. We want to do it with a custom annotation view in many cases.
 
-With SwiftUI, we can create custom annotations and show them on the map in a straightforward manner. Using this approach is very nice because we have all the SwiftUI features at our disposal, like stacks, navigation, and more.
+With SwiftUI, we can create custom annotations and show them on the map in a straightforward manner. It is very nice to use this approach because we have all the SwiftUI features like stacks, navigation, and more at our disposal.
 
 ## Links
 
