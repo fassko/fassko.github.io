@@ -2,7 +2,7 @@
 date: 2021-08-25 00:00
 title: Exploring SwiftUI map custom annotations
 tags: swift, ios, swiftui, localization
-description: 
+description: We [explored](https://karistaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them. Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications.
 ---
 
 We [explored](https://karistaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them.
