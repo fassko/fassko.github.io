@@ -5,13 +5,13 @@ tags: swift, ios, swiftui, button
 description: 
 ---
 
-Using mobile apps, we navigate to another view, calculate business expenses, or send a tweet by tapping on a button. SwiftUI makes it a breeze to construct a button. This time we will talk about how to do it in three ways using the view modifier approach, building a custom view modifier, and applying the button style.
+Using mobile apps, we navigate to another view, calculate business expenses, or send a tweet by tapping on a button. SwiftUI makes it a breeze to construct a button. This time we will talk how to do it in three ways using the view modifier approach, building a custom view modifier, and applying the button style.
 
 ## Using a Custom View Modifier
 
 In SwiftUI view modifiers are used to change the view in some kind of way. We can build a custom view modifiers ourselves. We will try to build one to create a custom button.
 
-At first we need to create the custom modifier. To do that we should use the `ViewModifier` protocol that requires to implement one function `func body(content: Content) -> some View` that takes in a view and produces a different version of that view.
+At first we need to create the custom modifier. To do that we should use the `ViewModifier` protocol that requires to implement one function `func body(content: Content) -> some View` which takes in a view and produces a different version of that view.
 
 ```swift
 struct CustomButtonModifier: ViewModifier {
@@ -26,7 +26,7 @@ struct CustomButtonModifier: ViewModifier {
 }
 ```
 
-We can apply the newly made view modifier with a `.modifier` modifier to the original view, but we can create an extension to the `View` protocol. That would allow us to us it in a more shorthand way.
+We can apply the newly made view modifier with a `.modifier` modifier to the original view, but we can create an extension to the `View` protocol. That would allow us to use it in a more shorthand way.
 
 ```swift
 extension View {
@@ -36,7 +36,7 @@ extension View {
 }
 ```
 
-Now we can create a SwiftUI button view and apply our freshly created view modifier.
+We can create a SwiftUI button view now and apply our freshly created view modifier.
 
 ```swift
 Button("Continue", action: {})
@@ -45,7 +45,7 @@ Button("Continue", action: {})
 
 ## Building a Custom View
 
-Now let's look into how we can style a SwiftUI button by building a custom view. Now we need to create a custom view that we will pass into `label` parameter when constructing the Button with the `init(action: () -> Void, label: () -> Label)` initializer.
+Now let's look into how we can style a SwiftUI button by building a custom view. We need to create a custom view that we will pass into `label` parameter when constructing the Button with the `init(action: () -> Void, label: () -> Label)` initializer.
 
 ```swift
 struct CustomButtonView: View {
@@ -60,7 +60,7 @@ struct CustomButtonView: View {
 }
 ```
 
-Now that we have our custom view we can use it and create the button.
+Now that we have our custom view, we can use it and create the button.
 
 ```swift
 Button(action: {}, label: {
@@ -70,7 +70,7 @@ Button(action: {}, label: {
 
 ## Applying the Button Style
 
-The most SwiftUI way of styling a button is by applying the custom button style. SwiftUI comes with couple of built in button styles, but this time we will create our own. To do that we need to create a custom style struct and conform to the `ButtonStyle` protocol that applies the standard interaction behaviour and we can customize the appearance ourselves.
+The most popular SwiftUI way of styling a button is by applying the custom button style. SwiftUI comes with couple of built-in button styles, but this time we will create our own. To do that we need to create a custom style struct and conform to the `ButtonStyle` protocol that applies the standard interaction behaviour and we can customize the appearance ourselves.
 
 ```swift
 struct CusttomButtonStyle: ButtonStyle {
@@ -85,7 +85,7 @@ struct CusttomButtonStyle: ButtonStyle {
 }
 ```
 
-Now that we have defined our custom button style we can apply it  by using the `.buttonStyle` view modifier.
+Now that we have defined our custom button style, we can apply it by using the `.buttonStyle` view modifier.
 
 ```swift
 Button("Continue", action: {})
@@ -94,7 +94,7 @@ Button("Continue", action: {})
 
 ## TL;DR
 
-A button is a gateway to most of our app functionalities like opening another view, sending a tweet or an email. With SwiftUI we can create a button in various ways, for instance applying a view modifier, creating a custom view and styling it with a custom button style.
+A button is a gateway to most of our app functionalities like opening another view, sending a tweet or an email. With SwiftUI we can create a button in various ways like applying a view modifier, creating a custom view and styling it with a custom button style.
 
 ## Links
 
