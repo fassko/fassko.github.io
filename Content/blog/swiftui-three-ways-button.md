@@ -1,8 +1,8 @@
 ---
-date: 2021-09-25 00:00
+date: 2021-09-24 00:00
 title: Three brilliant ways to style button with SwiftUI
 tags: swift, ios, swiftui, button
-description: 
+description: Using mobile apps, we navigate to another view, calculate business expenses, or send a tweet by tapping on a button. SwiftUI makes it a breeze to construct a button. This time we will talk how to do it in three ways using the view modifier approach, building a custom view modifier, and applying the button style.
 ---
 
 Using mobile apps, we navigate to another view, calculate business expenses, or send a tweet by tapping on a button. SwiftUI makes it a breeze to construct a button. This time we will talk how to do it in three ways using the view modifier approach, building a custom view modifier, and applying the button style.
