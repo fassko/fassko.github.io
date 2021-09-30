@@ -1,3 +1,8 @@
+- date: 2021-09-30
+  event: Tech Stash by Mintos, Riga, Latvia
+  title: A journey into the SwiftUI world
+  video: https://www.youtube.com/embed/MkDtmDHeJrQ
+  slides: e5f7dbb7f5e24b5680036e0fb767015e
 - date: 2020-05-19
   event: UIKonf, Berlin, Germany
   title: We need to talk about Websockets
