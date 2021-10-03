@@ -7,6 +7,14 @@ description: Using mobile apps, we navigate to another view, calculate business 
 
 Using mobile apps, we navigate to another view, calculate business expenses, or send a tweet by tapping on a button. SwiftUI makes it a breeze to construct a button. This time we will talk how to do it in three ways using the view modifier approach, building a custom view modifier, and applying the button style.
 
+We are going to start with the most basic SwiftUI button and style.
+
+```swift
+Button("Continue", action: {})
+```
+
+![Basic SwiftUI button](/assets/swiftui-three-ways-button/basic-button.png)
+
 ## Using a Custom View Modifier
 
 In SwiftUI view modifiers are used to change the view in some kind of way. We can build a custom view modifiers ourselves. We will try to build one to create a custom button.
@@ -91,6 +99,12 @@ Now that we have defined our custom button style, we can apply it by using the `
 Button("Continue", action: {})
   .buttonStyle(CusttomButtonStyle())
 ```
+
+## Outcome
+
+Let's put all the buttons one under another in the `VStack` and see the outcome. All of them should be the same.
+
+![All three buttons](/assets/swiftui-three-ways-button/three-buttons-look-same.png)
 
 ## TL;DR
 
