@@ -18,7 +18,7 @@ To show a title for the navigation, SwiftUI has a completely different approach 
 var body: some View {
   NavigationView {
     Text("Hello, world!")
-      .navigationTitle("Test")
+      .navigationTitle("Title")
   }
 }
 ```
