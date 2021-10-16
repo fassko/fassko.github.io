@@ -1,13 +1,13 @@
-- date: 2021-08-25
-  event: 360|iDev
-  title: How to use SwiftUI for rapid development
-  video: https://player.vimeo.com/video/601260523?h=31af3a39bb
-  slides: c29d0e18afc34ef19eb3d57c412e3410
 - date: 2021-09-30
   event: Tech Stash by Mintos, Riga, Latvia
   title: A journey into the SwiftUI world
   video: https://www.youtube.com/embed/MkDtmDHeJrQ
   slides: e5f7dbb7f5e24b5680036e0fb767015e
+- date: 2021-08-25
+  event: 360|iDev
+  title: How to use SwiftUI for rapid development
+  video: https://player.vimeo.com/video/601260523?h=31af3a39bb
+  slides: c29d0e18afc34ef19eb3d57c412e3410
 - date: 2020-05-19
   event: UIKonf, Berlin, Germany
   title: We need to talk about Websockets
