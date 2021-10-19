@@ -182,6 +182,11 @@ extension Node where Context == HTML.BodyContext {
         .div(
           .class("blog-content"),
           .raw(item.htmlDescription)
+        ),
+        .a(
+          .class("blog-read-more"),
+          .href(item.path),
+          .text("Read more")
         )
       )
     }
