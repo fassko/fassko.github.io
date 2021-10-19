@@ -274,6 +274,7 @@ h3 {
 
 .text-paragraph {
   padding-bottom: 10px;
+  line-height: 1.5;
 }
 
 .social-item-link {
@@ -308,6 +309,7 @@ h3 {
 .project-description {
   padding-bottom: 20px;
   line-height: 26px;
+  line-height: 1.5;
 }
 
 .project-image {
@@ -365,7 +367,7 @@ h3 {
 .blog-content p {
   padding-bottom: 20px;
   font-size: 18px;
-  line-height: 1.7em;
+  line-height: 1.5;
 }
 
 .blog-content blockquote {
@@ -396,6 +398,7 @@ h3 {
 
 .blog-content ul li {
   padding-bottom: 5px;
+  line-height: 1.5;
 }
 
 .blog-content img {
@@ -442,7 +445,7 @@ h3 {
 .about-me-text {
   padding: 30px 0;
   font-size: 18px;
-  line-height: 1.6em;
+  line-height: 1.5;
 }
 
 .about-me-text p:not(:last-child) {
@@ -536,11 +539,11 @@ audio {
   text-align: center;
   opacity: 0.7;
   font-size: 16px;
-  padding: 50px 0 20px 0;
+  padding: 50px 0 50px 0;
 }
 
 .footer p {
-  padding: 5px 0;
+  padding: 10px 0;
 }
 
 .footer p a {
@@ -561,7 +564,7 @@ audio {
   display: block;
   padding: 0 20px;
   color: #E5E5E5;
-  line-height: 1.6em;
+  line-height: 1.5;
   font-size: 0.95em;
   overflow-x: auto;
   white-space: pre;
