@@ -158,3 +158,4 @@ The hidden feature of the `TabView` is that we can use it to show the multiple t
 * [Adding TabView and tabItem()](https://www.hackingwithswift.com/quick-start/swiftui/adding-tabview-and-tabitem)
 * [How to embed views in a tab bar using TabView](https://www.hackingwithswift.com/quick-start/swiftui/how-to-embed-views-in-a-tab-bar-using-tabview)
 * [Introducing SwiftUI TabView and Working with Tab Bar Customization](https://www.appcoda.com/swiftui-tabview/)
+* [Working with the Tab View in SwiftUI](https://serialcoder.dev/text-tutorials/swiftui/working-with-the-tab-view-in-swiftui/)
