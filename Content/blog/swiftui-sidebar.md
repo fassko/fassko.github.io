@@ -110,7 +110,7 @@ Sidebar is a great way how to divide different parts of the app into iPad apps. 
 * [Human Interface Guidelines - Sidebars](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/)
 * [Sidebar official documentation](https://developer.apple.com/documentation/swiftui/sidebarliststyle)
 * [Learn how to create a Sidebar navigation for iOS, iPadOS and macOS](https://designcode.io/swiftui-handbook-sidebar)
-* [](https://swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/)
+* [Sidebar navigation in SwiftUI](https://swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/)
 * [How to show and hide a sidebar in a SwiftUI macOS app](https://sarunw.com/posts/how-to-toggle-sidebar-in-macos/)
 * [https://betterprogramming.pub/using-sidebar-in-swiftui-without-a-navigationview-94f4181c09b](https://betterprogramming.pub/using-sidebar-in-swiftui-without-a-navigationview-94f4181c09b)
 * [How to Make a Sidebar Menu in SwiftUI](https://dev.to/tprezioso/how-to-make-a-sidebar-menu-in-swiftui-ejl)
