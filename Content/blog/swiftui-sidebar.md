@@ -2,10 +2,10 @@
 date: 2021-10-20 00:00
 title: How Sidebar works on iPad with SwiftUI
 tags: swift, ios, swiftui, Sidebar, ipad
-description: 
+description: Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let's check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.
 ---
 
-starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let's check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.
+Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let's check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.
 
 ## Creating a Sidebar
 
