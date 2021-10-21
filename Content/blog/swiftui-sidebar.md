@@ -105,7 +105,7 @@ Sidebar is a great way how to divide different parts of the app into iPad apps. 
 
 ## Links
 
-* [Sample code](https://github.com/fassko/SwiftUICustomButton)
+* [Sample code](https://github.com/fassko/SwiftUISidebar)
 
 * [Human Interface Guidelines - Sidebars](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/)
 * [Sidebar official documentation](https://developer.apple.com/documentation/swiftui/sidebarliststyle)
