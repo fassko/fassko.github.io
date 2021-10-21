@@ -5,7 +5,7 @@ tags: swift, ios, swiftui, Sidebar, ipad
 description: 
 ---
 
-Apple starting with iPadOS 14 has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They already are using that in apps like Photos, Files, Notes, Calendar, and more. This time let's check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.
+starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let's check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.
 
 ## Creating a Sidebar
 
@@ -25,7 +25,7 @@ NavigationView {
 
 ![iPad sidebar with SwiftUI](/assets/swiftui-sidebar/ipad-sidebar.png)
 
-Now that we have the Sidebar let's add a title that would represent the global name. Usually, developers choose to put the app name, or for instance, the Apple Notes app has **Folders**  to mean what the Sidebar holds.
+Now that we have the Sidebar, let's add a title that would represent the global name. Developers usually choose to put the app name, or, for instance, the Apple Notes app has **Folders** to mean what the Sidebar holds.
 
 ```swift
 NavigationView {
@@ -42,9 +42,9 @@ NavigationView {
 
 ## Navigation from the Sidebar
 
-Now that we have the Sidebar, let's implement navigation when a user taps on the section. To do that, we need to wrap the `Label` in the `NavigationLink` and provide a destination SwiftUI view.
+Now that we have the Sidebar, let's implement navigation for events after user taps on the section. To do that, we need to wrap the `Label` in the `NavigationLink` and provide a destination SwiftUI view.
 
-For instance, if we would add about section in the app, it could look like this:
+For instance, if we would add About section in the app, it could look like this:
 
 ```swift
 NavigationLink {
@@ -62,7 +62,7 @@ When a user launches the app, they see an empty view until they select something
 
 ![](/assets/swiftui-sidebar/ipad-sidebar-empty-default-screen.png)
 
-To avoid this misleading behavior we should tell the SwiftUI layout engine to render a default or call it a home screen. The trick is to add another view inside the `NavigationView` and it will be the default screen when the app is launched for the first time.
+To avoid this misleading behavior, we should tell the SwiftUI layout engine to render a default or call it a home screen. The trick is to add another view inside the `NavigationView` and it will be the default screen when the app is launched for the first time.
 
 ```swift
 NavigationView {
@@ -97,7 +97,7 @@ On the iPhone, the Sidebar is rendered as the default home screen with a navigat
 
 ![iPhone rendering sidebar](/assets/swiftui-sidebar/iphone-sidebar.gif)
 
-Usually, this isn't what we would want, so in this case, we might need to consider changing it on the iPad size devices. That is out of the scope of this post.
+Usually, this isn't what we would want, so in this case, we might need to consider changing it on the iPad size devices. This is out of the scope of this post.
 
 ## TL;DR
 
