@@ -20,8 +20,7 @@ struct Project {
 fileprivate var projects = [
   Project(title: "Sharentic iOS app",
           description: "Sharentic helps you to live lightly, without compromise. The app is built entirely with SwiftUI, and for backend is used Firebase. For payments, Stripe is being used.",
-          image: "sharentic.png",
-          link: "https://apps.apple.com/us/app/sharentic-easy-rentals/id1550175474"),
+          image: "sharentic.png"),
   Project(title: "Qminder Apple TV app",
           description: "Qminder TV is native Apple TV app for the waiting list. It uses open sourced Qminder Swift API and latest Swift features such as codable and keypaths. App keeps active network connection using websockets and upates the UI using reactive approach and RxSwift.",
           image: "qminder-apple-tv.png"),
