@@ -517,6 +517,10 @@ h3 {
   max-width: 100%;
 }
 
+.talk-image {
+  max-width: 100%;
+}
+
 @media only screen and (max-width: 480px) {
   .talk-vide-iframe {
     height: 200px;

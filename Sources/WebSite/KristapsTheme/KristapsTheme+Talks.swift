@@ -48,6 +48,16 @@ internal extension Node where Context == HTML.BodyContext {
           .class("talk-media"),
           .talkAudio(with: audio)
         )
+      },
+      .`if`(talk.image != nil, .h3("Images")),
+      .`unwrap`(talk.image) { image in
+        .div(
+          .class("talk-media"),
+          .img(
+            .class("talk-image"),
+            .src("/assets/\(image)")
+          )
+        )
       }
     )
   }

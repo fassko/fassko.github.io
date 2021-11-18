@@ -10,6 +10,7 @@ internal struct Talk: Decodable {
   let video: String?
   let slides: String?
   let audio: URL?
+  let image: String?
 }
 
 extension Talk {
