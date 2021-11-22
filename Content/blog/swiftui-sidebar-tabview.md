@@ -12,6 +12,7 @@ We learned how to add a sidebar for an iPad in the previous blog post, but that 
 At first, we need to distinguish whether an app is running on iPhone or iPad. To do that, we should use the `UIUserInterfaceIdiom` enum. It can answer the question of what kind of device the app is running, starting with a phone and ending with a car within carplay.
 
 This time we are interested in two enum cases:
+
 * `phone` - interface for iPhone or iPod touch;
 * `pad` - interface for iPad.
 
@@ -59,7 +60,7 @@ struct ContentView: View {
 }
 ```
 
-Now we need to populate both steps with the [sidebar for the iPad]() and [tabview for the iPhone](). We have looked into doing both of these tasks before, so we aren't doing that in-depth again. Complete code you can check in the [sample project]().
+Now we need to go over both steps to add a [sidebar for the iPad](https://kristaps.me/blog/swiftui-sidebar/) and a [tabview for the iPhone](https://kristaps.me/blog/swiftui-tabview/). We have looked into doing both of these tasks before, so we aren't doing that in-depth again. Complete code you can check in the [sample project](https://github.com/fassko/SwiftUITabViewSidebar).
 
 ```swift
 struct ContentView: View {
