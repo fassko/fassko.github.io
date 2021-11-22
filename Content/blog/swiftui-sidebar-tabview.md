@@ -142,7 +142,7 @@ Sidebar is a great way how to show quick navigation to multiple views on the iPa
 
 ## Links
 
-* [Sample code](https://github.com/fassko/SwiftUISidebar)
+* [Sample code](https://github.com/fassko/SwiftUITabViewSidebar)
 
 * [UIUserInterfaceIdiom documentation](https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom)
 * [UIDevice documentation](https://developer.apple.com/documentation/uikit/uidevice/)
