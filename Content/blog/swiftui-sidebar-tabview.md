@@ -46,7 +46,7 @@ static var isIpad: Bool {
 
 Now that we know what kind of device our app users have, we can divide the navigation. That means we are going to use the `TabView` and for an iPad - sidebar for an iPhone.
 
-After creating a new SwiftUI project with the Xcode, we could separate the navigation in the 'ContentView.swift` file. Then right in the `body` we can add the logical statement checking if the device is an iPad, and in another way, it can be a phone view.
+After creating a new SwiftUI project with the Xcode, we could separate the navigation in the `ContentView.swift` file. Then right in the `body` we can add the logical statement checking if the device is an iPad, and in another way, it can be a phone view.
 
 ```swift
 struct ContentView: View {
