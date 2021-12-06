@@ -8,14 +8,14 @@ internal extension Node where Context == HTML.BodyContext {
     .wrapper(
       .section(
         .class("about-me"),
-        .aboutDescription(),
-        .aboutEmail(),
-        .myPictures()
+        .aboutDescription,
+        .socialItems,
+        .myPictures
       )
     )
   }
   
-  fileprivate static func aboutDescription() -> Node {
+  private static var aboutDescription: Node {
     .div(
       .class("about-me-text"),
       .h1(
@@ -54,7 +54,14 @@ internal extension Node where Context == HTML.BodyContext {
     )
   }
   
-  fileprivate static func aboutEmail() -> Node {
+  private static var socialItems: Node {
+    .div(
+      .class("about-me-social-items"),
+      .forEach(SocialItems.allCases, socialItem)
+    )
+  }
+  
+  private static var aboutEmail: Node {
     .a(
       .class("about-email"),
       .href("mailto:kristaps@hey.com"),
@@ -66,7 +73,7 @@ internal extension Node where Context == HTML.BodyContext {
     )
   }
   
-  fileprivate static func myPictures() -> Node {
+  private static var myPictures: Node {
     .div(
       .class("about-me-images"),
       .img(
