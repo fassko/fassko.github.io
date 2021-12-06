@@ -65,8 +65,11 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
             .div(
               .class("blog-item"),
               .h1(
-                .class("blog-title"),
-                .text(item.title)
+                .a(
+                  .class("blog-title"),
+                  .href(item.path),
+                  .text(item.title)
+                )
               ),
               .div(
                 .class("blog-date"),
