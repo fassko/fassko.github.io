@@ -27,7 +27,7 @@ internal extension Node where Context == HTML.BodyContext {
               .target(.blank),
               .text("Swift Weekly Brief")
             ),
-            .text(" that is read by thousands of developers. He writes a blog, speaking at conferences, teaching, and mentoring.")
+            .text(" that is read by thousands of developers globally. He writes a blog, speaks at conferences, teaches, and mentors.")
           ),
           .textParagraph(
             .text("His interests are in Web 3.0, sustainability, and automating old and clunky processes.")
