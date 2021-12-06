@@ -17,7 +17,7 @@ internal extension Node where Context == HTML.BodyContext {
               .target(.blank),
               .text("Qminder")
             ),
-            .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Lead Apple technology efforts and worked on technical sales, integrations, and AppStore marketing.")
+            .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Led Apple technology efforts and worked on technical sales, integrations, and AppStore marketing.")
           ),
           .textParagraph("Extensive knowledge of how and what to build on all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS. Knows web frontend technologies like ReactJS."),
           .textParagraph(
