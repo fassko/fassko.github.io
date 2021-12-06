@@ -54,15 +54,6 @@ internal extension Node where Context == HTML.BodyContext {
         .div(
           .class("text"),
           .textParagraph(
-            .text("Currently, the big thing he's life is "),
-            .a(
-              .href("https://sharentic.com/"),
-              .target(.blank),
-              .text("Sharentic")
-            ),
-            .text(". He is working to create a new model of sustainable consumption through seamless rentals. Their mission is to help people live lightly, with no compromises.")
-          ),
-          .textParagraph(
             .text("Executed as co-founder at global scale company "),
             .a(
               .href("https://www.qminder.com"),
@@ -71,7 +62,7 @@ internal extension Node where Context == HTML.BodyContext {
             ),
             .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Lead Apple technology efforts and worked on technical sales, integrations, and AppStore marketing.")
           ),
-          .textParagraph("Extensive knowledge of how and what to build on all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS."),
+          .textParagraph("Extensive knowledge of how and what to build on all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS. Knows web frontend technologies like ReactJS."),
           .textParagraph(
             .text("Active iOS community member. Running well-known newsletter "),
             .a(
@@ -80,6 +71,9 @@ internal extension Node where Context == HTML.BodyContext {
               .text("Swift Weekly Brief")
             ),
             .text(" that is read by thousands of developers. He writes a blog, speaking at conferences, teaching, and mentoring.")
+          ),
+          .textParagraph(
+            .text("His interests are in Web 3.0, sustainability, and automating old and clunky processes.")
           )
         ),
         .div(

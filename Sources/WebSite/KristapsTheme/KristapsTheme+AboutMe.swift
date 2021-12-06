@@ -23,6 +23,7 @@ internal extension Node where Context == HTML.BodyContext {
         .text("About")
       ),
       .p("Kristaps has extensive knowledge of all Apple platforms - iOS, iPadOS, watchOS, tvOS, and macOS. He is an active iOS community member."),
+      .p("He knows various web frontend technologies like ReactJS and others."),
       .p(
         .text("He is the project leader of one of the most popular Swift programming language newsletters "),
         .a(
@@ -33,6 +34,7 @@ internal extension Node where Context == HTML.BodyContext {
         .text(", read by thousands of developers.")
       ),
       .p("He writes a mobile development blog, regularly speaks at conferences, teaches, and mentors."),
+      .p("His interests are in Web 3.0, sustainability, and automating old and clunky processes."),
       .p(
         .text("Kristaps is an active volunteer in organizations like "),
         .a(
