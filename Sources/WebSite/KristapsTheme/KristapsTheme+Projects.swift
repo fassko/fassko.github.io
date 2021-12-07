@@ -19,8 +19,11 @@ struct Project {
 
 fileprivate var projects = [
   Project(title: "Sharentic iOS app",
-          description: "Sharentic helps you to live lightly, without compromise. The app is built entirely with SwiftUI, and for backend is used Firebase. For payments, Stripe is being used.",
+          description: "Sharentic helps you to live lightly, without compromise. The app was built entirely with SwiftUI, and for backend was used Firebase. For payments - Stripe. Additionally, all the stock and orders were managed using an internal dashboard.",
           image: "sharentic.png"),
+  Project(title: "Vaal Dashboard",
+          description: "Securitization made as easy as revenue-based financing. Securitization allows companies to attract financing based on asset quality rather than on the financial performance of the company. Saving a CFO or Head of Capital Markets one day a week, 52 days a year. It was built using ReactJS, Material UI and other fronend technologies. All the data came from the loan tape that was stored in the Google Sheets.",
+          image: "vaal-dashboard.png"),
   Project(title: "Vibur iOS app",
           description: "Unpleasant and pleasant events calendar. This app will help you to be aware of an unpleasant event at the time it is happening. You will find some simple questions about your feelings and emotions, use them to focus your awareness on the details of the experience as it is happening.",
           image: "vibur.png",
