@@ -1,7 +1,7 @@
 ---
 title: Animating shapes in iOS
 date: 2019-02-12 00:00
-tags: animations, CABasicAnimation, UIBezierPath, CAShapeLayer, CAAnimationGroup
+tags: animations, swift
 description: Animating a UIBezierPath drawing is a pretty trivial task. But how to animate shape morphing, i.e. make one shape change into another? (For instance, morphing a triangle into a square.) To accomplish this, we need to use CAShapeLayer and animate its properties using Core Animation capabilities.
 ---
 

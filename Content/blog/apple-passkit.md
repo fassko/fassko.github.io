@@ -1,7 +1,7 @@
 ---
 date: 2019-10-20 00:00
 title: What is PassKit and how to use it?
-tags: passkit, apple, ios, wallet
+tags: ios, swift
 description: Apple [PassKit](https://developer.apple.com/documentation/passkit) framework is responsible for Apple Pay and managing user passes in Wallet app.
 This time let’s talk about passes, how to create and distribute them. Wallet app allows iOS users to organize boarding passes, tickets or gifts, business and loyalty cards. In short, passes are digital representations of information that usually is printed on paper or used as plastic cards.  
 ---

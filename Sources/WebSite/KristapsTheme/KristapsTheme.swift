@@ -180,6 +180,14 @@ extension Node where Context == HTML.BodyContext {
         ),
         .div(
           .class("blog-date"),
+          .ul(
+            .class("blog-tags"),
+            .forEach(item.tags) { tag in
+              .li(
+                .text(tag.string)
+              )
+            }
+          ),
           .text(item.date.short)
         ),
         .div(

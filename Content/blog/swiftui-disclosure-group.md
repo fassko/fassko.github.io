@@ -2,7 +2,7 @@
 date: 2021-03-20 00:00
 title: How to show and hide content with DisclosureGroup using SwiftUI
 description: Showing and hiding some parts of information is a vital feature in mobile apps, especially considering that phone screens are much smaller than those on laptops or desktop computers. Now with the new SwiftUI capabilities, we can collapse content with `DisclosureGroup`. Let's see how we could use it in various ways.
-tags: swift, ios, swiftui, DisclosureGroup
+tags: swift, ios, swiftui
 ---
 
 Showing and hiding some parts of information is a vital feature in mobile apps, especially considering that phone screens are much smaller than those on laptops or desktop computers.

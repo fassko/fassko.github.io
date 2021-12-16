@@ -364,6 +364,23 @@ h3 {
   padding-bottom: 20px;
 }
 
+.blog-tags {
+  display: inline-block;
+  margin-right: 10px;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.blog-tags li {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin-bottom: 7px;
+  background-color: #121212;
+}
+
 .blog-content p {
   padding-bottom: 20px;
   font-size: 18px;
