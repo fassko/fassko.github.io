@@ -19,7 +19,7 @@ struct WebSite: Website {
   // Update these properties to configure your website:
   var url = URL(string: "https://kristaps.me")!
   var name = "Kristaps Grinbergs"
-  var description = "Kristaps Grinbergs - iOS and Apple technology developer and consultant. Startup founder. Conference speaker. Mentor."
+  var description = "Kristaps Grinbergs - Mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0."
   var language: Language { .english }
   var imagePath: Path? { nil }  
 }
