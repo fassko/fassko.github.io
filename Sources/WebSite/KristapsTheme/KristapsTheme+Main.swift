@@ -16,7 +16,7 @@ internal extension Node where Context == HTML.BodyContext {
           ),
           .h2(
             .class("tagline"),
-            .text("iOS and Apple technology developer and consultant.")
+            .text("Mobile and fullstack developer.")
           ),
           .h2(
             .class("tagline"),
@@ -24,7 +24,7 @@ internal extension Node where Context == HTML.BodyContext {
           ),
           .h2(
             .class("tagline"),
-            .text("Sustainability. Web 3.0")
+            .text("Passionate about building products, sustainability and Web 3.0.")
           )
         ),
         .img(
