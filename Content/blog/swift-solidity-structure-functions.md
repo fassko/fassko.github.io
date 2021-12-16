@@ -2,14 +2,14 @@
 date: 2021-12-16 00:00
 title: Solidity for Swift developers: File Structure and Functions
 tags: swift, Solidity
-description: 
+description: Solidity is an object-oriented language to write smart contracts that can be deployed on the blockchain, for instance, Ethereum. The syntax is similar to Javascript, but on the other hand, semantics is closer to C++. We will dig into Solidity language structure and functions from a Swift developer's perspective.
 ---
 
 Solidity is an object-oriented language to write smart contracts that can be deployed on the blockchain, for instance, Ethereum. The syntax is similar to Javascript, but on the other hand, semantics is closer to C++. We will dig into Solidity language structure and functions from a Swift developer's perspective.
 
 ##  Pragma and file extension
 
-Before we jump to the Solidity language structure, we need to know what a `pragma` keyword is and what it means.
+Before we jump into the Solidity language structure, we need to know what a `pragma` keyword is and what it means.
 
 Unlike the Objective-C `#pragma` and Swift `MARK`, the' pragma' keyword in Solidity describes what version of the compiler should use. Keep in mind that it instructs the compiler to check if the versions do match. It does not turn on or off any language features.
 
@@ -29,9 +29,9 @@ Solidity source files are saved with the `.sol` extension.
 
 ## Everything starts with a Contract
 
-Contracts in Solidity language are similar to classes in Swift. Contracts contain state variables, functions, function modifiers, events, errors, structs, and enums. This time we are going to look into only function structure.
+Contracts in Solidity language are similar to classes in Swift. Contracts contain state variables, functions, function modifiers, events, errors, structs, and enums. This time we are only going to look into function structure.
 
-Like classes, we need to name it and open and close with braces.
+Like classes, we need to name it and open, and close with braces.
 
 ```
 contract HelloSwiftFromSolidity {
@@ -53,7 +53,7 @@ You can notice now that each execution line should end with the semicolon `;`. T
 
 ## Functions
 
-Functions can be declared inside and outside the `contract`, similar to Swift. It can execute a piece of code.
+Functions can be declared inside and outside the `contract`, similar to Swift. They can execute a piece of code.
 
 ```
 contract HelloSwiftFromSolidity {
@@ -70,11 +70,11 @@ contract HelloSwiftFromSolidity {
 
 It is going on a lot, so let's break it down. If we want to access the state variable from outside, we need to set the visibility type to `public` and do the same for the function. In our case, the function returns something, and we can mark it as `view`. It returns a string that is stored in the memory and removed after the execution is finished.
 
-The places where the function variables and return data can be stored are:
+The places, where the function variables and return data can be stored, are:
 
 * `memory` - the lifetime of the variable is limited to the function scope, it isn't saved anywhere;
 * `storage` - data is stored in the smart contract storage on the blockchain;
-* `calldata` - data is stored outside from where the function is being called, about this we will discuss in the future and how to use it.
+* `calldata` - data is stored outside from where the function is being called, we will discuss more details and how to use it in the future.
 
 ### Function types
 
