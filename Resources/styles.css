@@ -372,15 +372,6 @@ h3 {
   margin-block-end: 0;
 }
 
-.blog-tags li {
-  display: inline-block;
-  margin-right: 5px;
-  padding: 5px 8px;
-  border-radius: 8px;
-  margin-bottom: 7px;
-  background-color: #121212;
-}
-
 .blog-content p {
   padding-bottom: 20px;
   font-size: 18px;
@@ -564,6 +555,48 @@ audio {
 
 .footer p a {
   padding: 0 5px;
+}
+
+
+/* -- TAGS --*/
+.tags {
+  padding: 50px 0;
+}
+
+.blog-tags li {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  margin-bottom: 7px;
+  background-color: #121212;
+}
+
+.tag {
+	margin: 2px;
+	display: inline-block;
+	background-color: var(--tags-background-color);
+	color: var(--tags-text-color);
+	padding: 6px 10px;
+	border-radius: 5px;
+}
+
+.tag-title {
+  background-color: #292929;
+  border-radius: 15px;
+  padding: 6px 10px;
+  margin: 5px;
+}
+
+.browse-all-tags {
+  display: block;
+  padding: 0 0 40px 0;
+}
+
+.all-tags .tag {
+	font-size: 120%;
+	margin: 5px;
+  background-color: #292929;
 }
 
 

@@ -73,6 +73,7 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
               ),
               .div(
                 .class("blog-date"),
+                .tagList(for: item, on: context.site),
                 .text(item.date.short)
               ),
               .div(
@@ -106,12 +107,72 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
   
   func makeTagListHTML(for page: TagListPage,
                        context: PublishingContext<Site>) throws -> HTML? {
-    nil
+    HTML(
+      .lang(context.site.language),
+      .head(for: page, on: context.site),
+      .body(
+        .header(for: context, selectedSection: nil),
+        .wrapper(
+          .section(
+            .class("tags"),
+            .h1(
+              .class("page-title"),
+              .text("Browse all tags")
+            ),
+            .ul(
+              .class("all-tags"),
+              .forEach(page.tags.sorted()) { tag in
+                .li(
+                  .class("tag"),
+                  .a(
+                    .href(context.site.path(for: tag)),
+                    .text(tag.string)
+                  )
+                )
+              }
+            )
+          )
+        ),
+        .customFooter()
+      )
+    )
   }
   
   func makeTagDetailsHTML(for page: TagDetailsPage,
                           context: PublishingContext<Site>) throws -> HTML? {
-    nil
+    HTML(
+      .lang(context.site.language),
+      .head(for: page, on: context.site),
+      .body(
+        .header(for: context, selectedSection: nil),
+        .wrapper(
+          .section(
+            .class("tags"),
+            .h1(
+              .class("page-title"),
+              .text("Tagged with "),
+              .span(
+                .class("tag-title"),
+                .text(page.tag.string)
+              )
+            ),
+            .a(
+              .class("browse-all-tags"),
+              .text("Browse all tags"),
+              .href(context.site.tagListPath)
+            ),
+            .itemList(
+              for: context.items(
+                taggedWith: page.tag,
+                sortedBy: \.date,
+                order: .descending
+              ),
+              on: context.site)
+          )
+        ),
+        .customFooter()
+      )
+    )
   }
 }
 
@@ -180,14 +241,7 @@ extension Node where Context == HTML.BodyContext {
         ),
         .div(
           .class("blog-date"),
-          .ul(
-            .class("blog-tags"),
-            .forEach(item.tags) { tag in
-              .li(
-                .text(tag.string)
-              )
-            }
-          ),
+          .tagList(for: item, on: site),
           .text(item.date.short)
         ),
         .div(
