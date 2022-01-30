@@ -2,10 +2,10 @@
 date: 2022-01-29 00:00
 title: Accessibility in Solidity
 tags: solidity
-description: 
+description: Solidity language allows specifying accessibility for contract functions and state variables. That will enable us to set constraints on constructing the smart contract and whether other contracts or addresses can access the data. Contract state variables and functions have a slight difference that we're going to check out. I want to mention that accessibility and visibility are different things in blockchain development context.
 ---
 
-Solidity language allows specifying accessibility for contract functions and state variables. That will enable us to set constraints on constructing the smart contract and whether other contracts or addresses can access the data. Contract state variables and functions have a slight difference that we're going to check out. I want to mention that accessibility and visibility are different things when discussing blockchain development.
+Solidity language allows specifying accessibility for contract functions and state variables. That will enable us to set constraints on constructing the smart contract and whether other contracts or addresses can access the data. Contract state variables and functions have a slight difference that we're going to check out. I want to mention that accessibility and visibility are different things in blockchain development context.
 
 ## Function visibility
 
@@ -17,7 +17,7 @@ When a function is defined as `public` it can be called from any other contract,
 
 ```solidity
 function publicFunction() public {
-    publicInt += 1;
+  publicInt += 1;
 }
 ```
 
@@ -27,11 +27,11 @@ Keyword `external` means that a function can be called by other contracts or add
 
 ```solidity
 function externalFunction() external {
-    externalInt += 1;
+  externalInt += 1;
 }
 
 function callExternalFunction() public {
-    this.externalFunction();
+  this.externalFunction();
 }
 ```
 
@@ -41,7 +41,7 @@ Internal functions can be called from the same smart contract or any other inher
 
 ```solidity
 function internalFunction() internal {
-    internalInt += 1;
+  internalInt += 1;
 }
 ```
 
@@ -51,7 +51,7 @@ Private functions aren't visible and can't be accessed from other smart contract
 
 ```solidity
 function internalFunction() internal {
-    internalInt += 1;
+  internalInt += 1;
 }
 ```
 
@@ -65,24 +65,24 @@ Public state variables can be accessed from any smart contract, including those 
 
 ```solidity
 contract Accessibility {
-    uint public publicInt;
+  uint public publicInt;
 }
 
 // can get and set from other smart contracts
 contract AccessPublic {
-    Accessibility accessibility = new Accessibility();
+  Accessibility accessibility = new Accessibility();
 
-    function accessPublicInt() public view returns(uint) {
-        uint publicInt = accessibility.publicInt();
-        return publicInt;
-    }
+  function accessPublicInt() public view returns(uint) {
+    uint publicInt = accessibility.publicInt();
+    return publicInt;
+  }
 }
 
 ```
 
 ### Internal
 
-Similar to functions, `internal` state variables can be accessed from the contract that defined them or any other that inherits from the smart contract. Important to note that smart contract state variables are `internal` by default.
+Similar to functions, `internal` state variables can be accessed from a contract that defined them or any other that inherits from a smart contract. Important to note that smart contract state variables are `internal` by default.
 
 ```solidity
 uint internal internalInt;
@@ -102,7 +102,7 @@ In blockchain development, visibility and accessibility have a different meaning
 
 ## TL;DR
 
-Solidity programming language has multiple options to define access levels for smart contract functions and state variables. In blockchain development, visibility and accessibility aren't the same. We can restrict access to the functions or state variables, but it can be viewed from outside.
+Solidity programming language has multiple options to define access levels for smart contract functions and state variables. In blockchain development, visibility and accessibility aren't the same. We can restrict access to the functions or state variables, but it can be viewed from the outside.
 
 ## Links
 
