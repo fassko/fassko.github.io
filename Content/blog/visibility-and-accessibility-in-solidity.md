@@ -1,6 +1,6 @@
 ---
 date: 2022-01-29 00:00
-title: Accessibility in Solidity
+title: Accessibility and visibility in Solidity
 tags: solidity
 description: Solidity language allows specifying accessibility for contract functions and state variables. That will enable us to set constraints on constructing the smart contract and whether other contracts or addresses can access the data. Contract state variables and functions have a slight difference that we're going to check out. I want to mention that accessibility and visibility are different things in blockchain development context.
 ---
