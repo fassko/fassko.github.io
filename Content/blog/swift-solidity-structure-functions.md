@@ -1,7 +1,7 @@
 ---
 date: 2021-12-16 00:00
 title: Solidity for Swift developers: File Structure and Functions
-tags: swift, solidity
+tags: swift, solidity, web3
 description: Solidity is an object-oriented language to write smart contracts that can be deployed on the blockchain, for instance, Ethereum. The syntax is similar to Javascript, but on the other hand, semantics is closer to C++. We will dig into Solidity language structure and functions from a Swift developer's perspective.
 ---
 
