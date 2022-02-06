@@ -58,6 +58,7 @@ With dynamic text, we should use the string interpolation and format it accordin
 ## Links
 
 * [Sample code](https://github.com/fassko/SwiftUILocalization)
+* [Spanish version](https://www.ibidemgroup.com/edu/traducir-aplicaciones-swiftui/)
 
 * [Localization guide by Apple](https://developer.apple.com/documentation/xcode/localization)
 * [Localization in SwiftUI](https://swiftwithmajid.com/2019/10/16/localization-in-swiftui/)
