@@ -1,5 +1,5 @@
 ---
-date: 2021-03-01 00:00
+date: 2022-03-01 00:00
 title: Mastering Arrays in Solidity
 tags: swift, solidity, web3, array
 description: Arrays in Solidity programming language can hold primitive data types like integers, boolean, and string. An array can be initialized with a fixed or dynamic size. If we compare them to other more advanced programming languages, there are pretty limited functions available to work with arrays. Despite that, we can add, remove, get the size of the array, and more.
