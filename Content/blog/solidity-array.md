@@ -1,8 +1,8 @@
 ---
 date: 2021-03-01 00:00
-title: 
+title: Mastering Arrays in Solidity
 tags: swift, solidity, web3, array
-description: 
+description: Arrays in Solidity programming language can hold primitive data types like integers, boolean, and string. An array can be initialized with a fixed or dynamic size. If we compare them to other more advanced programming languages, there are pretty limited functions available to work with arrays. Despite that, we can add, remove, get the size of the array, and more.
 ---
 
 Arrays in Solidity programming language can hold primitive data types like integers, boolean, and string. An array can be initialized with a fixed or dynamic size. If we compare them to other more advanced programming languages, there are pretty limited functions available to work with arrays. Despite that, we can add, remove, get the size of the array, and more.
@@ -31,7 +31,7 @@ uint256[10] array;
 
 Behind the scenes, Solidity fills the array with default values, which for the `uint256` is 0 (zero).
 
-We can also provide the values when initializing the array.
+We can also provide the values when initializing an array.
 
 ```
 uint256[] array = [1,2,3];
@@ -39,7 +39,7 @@ uint256[] array = [1,2,3];
 
 ## Add an element
 
-For the dynamic type of arrays, we can add a new element to it. To do that, we need to use the `push` method. It adds the element to the end of the array.
+We can add a new element for the dynamic type of arrays. To do that, we need to use the `push` method. It adds an element to the end of an array.
 
 Here is an example of adding 100 to the array that holds `uint256` values.
 
@@ -67,7 +67,7 @@ uint256 size = array.length;
 
 ## Remove
 
-We can remove the element from the array by using the `delete` function. The catch here is that it doesn't change the size of the array. It resets to the default value, which for instance, in the `uint256` case is 0 (zero).
+We can remove an element from array by using the `delete` function. The catch here is that it doesn't change the size of the array. It resets to the default value, which for instance, in the `uint256` case is 0 (zero).
 
 This example resets the first element in the array to 0 (zero).
 
@@ -75,7 +75,7 @@ This example resets the first element in the array to 0 (zero).
 delete array[0];
 ```
 
-If we want to remove the element and change the array's length, we can move all elements up from the element we want to delete. Then pop the last element because it isn't needed anymore.
+If we want to remove an element and change the array's length, we can move all elements up from the element we want to delete. Then pop the last element because it isn't needed anymore.
 
 ```
 for (uint256 i = _index; i < _array.length - 1; i++) {
