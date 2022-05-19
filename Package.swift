@@ -1,9 +1,10 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.5
 
 import PackageDescription
 
 let package = Package(
   name: "WebSite",
+  platforms: [.macOS(.v12)],
   products: [
     .executable(
       name: "WebSite",
@@ -11,16 +12,15 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.8.0"),
-    .package(name: "Yams", url: "https://github.com/jpsim/Yams.git", from: "4.0.6"),
-    .package(name: "SplashPublishPlugin", url: "https://github.com/johnsundell/splashpublishplugin.git", from: "0.1.0")
+    .package(name: "Publish", url: "https://github.com/johnsundell/publish.git", from: "0.9.0"),
+    .package(name: "Yams", url: "https://github.com/jpsim/Yams.git", from: "5.0.1"),
+    .package(name: "SplashPublishPlugin", url: "https://github.com/johnsundell/splashpublishplugin.git", from: "0.2.0")
   ],
   targets: [
-    .target(
-      name: "WebSite",
-      dependencies: ["Publish",
+    . executableTarget(name: "WebSite", dependencies: [
+      "Publish",
                      "Yams",
-                     "SplashPublishPlugin"]
-    )
+                     "SplashPublishPlugin"
+    ])
   ]
 )
