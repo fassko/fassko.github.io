@@ -2,7 +2,7 @@
 date: 2022-06-20 00:00
 title: Storage and memory secrets in Solidity 
 tags: Solidity, web3, memory, storage
-description: 
+description: This time, we will talk about storage locations in Solidity programming language, specifically about the `storage` and `memory` locations. Not knowing what they represent and how they work can cause issues in our smart contracts.
 ---
 
 This time, we will talk about storage locations in Solidity programming language, specifically about the `storage` and `memory` locations. Not knowing what they represent and how they work can cause issues in our smart contracts.
