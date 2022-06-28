@@ -5,17 +5,17 @@ tags: Solidity, web3, memory, storage
 description: 
 ---
 
-This time we will talk about storage locations in Solidity programming language, specifically about the `storage` and `memory` locations. Not knowing what they represent and how they work can cause issues in our smart contracts.
+This time, we will talk about storage locations in Solidity programming language, specifically about the `storage` and `memory` locations. Not knowing what they represent and how they work can cause issues in our smart contracts.
 
 ## Storage
 
-Storage in smart contracts holds data between function calls. We can imagine that would be a hard drive in the computer. Even if we turn it off, the data stays and isn't erased. In the blockchain, what we write in storage is stored.
+Storage in smart contracts holds data between function calls. We can imagine that `storage` would be as a hard drive in the computer. Even if we turn it off, the data stays and isn't erased. On the blockchain, what we write in storage is stored.
 
 ### Storage by default
 
 #### State variables
 
-By default, Solidity will keep in storage smart contract state variables.
+By default, Solidity will keep in storage smart contract's state variables.
 
 ```solidity
 contract StorageContract {
@@ -28,7 +28,7 @@ contract StorageContract {
 }
 ```
 
-In this example smart contract state variable `luckyNumbers` are kept in storage, and data will persist between function calls.
+In this example smart contract's state variables `luckyNumbers` are kept in storage, and data will persist between function calls.
 
 When we add and get the lucky number, we have a predictable outcome.
 
@@ -65,9 +65,9 @@ function editLuckyNumber(uint256 luckyNumber) external {
 }
 ```
 
-## Memory 
+## Memory
 
-In memory, Solidity keeps all locally defined value types, which can be uint, string, etc., but not array, struct, or mapping. As well, function arguments are kept in memory. Remember that `memory` can't be used at the smart contract level, only locally in functions.
+In memory, Solidity keeps all locally defined value types, which can be uint, string, etc., but not an array, a struct, or a mapping. Function arguments are kept in memory as well. Remember that `memory` can't be used at the smart contract level, only locally in functions.
 
 ```solidity
 function multiplyByItself(uint256 number) external pure returns(uint256) {
@@ -77,13 +77,13 @@ function multiplyByItself(uint256 number) external pure returns(uint256) {
 }
 ```
 
-In this example, the function argument `number` that we pass in our function is stored in memory. Also, the `result` locally defined variable is in memory and will be released as soon as the function's execution ends.
+In this example, the function argument `number` that we pass in our function is stored in memory. Also, locally defined variable of the `result` is stored in memory and will be released as soon as the function's execution ends.
 
 ## Pitfall using memory and storage
 
-One of the major pitfalls of wrongly using the `storage` and `memory` keywords in the Solidity programming language is that we declare a variable either `storage` or `memory` not thinking multiple times. First, keeping in `storage` will consume more gas because we need to pay for the block space. Secondly, we should ask ourselves whether we need to access data that we need to keep between the function calls. By function calls, it can be even two different functions.
+One of the major pitfalls of wrong usage of the `storage` and `memory` keywords in the Solidity programming language is that we declare a variable either `storage` or `memory` without thinking it through. First, keeping data in `storage` will consume more gas because we need to pay for the block space. Second, we should ask ourselves whether we need to access data that we keep between the function calls. By function calls, there can be even two different functions.
 
-If we define in function `editLuckyNumber` the `_luckyNumber` using the `memory` keyword, it will edit only locally, and changes won't be written to the blockchain.
+If we define the `_luckyNumber` in function `editLuckyNumber` using the `memory` keyword, it will edit this function locally only, and changes won't be written to the blockchain.
 
 ```solidity
 function editLuckyNumber(uint256 luckyNumber) external {
@@ -95,15 +95,15 @@ function editLuckyNumber(uint256 luckyNumber) external {
 }
 ```
 
-This function's outcome will result in editing the lucky number not working when we get the updated lucky number.
+This function's outcome will result in editing the lucky number not working because we update it only locally.
 
 ## TL;DR
 
-Storing data using Solidity language in our smart contracts is a crucial thing. With value types, life is easier, but with arrays, structs, and mappings, it is more tricky. That's why it is essential to ask whenever we want to save these variables. Do we want that data to persist between calling the smart contract or being saved locally while executing the function?
+Storing data using Solidity language in our smart contracts is a crucial thing. Life is easier with value types, but with arrays, structs, and mappings, it is more tricky. That's why it is essential to ask whenever we want to save these variables. Do we want data to persist between calling the smart contract or being saved locally while executing the function?
 
 ## Links
 
-* [Sample code](https://gist.github.com/fassko/)
+* [Sample code](https://gist.github.com/fassko/5b19bee0c78e3e41aa5d52573b2e696e)
 
 * [What is the memory keyword? What does it do?](https://docs.soliditylang.org/en/v0.3.3/frequently-asked-questions.html#what-is-the-memory-keyword-what-does-it-do)
 * [Storage vs Memory in Solidity](https://www.geeksforgeeks.org/storage-vs-memory-in-solidity/)
