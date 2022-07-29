@@ -1,11 +1,11 @@
 ---
-date: 2022-07-22 00:00
+date: 2022-07-29 00:00
 title: Mistery revealed about delegatecall in Solidity
 tags: Solidity, web3, proxy, delegatecall
-description: 
+description: This time we will talk about the critical lower-level function `delegatecall`. It is widely used in a proxy pattern, for instance, when using [OpenZepplin upgrades pattern](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies). Essentially this function executes code in another contract but uses data from the caller concept. Let's dig deeper and explore more.
 ---
 
-This time we will talk about a critical lower-level function `delegatecall`. It is widely used in a proxy pattern, for instance, when using [OpenZepplin upgrades pattern](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies). Essentially this function executes code in another contract but uses data from the caller concept. Let's dig deeper and explore more.
+This time we will talk about the critical lower-level function `delegatecall`. It is widely used in a proxy pattern, for instance, when using [OpenZepplin upgrades pattern](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies). Essentially this function executes code in another contract but uses data from the caller concept. Let's dig deeper and explore more.
 
 ## Storage clash
 
@@ -57,7 +57,7 @@ contract Caller {
 }
 ```
 
-Now when we interact with the `Caller` contract and set the lucky number, we can see that data has been changed only in this contract, not in the `Executor` contract. To verify that we can get the lucky number from both contracts.
+Now when we interact with the `Caller` contract and set the lucky number, we can see that data has been changed only in this contract, not in the `Executor` contract. To verify that, we can get the lucky number from both contracts.
 
 ![Interaction with the `Caller` and `Executor` smart contracts](/assets/solidity-delegatecall/deploy-caller-contract.png)
 
@@ -65,7 +65,7 @@ Now when we interact with the `Caller` contract and set the lucky number, we can
 
 Using the `delegatecall` function is a compelling feature in Solidity programming language. With great power comes great responsibility. It can be perilous when misused.
 
-Two major vulnerability attacks are mistakes preserving caller context and storage layout mismatch. We won't go into details this time but will follow up about that in future posts.
+Two major vulnerability attacks are mistakes preserving caller context and storage layout mismatch. We won't go into details this time but will follow up on that in future posts.
 
 ## TL;DR
 
@@ -75,8 +75,8 @@ The `delegatecall` is a lower-level function in Solidity programming language. I
 
 * [Sample code](https://gist.github.com/fassko/8af2cca1a71895a03cb28198fe57315f)
 
-* [https://docs.soliditylang.org/en/v0.8.15/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries](Official documentation)
-* [https://solidity-by-example.org/delegatecall/](Delegatecall - Solidity by Example)
-* [https://eips.ethereum.org/EIPS/eip-1967](EIP-1967: Standard Proxy Storage Slots)
-* [https://docs.openzeppelin.com/contracts/4.x/upgradeable](OpenZepplin upgrades)
-* [https://solidity-by-example.org/hacks/delegatecall/](Delegatecall Vulnerabilities)
+* [Official documentation](https://docs.soliditylang.org/en/v0.8.15/introduction-to-smart-contracts.html#delegatecall-callcode-and-libraries)
+* [Delegatecall - Solidity by Example](https://solidity-by-example.org/delegatecall/)
+* [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967)
+* [OpenZepplin upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
+* [Delegatecall Vulnerabilities](https://solidity-by-example.org/hacks/delegatecall/)
