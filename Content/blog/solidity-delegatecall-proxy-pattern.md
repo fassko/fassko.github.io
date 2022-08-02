@@ -81,3 +81,4 @@ The `delegatecall` is a lower-level function in Solidity programming language. I
 * [OpenZepplin upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
 * [Delegatecall Vulnerabilities](https://solidity-by-example.org/hacks/delegatecall/)
 * [https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-5-calling-other-contracts-visibility-state-access/topic/delegatecall/](https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-5-calling-other-contracts-visibility-state-access/topic/delegatecall/)
+* [Understanding delegatecall And How to Use It Safely](https://eip2535diamonds.substack.com/p/understanding-delegatecall-and-how)
