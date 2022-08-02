@@ -80,3 +80,4 @@ The `delegatecall` is a lower-level function in Solidity programming language. I
 * [EIP-1967: Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967)
 * [OpenZepplin upgrades](https://docs.openzeppelin.com/contracts/4.x/upgradeable)
 * [Delegatecall Vulnerabilities](https://solidity-by-example.org/hacks/delegatecall/)
+* [https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-5-calling-other-contracts-visibility-state-access/topic/delegatecall/](https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-5-calling-other-contracts-visibility-state-access/topic/delegatecall/)
