@@ -1,5 +1,5 @@
 ---
-date: 2022-07-29 00:00
+date: 2022-08-31 00:00
 title: Absence of null in Solidity
 tags: Solidity, web3, null
 description: One of the weirdest Solidity programming language's quirks is the absence of null. Coming from Swift, where nullability is one of the core building blocks, it felt foreign. At first, I didn't understand how to code without such a useful feature. This post elaborates on how to find a way around that in Solidity when building smart contracts.
