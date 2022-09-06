@@ -16,7 +16,7 @@ internal extension Node where Context == HTML.BodyContext {
           ),
           .h2(
             .class("tagline"),
-            .text("Mobile and fullstack developer.")
+            .text("Blockchain, mobile and fullstack developer.")
           ),
           .h2(
             .class("tagline"),
