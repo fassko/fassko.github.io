@@ -21,7 +21,7 @@ enum SocialItems: String, CaseIterable {
     case .github:
       return "https://github.com/fassko"
     case .instagram:
-      return "https://www.instagram.com/ios_nomad/"
+      return "https://www.instagram.com/fassko/"
     }
   }
   
@@ -38,7 +38,7 @@ enum SocialItems: String, CaseIterable {
     case .github:
       return "fassko"
     case .instagram:
-      return "ios_nomad"
+      return "fassko"
     }
   }
 }
