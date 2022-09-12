@@ -22,17 +22,8 @@ internal extension Node where Context == HTML.BodyContext {
         .class("page-title"),
         .text("About")
       ),
-      .p("Kristaps has extensive knowledge of all Apple platforms - iOS, iPadOS, watchOS, tvOS, and macOS. He is an active iOS community member."),
-      .p("He knows various web frontend technologies like ReactJS and others."),
-      .p(
-        .text("He is the project leader of one of the most popular Swift programming language newsletters "),
-        .a(
-          .href("https://swiftweekly.github.io"),
-          .target(.blank),
-          .text("Swift Weekly Brief")
-        ),
-        .text(", read by thousands of developers.")
-      ),
+      .p("Kristaps has extensive knowledge in Web3, iOS, and other Apple technologies, frontend, and databases."),
+      .p("He is an active Web3 and iOS community member. He writes blog posts about Web3 and mobile development and regularly speaks at conferences and meetups. In addition, he teaches and mentors."),
       .p("He writes a mobile development blog, regularly speaks at conferences, teaches, and mentors."),
       .p("His interests are in Web 3.0, sustainability, and automating old and clunky processes."),
       .p(
