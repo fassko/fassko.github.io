@@ -1,11 +1,11 @@
 ---
 date: 2022-09-05 00:00
-title: 
+title: Exploring ERC20 fungible token standard in Solidity
 tags: Solidity, web3, ERC20
-description: 
+description: This time let's talk about fungible tokens, one of the main building blocks in DeFi. These tokens can represent coins, gold, grain, and other assets that can be exchanged for them. We will look into one of the first Ethereum Improvement Proposal with number 20. This token standard is widely known as ERC20 and describes an interface for tokens within smart contracts. Functions like token transferring, approving spending, creating, and others are defined by this ERC20 standard.
 ---
 
-This time let's talk about fungible tokens, one of the main building blocks in DeFi. These tokens can represent coins, gold, grain, and other assets that can be exchanged between them. We will look into one of the first Ethereum Improvement Proposal with number 20. This token standard is widely known as ERC20 and describes an interface for tokens within smart contracts. Functions like token transferring, approving spending, creating, and others are defined by this ERC20 standard.
+This time let's talk about fungible tokens, one of the main building blocks in DeFi. These tokens can represent coins, gold, grain, and other assets that can be exchanged for them. We will look into one of the first Ethereum Improvement Proposal with number 20. This token standard is widely known as ERC20 and describes an interface for tokens within smart contracts. Functions like token transferring, approving spending, creating, and others are defined by this ERC20 standard.
 
 To illustrate the ERC20 standard in code, we will use [OpenZepplin ERC20](https://docs.openzeppelin.com/contracts/4.x/erc20) implementation.
 
@@ -30,11 +30,11 @@ When we want to deploy this contract, we should provide the `totalSupply`. I wan
 
 ![Deploy and mint tokens](/assets/solidity-erc20/deploy-mint-tokens.png)
 
-We can issue more tokens if needed by minting more.
+We can issue more tokens if that is needed by minting more.
 
 ### Burning
 
-When we need to decrease the value of total tokens available in circulation, we can burn them. Token burning means that we send a  specific number of tokens to zero address `0x0000000000000000000000000000000000000000`, and it is locked forever because nobody has access to this address.
+When we need to decrease the value of total tokens available in circulation, we can burn them. Token burning means that we send a specific number of tokens to zero address `0x0000000000000000000000000000000000000000`, and it is locked forever because nobody has an access to this address.
 
 ```solidity
 function burn(uint256 burnAmount) external {
@@ -42,11 +42,11 @@ function burn(uint256 burnAmount) external {
   }
 ```
 
-To burn tokens, we need to pass an address that is the same that minted the tokens and the amount we want to burn.
+To burn tokens, we need to pass the address that is the same that minted the tokens and the amount we want to burn.
 
 ## Utility functions
 
-A couple of utility functions from the ERC20 standard help us to find token information and balances.
+A couple of utility functions from the ERC20 standard helps us to find token information and balances.
 
 ### Token information
 
@@ -56,7 +56,7 @@ Once the smart contract is deployed on the chain, anyone can see the name, symbo
 
 ### Balances
 
-ERC20 standard, in essence,  holds the mapping of addresses and the amount that it has. It means that at any given time, we can ask balance of the specific address. It is publicly visible and accessible. Of course, we don't know who is behind this address, nor can we change the amount.
+ERC20 standard, in essence, holds the mapping of addresses and the amount it has. It means that at any given time, we can ask balance of the specific address. It is publicly visible and accessible. Of course, we don't know who is behind this address, nor can we change the amount.
 
 ![Token balance](/assets/solidity-erc20/erc20-balance.png)
 
@@ -76,7 +76,7 @@ Once we hold an amount of ERC20 tokens, we can send it not exceeding the total a
 
 ![ERC20 transfer](/assets/solidity-erc20/erc20-transfer.png)
 
-In the ERC20 implementation, it is described that once we transfer tokens amount we send is deducted from our balance and increased for the address we send to. It checks if we have enough tokens to transfer and if we're not exceeding our balance. Remember, we are constantly working with the token amount balance sheet.
+In the ERC20 implementation, it is described that once we transfer tokens, amount we send is deducted from our balance and increased for the address we send it to. It checks if we have enough tokens to transfer and if we're not exceeding our balance. Remember, we are constantly working with the token amount balance sheet.
 
 ### Transfer tokens on behalf
 
@@ -103,6 +103,7 @@ In the ERC20 standard implementation, allowances and balances are being changed 
 ## TL;DR
 
 ERC20 is one of the first standards within Ethereum Improvement proposals. It describes a smart contract that holds fungible token balances and transfers between addresses. It also talks about additional features like allowing to spend on behalf of the token holder. It is the gold standard for tokens on EVM chains.
+
 ## Links
 
 * [Sample code](https://gist.github.com/fassko/9a25b7249394cf20625d705364ff469b)
