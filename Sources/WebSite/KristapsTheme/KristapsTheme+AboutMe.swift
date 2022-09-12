@@ -23,6 +23,15 @@ internal extension Node where Context == HTML.BodyContext {
         .text("About")
       ),
       .p("Kristaps has extensive knowledge in Web3, iOS, and other Apple technologies, frontend, and databases."),
+      .textParagraph(
+          .text("Executed as technical co-founder at global scale company "),
+          .a(
+            .href("https://www.qminder.com"),
+            .target(.blank),
+            .text("Qminder")
+          ),
+          .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games.")
+      ),
       .p("He is an active Web3 and iOS community member. He writes blog posts about Web3 and mobile development and regularly speaks at conferences and meetups. In addition, he teaches and mentors."),
       .p("He writes a mobile development blog, regularly speaks at conferences, teaches, and mentors."),
       .p("His interests are in Web 3.0, sustainability, and automating old and clunky processes."),
@@ -69,6 +78,12 @@ internal extension Node where Context == HTML.BodyContext {
       .class("about-me-images"),
       .img(
         .src("/assets/speaking/kristaps-grinbergs-appbuilders.jpeg")
+      ),
+      .img(
+        .src("/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg")
+      ),
+      .img(
+        .src("/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg")
       ),
       .img(
         .src("/assets/speaking/kristaps-grinbergs-mobile-era.jpg")

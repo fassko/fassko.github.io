@@ -17,18 +17,9 @@ internal extension Node where Context == HTML.BodyContext {
               .target(.blank),
               .text("Qminder")
             ),
-            .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games, and more. Led Apple technology efforts and worked on technical sales, integrations, and AppStore marketing.")
+            .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games")
           ),
-          .textParagraph("Extensive knowledge of how and what to build on all Apple platforms - iOS, iPadOS, watchOS, tvOS, and MacOS. Knows web frontend technologies like ReactJS."),
-          .textParagraph(
-            .text("Active iOS community member. Running well-known newsletter "),
-            .a(
-              .href("https://swiftweekly.github.io/"),
-              .target(.blank),
-              .text("Swift Weekly Brief")
-            ),
-            .text(" that is read by thousands of developers globally. He writes a blog, speaks at conferences, teaches, and mentors.")
-          ),
+          .textParagraph("Extensive knowledge in Web3, iOS, and other Apple technologies, frontend, and databases."),
           .textParagraph(
             .text("His interests are in Web 3.0, sustainability, and automating old and clunky processes.")
           )
