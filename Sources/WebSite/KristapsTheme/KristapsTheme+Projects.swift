@@ -18,6 +18,11 @@ struct Project {
 }
 
 fileprivate var projects = [
+  Project(
+    title: "Salto X",
+    description: "Token Incentive Plans for Remote Companies: mint your company token, distribute and manage on Salto X.",
+    image: "salto-x-dashboard-nft.png"
+  ), 
   Project(title: "Sharentic iOS app",
           description: "Sharentic helps you to live lightly, without compromise. The app was built entirely with SwiftUI, and for backend was used Firebase. For payments - Stripe. Additionally, all the stock and orders were managed using an internal dashboard.",
           image: "sharentic.png"),
