@@ -7,6 +7,7 @@ enum SocialItems: String, CaseIterable {
   case twitter
   case github
   case instagram
+  case telegram
   
   var link: String {
     switch self {
@@ -22,6 +23,8 @@ enum SocialItems: String, CaseIterable {
       return "https://github.com/fassko"
     case .instagram:
       return "https://www.instagram.com/fassko/"
+    case .telegram:
+      return "https://t.me/kristapsgrinbergs"
     }
   }
   
@@ -39,6 +42,8 @@ enum SocialItems: String, CaseIterable {
       return "fassko"
     case .instagram:
       return "fassko"
+    case .telegram:
+      return "kristapsgrinbergs"
     }
   }
 }
