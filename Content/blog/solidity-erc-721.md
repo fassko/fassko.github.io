@@ -1,8 +1,8 @@
 ---
-date: 2022-12-06 00:00
+date: 2022-12-30 00:00
 title: 
 tags: Solidity, web3, ERC721
-description: 
+description: The non-fungible tokens, or in short NFTs, have one the most influential roles in the crypto and Web3 scene. These are digital assets that can represent digital art, virtual collectibles, assets in games, and more. Ethereum Foundation introduced the ERC-721 standard in 2017, which helped all the crypto wallets, brokers, and protocols to use this feature in a translatable way between any crypto solution. In this post, we will look more deeply into the ERC-721 standard and explore how it is used in the Solidity programming language for the Ethereum blockchain.
 ---
 
 The non-fungible tokens, or in short NFTs, have one the most influential roles in the crypto and Web3 scene. These are digital assets that can represent digital art, virtual collectibles, assets in games, and more. Ethereum Foundation introduced the ERC-721 standard in 2017, which helped all the crypto wallets, brokers, and protocols to use this feature in a translatable way between any crypto solution. In this post, we will look more deeply into the ERC-721 standard and explore how it is used in the Solidity programming language for the Ethereum blockchain.
@@ -17,14 +17,14 @@ An NFT can represent but is not limited to:
 * virtual collectibles;
 * digital assets in games;
 * ownership rights, for instance, to a real estate;
-* tickets that have a unique data like seating place;
+* tickets that have unique data like seating place;
 * negative loan like a mortgage.
 
 NFTs are like humans - there are no two people the same.
 
 ## The ERC-721?
 
-To represent an NFT Ethereum foundation has standardized it with an ERC-721 token standard. This standard describes a table of who owns what. A standardized approach helps crypto wallets, brokers, and auctions to work with NFTs on Ethereum and other EVM  blockchains. The ERC-721 standard was launched in 2017 and authored by William Entriken, Dieter Shirley, Jacob Evans, and Nastassia Sachs. I met William Entriken at one of the NFT conferences.
+To represent an NFT, the Ethereum foundation has implemented it with an ERC-721 token standard. This standard describes a table of who owns what. The standardized approach helps crypto wallets, brokers, and auctions to work with NFTs on Ethereum and other EVM  blockchains. The ERC-721 standard was launched in 2017 and authored by William Entriken, Dieter Shirley, Jacob Evans, and Nastassia Sachs. I met William Entriken at one of the NFT conferences.
 
 ### Functions
 
@@ -35,7 +35,7 @@ There are several functions defined in the ERC-721 standard. Let's look at the m
 These functions describe ownership rights.
 
 * `balanceOf(address _owner)` returns a number of NFTS owned by `_owner` address;
-* `ownerOf(uint256 _tokenId)` returns owner who owns token with the `_tokenId` identifier;
+* `ownerOf(uint256 _tokenId)` returns an owner who owns token with the `_tokenId` identifier;
 
 #### Transfer functions
 
@@ -46,11 +46,11 @@ These functions help to transfer a token.
 * `approve(address _approved, uint256 _tokenId)` gives rights to the `_approved` to transfer the token with the `_tokenId` identifier;
 * `getApproved(uint256 _tokenId)` returns the wallet address approved to transfer the token with `_tokenId` identifier;
 * `setApprovalForAll(address _operator, bool _approved)` approve or remove approval for all the `msg.sender` assets to `_operator`;
-* `isApprovedForAll(address _owner, address _operator)` cheks if   the `_operator` address has rights for the `_owner` assets.
+* `isApprovedForAll(address _owner, address _operator)` cheks if the `_operator` address has rights for the `_owner` assets.
 
 ### Events
 
-Events help to notify about changes with the NFT. For instance, the web frontend can be updated.
+Events help to notify about changes with an NFT. For instance, the web frontend can be updated.
 
 `Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId)` emits when the token with the `_tokenId` identifier is transfered from the `_from` to the `_to`.
 
@@ -60,7 +60,7 @@ Events help to notify about changes with the NFT. For instance, the web frontend
 
 ## Metadata extension
 
-A commonly used ERC-721 extension is to describe metadata in a JSON format. It represents information about the token, like name, symbol, and token URI. Using this extension crypto wallets can ask for this information using three functions:
+A commonly used ERC-721 extension describes metadata in a JSON format. It represents information about a token, like a name, symbol, and token URI. Using this extension, crypto wallets can ask for the information using three functions:
 
 * `function name() external view returns (string _name)` returns a descriptive name;
 * `function symbol() external view returns (string _symbol)` returns token symbol;
@@ -83,7 +83,7 @@ The token URI points to a JSON file that conforms to the ERC721 Metadata JSON Sc
     },
     "image": {
       "type": "string",
-      "description": "A URI pointing to a resource with mime type image representing the asset to which this NFT represents. Consider making any images at a width between 320 and 1080 pixels and aspect ratio between 1.91:1 and 4:5 inclusive."
+      "description": "A URI pointing to a resource with mime type image representing the asset to which this NFT represents. "
     }
   }
 }
@@ -97,7 +97,7 @@ The most straightforward way to implement NFTs is to use the OpenZepplin contrac
 
 Let's build an NFT ticketing smart contract.
 
-First, we need to import OpenZepplin ERC-721 contract implementations and conform our smart contract to it.
+First, we must import OpenZepplin ERC-721 contract implementations and conform our smart contract to it.
 
 ```solidity
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -108,7 +108,7 @@ contract Ticket is ERC721URIStorage {
 }
 ```
 
-At first, we need to define the NFT name and symbol. To do that, we will pass the event name and description to smart contract the constructor.
+At first, we need to define the NFT name and symbol. To do that, we pass the event name and description to smart contract the constructor.
 
 ```solidity
 constructor(
@@ -119,7 +119,7 @@ constructor(
 }
 ```
 
-Right now we can start minting NFTs because the OpenZepplin hides away all the nitty gritty implementation details.
+We can now start minting NFTs because the OpenZepplin hides away all the nitty gritty implementation details.
 
 ```solidity
 function createTicket(address visitor, string memory tokenURI) external {
@@ -141,7 +141,7 @@ All the ERC-721 functions discussed above come *for free* with the OpenZepplin c
 
 ## TL;DR
 
-The non-fungible tokens, or NFTs, differ much from regular ERC-20 tokens. It describes uniqueness. NFTs are like kitties - there are no two kitties alike. The most commonly used standard that defines NFTs is ERC-721, with metadata extension. It helps to attach metadata to the token, like images which is the most used feature in the crypto world.
+The non-fungible tokens, or NFTs, differ much from regular ERC-20 tokens. They describe uniqueness. Remember what we discussed at the beginning of this post - NFTs are like humans. Or let me call it differently this time - NFTs are like kitties - there are no two kitties alike. The most commonly used standard that defines NFTs is ERC-721, with metadata extension. It helps to attach metadata to the token, like images which is the most used feature in the crypto world.
 
 ## Links
 
