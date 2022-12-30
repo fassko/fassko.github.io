@@ -1,6 +1,6 @@
 ---
 date: 2022-12-30 00:00
-title: 
+title: What are an NFT and the ERC-721 standard?
 tags: Solidity, web3, ERC721
 description: The non-fungible tokens, or in short NFTs, have one the most influential roles in the crypto and Web3 scene. These are digital assets that can represent digital art, virtual collectibles, assets in games, and more. Ethereum Foundation introduced the ERC-721 standard in 2017, which helped all the crypto wallets, brokers, and protocols to use this feature in a translatable way between any crypto solution. In this post, we will look more deeply into the ERC-721 standard and explore how it is used in the Solidity programming language for the Ethereum blockchain.
 ---
