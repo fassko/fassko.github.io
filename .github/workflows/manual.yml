@@ -5,9 +5,12 @@ on:
     inputs:
       environment:
         description: 'Define environment'
-        default: 'staging'
         required: true
-        type: string
+        type: choice
+        options:
+        - staging
+        - demo
+        - production 
         
 jobs:
   printInputs:
