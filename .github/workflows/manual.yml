@@ -13,5 +13,5 @@ jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-      echo "Input: ${{ inputs.environment }}"
+      - name: Send greeting
+        run: echo "${{ inputs.environment }}"
