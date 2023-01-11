@@ -13,4 +13,5 @@ jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "Env: ${{ github.event.inputs.environment }}"
+    - run: |
+      echo "Input: ${{ github.event.inputs.environment }}"
