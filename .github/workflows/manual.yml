@@ -7,11 +7,11 @@ on:
         description: 'Define environment'
         default: 'staging'
         required: true
-        type: environment
+        type: string
         
 jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-      echo "Input: ${{ github.event.inputs.environment }}"
+      echo "Input: ${{ inputs.environment }}"
