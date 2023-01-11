@@ -12,6 +12,7 @@ on:
 jobs:
   printInputs:
     runs-on: ubuntu-latest
+    if: inputs.environment == 'staging'
     steps:
       - name: Send greeting
         run: echo "${{ inputs.environment }}"
