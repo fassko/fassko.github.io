@@ -1,0 +1,16 @@
+name: Test inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Define environment'
+        default: 'staging'
+        required: true
+        type: environment
+        
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Env: ${{ github.event.inputs.environment }}"
