@@ -188,3 +188,4 @@ The EIP-712 standard opens doors to sign a transaction and allows someone else t
 * [EIP-712: Typed structured data hashing and signing](https://eips.ethereum.org/EIPS/eip-712)
 * [Signing Data with Metamask](https://docs.metamask.io/guide/signing-data.html#signtypeddata-v4)
 * [EIP712 is here: What to expect and how to use it](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26)
+* [Meta-Transactions](https://blog.smlxl.io/meta-transactions-28047138ef6d)
