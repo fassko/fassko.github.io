@@ -5,11 +5,11 @@ tags: Solidity, web3, Metamask
 description: 
 ---
 
-Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. A gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign the transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask.
+Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask.
 
 ## What is EIP-712 standard?
 
-EIP-712 standard describes how data is structured, hashed, and signed. Signing a transaction has been around in crypto wallets like Metamask, but this approach aims to display that in a much more human readable way that users can understand and review before signing.
+EIP-712 standard describes how data is structured, hashed, and signed. Signing a transaction has been around in crypto wallets like Metamask, but this approach aims to display that in a much more human-readable way that users can understand and review before signing.
 
 ### Structure a typed data
 
@@ -85,13 +85,13 @@ message: {
 }
 ```
 
-We put all these parts together to construct the JSON data in a typed structured data object.
+We combined all these parts to construct the JSON data in a typed structured data object.
 
 ## How to sign a message with Metamask?
 
-Now that we have compiled the JSON data object, we want to sign in with Metamask. We won't go into details about how to use JavaScript libraries like [Ethers.js](https://docs.ethers.org/v5/) or [web3.js](https://web3js.readthedocs.io/en/v1.8.1/), but we will do it with the Metamask console that is available in Chrome-based browsers.
+Now that we have compiled the JSON data object, we want to sign it with Metamask. We won't go into details about how to use JavaScript libraries like [Ethers.js](https://docs.ethers.org/v5/) or [web3.js](https://web3js.readthedocs.io/en/v1.8.1/), but we will do it with the Metamask console that is available in Chrome-based browsers.
 
-At first, we should enable the Metamask Ethereum console. To do that, we need to open the developer console in any Chrome-based browser and type `ethereum.enable()`. Metamask will ask to connect to an account. Please allow it to do it.
+At first, we should enable the Metamask Ethereum console. To do that, we must open the developer console in any Chrome-based browser and type `ethereum.enable()`. Metamask will ask to connect to an account. Please allow it to do so.
 
 ![Connect to Metamask](/assets/eip-712/connect-metamask.png)
 
@@ -99,7 +99,7 @@ We can verify if everything is ok by opening the promise in the console and seei
 
 ![Connect to Metamask](/assets/eip-712/connect-metamask-promise.png)
 
-Now we should copy the wallet address to sign the message. Then save it to a variable in the developer console for easier access.
+Now, we should copy the wallet address to sign the message. Then save it to a variable in the developer console for easier access.
 
 ```javascript
 const account = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
@@ -107,7 +107,7 @@ const account = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
 
 ![Set account in developer console](/assets/eip-712/console-account.png)
 
-After that, we will use the JSON data object that we constructed according to the EIP-712 standard and also save it in a variable.
+After that, we will use the JSON data object we constructed according to the EIP-712 standard and save it in a variable.
 
 ```javascript
 const msgData = JSON.stringify({
@@ -163,7 +163,7 @@ const msgData = JSON.stringify({
 
 ![EIP-712 typed JSON data in developer console](/assets/eip-712/typed-data-console.png)
 
-Now we can finally sign the message by executing the `eth_signTypedData_v4` method.
+Now, we can finally sign the message by executing the `eth_signTypedData_v4` method.
 
 ```javascript
 ethereum.request({method: "eth_signTypedData_v4", params: [account, msgData]})
@@ -181,7 +181,7 @@ This data can be used on behalf of the signer to execute a smart contract on the
 
 ## TL;DR
 
-The EIP-712 standard opens doors to sign a transaction and allows someone else to use this transaction. It helps to implement gasless transactions to avoid our users paying the gas fee and figuring out how to get native tokens like Ethereum, Matic, and others. This standard describes how to format the message in human-readable form in a crypto wallet like Metamask when the user signs it. After it is signed, we can use this signed transaction in the smart contract but about that in one of the following blog posts.
+The EIP-712 standard opens doors to sign a transaction and allows someone else to use this transaction. It helps to implement gasless transactions to avoid our users paying the gas fee and figuring out how to get native tokens like Ethereum, Matic, and others. This standard describes how to format the message in human-readable form in a crypto wallet like Metamask when a user signs it. After it is signed, we can use this signed transaction in a smart contract, but more on that in one of the following blog posts.
 
 ## Links
 
