@@ -2,14 +2,14 @@
 date: 2023-02-27 00:00
 title: Understanding the Signing Process of Solidity Transactions with Ethers.js
 tags: Solidity, web3, ethersjs
-description: 
+description: In the previous [post](/blog/solidity-eip-712-sign-metamask/), we discussed meta transactions and the EIP-712 standard. This time we will check out how to sign the transaction with Ethers.js library and execute it in a smart contract. That means that the gas fee will be paid by someone else.
 ---
 
-In the previous [post](/blog/solidity-eip-712-sign-metamask/), we discussed meta transactions and the EIP-712 standard. This time we will check out how to sign the transaction with Ethers.js library and execute it in the smart contract. That means that the gas fee will be paid by someone else.
+In the previous [post](/blog/solidity-eip-712-sign-metamask/), we discussed meta transactions and the EIP-712 standard. This time we will check out how to sign the transaction with Ethers.js library and execute it in a smart contract. That means that the gas fee will be paid by someone else.
 
 ## Package up the transaction
 
-At first, we need to create the transaction and package it up with all the required components according to the EIP-712 standard. We need three main parts:
+At first, we need to create a transaction and package it up with all the required components according to the EIP-712 standard. We need three main parts:
 
 * define used types in the message;
 * domain information to verify the transaction in the smart contract;
@@ -143,7 +143,7 @@ We have signed the transaction, and it is ready to be sent to the blockchain and
 
 ## TL;DR
 
-Signing a transaction according to the EIP-712 standard with the Ethers JS library is straightforward. Thankfully this JavaScript library supports it and can be used right now. There are three steps - create a function signature, construct the transaction, and sign it. After that, it can be sent to the smart contract, and the gas fee can be paid by someone else.
+Signing a transaction according to the EIP-712 standard with the Ethers JS library is straightforward. Thankfully, this JavaScript library supports it and can be used right now. There are three steps - create a function signature, construct the transaction, and sign it. After that, it can be sent to the smart contract, and the gas fee can be paid by someone else.
 
 ## Links
 
