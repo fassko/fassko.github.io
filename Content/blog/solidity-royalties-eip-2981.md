@@ -2,10 +2,10 @@
 date: 2023-03-28 00:00
 title:  Implementing the ERC-2981 NFT royalty standard with Solidity - a game-changer for creators to receive income from every sale
 tags: Solidity, web3
-description: 
+description: With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered impossible. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payments for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation.
 ---
 
-With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in previously impossible ways. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payment for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation.
+With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered impossible. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payments for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation.
 
 ## The NFT royalty standard
 
@@ -21,9 +21,9 @@ There are other implementations, or we can create our own according to the ERC-2
 
 ## Using the NFT royalty standard
 
-One of the many extensions OpenZeppelin provides is the ERC721Royalty extension, which adds a royalty payment mechanism to the ERC721 token standard.
+ERC721Royalty extension is one of the many extensions OpenZeppelin provides, which adds a royalty payment mechanism to the ERC721 token standard.
 
-The ERC721Royalty extension adds a new function to the ERC721 standard called `_setTokenRoyalty` for a specific NFT or `_setDefaultRoyalty` for all the NFTs. This function allows the creator of an NFT to set a percentage of each sale that will be paid as a royalty to the creator or a designated recipient. The royalty payment is automatically deducted from the sale price of the NFT and transferred to the designated recipient.
+The ERC721Royalty extension adds a new function to the ERC721 standard called `_setTokenRoyalty` for a specific NFT or `_setDefaultRoyalty` for all the NFTs. This function allows a creator of an NFT to set a percentage of each sale that will be paid as a royalty to them. The royalty payment is automatically deducted from the sale price of the NFT and transferred to a creator.
 
 To use the `ERC721Royalty` extension, we must inherit our NFT smart contract from the `ERC721Royalty` and either set royalty. Let's check out both ways, setting it for all the NFTs and specific ones.
 
@@ -37,7 +37,7 @@ contract Royalties is ERC721Royalty {
 
 ### Setting royalties per NFT
 
-To set the royalties fee per specific NFT, we need to use the `_setTokenRoyalty` function while minting the NFT. We need to provide the royalty-received address and fee numerator. The fee numerator is a percentage. For example, if an NFT is sold for 1 ETH and the royalty fee is set to 10%, the original creator would receive 0.1 ETH every time that NFT is sold in the future.
+To set the royalties fee per specific NFT, we need to use the `_setTokenRoyalty` function while minting the NFT. We need to provide the royalty-received address and fee numerator. The fee numerator is a percentage. For example, if an NFT is sold for 1 ETH and the royalty fee is set to 10%, the original creator would receive 0.1 ETH for that deal. If an NFT is sold for 2 ETH the next time, the original creator will receive another 0.2 ETH for that next deal, and so on, every time that NFT is sold in the future.
 
 ```solidity
 function safeMint(
@@ -56,13 +56,13 @@ Now when minting an NFT, we can provide these values.
 
 ![Royalty per NFT](/assets/solidity-erc-721-royalties/royalty-per-nft.png)
 
-For the fee numerator, we are specifying it as a percentage without coma. It means that **1000** is qualent to **10%**.
+For the fee numerator, we are specifying it as a percentage without a coma. It means that **1000** is equivalent to **10%**.
 
 Now receiver will receive 10% from each resale on NFT marketplaces like OpenSea or Rarible.
 
 ### Setting royalties for all NFTs
 
-The most straightforward way to specify a royalty fee is to configure that for all the NFTs equally. To do that, we can call the `_setDefaultRoyalty` function when deploying the smart contract. We need to provide the royalty fee receiver and fee numerator similar to what we did per each NFT.
+The most straightforward way to specify a royalty fee is to configure that for all the NFTs equally. To do that, we can call the `_setDefaultRoyalty` function when deploying the smart contract. We must provide the royalty fee receiver and fee numerator similar to what we did per each NFT.
 
 ```solidity
 constructor(address _receiver, uint96 feeNumerator) 
@@ -73,7 +73,7 @@ constructor(address _receiver, uint96 feeNumerator)
 
 ![Royalty for all NFTs](/assets/solidity-erc-721-royalties/royalty-all-nfts.png)
 
-Now all the NFT resales on marketplaces will require a royalty fee of 10% to the receiver percentage.
+Now, all the NFT resales on marketplaces will require a royalty fee of 10% to be transferred to a creator.
 
 ## TL;DR
 
