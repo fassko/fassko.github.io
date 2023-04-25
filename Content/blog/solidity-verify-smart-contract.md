@@ -60,8 +60,6 @@ The Hardhat Etherscan plugin provides a streamlined and efficient way for develo
 
 ## Links
 
-- [Sample code](https://gist.github.com/fassko/e8f7c2b8bb263f8337845126a757f6c0)
-
 - [Hardhat documentation](https://hardhat.org/hardhat-runner/docs/guides/verifying)
 - [Different Ways to Verify Your Smart Contract Code](https://www.quicknode.com/guides/ethereum-development/smart-contracts/different-ways-to-verify-smart-contract-code/)
 - [Verifying Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/verifying/)
