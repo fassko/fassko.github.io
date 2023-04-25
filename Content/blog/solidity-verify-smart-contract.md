@@ -2,22 +2,20 @@
 date: 2023-04-24 00:00
 title: How Hardhat Simplifies Smart Contract Verification on Ethereum
 tags: Solidity, web3, hardhat
-description: Smart contract verification is crucial in ensuring transparency, trust, and safety for users in the blockchain ecosystem. Smart contracts are immutable. Once deployed on the blockchain, they cannot be modified or deleted, making verification an essential process to ensure their correctness and safety. Verifying smart contracts with Hardhat tooling is a straightforward process that can be done quickly and easily. It provides a simple and effective way to verify smart contracts on the Ethereum networks.
+description: Smart contract verification is crucial for ensuring transparency, trust, and safety for users in the blockchain ecosystem. Smart contracts are immutable. Once deployed on the blockchain, they cannot be modified or deleted, making verification an essential process to ensure their correctness and safety. Verifying smart contracts with Hardhat tooling is a straightforward process that can be done quickly and easily. It provides a simple and effective way to verify smart contracts on the Ethereum network.
 ---
 
-Smart contract verification is crucial in ensuring transparency, trust, and safety for users in the blockchain ecosystem. Smart contracts are immutable. Once deployed on the blockchain, they cannot be modified or deleted, making verification an essential process to ensure their correctness and safety. Verifying smart contracts with Hardhat tooling is a straightforward process that can be done quickly and easily. It provides a simple and effective way to verify smart contracts on the Ethereum networks.
+Smart contract verification is crucial for ensuring transparency, trust, and safety for users in the blockchain ecosystem. Smart contracts are immutable. Once deployed on the blockchain, they cannot be modified or deleted, making verification an essential process to ensure their correctness and safety. Verifying smart contracts with Hardhat tooling is a straightforward process that can be done quickly and easily. It provides a simple and effective way to verify smart contracts on the Ethereum network.
 
 ## Setting up the Etherscan Hardhat plugin
 
 The Etherscan Hardhat plugin is a powerful tool that allows developers to quickly verify and deploy their smart contracts on the Ethereum network. The plugin integrates Etherscan's smart contract verification services directly into the Hardhat workflow, making it easy for developers to ensure the correctness and security of their contracts.
 
-To use the Hardhat Etherscan plugin, we need to install it with the following command:
+To use the Hardhat Etherscan plugin, we must first install the Hardhat development environment on our system. Once Hardhat is installed, the plugin can be installed with the following command:
 
 ```sh
 npm install @nomiclabs/hardhat-etherscan --save-dev
 ```
-
-To use the Hardhat Etherscan plugin, developers must first install the Hardhat development environment on their system. Once Hardhat is installed, the plugin can be installed with the following command:
 
 After installing the plugin, we need to configure their Hardhat project to use it. We should import the Etherscan plugin and set the API key for the network we will use. In our example, we are going to use the Polygon Mumbai test network.
 
