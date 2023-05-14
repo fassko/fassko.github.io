@@ -1,5 +1,5 @@
 ---
-date: 2023-04-24 00:00
+date: 2023-05-11 00:00
 title: Programmatically Verifying Solidity Smart Contract Code with Hardhat
 tags: Solidity, web3, hardhat
 description: In a previous [blog post](/blog/solidity-verify-smart-contract/), we discussed the importance of verifying Solidity smart contracts before deploying them onto the blockchain. However, there is a way to automate that process and make it more efficient. With the help of Hardhat, a popular development environment for Ethereum, developers can now verify their smart contract code programmatically as part of the deployment process. This means the verification process can be integrated into the development pipeline, ensuring the code is verified automatically each time the contract is deployed. This blog post will explore how to use Hardhat to verify smart contract code and streamline the verification process programmatically.
