@@ -2,7 +2,7 @@
 date: 2023-05-15 00:00
 title: Exploring the Features and Benefits of Azuki's ERC-721A NFT Standard
 tags: Solidity, web3, erc721, nft
-description:
+description: NFT minting on Ethereum can be expensive due to the high gas fees associated with executing intelligent contract transactions on the blockchain. Previously [we learned](https://kristaps.me/blog/solidity-erc-721/) how to use the ERC-721 standard, but there is an improved standard, ERC-721A, by Azuki. It gives enormous gas savings when minting multiple NFTs in one transaction. Minting five NFTs can save 7.2 times gas compared to the original ERC-721 standard. Let's check it out in this article.
 ---
 
 NFT minting on Ethereum can be expensive due to the high gas fees associated with executing intelligent contract transactions on the blockchain. Previously [we learned](https://kristaps.me/blog/solidity-erc-721/) how to use the ERC-721 standard, but there is an improved standard, ERC-721A, by Azuki. It gives enormous gas savings when minting multiple NFTs in one transaction. Minting five NFTs can save 7.2 times gas compared to the original ERC-721 standard. Let's check it out in this article.
