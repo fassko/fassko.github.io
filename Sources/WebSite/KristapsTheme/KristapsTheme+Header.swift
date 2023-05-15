@@ -106,7 +106,7 @@ extension Node where Context == HTML.DocumentContext {
       .meta(.name("og:site_name"), .content(site.description)),
       .meta(.name("og:title"), .content(site.description)),
       .meta(.name("og:description"), .content(site.description)),
-      .meta(.name("og:image"), .content("linkedin.png")),
+      .meta(.name("og:image"), .content("https://kristaps.me/og-image.png")),
       .meta(.name("og:type"), .content("website")),
       .meta(.name("og:url"), .content(site.url.absoluteString)),
       .meta(.name("twitter:card"), .content("summary")),
