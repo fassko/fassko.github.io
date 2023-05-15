@@ -1,5 +1,5 @@
 ---
-date: 2023-04-24 00:00
+date: 2023-05-15 00:00
 title: Exploring the Features and Benefits of Azuki's ERC-721A NFT Standard
 tags: Solidity, web3, erc721, nft
 description:
