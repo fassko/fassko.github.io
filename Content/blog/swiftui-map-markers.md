@@ -2,7 +2,7 @@
 date: 2023-06-25 00:00
 title: Creating Interactive Maps with Custom Markers Using SwiftUI in iOS 17
 tags: swift, swiftui, mapkit
-description:
+description: With the release of iOS 17, Apple introduces an exciting enhancement to SwiftUI that revolutionizes how we add markers on maps. With the new SwiftUI in iOS 17, you can easily customize markers to match your app's aesthetic and branding, allowing seamless integration with your overall user interface. This article describes how to add and style map markers in iOS 17 with SwiftUI. Keep in mind that this is still in beta and can change.
 ---
 
 With the release of iOS 17, Apple introduces an exciting enhancement to SwiftUI that revolutionizes how we add markers on maps. With the new SwiftUI in iOS 17, you can easily customize markers to match your app's aesthetic and branding, allowing seamless integration with your overall user interface. This article describes how to add and style map markers in iOS 17 with SwiftUI. Keep in mind that this is still in beta and can change.
