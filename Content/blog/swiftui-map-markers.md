@@ -5,7 +5,7 @@ tags: swift, swiftui, mapkit
 description:
 ---
 
-With the release of iOS 17, Apple introduces an exciting enhancement to SwiftUI that revolutionizes how we add markers on maps. With the new SwiftUI in iOS 17, you can easily customize markers to match your app's aesthetic and branding, allowing for seamless integration with your overall user interface. This article will look into how to add and style map markers in iOS 17 with SwiftUI. Keep in mind that this is still in beta and can change.
+With the release of iOS 17, Apple introduces an exciting enhancement to SwiftUI that revolutionizes how we add markers on maps. With the new SwiftUI in iOS 17, you can easily customize markers to match your app's aesthetic and branding, allowing seamless integration with your overall user interface. This article describes how to add and style map markers in iOS 17 with SwiftUI. Keep in mind that this is still in beta and can change.
 
 ## Add map markers
 
@@ -33,7 +33,7 @@ Marker("Latvian Freedom Monument", image: "monument", coordinate: .marker)
 
 ### Using SF symbols
 
-Int iOS 17 with SwiftUI we can place a marker on the map by leveraging the built-in SF Symbols library. SF Symbols provides a vast collection of scalable and customizable icons seamlessly integrating with Apple's user interface guidelines. Without needing external image assets, we can easily access and incorporate many visually consistent and recognizable icons, such as pins, landmarks, or directional arrows.
+SwiftUI on iOS 17 enables placing a marker on the map by leveraging the built-in SF Symbols library. SF Symbols provides a vast collection of scalable and customizable icons seamlessly integrating with Apple's user interface guidelines. No external image assets are needed, so we can easily access and incorporate many visually consistent and recognizable icons, such as pins, landmarks, or directional arrows.
 
 ```swift
 Marker("Latvian Freedom Monument", systemImage: "signpost.left.fill", coordinate: .marker)
@@ -53,7 +53,7 @@ Marker("Latvian Freedom Monument", monogram: "LV", coordinate: .marker)
 
 ### Custom label
 
-The SwiftUI Label view approach allows developers to design and customize markers with rich textual information and accompanying icons or images. By leveraging the Label view, developers can easily combine a text element and an optional image or icon, allowing for the creation of markers.
+The SwiftUI Label view approach allows developers to design and customize markers with rich textual information and accompanying icons or images. By leveraging the Label view, developers can easily combine a text element and an optional image or icon, allowing the creation of markers.
 
 ```swift
 Marker(coordinate: .marker) {
@@ -65,7 +65,7 @@ Marker(coordinate: .marker) {
 
 ## Change marker color
 
-We have the flexibility to change the tint color of map markers, allowing for enhanced customization and visual consistency within their apps. By modifying the tint color, developers can seamlessly integrate the markers with their app's overall color scheme, branding, or design language. With SwiftUI's declarative syntax, adjusting the tint color of map markers is straightforward.
+We have the flexibility to change the tint color of map markers, allowing enhanced customization and visual consistency within their apps. By modifying the tint color, developers can seamlessly integrate the markers with their app's overall color scheme, branding, or design language. With SwiftUI's declarative syntax, adjusting the tint color of map markers is straightforward.
 
 ```swift
 .tint(.yellow)
@@ -73,7 +73,7 @@ We have the flexibility to change the tint color of map markers, allowing for en
 
 ## TL;DR
 
-In iOS 17 with SwiftUI, developers have a variety of options for adding markers on the map. We can pass a title and coordinate for a simple marker, utilize custom SVG images from the assets catalog for personalized markers, leverage built-in SF Symbols for standardized and customizable markers, use monogram text for elegant and compact markers, or employ custom labels for markers with rich textual information. Additionally, developers can style the markers' tint color, ensuring visual consistency and customization within their apps. These features empower developers to create visually engaging and personalized map experiences seamlessly integrating with their app's design.
+In iOS 17 with SwiftUI, developers have various options for adding markers on the map. We can pass a title and coordinate for a simple marker, utilize custom SVG images from the assets catalog for personalized markers, leverage built-in SF Symbols for standardized and customizable markers, use monogram text for elegant and compact markers, or employ custom labels for markers with rich textual information. Additionally, developers can style the markers' tint color, ensuring visual consistency and app customization. These features empower developers to create visually engaging and personalized map experiences seamlessly integrating with their app's design.
 
 ## Links
 
