@@ -93,7 +93,7 @@ Although this function seems lengthy and complicated, let's review it together.
 
 First, we check if the element exists in the Set. If it does, we must determine its index from the `indexes` mapping.
 
-Next, we must remove the element from the "elements" array. Using the "delete" function on Solidity arrays will create empty spaces and not change the array's length. To prevent this, we must move the last element to the location where the desired element will be removed.
+To remove an element from the "elements" array in Solidity, we should avoid using the "delete" function as it creates empty spaces in the array without altering its length. Instead, we can move the last element of the array to the position of the element we want to remove.
 
 Finally, we will use the `pop` built-in function to remove the last element from the array and remove the element index.
 
