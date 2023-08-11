@@ -2,7 +2,7 @@ body {
   margin-top: 0;
   padding: 0;
   background-color: #121212;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 * {
@@ -52,9 +52,11 @@ h3 {
 }
 
 .stripes {
-  background: repeating-linear-gradient(-45deg,
-    #1F1F1F 0 15px,
-    #636363 15px 17px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #1f1f1f 0 15px,
+    #636363 15px 17px
+  );
   height: 50px;
   position: absolute;
   top: 0;
@@ -80,7 +82,7 @@ h3 {
   .header-wrapper {
     justify-content: flex-end;
   }
-  
+
   .main-title {
     display: none;
   }
@@ -114,7 +116,7 @@ h3 {
   .nav-container {
     width: 100%;
   }
-  
+
   .nav-item {
     padding: 0 15px;
   }
@@ -142,7 +144,7 @@ h3 {
 
 @media only screen and (max-width: 480px) {
   .main {
-    padding: 20px 0;  
+    padding: 20px 0;
   }
 }
 
@@ -188,7 +190,6 @@ h3 {
   width: 250px;
   height: 250px;
 }
-
 
 /*  --- DIVIDER --- */
 
@@ -239,7 +240,7 @@ h3 {
 
 @media only screen and (max-width: 480px) {
   .divider-right-element {
-    width: 10%;;
+    width: 10%;
   }
 }
 
@@ -292,7 +293,6 @@ h3 {
   padding-right: 10px;
 }
 
-
 /* --- PROJECTS --- */
 
 .project-item {
@@ -320,7 +320,7 @@ h3 {
 
 .hr-divider {
   width: 100%;
-  border: 1px solid #1F1F1F;
+  border: 1px solid #1f1f1f;
   border-radius: 1px;
 }
 
@@ -383,7 +383,7 @@ h3 {
   margin: 10px 0 20px 0;
 }
 
-.blog-content blockquote  p {
+.blog-content blockquote p {
   padding: 10px 10px 10px 20px;
 }
 
@@ -410,7 +410,7 @@ h3 {
 }
 
 .blog-content img {
-  max-width: 80%;
+  max-width: 95%;
   padding: 30px 0 50px 0;
   margin-left: auto;
   margin-right: auto;
@@ -465,7 +465,7 @@ h3 {
 }
 
 .about-me-images img {
-  max-width: 80%;
+  max-width: 95%;
   display: block;
   border-radius: 10px;
 }
@@ -496,7 +496,6 @@ h3 {
 .talk-item:not(:last-child) {
   margin-bottom: 50px;
 }
-
 
 .talk-title {
   font-size: 28px;
@@ -557,7 +556,6 @@ audio {
   padding: 0 5px;
 }
 
-
 /* -- TAGS --*/
 .tags {
   padding: 50px 0;
@@ -573,12 +571,12 @@ audio {
 }
 
 .tag {
-	margin: 2px;
-	display: inline-block;
-	background-color: var(--tags-background-color);
-	color: var(--tags-text-color);
-	padding: 6px 10px;
-	border-radius: 5px;
+  margin: 2px;
+  display: inline-block;
+  background-color: var(--tags-background-color);
+  color: var(--tags-text-color);
+  padding: 6px 10px;
+  border-radius: 5px;
 }
 
 .tag-title {
@@ -595,11 +593,10 @@ audio {
 }
 
 .all-tags .tag {
-	font-size: 120%;
-	margin: 5px;
+  font-size: 120%;
+  margin: 5px;
   background-color: #292929;
 }
-
 
 /* -- CODE -- */
 .blog-content pre {
@@ -610,10 +607,10 @@ audio {
 }
 
 .blog-content pre code {
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
   display: block;
   padding: 0 20px;
-  color: #E5E5E5;
+  color: #e5e5e5;
   line-height: 1.5;
   font-size: 0.95em;
   overflow-x: auto;
@@ -630,7 +627,7 @@ audio {
 }
 
 .blog-content pre code .type {
-  color: #41B645;
+  color: #41b645;
 }
 
 .blog-content pre code .call {
@@ -642,21 +639,21 @@ audio {
 }
 
 .blog-content pre code .number {
-  color: #786DC4;
+  color: #786dc4;
 }
 
 .blog-content pre code .string {
-  color: #DB2C38;
+  color: #db2c38;
 }
 
 .blog-content pre code .comment {
-  color: #41B645;
+  color: #41b645;
 }
 
 .blog-content pre code .dotAccess {
-  color: #00A0BE;
+  color: #00a0be;
 }
 
 .blog-content pre code .preprocessing {
-  color: #C67C48;
+  color: #c67c48;
 }
