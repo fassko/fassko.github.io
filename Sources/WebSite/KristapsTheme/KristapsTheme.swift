@@ -23,6 +23,8 @@ internal struct KristapsHTMLFactory<Site: Website>: HTMLFactory {
         .mainSection(),
         .divider(for: "about"),
         .aboutSection(),
+        .divider(for: "hire me"),
+        .hireSection(),
         .divider(for: "projects"),
         .projectsSection(),
         .customFooter()

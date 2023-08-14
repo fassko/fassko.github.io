@@ -19,7 +19,7 @@ internal extension Node where Context == HTML.BodyContext {
             ),
             .text(" that serviced companies like Bolt, Uber, Lyft, The Olympic Games")
           ),
-          .textParagraph("Extensive knowledge in Web3, iOS, and other Apple technologies, frontend, and databases."),
+          .textParagraph("He has extensive knowledge and expertise in building projects across full-stack, mobile, and blockchain domains."),
           .textParagraph(
             .text("His interests are in Web 3.0, sustainability, and automating old and clunky processes.")
           )
