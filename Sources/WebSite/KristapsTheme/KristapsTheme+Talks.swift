@@ -58,6 +58,18 @@ internal extension Node where Context == HTML.BodyContext {
             .src("/assets/\(image)")
           )
         )
+      },
+      .`if`(talk.link != nil, .h3("Links")),
+      .`unwrap`(talk.link) { link in
+          .div(
+            .class("talk-media"),
+            .a(
+              .href(link),
+              .text(link),
+              .target(.blank)
+            )
+          )
+        
       }
     )
   }

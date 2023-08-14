@@ -11,6 +11,7 @@ internal struct Talk: Decodable {
   let slides: String?
   let audio: URL?
   let image: String?
+  let link: String?
 }
 
 extension Talk {

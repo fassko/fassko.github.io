@@ -1,3 +1,12 @@
+- date: 2023-05-10
+  event: NFT Tallinn
+  title: Effective Smart Contract Management - Workshop
+  image: nft-tallinn-2023-effective-smart-contract-management.jpg
+  link: https://github.com/fassko/nfttallinn2023
+- date: 2023-05-09
+  event: NFT Tallinn
+  title: Delivering Infrastructure as a Service for Web3 Developers
+  image: nft-tallinn-2023-delivering-infrastructure-as-service-for-web3-developers.jpg
 - date: 2022-10-07
   event: Riga COMM - The Baltic Business Technology Fair and Conference
   title: From Web2 to Web3. A developer story.
@@ -8,6 +17,15 @@
   title: A journey from Swift to Solidity
   slides: 9846288a0507403a94d56bc353c20df3
   video: https://www.youtube.com/embed/_tNOCfJ_NxM
+- date: 2022-03-22
+  event: NFT Tallinn
+  title: NFT Utility and Value Beyond Speculation
+  image: nft-tallinn-2022-nft-utility-and-value-beyond-speculation.jpg
+- date: 2022-03-23
+  event: NFT Tallinn
+  title: How to Create Your First NFT - Workshop
+  image: nft-tallinn-2022-how-to-create-your-first-nft.jpg
+  link: https://github.com/fassko/NFTTallinn
 - date: 2021-09-30
   event: Tech Stash by Mintos, Riga, Latvia
   title: A journey into the SwiftUI world
