@@ -32,6 +32,10 @@ extension Node where Context == HTML.DocumentContext {
       .siteName(site.name),
       .url(site.url(for: location)),
       .title(title),
+      .meta(.name("og:site_name"), .content(site.description)),
+      .meta(.name("og:title"), .content(site.description)),
+      .meta(.name("og:description"), .content(site.description)),
+      .meta(.name("og:image"), .content("https://kristaps.me/og-image.png")),
       .`unwrap`(refreshToPage) { link in
         .selfClosedElement(named: "meta", attributes: [
           .init(name: "http-equiv", value: "refresh"),
@@ -39,10 +43,6 @@ extension Node where Context == HTML.DocumentContext {
         ])
       },
       .meta(.name("author"), .content(site.name)),
-      .meta(.name("og:site_name"), .content(site.description)),
-      .meta(.name("og:title"), .content(site.description)),
-      .meta(.name("og:description"), .content(site.description)),
-      .meta(.name("og:image"), .content("https://kristaps.me/og-image.png")),
       .meta(.name("og:image:secure_url"), .content("https://kristaps.me/og-image.png")),
       .meta(.name("og:type"), .content("website")),
       .meta(.name("og:url"), .content(site.url.absoluteString)),
