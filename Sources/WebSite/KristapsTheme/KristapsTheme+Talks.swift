@@ -64,8 +64,8 @@ internal extension Node where Context == HTML.BodyContext {
           .div(
             .class("talk-media"),
             .a(
-              .href(link),
-              .text(link),
+              .href(link.href),
+              .text(link.text),
               .target(.blank)
             )
           )

@@ -3,6 +3,11 @@ import Foundation
 import Files
 import Yams
 
+internal struct TalkLink: Decodable {
+  let href: String
+  let text: String
+}
+
 internal struct Talk: Decodable {
   let date: Date
   let title: String
@@ -11,7 +16,7 @@ internal struct Talk: Decodable {
   let slides: String?
   let audio: URL?
   let image: String?
-  let link: String?
+  let link: TalkLink?
 }
 
 extension Talk {
@@ -25,10 +30,11 @@ internal struct TalksProvider {
     let decoder = YAMLDecoder()
     do {
       let talks = try File(path: "./Content/talks.yml").readAsString().data(using: .utf8)!
-    let decoded = try decoder.decode([Talk].self, from: talks)
-    return decoded
+      let decoded = try decoder.decode([Talk].self, from: talks)
+      return decoded
     } catch {
       print("Can't decode talks")
+      print(error)
       return []
     }
   }

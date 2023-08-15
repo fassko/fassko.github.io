@@ -2,7 +2,9 @@
   event: NFT Tallinn
   title: Effective Smart Contract Management - Workshop
   image: nft-tallinn-2023-effective-smart-contract-management.jpg
-  link: https://github.com/fassko/nfttallinn2023
+  link:
+    href: https://github.com/fassko/nfttallinn2023
+    text: Workshop materials
 - date: 2023-05-09
   event: NFT Tallinn
   title: Delivering Infrastructure as a Service for Web3 Developers
@@ -25,7 +27,9 @@
   event: NFT Tallinn
   title: How to Create Your First NFT - Workshop
   image: nft-tallinn-2022-how-to-create-your-first-nft.jpg
-  link: https://github.com/fassko/NFTTallinn
+  link:
+    href: https://github.com/fassko/NFTTallinn
+    text: Workshop materials
 - date: 2021-09-30
   event: Tech Stash by Mintos, Riga, Latvia
   title: A journey into the SwiftUI world
