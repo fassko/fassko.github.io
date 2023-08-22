@@ -1,3 +1,10 @@
+- date: 2023-08-22
+  event: Founderly
+  title: "Decoding Smart Contracts: From Creation to NFT Integration"
+  slides: d4ab460aada64a64ad8d06b0b5cf7bec
+  link:
+    href: https://github.com/fassko/UnderTheRoof
+    text: Workshop materials
 - date: 2023-05-10
   event: NFT Tallinn
   title: Effective Smart Contract Management - Workshop
