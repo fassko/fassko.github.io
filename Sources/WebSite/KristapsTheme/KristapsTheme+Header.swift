@@ -59,6 +59,11 @@ extension Node where Context == HTML.DocumentContext {
         .init(name: "href", value: "https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"),
         .init(name: "rel", value: "stylesheet")
       ]),
+      .script(
+          .async(),
+          .src(URL(string: "https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL")!)
+        ),
+      .script(.src("/scripts/ga.js")),
       .selfClosedElement(named: "link",
                          attributes: [
                           .init(name: "rel", value: "apple-touch-icon-precomposed"),
@@ -111,6 +116,7 @@ extension Node where Context == HTML.DocumentContext {
       .meta(.name("og:image:secure_url"), .content("https://kristaps.me/og-image.png")),
       .meta(.name("og:type"), .content("website")),
       .meta(.name("og:url"), .content(site.url.absoluteString)),
+      .meta(.name("og:image:secure_url"), .content("https://kristaps.me/og-image.png")),
       .meta(.name("twitter:card"), .content("summary")),
       .meta(.name("twitter:site"), .content("@fassko")),
       .meta(.name("twitter:title"), .content(site.name)),
@@ -130,6 +136,11 @@ extension Node where Context == HTML.DocumentContext {
                           .init(name: "sizes", value: "120x120"),
                           .init(name: "href", value: "apple-touch-icon-120x120.png")
                          ]),
+      .script(
+          .async(),
+          .src(URL(string: "https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL")!)
+        ),
+      .script(.src("/scripts/ga.js")),
       .twitterCardType(location.imagePath == nil ? .summary : .summaryLargeImage),
       .forEach(stylesheetPaths, { .stylesheet($0) }),
       .viewport(.accordingToDevice),
