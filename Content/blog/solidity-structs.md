@@ -1,7 +1,7 @@
 ---
 date: 2023-09-21 00:00
 title: Structs in Solidity: Mastering Data Organization in Ethereum Smart Contracts
-tags: Solidity, web3, errors
+tags: Solidity, web3, struct, ethereum
 description: The Solidity programming language for Ethereum smart contracts, offers a robust feature known as **structs** that is indispensable in organizing and structuring information. These user-defined data types allow us to bundle variables under a single name, effectively creating blocks of organized data with set boundaries. Not only do structs enhance code readability and maintainability, but they also offer flexibility in instantiation. There are three ways to instantiate a struct in Solidity, each with advantages and use cases. In this blog post, we'll explore the nitty-gritty of Solidity structs, exploring their significance.
 ---
 
