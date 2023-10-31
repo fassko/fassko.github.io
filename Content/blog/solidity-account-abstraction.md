@@ -2,10 +2,10 @@
 date: 2023-10-31 00:00
 title: Title: Understanding ERC-4337 and the Future of Ethereum User Experience: Account Abstraction
 tags: ethereum, solidity
-description: In Ethereum Improvement Proposal 4337 (ERC-4337), account abstraction simplifies user interaction and the blockchain. It eliminates the need for users to deal with the complexities of wallets, making blockchain applications (dApps) more accessible to users. For instance, users can use social login to interact with dApps, and there is no need for private keys or seed phrases anymore. In this series of posts, we will provide a high-level overview of the topic in this post and dive into the code in later ones.
+description: In Ethereum Improvement Proposal 4337 (ERC-4337), account abstraction simplifies user interaction and the blockchain. It eliminates the need for users to deal with the complexities of wallets, making blockchain applications (dApps) more accessible to users. For instance, users can use social login to interact with dApps, and there is no need for private keys or seed phrases anymore. In this series of posts, I will provide a high-level overview of the topic in this post and dive into the code in the following ones.
 ---
 
-In Ethereum Improvement Proposal 4337 (ERC-4337), account abstraction simplifies user interaction and the blockchain. It eliminates the need for users to deal with the complexities of wallets, making blockchain applications (dApps) more accessible to users. For instance, users can use social login to interact with dApps, and there is no need for private keys or seed phrases anymore. In this series of posts, we will provide a high-level overview of the topic in this post and dive into the code in later ones.
+In Ethereum Improvement Proposal 4337 (ERC-4337), account abstraction simplifies user interaction and the blockchain. It eliminates the need for users to deal with the complexities of wallets, making blockchain applications (dApps) more accessible to users. For instance, users can use social login to interact with dApps, and there is no need for private keys or seed phrases anymore. In this series of posts, I will provide a high-level overview of the topic in this post and dive into the code in the following ones.
 
 ## What is Account Abstraction?
 
@@ -38,11 +38,11 @@ Users do not interact with smart contracts directly but through an intermediary 
 
 Coworkers and DAO members can share accounts, simplifying multi-signature interactions.
 
-When implementing account abstraction, it is crucial to thoroughly test and ensure that the smart contracts are written securely and accurately. smart contracts are inherently more susceptible to hacks than externally owned accounts that rely on private keys for security. This poses a significant risk when employing a sophisticated mechanism to pay for transaction fees on behalf of users.
+When implementing account abstraction, it is crucial to thoroughly test and ensure that the smart contracts are written securely and accurately. Smart contracts are inherently more susceptible to hacks than externally owned accounts that rely on private keys for security. This poses a significant risk when employing a sophisticated mechanism to pay for transaction fees on behalf of users.
 
 ## TL;DR
 
-Proposed in ERC-4337, account abstraction is a paradigm shift for Ethereum's usability, security, and user-friendliness. I'ts success is dependent on the community's adoption rate.
+Proposed in ERC-4337, account abstraction is a paradigm shift for Ethereum's usability, security, and user-friendliness. It's success is dependent on the community's adoption rate.
 
 ## Links
 
