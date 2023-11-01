@@ -22,6 +22,9 @@ internal extension Node where Context == HTML.BodyContext {
           .textParagraph("He has extensive knowledge and expertise in building projects across full-stack, mobile, and blockchain domains."),
           .textParagraph(
             .text("His interests are in Web 3.0, sustainability, and automating old and clunky processes.")
+          ),
+          .textParagraph(
+            .text("Kristaps hobbies are orienteering sport, cycling and gardening.")
           )
         ),
         .div(

@@ -64,12 +64,12 @@ internal extension Node where Context == HTML.BodyContext {
   private static var aboutEmail: Node {
     .a(
       .class("about-email"),
-      .href("mailto:kristaps@hey.com"),
+      .href("mailto:fassko@gmail.com"),
       .img(
         .class("about-email-img"),
         .src("/images/email.svg")
       ),
-      .text("kristaps@hey.com")
+      .text("fassko@gmail.com")
     )
   }
   

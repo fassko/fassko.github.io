@@ -12,7 +12,7 @@ enum SocialItems: String, CaseIterable {
   var link: String {
     switch self {
     case .email:
-      return "mailto:kristaps@hey.com"
+      return "mailto:fassko@gmail.com"
     case .phone:
       return "tel:+37125660643"
     case .linkedin:
@@ -31,7 +31,7 @@ enum SocialItems: String, CaseIterable {
   var text: String {
     switch self {
     case .email:
-      return "kristaps@hey.com"
+      return "fassko@gmail.com"
     case .phone:
       return "+371 25660643"
     case .linkedin:
