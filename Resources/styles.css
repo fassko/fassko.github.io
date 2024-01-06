@@ -415,18 +415,15 @@ h3 {
   padding-top: 30px;
 }
 
-.blog-content ol li {
-  padding-bottom: 5px;
-  line-height: 1.5;
-}
-
-.blog-content ul, ol {
+.blog-content ul,
+.blog-content ol {
   padding-left: 30px;
   padding-bottom: 20px;
   font-size: 18px;
 }
 
-.blog-content ul, ol li {
+.blog-content ul li,
+.blog-content ol li {
   padding-bottom: 5px;
   line-height: 1.5;
 }
