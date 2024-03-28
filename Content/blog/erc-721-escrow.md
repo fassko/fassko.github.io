@@ -1,6 +1,6 @@
 ---
 date: 2024-03-28 00:00
-title: Understanding Escrow in ERC-721 Smart Contracts
+title: Understanding Escrow in ERC-721 NFT Smart Contracts
 tags: ethereum, solidity, nft
 description: The ERC-721 standard helps make buying and selling unique digital items (NFTs) safe and reliable. It is crucial to secure transactions between two parties. That is where escrow services come in. They act like a safety net, holding an NFT until everyone agrees and all rules have been met. Let's explore how we can develop an escrow using the ERC-721 standard using OpenZeppelin implementation.
 ---
