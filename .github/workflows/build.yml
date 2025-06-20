@@ -1,3 +1,11 @@
+name: Build
+
+on:
+  push:
+    branches-ignore: [master, develop]
+  pull_request:
+    branches-ignore: [master, develop]
+
 jobs:
   build:
     name: Build
