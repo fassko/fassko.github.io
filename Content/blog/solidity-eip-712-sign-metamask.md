@@ -66,43 +66,8 @@ domain: {
   name: "AddEmployee",
   version: "1",
   verifyingContract: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  salt: "0x0000000000000000000000000000000000000000000000000000000000005"
+  salt: "0x0...05"
   }
-```
-
-Now we need to pass data and tell what will be the primary type.
-
-```javascript
-primaryType: "Employee",
-message: {
-  id: 1111,
-  name: "John",
-  address: {
-    address: 'Infinity Loop 1',
-    country: 'USA',
-    phoneNumber: '+123456789'
-  }
-}
-```
-
-We combined all these parts to construct the JSON data in a typed structured data object.
-
-## How to sign a message with Metamask?
-
-Now that we have compiled the JSON data object, we want to sign it with Metamask. We won't go into details about how to use JavaScript libraries like [Ethers.js](https://docs.ethers.org/v5/) or [web3.js](https://web3js.readthedocs.io/en/v1.8.1/), but we will do it with the Metamask console that is available in Chrome-based browsers.
-
-At first, we should enable the Metamask Ethereum console. To do that, we must open the developer console in any Chrome-based browser and type `ethereum.enable()`. Metamask will ask to connect to an account. Please allow it to do so.
-
-![Connect to Metamask](/assets/eip-712/connect-metamask.png)
-
-We can verify if everything is ok by opening the promise in the console and seeing that it is fulfilled.
-
-![Connect to Metamask](/assets/eip-712/connect-metamask-promise.png)
-
-Now, we should copy the wallet address to sign the message. Then save it to a variable in the developer console for easier access.
-
-```javascript
-const account = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
 ```
 
 ![Set account in developer console](/assets/eip-712/console-account.png)
@@ -146,7 +111,7 @@ const msgData = JSON.stringify({
     version: "1",
     verifyingContract: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     salt:
-      "0x00000000000000000000000000000000000000000000000000000000005"
+      "0x0...05"
   },
   primaryType: "Employee",
   message: {
