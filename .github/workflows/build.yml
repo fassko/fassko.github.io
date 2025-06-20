@@ -14,14 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Swift 5.8
-      run: |
-        wget -q https://download.swift.org/swift-5.8-release/ubuntu2204/swift-5.8-RELEASE-ubuntu22.04.tar.gz
-        tar xzf swift-5.8-RELEASE-ubuntu22.04.tar.gz
-        echo "$PWD/swift-5.8-RELEASE-ubuntu22.04/usr/bin" >> $GITHUB_PATH
-
     - name: Show Swift version
       run: swift --version
+
+    - name: Show system info
+      run: |
+        uname -a
+        lsb_release -a
+        swift --version
+
+    - name: Clean build
+      run: swift package clean
 
     - name: Show package dependencies
       run: swift package show-dependencies
