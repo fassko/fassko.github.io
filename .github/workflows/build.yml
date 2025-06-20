@@ -9,10 +9,19 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install Swift 5.7.3
+      run: |
+        SWIFT_VERSION=5.7.3
+        SWIFT_PLATFORM=ubuntu20.04
+        SWIFT_URL="https://download.swift.org/swift-${SWIFT_VERSION}-release/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}.tar.gz"
+        wget -q $SWIFT_URL
+        tar xzf swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}.tar.gz
+        echo "$PWD/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}/usr/bin" >> $GITHUB_PATH
 
     - name: Show Swift version
       run: swift --version
@@ -21,7 +30,6 @@ jobs:
       run: |
         uname -a
         lsb_release -a
-        swift --version
 
     - name: Clean build
       run: swift package clean
