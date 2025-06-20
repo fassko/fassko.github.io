@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Kristaps Grinbergs"/><link rel="canonical" href="https://kristaps.me/blog/swiftui-navigationview"/><meta name="twitter:url" content="https://kristaps.me/blog/swiftui-navigationview"/><meta name="og:url" content="https://kristaps.me/blog/swiftui-navigationview"/><title>Cracking the Navigation Bar Secrets with SwiftUI | Kristaps Grinbergs</title><meta name="twitter:title" content="Cracking the Navigation Bar Secrets with SwiftUI | Kristaps Grinbergs"/><meta name="og:title" content="Cracking the Navigation Bar Secrets with SwiftUI | Kristaps Grinbergs"/><meta name="description" content="Navigating from one view to another, or simply showing a title and buttons, is one of the most crucial building blocks of modern iOS applications. Almost every app has this feature. SwiftUI brings some new approaches for how to show the Navigation Bar, set the title, and add buttons. So let's check it out."/><meta name="twitter:description" content="Navigating from one view to another, or simply showing a title and buttons, is one of the most crucial building blocks of modern iOS applications. Almost every app has this feature. SwiftUI brings some new approaches for how to show the Navigation Bar, set the title, and add buttons. So let's check it out."/><meta name="og:description" content="Navigating from one view to another, or simply showing a title and buttons, is one of the most crucial building blocks of modern iOS applications. Almost every app has this feature. SwiftUI brings some new approaches for how to show the Navigation Bar, set the title, and add buttons. So let's check it out."/><meta name="og:site_name" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:title" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:image" content="https://kristaps.me/og-image.png"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="og:type" content="website"/><meta name="og:url" content="https://kristaps.me"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@fassko"/><meta name="twitter:title" content="Kristaps Grinbergs"/><meta name="twitter:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="twitter:image" content="fb-og.png"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet"/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script src="/scripts/ga.js"></script><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs"/></head><body><header class="header"><div class="header-wrapper"><div class="main-title"><a href="/">Kristaps Grinbergs</a></div><nav class="nav-container"><nav><ul class="nav"><li class="nav-item"><a href="/">home</a></li><li class="nav-item"><a href="/blog">blog</a></li><li class="nav-item"><a href="/talks">talks</a></li><li class="nav-item"><a href="/about">about</a></li></ul></nav></nav></div></header><div class="wrapper"><section class="blog-list"><div class="blog-item"><h1><a class="blog-title" href="/blog/swiftui-navigationview">Cracking the Navigation Bar Secrets with SwiftUI</a></h1><div class="blog-date"><ul class="blog-tags"><li><a href="/tags/swift">swift</a></li><li><a href="/tags/ios">ios</a></li><li><a href="/tags/swiftui">swiftui</a></li><li><a href="/tags/navigationview">navigationview</a></li></ul>May 25, 2021</div><div class="blog-content"><p>Navigating from one view to another, or simply showing a title and buttons, is one of the most crucial building blocks of modern iOS applications. Almost every app has this feature. SwiftUI brings some new approaches for how to show the Navigation Bar, set the title, and add buttons. So let's check it out.</p><h2>Showing Navigation View</h2><p>To show a Navigation Bar using SwiftUI, we should use the <code>NavigationView</code> component that is responsible for this purpose. It requires that we provide the <code>Content</code> that is a <code>View</code> type. The <code>Content</code> can be anything from a text field to scrollable content. In short, it can be any SwiftUI view.</p><p>To show a title for the navigation, SwiftUI has a completely different approach than we are used to with UIKit. We should set it as a view modifier, not for the <code>NavigationView</code>, but the <code>Content</code>.</p><pre><code><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">NavigationView</span> {
+    <span class="type">Text</span>(<span class="string">"Hello, world!"</span>)
+      .<span class="call">navigationTitle</span>(<span class="string">"Title"</span>)
+  }
+}
+</code></pre><img src="/assets/swiftui-navigationview/navigation-title.png" alt="Navigation View with a Title"/><p>SwiftUI framework provides a means to specify the size of the <code>NavigationView</code>. We want to use the <code>.navigationBarTitleDisplayMode</code> modifier for the <code>Content</code> and provide a display mode. <code>DisplayMode</code> type is an enum that has three cases:</p><ul><li><code>automatic</code> - inherits from the previous navigation item;</li><li><code>inline</code> - small navigation size;</li><li><code>large</code> - large navigation size.</li></ul><p>Let's see how to use it in the code.</p><pre><code><span class="type">NavigationView</span> {
+  <span class="type">Text</span>(<span class="string">"Hello, world!"</span>)
+    .<span class="call">navigationTitle</span>(<span class="string">"Title"</span>)
+    .<span class="call">navigationBarTitleDisplayMode</span>(.<span class="dotAccess">inline</span>)     
+}
+</code></pre><img src="/assets/swiftui-navigationview/navigationview-small.png" alt="Small NavigationView"/><p>When we want to change the <code>NavigationView</code> to a larger size, we simply change the <code>.inline</code> to <code>.large</code>.</p><pre><code><span class="type">NavigationView</span> {
+  <span class="type">Text</span>(<span class="string">"Hello, world!"</span>)
+    .<span class="call">navigationTitle</span>(<span class="string">"Title"</span>)
+    .<span class="call">navigationBarTitleDisplayMode</span>(.<span class="dotAccess">large</span>)
+}
+</code></pre><h2>Add Navigation View Buttons</h2><p>Now that we know how to show the <code>NavigationView</code>, let's explore how to add buttons. I want to point out that previously with SwiftUI, we used the <code>.navigationBarItems</code> view modifier, but this is now deprecated. With the latest SwiftUI version, we should call the <code>.toolbar</code> modifier. Let's dig deeper into how to use it in various scenarios.</p><h3>Add a Single Button</h3><p>Let's add a <code>Button</code> to the leading and trailing side of the <code>NavigationView</code>. To achieve this, we need to use the <code>.toolbar</code> view modifier and pass the <code>.ToolbarItem</code> view. To initialize the <code>.ToolbarItem</code>, we should provide the placement and content. The placement parameter is a type <code>ToolbarItemPlacement</code>, which is a struct. There are a couple ways to manage the placement, but for now we will look into two of them:</p><ul><li><code>navigationBarLeading</code> - shows the button on the leading side of the navigation bar;</li><li><code>navigationBarTrailing</code> - shows the button on the trailing side of the navigation bar.</li></ul><pre><code><span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">NavigationView</span> {
+    <span class="type">Text</span>(<span class="string">"Buttons Example"</span>)
+      .<span class="call">navigationTitle</span>(<span class="string">"Buttons"</span>)
+      .<span class="call">toolbar</span> {
+        <span class="type">ToolbarItem</span>(placement: .<span class="dotAccess">navigationBarLeading</span>) {
+          <span class="type">Button</span>(action: {
+            <span class="call">print</span>(<span class="string">"Refresh"</span>)
+          }) {
+            <span class="type">Label</span>(<span class="string">"Send"</span>, systemImage: <span class="string">"paperplane.fill"</span>)
+          }
+        }
+        <span class="type">ToolbarItem</span>(placement: .<span class="dotAccess">navigationBarTrailing</span>) {
+          <span class="type">Button</span>(action: {
+            <span class="call">print</span>(<span class="string">"Refresh"</span>)
+          }) {
+            <span class="type">Label</span>(<span class="string">"Refresh"</span>, systemImage: <span class="string">"arrow.clockwise"</span>)
+          }
+        }
+      }
+  }
+}
+</code></pre><img src="/assets/swiftui-navigationview/navigationview-single-button.png" alt="Single Button NavigationView"/><h3>Add multiple buttons</h3><p>Now that we know how to add a single button, let's learn how to add multiple buttons. This time we need to use the <code>ToolbarItemGroup</code> that represents a group of toolbar items.</p><pre><code>.<span class="call">toolbar</span> {
+  <span class="type">ToolbarItemGroup</span>(placement: .<span class="dotAccess">navigationBarLeading</span>) {
+    <span class="type">Button</span>(action: {
+      <span class="call">print</span>(<span class="string">"Send"</span>)
+    }) {
+      <span class="type">Label</span>(<span class="string">"Send"</span>, systemImage: <span class="string">"paperplane.fill"</span>)
+    }
+  }
+
+  <span class="type">ToolbarItemGroup</span>(placement: .<span class="dotAccess">navigationBarTrailing</span>) {
+    <span class="type">Button</span>(action: {
+      <span class="call">print</span>(<span class="string">"Refresh"</span>)
+    }) {
+      <span class="type">Label</span>(<span class="string">"Refresh"</span>, systemImage: <span class="string">"arrow.clockwise"</span>)
+    }
+
+    <span class="type">Button</span>(action: {
+      <span class="call">print</span>(<span class="string">"Edit"</span>)
+    }) {
+      <span class="type">Label</span>(<span class="string">"Edit"</span>, systemImage: <span class="string">"slider.horizontal.3"</span>)
+    }
+  }
+}
+</code></pre><img src="/assets/swiftui-navigationview/navigationview-multiple-buttons.png" alt="Multiple Buttons NavigationView"/><p>When adding multiple buttons, we shouldn't go too crazy. Eventually it may become difficult to use the app because the buttons could cover up the the navigation bar title.</p><h2>Change Navigation View Color</h2><p>Right now, SwiftUI doesn’t have the option to change the color of the <code>NavigationView</code>. For that we need to turn back to UIKit and use the <code>UINavigationBarAppearance</code> object to customize the navigation bar.</p><p>To change the color of the SwiftUI navigation bar, we can add the <code>init</code> method to the SwiftUI view and change the navigation bar appearance inside there, like this:</p><pre><code><span class="keyword">init</span>() {
+  <span class="keyword">let</span> coloredAppearance = <span class="type">UINavigationBarAppearance</span>()
+  coloredAppearance.<span class="call">configureWithOpaqueBackground</span>()
+  coloredAppearance.<span class="property">backgroundColor</span> = .<span class="dotAccess">systemRed</span>
+  coloredAppearance.<span class="property">titleTextAttributes</span> = [.<span class="dotAccess">foregroundColor</span>: <span class="type">UIColor</span>.<span class="property">white</span>]
+  coloredAppearance.<span class="property">largeTitleTextAttributes</span> = [.<span class="dotAccess">foregroundColor</span>: <span class="type">UIColor</span>.<span class="property">white</span>]
+  
+  <span class="type">UINavigationBar</span>.<span class="call">appearance</span>().<span class="property">standardAppearance</span> = coloredAppearance
+  <span class="type">UINavigationBar</span>.<span class="call">appearance</span>().<span class="property">compactAppearance</span> = coloredAppearance
+  <span class="type">UINavigationBar</span>.<span class="call">appearance</span>().<span class="property">scrollEdgeAppearance</span> = coloredAppearance
+  
+  <span class="type">UINavigationBar</span>.<span class="call">appearance</span>().<span class="property">tintColor</span> = .<span class="dotAccess">white</span>
+}
+
+<span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">NavigationView</span> {
+    <span class="type">Text</span>(<span class="string">"Navigtion Bar with different color"</span>)
+      .<span class="call">navigationTitle</span>(<span class="string">"Title"</span>)
+  }
+}
+</code></pre><p>We can see from the code that we are doing multiple things, like changing the background color and title text color. We can use either system colors or bring in colors from the iOS app assets catalog.</p><img src="/assets/swiftui-navigationview/navigationview-custom-color.png" alt="Navigation Bar with custom color"/><h2>TL;DR</h2><p>The Navigation Bar is a vital element of modern iOS and iPadOS applications. A majority of apps have more than one screen and our users have to navigate back and forth inside our apps.</p><p>SwiftUI comes with a new view, <code>NavigationView</code>, and we are required to completely shift our thinking about the navigation and how to use it compared with the UIKit.</p><p>With SwiftUI, it is very straightforward to add navigation on the screen, change the title, and add buttons to the Navigation Bar. But if we want to change the color, we should go back to the UIKit. I believe this will change quite soon.</p><h2>Links</h2><ul><li><a href="https://github.com/fassko/SwiftUINavigationView">Sample code</a></li></ul><ul><li><a href="https://www.hackingwithswift.com/articles/216/complete-guide-to-navigationview-in-swiftui">The Complete Guide to NavigationView in SwiftUI</a></li><li><a href="https://www.simpleswiftguide.com/swiftui-navigationview-tutorial-with-examples/">SwiftUI NavigationView tutorial with examples</a></li><li><a href="https://youtu.be/kCJyhG8zjvY">Navigation Bar Styling in SwiftUI</a></li><li><a href="https://swiftuirecipes.com/blog/navigation-bar-styling-in-swiftui">Navigation bar styling in SwiftUI</a></li><li><a href="https://medium.com/@francisco.gindre/customizing-swiftui-navigation-bar-8369d42b8805">Customizing SwiftUI Navigation Bar</a></li><li><a href="https://medium.com/swlh/custom-navigationview-bar-in-swiftui-4b782eb68e94">Custom NavigationView Bar in SwiftUI</a></li><li><a href="https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-bar-items-to-a-navigation-view">https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-bar-items-to-a-navigation-view</a></li><li><a href="https://medium.com/@francisco.gindre/customizing-swiftui-navigation-bar-8369d42b8805">Customizing SwiftUI Navigation Bar</a></li></ul></div></div></section></div><footer class="footer"><p>Copyright © Kristaps Grinbergs. 2025.</p><p><a href="https://twitter.com/fassko" target="_blank">Twitter</a>•<a href="/feed.rss">RSS</a>•<a href="/about">Contact</a></p></footer></body></html>

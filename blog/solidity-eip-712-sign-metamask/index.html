@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Kristaps Grinbergs"/><link rel="canonical" href="https://kristaps.me/blog/solidity-eip-712-sign-metamask"/><meta name="twitter:url" content="https://kristaps.me/blog/solidity-eip-712-sign-metamask"/><meta name="og:url" content="https://kristaps.me/blog/solidity-eip-712-sign-metamask"/><title>What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask? | Kristaps Grinbergs</title><meta name="twitter:title" content="What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask? | Kristaps Grinbergs"/><meta name="og:title" content="What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask? | Kristaps Grinbergs"/><meta name="description" content="Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask."/><meta name="twitter:description" content="Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask."/><meta name="og:description" content="Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask."/><meta name="og:site_name" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:title" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:image" content="https://kristaps.me/og-image.png"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="og:type" content="website"/><meta name="og:url" content="https://kristaps.me"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@fassko"/><meta name="twitter:title" content="Kristaps Grinbergs"/><meta name="twitter:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="twitter:image" content="fb-og.png"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet"/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script src="/scripts/ga.js"></script><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs"/></head><body><header class="header"><div class="header-wrapper"><div class="main-title"><a href="/">Kristaps Grinbergs</a></div><nav class="nav-container"><nav><ul class="nav"><li class="nav-item"><a href="/">home</a></li><li class="nav-item"><a href="/blog">blog</a></li><li class="nav-item"><a href="/talks">talks</a></li><li class="nav-item"><a href="/about">about</a></li></ul></nav></nav></div></header><div class="wrapper"><section class="blog-list"><div class="blog-item"><h1><a class="blog-title" href="/blog/solidity-eip-712-sign-metamask">What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask?</a></h1><div class="blog-date"><ul class="blog-tags"><li><a href="/tags/solidity">Solidity</a></li><li><a href="/tags/web3">web3</a></li><li><a href="/tags/metamask">Metamask</a></li></ul>Jan 28, 2023</div><div class="blog-content"><p>Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask.</p><h2>What is EIP-712 standard?</h2><p>EIP-712 standard describes how data is structured, hashed, and signed. Signing a transaction has been around in crypto wallets like Metamask, but this approach aims to display that in a much more human-readable way that users can understand and review before signing.</p><h3>Structure a typed data</h3><p>The EIP-712 states how the typed data should be structured in a JSON document. Let's go over the main parts of it.</p><p>At first, we need to describe what the types would look like. It always starts describing the <code>EIP712Domain</code> type and follows with types that will be presented when signing.</p><p>Let's say we would like to add a new employee. That means we must introduce an <code>Employee</code> type with an inner <code>Address</code> type.</p><pre><code>types: {
+    <span class="type">EIP712Domain</span>: [
+      {
+        name: <span class="string">"name"</span>,
+        type: <span class="string">"string"</span>
+      },
+      {
+        name: <span class="string">"version"</span>,
+        type: <span class="string">"string"</span>
+      },
+      {
+        name: <span class="string">"verifyingContract"</span>,
+        type: <span class="string">"address"</span>
+      },
+      {
+        name: <span class="string">"salt"</span>,
+        type: <span class="string">"bytes32"</span>
+      }
+    ],
+    <span class="type">Employee</span>: [
+      { name: 'id', type: <span class="string">"uint256"</span> },
+      { name: 'name', type: 'string' },
+      { name: 'address', type: '<span class="type">Address</span>' }
+    ],
+    <span class="type">Address</span>: [
+      { name: 'address', type: <span class="string">"string"</span> },
+      { name: 'country', type: <span class="string">"string"</span> },
+      { name: 'phoneNumber', type: <span class="string">"string"</span> }
+    ]
+  }
+</code></pre><p>After that, we should pass on information about the domain specifics.</p><p>Let's go over the fields:</p><ul><li><code>name</code> is the smart contract name that this message will be sent to;</li><li><code>version</code> will always be <code>1</code>;</li><li><code>verifyingContract</code> is the smart contract address whose name is in <code>name</code> field;</li><li><code>salt</code> is the chain id in hex format that you can find the chain id from <a href="https://chainlist.org/">chainlist.org</a>.</li></ul><pre><code>domain: {
+  name: <span class="string">"AddEmployee"</span>,
+  version: <span class="string">"1"</span>,
+  verifyingContract: <span class="string">"0x5FbDB2315678afecb367f032d93F642f64180aa3"</span>,
+  salt: <span class="string">"0x0...05"</span>
+  }
+</code></pre><img src="/assets/eip-712/console-account.png" alt="Set account in developer console"/><p>After that, we will use the JSON data object we constructed according to the EIP-712 standard and save it in a variable.</p><pre><code>const msgData = <span class="type">JSON</span>.<span class="call">stringify</span>({
+  types: {
+    <span class="type">EIP712Domain</span>: [
+      {
+        name: <span class="string">"name"</span>,
+        type: <span class="string">"string"</span>
+      },
+      {
+        name: <span class="string">"version"</span>,
+        type: <span class="string">"string"</span>
+      },
+      {
+        name: <span class="string">"verifyingContract"</span>,
+        type: <span class="string">"address"</span>
+      },
+      {
+        name: <span class="string">"salt"</span>,
+        type: <span class="string">"bytes32"</span>
+      }
+    ],
+    <span class="type">Employee</span>: [
+      { name: 'id', type: <span class="string">"uint256"</span> },
+      { name: 'name', type: 'string' },
+      { name: 'address', type: '<span class="type">Address</span>' }
+    ],
+    <span class="type">Address</span>: [
+      { name: 'address', type: <span class="string">"string"</span> },
+      { name: 'country', type: <span class="string">"string"</span> },
+      { name: 'phoneNumber', type: <span class="string">"string"</span> }
+    ]
+  },
+  domain: {
+    name: <span class="string">"AddEmployee"</span>,
+    version: <span class="string">"1"</span>,
+    verifyingContract: <span class="string">"0x5FbDB2315678afecb367f032d93F642f64180aa3"</span>,
+    salt:
+      <span class="string">"0x0...05"</span>
+  },
+  primaryType: <span class="string">"Employee"</span>,
+  message: {
+    id: <span class="number">1111</span>,
+    name: <span class="string">"John"</span>,
+    address: {
+      address: '<span class="type">Infinity Loop</span> <span class="number">1</span>',
+      country: '<span class="type">USA</span>',
+      phoneNumber: '+<span class="number">123456789</span>'
+    }
+  }
+});
+</code></pre><img src="/assets/eip-712/typed-data-console.png" alt="EIP-712 typed JSON data in developer console"/><p>Now, we can finally sign the message by executing the <code>eth_signTypedData_v4</code> method.</p><pre><code>ethereum.<span class="call">request</span>({method: <span class="string">"eth_signTypedData_v4"</span>, params: [account, msgData]})
+</code></pre><p>Then Metamask will show the message data. We can once again verify if it is correct and sign it.</p><img src="/assets/eip-712/sign-message-metamask-console.png" alt="Signing message with Metamask"/><p>After we hit the sign button, we return the message hash that we can use in the smart contract.</p><img src="/assets/eip-712/message-hash.png" alt="Message hash"/><p>This data can be used on behalf of the signer to execute a smart contract on the blockchain, which we will look into in the next post.</p><h2>TL;DR</h2><p>The EIP-712 standard opens doors to sign a transaction and allows someone else to use this transaction. It helps to implement gasless transactions to avoid our users paying the gas fee and figuring out how to get native tokens like Ethereum, Matic, and others. This standard describes how to format the message in human-readable form in a crypto wallet like Metamask when a user signs it. After it is signed, we can use this signed transaction in a smart contract, but more on that in one of the following blog posts.</p><h2>Links</h2><ul><li><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712: Typed structured data hashing and signing</a></li><li><a href="https://docs.metamask.io/guide/signing-data.html#signtypeddata-v4">Signing Data with Metamask</a></li><li><a href="https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26">EIP712 is here: What to expect and how to use it</a></li><li><a href="https://blog.smlxl.io/meta-transactions-28047138ef6d">Meta-Transactions</a></li></ul></div></div></section></div><footer class="footer"><p>Copyright © Kristaps Grinbergs. 2025.</p><p><a href="https://twitter.com/fassko" target="_blank">Twitter</a>•<a href="/feed.rss">RSS</a>•<a href="/about">Contact</a></p></footer></body></html>

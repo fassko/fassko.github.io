@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Kristaps Grinbergs"/><link rel="canonical" href="https://kristaps.me/blog/swiftui-alert"/><meta name="twitter:url" content="https://kristaps.me/blog/swiftui-alert"/><meta name="og:url" content="https://kristaps.me/blog/swiftui-alert"/><title>How to use Alert with SwiftUI | Kristaps Grinbergs</title><meta name="twitter:title" content="How to use Alert with SwiftUI | Kristaps Grinbergs"/><meta name="og:title" content="How to use Alert with SwiftUI | Kristaps Grinbergs"/><meta name="description" content="Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer."/><meta name="twitter:description" content="Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer."/><meta name="og:description" content="Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer."/><meta name="og:site_name" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:title" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:image" content="https://kristaps.me/og-image.png"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="og:type" content="website"/><meta name="og:url" content="https://kristaps.me"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@fassko"/><meta name="twitter:title" content="Kristaps Grinbergs"/><meta name="twitter:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="twitter:image" content="fb-og.png"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet"/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script src="/scripts/ga.js"></script><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs"/></head><body><header class="header"><div class="header-wrapper"><div class="main-title"><a href="/">Kristaps Grinbergs</a></div><nav class="nav-container"><nav><ul class="nav"><li class="nav-item"><a href="/">home</a></li><li class="nav-item"><a href="/blog">blog</a></li><li class="nav-item"><a href="/talks">talks</a></li><li class="nav-item"><a href="/about">about</a></li></ul></nav></nav></div></header><div class="wrapper"><section class="blog-list"><div class="blog-item"><h1><a class="blog-title" href="/blog/swiftui-alert">How to use Alert with SwiftUI</a></h1><div class="blog-date"><ul class="blog-tags"><li><a href="/tags/swift">swift</a></li><li><a href="/tags/ios">ios</a></li><li><a href="/tags/swiftui">swiftui</a></li><li><a href="/tags/alert">alert</a></li></ul>Feb 14, 2021</div><div class="blog-content"><p>Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer.</p><p>SwiftUI has the <code>Alert</code> component, and there are a couple of ways how to use it. Let's check it out.</p><h2>Alert</h2><p>One of the easiest ways how to show the alert with SwiftUI is to have a local state variable to indicate if the alert should be visible or not. After that, we need to add a view modifier <code>.alert</code> that requires returning the <code>Alert</code> view.</p><pre><code><span class="keyword">@State private var</span> showAlert = <span class="keyword">false
+
+var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">VStack</span> {
+    <span class="type">Button</span>(<span class="string">"Show alert"</span>) {
+      showAlert = <span class="keyword">true</span>
+    }
+    .<span class="call">alert</span>(isPresented: <span class="property">$showAlert</span>) {
+      <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Title"</span>))
+    }
+  }
+}
+</code></pre><p>In the previous example, we saw that the <code>showAlert</code> state variable keeps a <code>bool</code> value. At first, the alert isn't visible, and it is <code>false</code>. When we press the button, we need to change the state variable to <code>true</code> which triggers the alert to be visible on the screen.</p><img src="/assets/swiftui-alert/alert.png" alt="Alert with SwiftUI"/><p>We can see that by default, the alert has an OK button to dismiss it. We will try to add more buttons later in this post.</p><p>For the <code>Alert</code> view, we can provide not only <code>title</code> but also a <code>message</code> field that is one under another.</p><pre><code><span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Title"</span>),
+      message: <span class="type">Text</span>(<span class="string">"Message"</span>))
+</code></pre><img src="/assets/swiftui-alert/alert-with-message.png" alt="Alert with message"/><h2>Alert with identifiable item</h2><p>Another way to present an alert in the SwiftUI is by using an identifiable view state variable. Using this approach SwiftUI layout system passes the value of this state variable, and we can populate the alert title, message, or event buttons using its contents. The bonus is that once this item changes, the SwiftUI layout system would update the alert with the new value, which is a pretty neat feature that we get for free.</p><p>Let's see how to do it in the code. At first, we need to set up an object that implements the <code>Identifiable</code> protocol. Let's create a user structure. We need to create an <code>id</code> constant, and we could use the <code>UUID</code> structure that represents a globally unique value that can identify values between them.</p><pre><code><span class="keyword">struct</span> User: <span class="type">Identifiable</span> {
+  <span class="keyword">let</span> id: <span class="type">UUID</span>
+  <span class="keyword">let</span> name: <span class="type">String</span>
+}
+</code></pre><p>Next, let's move to the SwiftUI part and create our view.</p><pre><code><span class="keyword">@State private var</span> user: <span class="type">User</span>?
+
+<span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">VStack</span> {
+    <span class="type">Button</span>(<span class="string">"Show alert"</span>) {
+      user = <span class="type">User</span>(id: <span class="type">UUID</span>(), name: <span class="string">"Kristaps"</span>)
+    }
+    .<span class="call">alert</span>(item: <span class="property">$user</span>) { user <span class="keyword">in</span>
+      <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Hello,</span> \(user.<span class="property">name</span>)<span class="string">!"</span>))
+    }
+  }
+}
+</code></pre><p>It is important to note that the view state variable is optional because SwiftUI determines if the alert should be visible on the screen.</p><p>When using the <code>.alert</code> view modifier, we have the closure with an input variable which is the current value of the state variable. This way, we could populate, for instance, the alert title.</p><img src="/assets/swiftui-alert/alert-identifiable-item.png" alt="Alert with identifiable item"/><h2>Alert Buttons</h2><p>Now we know how to show an alert on the screen using SwiftUI with two different approaches. But how to show more than one button and customize them?</p><p>To add buttons for the alert, we could use either the <code>Alert</code> initializer specifying the dismiss button, or have the way to initialize the <code>Alert</code>, providing the primary and secondary button.</p><p>Let's create a confirmation alert that would ask our users if they want to delete something from a list.</p><pre><code><span class="keyword">@State private var</span> showAlert = <span class="keyword">false
+  
+var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">VStack</span> {
+    <span class="type">Button</span>(<span class="string">"Show alert"</span>) {
+      showAlert = <span class="keyword">true</span>
+    }
+    .<span class="call">alert</span>(isPresented: <span class="property">$showAlert</span>) {
+      <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Do you want to delete this item?"</span>),
+        primaryButton: .<span class="call">cancel</span>(),
+        secondaryButton: .<span class="call">destructive</span>(<span class="type">Text</span>(<span class="string">"Delete"</span>)) {
+          <span class="call">print</span>(<span class="string">"Delete item"</span>)
+        }
+      )
+    }
+  }
+}
+</code></pre><p>Let's unwrap the code. To show the alert, we are using our first approach with the view state variable that indicates when we want to show the alert on the screen.</p><p>Inside the <code>.alert</code> view modifier where we are constructing the <code>Alert</code> representation, we see that we are using a different initializer to provide information about alert buttons. That is a specific <a href="https://developer.apple.com/documentation/swiftui/alert/button">button</a> that represents an operation of an alert. There are four different styles of buttons we could use in SwiftUI:</p><ul><li>default;</li><li>cancel - indicates cancellation with a system provided label;</li><li>cancel - similar like above, but with a custom label;</li><li>destructive - indicates destructive action, for example, deletion.</li></ul><p>We are using the cancel and destructive button styles for our confirmation alert because our users could cancel or delete the item from a list.</p><img src="/assets/swiftui-alert/alert-buttons.png" alt="Alert with buttons"/><h2>Show multiple alerts</h2><p>To show multiple alerts on a view, we have two ways.</p><h3>Using state variables</h3><p>The first is to keep a view state variable per each alert. But we need to add the <code>.alert</code> modifier, not for the full view, but we can add it, for example, for the button that invokes the alert. If we add two <code>.alert</code> modifiers one after another, the SwiftUI layout engine will show only the first one.</p><pre><code><span class="keyword">@State var</span> firstAlertShown = <span class="keyword">false
+@State var</span> secondAlertShown = <span class="keyword">false
+
+var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+  <span class="type">VStack</span>(spacing: <span class="number">50</span>) {
+    <span class="type">Button</span>(<span class="string">"Show first alert"</span>) {
+      firstAlertShown = <span class="keyword">true</span>
+    }
+    .<span class="call">alert</span>(isPresented: <span class="property">$firstAlertShown</span>) {
+      <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"First alert"</span>))
+    }
+
+    <span class="type">Button</span>(<span class="string">"Show second alert"</span>) {
+      secondAlertShown = <span class="keyword">true</span>
+    }
+    .<span class="call">alert</span>(isPresented: <span class="property">$secondAlertShown</span>) {
+      <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Second alert"</span>))
+    }
+  }
+}
+</code></pre><h3>Using identifiable state variable</h3><p>I like the second approach much better - it is more type safe. At first, we need to set up a structure representing the alert that conforms to the <code>Identifiable</code> protocol. Inside this structure, we have a local enumeration type representing all alerts types we would like to show and return the specific alert view. Ideally, it should be separated, but to show this example, I kept it like this.</p><pre><code><span class="keyword">struct</span> AlertIdentifier: <span class="type">Identifiable</span> {
+  <span class="keyword">enum</span> ActiveAlert {
+    <span class="keyword">case</span> first
+    <span class="keyword">case</span> second
+
+    <span class="keyword">var</span> alertView: <span class="type">Alert</span> {
+      <span class="keyword">switch self</span> {
+      <span class="keyword">case</span> .<span class="dotAccess">first</span>:
+        <span class="keyword">return</span> <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"First alert"</span>))
+      <span class="keyword">case</span> .<span class="dotAccess">second</span>:
+        <span class="keyword">return</span> <span class="type">Alert</span>(title: <span class="type">Text</span>(<span class="string">"Second alert"</span>))
+      }
+    }
+  }
+
+  <span class="keyword">var</span> id: <span class="type">ActiveAlert</span>
+}
+</code></pre><p>Next, we want to create the SwiftUI view and use it. Our view would have the local state variable with our new <code>AlertIdentifier</code> type when invoking and constructing the alert. We can use it and the computed <code>alertView</code> property that we had built before inside the <code>ActiveAlert</code> enum.</p><pre><code><span class="keyword">struct</span> MultipleAlertsViewIdentifiable: <span class="type">View</span> {
+  <span class="keyword">@State var</span> alert: <span class="type">AlertIdentifier</span>?
+
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">VStack</span>(spacing: <span class="number">50</span>) {
+      <span class="type">Button</span>(<span class="string">"Show first alert"</span>) {
+        alert = <span class="type">AlertIdentifier</span>(id: .<span class="dotAccess">first</span>)
+      }
+
+      <span class="type">Button</span>(<span class="string">"Show second alert"</span>) {
+        alert = <span class="type">AlertIdentifier</span>(id: .<span class="dotAccess">second</span>)
+      }
+    }
+    .<span class="call">alert</span>(item: <span class="property">$alert</span>) {
+      $0.<span class="property">id</span>.<span class="property">alertView</span>
+    }
+  }
+}
+</code></pre><p>A lot to unpack here, but the main point is that it's safe to show multiple alerts on the same view without adding a state variable for each alert. Using this approach, we don't need to worry if our alert would be shown to the user because we don't have multiple <code>.alert</code> view modifiers scattered around the view itself.</p><h2>TL;DR</h2><p>Showing an alert to inform our app users or ask for confirmation is essential for the user interface. We can show the alert with SwiftUI in two ways. The first one is by using a state variable that indicates if the alert is visible. The second uses an identifiable state variable that can be used to populate the alert title, message, and buttons.</p><p>We can set up multiple types of buttons for the alert. If we would like to show more than two, we need to use the SwiftUI sheets.</p><p>To present multiple alerts in the same view, we can achieve it either by multiple view state variables or by using one identifiable structure that would be responsible for creating the alert itself.</p><h2>Links</h2><ul><li><a href="https://github.com/fassko/swiftui-alert">Sample code</a></li></ul><ul><li><a href="https://developer.apple.com/documentation/swiftui/alert">Alert official documentation</a></li><li><a href="https://developer.apple.com/documentation/swiftui/alert/button">Alert Button official documentation</a></li><li><a href="https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-an-alert">How to show an alert</a></li><li><a href="https://www.hackingwithswift.com/books/ios-swiftui/working-with-identifiable-items-in-swiftui">Working with Identifiable items in SwiftUI</a></li><li><a href="http://www.thomashanning.com/swiftui-alert/">SwiftUI: Alert</a></li></ul></div></div></section></div><footer class="footer"><p>Copyright © Kristaps Grinbergs. 2025.</p><p><a href="https://twitter.com/fassko" target="_blank">Twitter</a>•<a href="/feed.rss">RSS</a>•<a href="/about">Contact</a></p></footer></body></html>

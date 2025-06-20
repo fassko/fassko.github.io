@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Kristaps Grinbergs"/><link rel="canonical" href="https://kristaps.me/blog/swiftui-map-annotations"/><meta name="twitter:url" content="https://kristaps.me/blog/swiftui-map-annotations"/><meta name="og:url" content="https://kristaps.me/blog/swiftui-map-annotations"/><title>Exploring SwiftUI map custom annotations | Kristaps Grinbergs</title><meta name="twitter:title" content="Exploring SwiftUI map custom annotations | Kristaps Grinbergs"/><meta name="og:title" content="Exploring SwiftUI map custom annotations | Kristaps Grinbergs"/><meta name="description" content="We [explored](https://kristaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them. Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications."/><meta name="twitter:description" content="We [explored](https://kristaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them. Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications."/><meta name="og:description" content="We [explored](https://kristaps.me/blog/swiftui-mapview/) the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them. Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications."/><meta name="og:site_name" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:title" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:image" content="https://kristaps.me/og-image.png"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="og:type" content="website"/><meta name="og:url" content="https://kristaps.me"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@fassko"/><meta name="twitter:title" content="Kristaps Grinbergs"/><meta name="twitter:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="twitter:image" content="fb-og.png"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet"/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script src="/scripts/ga.js"></script><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs"/></head><body><header class="header"><div class="header-wrapper"><div class="main-title"><a href="/">Kristaps Grinbergs</a></div><nav class="nav-container"><nav><ul class="nav"><li class="nav-item"><a href="/">home</a></li><li class="nav-item"><a href="/blog">blog</a></li><li class="nav-item"><a href="/talks">talks</a></li><li class="nav-item"><a href="/about">about</a></li></ul></nav></nav></div></header><div class="wrapper"><section class="blog-list"><div class="blog-item"><h1><a class="blog-title" href="/blog/swiftui-map-annotations">Exploring SwiftUI map custom annotations</a></h1><div class="blog-date"><ul class="blog-tags"><li><a href="/tags/swift">swift</a></li><li><a href="/tags/ios">ios</a></li><li><a href="/tags/swiftui">swiftui</a></li><li><a href="/tags/localization">localization</a></li></ul>Aug 25, 2021</div><div class="blog-content"><p>We <a href="https://kristaps.me/blog/swiftui-mapview/">explored</a> the Mapview in SwiftUI a while back. This time we will look into creating custom map annotations, the limitations, and how to overcome some of them.</p><p>Placing annotations on the map, like marking a specific place, is one of the most critical tasks when showing a map in our iOS applications.</p><h2>MapAnnotation protocol</h2><p>We need to look into the <a href="https://developer.apple.com/documentation/mapkit/mapannotation">MapAnnotation</a>, when working with custom map annotations in SwiftUI. We can customize it exactly how we want and then place it on the map.</p><p>As a reminder, to show annotations on the map we need a list of places that conform to the <code>Identifiable</code> protocol and then use it when initializing the <code>Map</code> view in an array.</p><pre><code><span class="keyword">struct</span> Place: <span class="type">Identifiable</span> {
+  <span class="keyword">let</span> id = <span class="type">UUID</span>()
+  <span class="keyword">var</span> name: <span class="type">String</span>
+  <span class="keyword">var</span> coordinate: <span class="type">CLLocationCoordinate2D</span>
+}
+
+<span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+  <span class="keyword">@State private var</span> region = <span class="type">MKCoordinateRegion</span>(center: <span class="type">CLLocationCoordinate2D</span>(latitude: <span class="number">40.748433</span>, longitude: -<span class="number">73.985656</span>), span: <span class="type">MKCoordinateSpan</span>(latitudeDelta: <span class="number">0.01</span>, longitudeDelta: <span class="number">0.01</span>))
+  
+  <span class="keyword">var</span> empireStateBuilding =
+  <span class="type">Place</span>(name: <span class="string">"Empire State Building"</span>, coordinate: <span class="type">CLLocationCoordinate2D</span>(latitude: <span class="number">40.748433</span>, longitude: -<span class="number">73.985656</span>))
+  
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">Map</span>(coordinateRegion: <span class="property">$region</span>,
+        annotationItems: [empireStateBuilding]
+    ) { place <span class="keyword">in</span>
+      <span class="comment">// ... create a custom MapAnnotation</span>
+    }
+  }
+}
+</code></pre><p>Now is the time to create a custom map annotation. Let's make a custom view so we could reuse it. We can use the map circle with fill from the SFSymbols and place a pin on the bottom to show the exact location precisely.</p><pre><code><span class="keyword">struct</span> PlaceAnnotationView: <span class="type">View</span> {
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">VStack</span>(spacing: <span class="number">0</span>) {
+      <span class="type">Image</span>(systemName: <span class="string">"mappin.circle.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">title</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+      
+      <span class="type">Image</span>(systemName: <span class="string">"arrowtriangle.down.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">caption</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+        .<span class="call">offset</span>(x: <span class="number">0</span>, y: -<span class="number">5</span>)
+    }
+  }
+}
+</code></pre><img src="/assets/swiftui-custom-map-annotations/map-pin.png" alt="Custom map pin view"/><p>We can use it in our 'Map' closure block now.</p><pre><code>   <span class="type">Map</span>(coordinateRegion: <span class="property">$region</span>,
+        annotationItems: [empireStateBuilding]
+    ) { place <span class="keyword">in</span>
+      <span class="type">MapAnnotation</span>(coordinate: place.<span class="property">coordinate</span>) {
+        <span class="type">PlaceAnnotationView</span>()
+      }
+    }
+</code></pre><img src="/assets/swiftui-custom-map-annotations/empire-state-building-annotation.png" alt="Empire State Building custom annotation"/><p>When zooming in or out, we see that annotation is placed precisely where the Empire State Building is located.</p><p>After we have the annotation on the map, we would like to somehow interact with it. Let's explore in the following sections how to show an annotation title and navigate when clicking on it.</p><h2>Show and hide the annotation title</h2><p>To show (and hide) the annotation title, we need to include it in the custom annotation view because we are constructing it manually.</p><p>We can add the title in the <code>PlaceAnnotationView</code> <code>VStack</code> and show or hide it when a user taps it.</p><pre><code><span class="keyword">struct</span> PlaceAnnotationView: <span class="type">View</span> {
+  <span class="keyword">@State private var</span> showTitle = <span class="keyword">true
+  
+  let</span> title: <span class="type">String</span>
+  
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">VStack</span>(spacing: <span class="number">0</span>) {
+      <span class="type">Text</span>(title)
+        .<span class="call">font</span>(.<span class="dotAccess">callout</span>)
+        .<span class="call">padding</span>(<span class="number">5</span>)
+        .<span class="call">background</span>(<span class="type">Color</span>(.<span class="dotAccess">white</span>))
+        .<span class="call">cornerRadius</span>(<span class="number">10</span>)
+        .<span class="call">opacity</span>(showTitle ? <span class="number">0</span> : <span class="number">1</span>)
+      
+      <span class="type">Image</span>(systemName: <span class="string">"mappin.circle.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">title</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+      
+      <span class="type">Image</span>(systemName: <span class="string">"arrowtriangle.down.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">caption</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+        .<span class="call">offset</span>(x: <span class="number">0</span>, y: -<span class="number">5</span>)
+    }
+    .<span class="call">onTapGesture</span> {
+      <span class="call">withAnimation</span>(.<span class="dotAccess">easeInOut</span>) {
+        showTitle.<span class="call">toggle</span>()
+      }
+    }
+  }
+}
+</code></pre><p>We can make it appear and disappear with animation using the view state variable and changing the opacity accordingly. It would give that additional nice touch.</p><img src="/assets/swiftui-custom-map-annotations/show-hide-annotation-title.gif" alt="Show and hide custom annotation title"/><p>Another option is to show the annotation title all the time. In that case, our app users would understand without tapping what this place is.</p><pre><code><span class="keyword">struct</span> PlaceAnnotationView: <span class="type">View</span> {
+  <span class="keyword">let</span> title: <span class="type">String</span>
+  
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">VStack</span>(spacing: <span class="number">0</span>) {
+      <span class="type">Text</span>(title)
+        .<span class="call">font</span>(.<span class="dotAccess">callout</span>)
+        .<span class="call">padding</span>(<span class="number">5</span>)
+        .<span class="call">background</span>(<span class="type">Color</span>(.<span class="dotAccess">white</span>))
+        .<span class="call">cornerRadius</span>(<span class="number">10</span>)
+      
+      <span class="type">Image</span>(systemName: <span class="string">"mappin.circle.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">title</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+      
+      <span class="type">Image</span>(systemName: <span class="string">"arrowtriangle.down.fill"</span>)
+        .<span class="call">font</span>(.<span class="dotAccess">caption</span>)
+        .<span class="call">foregroundColor</span>(.<span class="dotAccess">red</span>)
+        .<span class="call">offset</span>(x: <span class="number">0</span>, y: -<span class="number">5</span>)
+    }
+  }
+}
+</code></pre><h2>Navigation from map annotation</h2><p>When a user taps the annotation, we would like to navigate to a different view and show extra information about this place on the map. To do so, we can put the custom annotation view inside the <code>NavigationLink</code> and then navigate to the location details view.</p><pre><code><span class="type">MapAnnotation</span>(coordinate: place.<span class="property">coordinate</span>) {
+  <span class="type">NavigationLink</span> {
+    <span class="type">LocationDetailsView</span>(place: place)
+  } label: {
+    <span class="type">PlaceAnnotationView</span>(title: place.<span class="property">name</span>)
+  }
+}
+</code></pre><p>A user will be brought to the details screen after tapping the annotation. That's it!</p><img src="/assets/swiftui-custom-map-annotations/navigate.gif" alt="Navigate from the custom annotation"/><h2>TL;DR</h2><p>Marking a place on the map with annotation is a significant feature when using a map view in iOS apps. We want to do it with a custom annotation view in many cases.</p><p>With SwiftUI, we can create custom annotations and show them on the map in a straightforward manner. It is very nice to use this approach because we have all the SwiftUI features like stacks, navigation, and more at our disposal.</p><h2>Links</h2><ul><li><a href="https://github.com/fassko/SwiftUIMapCustomAnnotations">Sample code</a></li></ul><ul><li><a href="https://developer.apple.com/documentation/mapkit/mapannotation">MapAnnotation documentation</a></li><li><a href="https://developer.apple.com/documentation/mapkit/mapannotationprotocol">MapAnnotationProtocol documentation</a></li><li><a href="https://www.youtube.com/watch?v=vfWxwDfX30I">Adding Annotations to Map in SwiftUI</a></li><li><a href="https://swiftuirecipes.com/blog/map-with-annotations-in-swiftui">Map with Annotations in SwiftUI</a></li><li><a href="https://www.hackingwithswift.com/quick-start/swiftui/how-to-show-annotations-in-a-map-view">How to show annotations in a Map view</a></li><li><a href="https://www.appcoda.com/swiftui-map/">How to Work with SwiftUI Maps and Annotations</a></li></ul></div></div></section></div><footer class="footer"><p>Copyright © Kristaps Grinbergs. 2025.</p><p><a href="https://twitter.com/fassko" target="_blank">Twitter</a>•<a href="/feed.rss">RSS</a>•<a href="/about">Contact</a></p></footer></body></html>
