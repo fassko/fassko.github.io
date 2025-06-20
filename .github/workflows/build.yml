@@ -12,7 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
-    - name: Deploy with Publish
+    - name: Setup Swift
+      uses: swift-actions/setup-swift@v1
+      with:
+        swift-version: '5.9'
+
+    - name: Show Swift version
+      run: swift --version
+
+    - name: Show package dependencies
+      run: swift package show-dependencies
+
+    - name: Build with Publish
       run: swift run
+      env:
+        SWIFT_BACKTRACE: 1
