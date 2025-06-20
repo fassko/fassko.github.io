@@ -9,7 +9,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-22.04
     container:
-      image: swift:5.7-focal
+      image: swift:5.9-focal
 
     steps:
     - uses: actions/checkout@v4
