@@ -1,43 +1,30 @@
-name: Build
-
-on:
-  push:
-    branches-ignore: [master, develop]
-  pull_request:
-    branches-ignore: [master, develop]
-
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install dependencies for Swift
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          clang libicu-dev libpython3-dev libcurl4-openssl-dev \
+          libxml2-dev libssl-dev pkg-config tzdata git
+
     - name: Install Swift 5.7.3
       run: |
         SWIFT_VERSION=5.7.3
-        SWIFT_PLATFORM=ubuntu20.04
-        SWIFT_URL="https://download.swift.org/swift-${SWIFT_VERSION}-release/${SWIFT_PLATFORM}/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}.tar.gz"
-        wget -q $SWIFT_URL
-        tar xzf swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}.tar.gz
-        echo "$PWD/swift-${SWIFT_VERSION}-RELEASE-${SWIFT_PLATFORM}/usr/bin" >> $GITHUB_PATH
+        PLATFORM=ubuntu20.04  # Swift 5.7 was built for 20.04
+        URL="https://download.swift.org/swift-${SWIFT_VERSION}-release/${PLATFORM}/swift-${SWIFT_VERSION}-RELEASE-${PLATFORM}.tar.gz"
+
+        wget -q $URL
+        tar xzf swift-${SWIFT_VERSION}-RELEASE-${PLATFORM}.tar.gz
+        echo "$PWD/swift-${SWIFT_VERSION}-RELEASE-${PLATFORM}/usr/bin" >> $GITHUB_PATH
 
     - name: Show Swift version
       run: swift --version
 
-    - name: Show system info
-      run: |
-        uname -a
-        lsb_release -a
-
-    - name: Clean build
-      run: swift package clean
-
-    - name: Show package dependencies
-      run: swift package show-dependencies
-
-    - name: Build with Publish
-      run: swift run
-      env:
-        SWIFT_BACKTRACE: 1
+    - name: Build project
+      run: swift build
