@@ -10,7 +10,7 @@ description: This post takes a closer look at the `approve()` function in the ER
 * this time I will go into depth of approve function of this standard
 * it approves the spender to use up to defined amount to spend caller's funds
 * it is used in smart contracts to interact with dapps
-* be careful to set before 0 and then the correct value, if you lower then spender can spend both amounts
+* be careful to set before 0 and then the correct value, if you lower than spender can spend both amounts
   attack vector
   https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
 
