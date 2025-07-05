@@ -1,7 +1,7 @@
 ---
 date: 2022-09-05 00:00
 title: Exploring ERC20 fungible token standard in Solidity
-tags: Solidity, web3, ERC20
+tags: Solidity, web3, ER-C20
 description: This time let's talk about fungible tokens, one of the main building blocks in DeFi. These tokens can represent coins, gold, grain, and other assets that can be exchanged for them. We will look into one of the first Ethereum Improvement Proposal with number 20. This token standard is widely known as ERC20 and describes an interface for tokens within smart contracts. Functions like token transferring, approving spending, creating, and others are defined by this ERC20 standard.
 ---
 

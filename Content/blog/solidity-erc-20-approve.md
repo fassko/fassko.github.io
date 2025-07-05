@@ -1,7 +1,7 @@
 ---
 date: 2025-07-05 00:00
 title: Understanding approve() in ERC-20: Why It Matters and How to Use It Safely
-tags: Solidity, web3, ERC20
+tags: Solidity, web3, ERC-20
 description: This post takes a closer look at the `approve()` function in the ERC-20 token standard. While commonly used in DeFi applications, it introduces a huge risk if not handled correctly. Learn how to use it safely and avoid known vulnerabilities.
 ---
 
