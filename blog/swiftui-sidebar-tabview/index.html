@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="og:site_name" content="Kristaps Grinbergs"/><link rel="canonical" href="https://kristaps.me/blog/swiftui-sidebar-tabview"/><meta name="twitter:url" content="https://kristaps.me/blog/swiftui-sidebar-tabview"/><meta name="og:url" content="https://kristaps.me/blog/swiftui-sidebar-tabview"/><title>Improve iPad sidebar navigation on the iPhone with SwiftUI | Kristaps Grinbergs</title><meta name="twitter:title" content="Improve iPad sidebar navigation on the iPhone with SwiftUI | Kristaps Grinbergs"/><meta name="og:title" content="Improve iPad sidebar navigation on the iPhone with SwiftUI | Kristaps Grinbergs"/><meta name="description" content="We learned how to add a sidebar for an iPad in the previous blog post, but that approach isn't that great for an iPhone. It looks pretty weird, and once we configure a default view, it automatically navigates to it once iPhone app starts. This isn't great on a phone but makes total sense on an iPad. We can improve that by showing a sidebar for an iPad and a TabView on an iPhone."/><meta name="twitter:description" content="We learned how to add a sidebar for an iPad in the previous blog post, but that approach isn't that great for an iPhone. It looks pretty weird, and once we configure a default view, it automatically navigates to it once iPhone app starts. This isn't great on a phone but makes total sense on an iPad. We can improve that by showing a sidebar for an iPad and a TabView on an iPhone."/><meta name="og:description" content="We learned how to add a sidebar for an iPad in the previous blog post, but that approach isn't that great for an iPhone. It looks pretty weird, and once we configure a default view, it automatically navigates to it once iPhone app starts. This isn't great on a phone but makes total sense on an iPad. We can improve that by showing a sidebar for an iPad and a TabView on an iPhone."/><meta name="og:site_name" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:title" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="og:image" content="https://kristaps.me/og-image.png"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="og:type" content="website"/><meta name="og:url" content="https://kristaps.me"/><meta name="og:image:secure_url" content="https://kristaps.me/og-image.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@fassko"/><meta name="twitter:title" content="Kristaps Grinbergs"/><meta name="twitter:description" content="Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0"/><meta name="twitter:image" content="fb-og.png"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet"/><link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120.png"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script src="/scripts/ga.js"></script><meta name="twitter:card" content="summary"/><link rel="stylesheet" href="/styles.css" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><link rel="shortcut icon" href="/images/favicon.png" type="image/png"/><link rel="alternate" href="/feed.rss" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs"/></head><body><header class="header"><div class="header-wrapper"><div class="main-title"><a href="/">Kristaps Grinbergs</a></div><nav class="nav-container"><nav><ul class="nav"><li class="nav-item"><a href="/">home</a></li><li class="nav-item"><a href="/blog">blog</a></li><li class="nav-item"><a href="/talks">talks</a></li><li class="nav-item"><a href="/about">about</a></li></ul></nav></nav></div></header><div class="wrapper"><section class="blog-list"><div class="blog-item"><h1><a class="blog-title" href="/blog/swiftui-sidebar-tabview">Improve iPad sidebar navigation on the iPhone with SwiftUI</a></h1><div class="blog-date"><ul class="blog-tags"><li><a href="/tags/swift">swift</a></li><li><a href="/tags/ios">ios</a></li><li><a href="/tags/swiftui">swiftui</a></li><li><a href="/tags/sidebar">sidebar</a></li><li><a href="/tags/ipad">ipad</a></li></ul>Nov 21, 2021</div><div class="blog-content"><p>We learned how to add a sidebar for an iPad in the previous blog post, but that approach isn't that great for an iPhone. It looks pretty weird, and once we configure a default view, it automatically navigates to it once iPhone app starts. This isn't great on a phone but makes total sense on an iPad. We can improve that by showing a sidebar for an iPad and a TabView on an iPhone.</p><h2>Checking if the device is an iPad</h2><p>At first, we need to distinguish whether an app is running on iPhone or iPad. To do that, we should use the <code>UIUserInterfaceIdiom</code> enum. It can answer the question of what kind of device the app is running, starting with a phone and ending with a car within carplay.</p><p>This time we are interested in two enum cases:</p><ul><li><code>phone</code> - interface for iPhone or iPod touch;</li><li><code>pad</code> - interface for iPad.</li></ul><p>To get the current device interface, we need to access it from the UIDevice class that represents the current running device. To retrieve the user interface idiom, we need to get it from the existing class variable from the UIDevice class. Then from the <code>userInterfaceIdiom</code> variable, we get the current device idiom.</p><p>To access this in a bit nicer way, we can extend the <code>UIDevice</code> class and add a new static variable that would be a shorthand version of the process explained before.</p><pre><code><span class="keyword">extension</span> <span class="type">UIDevice</span> {
+  <span class="keyword">static var</span> idiom: <span class="type">UIUserInterfaceIdiom</span> {
+    <span class="type">UIDevice</span>.<span class="property">current</span>.<span class="property">userInterfaceIdiom</span>
+  }
+}
+</code></pre><p>To make it even more sugar-coated, we can add two static variables to see if the device is an iPhone or an iPad.</p><pre><code><span class="keyword">extension</span> <span class="type">UIDevice</span> {
+<span class="keyword">static var</span> isIpad: <span class="type">Bool</span> {
+    idiom == .<span class="dotAccess">pad</span>
+  }
+  
+  <span class="keyword">static var</span> isiPhone: <span class="type">Bool</span> {
+    idiom == .<span class="dotAccess">phone</span>
+  }
+}
+</code></pre><h2>Dividing navigation</h2><p>Now that we know what kind of device our app users have, we can divide the navigation. That means we are going to use the <code>TabView</code> and for an iPad - sidebar for an iPhone.</p><p>After creating a new SwiftUI project with the Xcode, we could separate the navigation in the <code>ContentView.swift</code> file. Then right in the <code>body</code> we can add the logical statement checking if the device is an iPad, and in another way, it can be a phone view.</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="keyword">if</span> <span class="type">UIDevice</span>.<span class="property">isIpad</span> {
+     <span class="comment">// iPad view</span>
+    } <span class="keyword">else</span> {
+	    <span class="comment">// iPhone view</span>
+    }
+  }
+}
+</code></pre><p>Now we need to go over both steps to add a <a href="https://kristaps.me/blog/swiftui-sidebar/">sidebar for the iPad</a> and a <a href="https://kristaps.me/blog/swiftui-tabview/">tabview for the iPhone</a>. We have looked into doing both of these tasks before, so we aren't doing that in-depth again. Complete code you can check in the <a href="https://github.com/fassko/SwiftUITabViewSidebar">sample project</a>.</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="keyword">if</span> <span class="type">UIDevice</span>.<span class="property">isIpad</span> {
+      <span class="type">NavigationView</span> {
+        <span class="type">List</span> {
+          <span class="type">NavigationLink</span>(destination: <span class="type">DashboardView</span>()) {
+            <span class="type">Label</span>(<span class="string">"Dashboard"</span>, systemImage: <span class="string">"square.dashed"</span>)
+          }
+
+          <span class="comment">// ...</span>
+        }
+      
+        <span class="type">DashboardView</span>()
+      }
+    } <span class="keyword">else</span> {
+      <span class="type">TabView</span> {
+        <span class="type">DashboardView</span>()
+          .<span class="call">tabItem</span> {
+            <span class="type">Label</span>(<span class="string">"Dashboard"</span>, systemImage: <span class="string">"square.dashed"</span>)
+          }
+
+        <span class="comment">// ...</span>
+      }
+	  }
+  }
+}
+</code></pre><p>What we can do is extract both steps to the struct variables to separate the concerns.</p><pre><code><span class="keyword">struct</span> ContentView: <span class="type">View</span> {
+  <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="keyword">if</span> <span class="type">UIDevice</span>.<span class="property">isIpad</span> {
+      sidebar
+    } <span class="keyword">else</span> {
+      tabview
+    }
+  }
+  
+  <span class="keyword">private var</span> sidebar: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">NavigationView</span> {
+      <span class="type">List</span> {
+        <span class="type">NavigationLink</span>(destination: <span class="type">DashboardView</span>()) {
+          <span class="type">Label</span>(<span class="string">"Dashboard"</span>, systemImage: <span class="string">"square.dashed"</span>)
+        }
+        <span class="comment">// ...</span>
+    }
+      
+      <span class="type">DashboardView</span>()
+    }
+  }
+  
+  <span class="keyword">private var</span> tabview: <span class="keyword">some</span> <span class="type">View</span> {
+    <span class="type">TabView</span> {
+      <span class="type">DashboardView</span>()
+        .<span class="call">tabItem</span> {
+          <span class="type">Label</span>(<span class="string">"Dashboard"</span>, systemImage: <span class="string">"square.dashed"</span>)
+        }
+
+      <span class="comment">// ..</span>
+    }
+  }
+}
+</code></pre><h2>Limitations</h2><p>Life isn't just rainbows and butterflies. There are some limitations to this approach. iPhone tab view can hold up to five items. If there are more tabs, then it goes under the more tab.</p><img src="/assets/swiftui-sidebar-tabview/iphone-tabview-more.png" alt="iPhone TabView More tab"/><p>We need to consider this approach by showing the tab view instead of the navigation list for an iPhone. Another way could be to show a custom view that we aren't looking into in this article.</p><h2>TL;DR</h2><p>Sidebar is a great way how to show quick navigation to multiple views on an iPad. Sadly, it looks wrong as a list on an iPhone and automatically navigates to the default view. We can improve that by showing a tab view for iPhone and sidebar for iPad user interfaces. We need to remember that a tab view can hold up to five items on an iPhone.</p><h2>Links</h2><ul><li><a href="https://github.com/fassko/SwiftUITabViewSidebar">Sample code</a></li></ul><ul><li><a href="https://developer.apple.com/documentation/uikit/uiuserinterfaceidiom">UIUserInterfaceIdiom documentation</a></li><li><a href="https://developer.apple.com/documentation/uikit/uidevice/">UIDevice documentation</a></li><li><a href="https://kristaps.me/blog/swiftui-tabview/">The hidden secrets of TabView in iOS with SwiftUI</a></li><li><a href="https://kristaps.me/blog/swiftui-sidebar/">How Sidebar works on iPad with SwiftUI</a></li></ul></div></div></section></div><footer class="footer"><p>Copyright © Kristaps Grinbergs. 2025.</p><p><a href="https://twitter.com/fassko" target="_blank">Twitter</a>•<a href="/feed.rss">RSS</a>•<a href="/about">Contact</a></p></footer></body></html>
