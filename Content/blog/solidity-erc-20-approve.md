@@ -36,6 +36,9 @@ token.approve(spender, 0);
 token.approve(spender, newAmount);
 ```
 
+You can also use the OpenZeppelin's `SafeERC20` library with methods like `safeApprove()`, `safeIncreaseAllowance()`, and `safeDecreaseAllowance()` instead of manually calling `approve()`.
+Looking at this library is outside the scope of this blog post.
+
 ## TL;DR
 
 The `approve()` function of the ERC-20 standard permits a smart contract (or another address) to spend your tokens.
