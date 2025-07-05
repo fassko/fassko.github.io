@@ -1,18 +1,9 @@
 ---
-date: 2025-06-27 00:00
+date: 2025-07-05 00:00
 title: Understanding approve() in ERC-20: Why It Matters and How to Use It Safely
 tags: Solidity, web3, ERC20
 description: This post takes a closer look at the `approve()` function in the ERC-20 token standard. While commonly used in DeFi applications, it introduces a huge risk if not handled correctly. Learn how to use it safely and avoid known vulnerabilities.
 ---
-
-* we briefly checked the ERC-20 before https://kristaps.me/blog/solidity-erc-20/, but
-* ERC-20 is the fungible token standard in EVM chains, one dollar is another dollar note
-* this time I will go into depth of approve function of this standard
-* it approves the spender to use up to defined amount to spend caller's funds
-* it is used in smart contracts to interact with dapps
-* be careful to set before 0 and then the correct value, if you lower than spender can spend both amounts
-  attack vector
-  https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
 
 In a [previous post](/blog/solidity-erc-20/), I gave a quick overview of ERC-20 — the fungible token standard used across EVM-compatible chains.
 Like how one dollar bill is interchangeable with another, ERC-20 tokens are designed to be equal in value and function.
@@ -34,7 +25,7 @@ IERC20(token).approve(spender, amount);
 The naive implementation of approve() can be risky.
 
 Let's say you initially approve 100 tokens, then later decide to reduce it to 50.
-If you just call `approve(spender, 50)`, there is a chance that the spender sees both approvals before the new one takes effect — and spends both amounts.
+If you call `approve(spender, 50)`, there is a chance that the spender sees both approvals before the new one takes effect — and spends both amounts.
 
 This race condition is well-documented and can be exploited. See the issue on [GitHub](https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729).
 
@@ -54,6 +45,8 @@ Be careful and always reset to 0 before updating allowances to avoid race condit
 The ERC-20 standard may seem simple, but subtle details like this one can expose users to a real risk of losing money.
 
 ## Links
+
+* [Sample code][https://github.com/fassko/erc-20-approve-attack]
 
 * [EIP-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 * [ERC-20 - Ethereum documentation](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
