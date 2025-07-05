@@ -50,5 +50,5 @@ The ERC-20 standard may seem simple, but subtle details like this one can expose
 
 * [EIP-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 * [ERC-20 - Ethereum documentation](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
-* [ERC20 - OpenZepplin documentation](https://docs.openzeppelin.com/contracts/4.x/erc20)
-* [ERC20 - OpenZepplin implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
+* [ERC20 - OpenZeppelin documentation](https://docs.openzeppelin.com/contracts/4.x/erc20)
+* [ERC20 - OpenZeppelin implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
