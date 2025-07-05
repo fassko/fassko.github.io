@@ -46,7 +46,7 @@ The ERC-20 standard may seem simple, but subtle details like this one can expose
 
 ## Links
 
-* [Sample code][https://github.com/fassko/erc-20-approve-attack]
+* [Sample code](https://github.com/fassko/erc-20-approve-attack)
 
 * [EIP-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20)
 * [ERC-20 - Ethereum documentation](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
