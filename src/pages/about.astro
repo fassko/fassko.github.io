@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SocialItems from '@/components/SocialItems.astro';
+---
+
+<BaseLayout title="About">
+  <Header selectedSection="about" />
+  <div class="wrapper">
+    <section class="about-me">
+      <div class="about-me-text">
+        <h1 class="page-title">About</h1>
+        <p>
+          Kristaps has extensive knowledge in Web3, iOS, and other Apple technologies, frontend,
+          and databases.
+        </p>
+        <p>
+          Executed as technical co-founder at global scale company
+          <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer">Qminder</a>
+          that serviced companies like Bolt, Uber, Lyft, The Olympic Games.
+        </p>
+        <p>
+          He is an active Web3 and iOS community member. He writes blog posts about Web3 and mobile
+          development and regularly speaks at conferences and meetups. In addition, he teaches and
+          mentors.
+        </p>
+        <p>
+          He writes a mobile development blog, regularly speaks at conferences, teaches, and
+          mentors.
+        </p>
+        <p>His interests are in Web 3.0, sustainability, and automating old and clunky processes.</p>
+        <p>
+          Kristaps is an active volunteer in organizations like
+          <a href="http://www.rigatechgirls.com/" target="_blank" rel="noopener noreferrer"
+            >Riga Tech Girls</a
+          >,
+          <a href="https://www.dzivniekubriviba.lv/" target="_blank" rel="noopener noreferrer"
+            >Animal Freedom</a
+          >, and many more.
+        </p>
+        <p>His hobbies are orienteering sport, cycling, and cooking.</p>
+      </div>
+      <div class="about-me-social-items">
+        <SocialItems />
+      </div>
+      <div class="about-me-images">
+        <img src="/assets/speaking/kristaps-grinbergs-appbuilders.jpeg" alt="" />
+        <img src="/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg" alt="" />
+        <img src="/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg" alt="" />
+        <img src="/assets/speaking/kristaps-grinbergs-mobile-era.jpg" alt="" />
+        <img src="/assets/speaking/kristaps-grinbergs-shareit.jpg" alt="" />
+      </div>
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>

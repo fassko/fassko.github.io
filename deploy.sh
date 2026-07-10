@@ -1,6 +1,6 @@
 #!/bin/bash
 
-publish deploy
+npm run build
 
 curl -X DELETE "https://api.cloudflare.com/client/v4/zones/$CF_ZONE/purge_cache" \
   -H "X-Auth-Email: $CF_API_EMAIL" \

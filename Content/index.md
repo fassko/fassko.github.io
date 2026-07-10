@@ -1,1 +1,0 @@
-# Kristaps Grinbergs

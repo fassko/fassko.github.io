@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import TagList from '@/components/TagList.astro';
+import { postSlug } from '@/utils/post';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tagMap = new Map<string, typeof posts>();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) {
+      const key = tag.toLowerCase();
+      const existing = tagMap.get(key) ?? [];
+      existing.push(post);
+      tagMap.set(key, existing);
+    }
+  }
+
+  return [...tagMap.entries()].map(([tag, taggedPosts]) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: taggedPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout title={`Tagged with ${tag}`}>
+  <Header />
+  <div class="wrapper">
+    <section class="tags">
+      <h1 class="page-title">
+        Tagged with <span class="tag-title">{tag}</span>
+      </h1>
+      <a class="browse-all-tags" href="/tags">Browse all tags</a>
+      {
+        posts.map((post) => (
+          <div class="blog-item">
+            <h2>
+              <a class="blog-title" href={`/blog/${postSlug(post.id)}`}>
+                {post.data.title}
+              </a>
+            </h2>
+            <div class="blog-date">
+              <TagList tags={post.data.tags ?? []} />
+              {formatDate(post.data.date)}
+            </div>
+            <div class="blog-content">
+              <p>{post.data.description}</p>
+            </div>
+            <a class="blog-read-more" href={`/blog/${postSlug(post.id)}`}>
+              Read more
+            </a>
+          </div>
+        ))
+      }
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+const posts = await getCollection('blog');
+const tagSet = new Set<string>();
+
+for (const post of posts) {
+  for (const tag of post.data.tags ?? []) {
+    tagSet.add(tag.toLowerCase());
+  }
+}
+
+const tags = [...tagSet].sort();
+---
+
+<BaseLayout title="Browse all tags">
+  <Header />
+  <div class="wrapper">
+    <section class="tags">
+      <h1 class="page-title">Browse all tags</h1>
+      <ul class="all-tags">
+        {
+          tags.map((tag) => (
+            <li class="tag">
+              <a href={`/tags/${encodeURIComponent(tag)}`}>{tag}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>

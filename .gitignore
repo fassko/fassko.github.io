@@ -35,6 +35,12 @@ Thumbs.db
 # Ignore node_modules
 node_modules/
 
+# Astro build output
+dist/
+
+# Astro generated types
+.astro/
+
 # Ignore any bower_components
 bower_components/
 
@@ -46,6 +52,5 @@ _site/
 .jekyll-metadata
 /.jekyll-cache
 /.build
-/Output
 /.publish
 /.vscode

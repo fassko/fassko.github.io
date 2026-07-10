@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="divider">
+  <div class="divider-wrapper">
+    <div class="divider-left-element"></div>
+    <div class="divider-title">{title}</div>
+    <div class="divider-right-element"></div>
+  </div>
+</div>

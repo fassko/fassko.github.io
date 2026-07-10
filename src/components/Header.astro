@@ -1,0 +1,31 @@
+---
+interface Props {
+  selectedSection?: 'blog' | 'talks' | 'about' | null;
+}
+
+const { selectedSection = null } = Astro.props;
+---
+
+<header class="header">
+  <div class="header-wrapper">
+    <div class="main-title">
+      <a href="/">Kristaps Grinbergs</a>
+    </div>
+    <nav class="nav-container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="/">home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/blog">blog</a>
+        </li>
+        <li class="nav-item">
+          <a href="/talks">talks</a>
+        </li>
+        <li class="nav-item">
+          <a href="/about">about</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
