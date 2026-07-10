@@ -1,0 +1,14 @@
+---
+import { socialItems } from '@/data/social';
+---
+
+<div class="social-items">
+  {
+    socialItems.map((item) => (
+      <a class="social-item-link" href={item.link} target="_blank" rel="noopener noreferrer">
+        <img class="social-item-image" src={`/images/${item.id}.svg`} alt="" />
+        {item.text}
+      </a>
+    ))
+  }
+</div>

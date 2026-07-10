@@ -1,0 +1,54 @@
+---
+import { siteConfig } from '@/site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  refreshTo?: string;
+}
+
+const { title, description, refreshTo } = Astro.props;
+const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+const pageDescription = description ?? siteConfig.description;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={siteConfig.name} />
+    {refreshTo && <meta http-equiv="refresh" content={`0; url=${refreshTo}`} />}
+    <meta property="og:site_name" content={siteConfig.description} />
+    <meta property="og:title" content={siteConfig.description} />
+    <meta property="og:description" content={siteConfig.description} />
+    <meta property="og:image" content="https://kristaps.me/og-image.png" />
+    <meta property="og:image:secure_url" content="https://kristaps.me/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteConfig.url} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content={siteConfig.twitter} />
+    <meta name="twitter:title" content={siteConfig.name} />
+    <meta name="twitter:description" content={siteConfig.description} />
+    <meta name="twitter:image" content="fb-og.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="120x120"
+      href="/apple-touch-icon-120x120.png"
+    />
+    <link rel="alternate" type="application/rss+xml" title={`Subscribe to ${siteConfig.name}`} href="/feed.rss" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script>
+    <script src="/scripts/ga.js" is:inline></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import TagList from '@/components/TagList.astro';
+import { postSlug } from '@/utils/post';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: postSlug(post.id) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <Header selectedSection="blog" />
+  <div class="wrapper">
+    <section class="blog-list">
+      <div class="blog-item">
+        <h1>
+          <a class="blog-title" href={`/blog/${postSlug(post.id)}`}>
+            {post.data.title}
+          </a>
+        </h1>
+        <div class="blog-date">
+          <TagList tags={post.data.tags ?? []} />
+          {formatDate(post.data.date)}
+        </div>
+        <div class="blog-content">
+          <Content />
+        </div>
+      </div>
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>

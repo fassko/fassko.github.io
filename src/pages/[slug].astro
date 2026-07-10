@@ -1,0 +1,19 @@
+---
+import { legacyBlogRedirects } from '@/data/legacy-redirects';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return legacyBlogRedirects.map((slug) => ({
+    params: { slug },
+    props: { redirectTo: slug === 'index' ? '/blog' : `/blog/${slug}` },
+  }));
+}
+
+const { redirectTo } = Astro.props;
+---
+
+<BaseLayout refreshTo={redirectTo}>
+  <p>
+    Redirecting to <a href={redirectTo}>{redirectTo}</a>...
+  </p>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import TagList from '@/components/TagList.astro';
+import { postSlug } from '@/utils/post';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout title="Blog">
+  <Header selectedSection="blog" />
+  <div class="wrapper">
+    <section class="blog-list">
+      <h1 class="page-title">Blog</h1>
+      {
+        posts.map((post) => (
+          <div class="blog-item">
+            <h2>
+              <a class="blog-title" href={`/blog/${postSlug(post.id)}`}>
+                {post.data.title}
+              </a>
+            </h2>
+            <div class="blog-date">
+              <TagList tags={post.data.tags ?? []} />
+              {formatDate(post.data.date)}
+            </div>
+            <div class="blog-content">
+              <p>{post.data.description}</p>
+            </div>
+            <a class="blog-read-more" href={`/blog/${postSlug(post.id)}`}>
+              Read more
+            </a>
+          </div>
+        ))
+      }
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>
