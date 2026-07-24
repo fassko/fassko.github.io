@@ -16,8 +16,8 @@ export const socialItems: SocialItem[] = [
     text: 'kristapsgrinbergs',
   },
   {
-    id: 'twitter',
-    link: 'https://twitter.com/fassko',
+    id: 'x',
+    link: 'https://x.com/fassko',
     text: '@fassko',
   },
   {
