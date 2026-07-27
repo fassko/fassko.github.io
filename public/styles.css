@@ -121,8 +121,9 @@ a:hover {
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.2;
   padding: 0 0 1.75rem;
+  overflow: visible;
 }
 
 h2 {
