@@ -289,6 +289,7 @@ h3 {
   border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
+  text-decoration: none;
   transition:
     transform 0.2s var(--ease),
     background 0.2s var(--ease),
@@ -301,25 +302,36 @@ h3 {
   transform: translateY(-1px);
 }
 
+a.button-primary,
+a.button-primary:hover,
+a.button-primary:visited,
 .button-primary {
   background: var(--accent);
   color: var(--on-accent);
+  text-decoration: none;
 }
 
+a.button-primary:hover,
 .button-primary:hover {
   background: var(--accent-hover);
   color: var(--on-accent);
 }
 
+a.button-ghost,
+a.button-ghost:hover,
+a.button-ghost:visited,
 .button-ghost {
   border: 1px solid var(--border-strong);
   color: var(--text);
   background: transparent;
+  text-decoration: none;
 }
 
+a.button-ghost:hover,
 .button-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--text);
+  color: var(--text);
+  background: var(--surface-hover);
 }
 
 .profile-picture {
