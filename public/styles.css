@@ -18,20 +18,20 @@
   --border-strong: rgba(255, 255, 255, 0.14);
   --text: #f2f4f7;
   --text-muted: #9aa3b2;
-  --accent: #3dd6c6;
-  --accent-hover: #63e4d6;
-  --accent-soft: rgba(61, 214, 198, 0.14);
-  --accent-border: rgba(61, 214, 198, 0.22);
+  --accent: #ffffff;
+  --accent-hover: #e8e8e8;
+  --accent-soft: rgba(255, 255, 255, 0.08);
+  --accent-border: rgba(255, 255, 255, 0.18);
   --danger: #ff7a7a;
-  --on-accent: #041312;
+  --on-accent: #111111;
   --header-bg: rgba(11, 13, 16, 0.72);
   --nav-hover: rgba(255, 255, 255, 0.06);
   --surface-hover: rgba(255, 255, 255, 0.04);
   --quote-bg: rgba(255, 255, 255, 0.02);
   --code-bg: rgba(255, 255, 255, 0.06);
   --code-block-bg: #0a0c10;
-  --glow-1: rgba(61, 214, 198, 0.11);
-  --glow-2: rgba(255, 196, 120, 0.05);
+  --glow-1: rgba(255, 255, 255, 0.04);
+  --glow-2: rgba(255, 255, 255, 0.02);
   --icon-filter: none;
 }
 
