@@ -1,7 +1,7 @@
 :root {
-  --font-display: "Syne", sans-serif;
-  --font-body: "Manrope", sans-serif;
-  --font-mono: "Source Code Pro", ui-monospace, monospace;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius: 12px;
   --radius-lg: 20px;
   --space: clamp(1rem, 2vw, 1.5rem);
@@ -120,7 +120,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   padding: 0 0 1.75rem;
   overflow: visible;
@@ -254,8 +254,8 @@ h3 {
 .name-title {
   font-family: var(--font-display);
   font-size: clamp(2.6rem, 6vw, 4.25rem);
-  font-weight: 800;
-  letter-spacing: -0.045em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   line-height: 1.12;
   padding-bottom: 1.5rem;
   overflow: visible;
