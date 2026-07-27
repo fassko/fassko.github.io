@@ -3,17 +3,21 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import { slugifyTag } from '@/utils/tag';
 
 const posts = await getCollection('blog');
-const tagSet = new Set<string>();
+const tagMap = new Map<string, string>();
 
 for (const post of posts) {
   for (const tag of post.data.tags ?? []) {
-    tagSet.add(tag.toLowerCase());
+    const slug = slugifyTag(tag);
+    if (!tagMap.has(slug)) {
+      tagMap.set(slug, slug.replace(/-/g, ' '));
+    }
   }
 }
 
-const tags = [...tagSet].sort();
+const tags = [...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 ---
 
 <BaseLayout title="Browse all tags">
@@ -23,9 +27,9 @@ const tags = [...tagSet].sort();
       <h1 class="page-title">Browse all tags</h1>
       <ul class="all-tags">
         {
-          tags.map((tag) => (
+          tags.map(([slug, label]) => (
             <li class="tag">
-              <a href={`/tags/${encodeURIComponent(tag)}`}>{tag}</a>
+              <a href={`/tags/${slug}`}>{label}</a>
             </li>
           ))
         }

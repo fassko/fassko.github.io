@@ -28,7 +28,7 @@ function formatDate(date: Date): string {
         posts.map((post) => (
           <div class="blog-item">
             <h2>
-              <a class="blog-title" href={`/blog/${postSlug(post.id)}`}>
+              <a class="blog-title" href={`/blog/${postSlug(post)}`}>
                 {post.data.title}
               </a>
             </h2>
@@ -39,7 +39,7 @@ function formatDate(date: Date): string {
             <div class="blog-content">
               <p>{post.data.description}</p>
             </div>
-            <a class="blog-read-more" href={`/blog/${postSlug(post.id)}`}>
+            <a class="blog-read-more" href={`/blog/${postSlug(post)}`}>
               Read more
             </a>
           </div>

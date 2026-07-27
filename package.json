@@ -5,11 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && cp dist/feed.xml dist/feed.rss",
+    "build": "astro build && cp dist/feed.xml dist/feed.rss && cp dist/sitemap-0.xml dist/sitemap.xml",
     "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.8.0"
   },
   "devDependencies": {
