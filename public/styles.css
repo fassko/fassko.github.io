@@ -749,6 +749,16 @@ h3 {
   padding: 1rem 0 2.5rem;
 }
 
+.about-me-text strong,
+.text-paragraph strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.about-me-text .hero-actions {
+  margin-top: 1.75rem;
+}
+
 /* --- TALKS --- */
 
 .talk-media:not(:last-child) {
