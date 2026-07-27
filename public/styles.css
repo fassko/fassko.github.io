@@ -428,14 +428,14 @@ a.button-ghost:hover,
   color: var(--text-muted);
 }
 
-.text a {
+.text a:not(.button) {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--accent-border);
   text-underline-offset: 3px;
 }
 
-.text a:hover {
+.text a:not(.button):hover {
   color: var(--accent);
   text-decoration-color: var(--accent);
 }
@@ -740,7 +740,7 @@ a.button-ghost:hover,
   padding-bottom: 0.85rem;
 }
 
-.about-me-text a {
+.about-me-text a:not(.button) {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--accent-border);
