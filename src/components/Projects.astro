@@ -1,21 +1,39 @@
 ---
 import { projects } from '@/data/projects';
+
+function isAppStoreLink(link?: string): boolean {
+  if (!link) return false;
+  return link.includes('apps.apple.com') || link.includes('itunes.apple.com');
+}
 ---
 
 <section class="projects">
   {
     projects.map((project) => (
       <div class="project-item">
-        <div class="project-title">{project.title}</div>
-        <div class="project-description">{project.description}</div>
-        <img class="project-image" src={`/images/${project.image}`} alt={project.title} />
-        {
-          project.link && (
+        <div class="project-title">
+          {project.link ? (
             <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <img src="/images/download-appstore.svg" alt="Download on the App Store" />
+              {project.title}
             </a>
-          )
-        }
+          ) : (
+            project.title
+          )}
+        </div>
+        <div class="project-description">{project.description}</div>
+        {project.image && (
+          <img class="project-image" src={`/images/${project.image}`} alt={project.title} />
+        )}
+        {isAppStoreLink(project.link) && (
+          <a href={project.link} target="_blank" rel="noopener noreferrer">
+            <img src="/images/download-appstore.svg" alt="Download on the App Store" />
+          </a>
+        )}
+        {project.link && !isAppStoreLink(project.link) && (
+          <a class="blog-read-more" href={project.link} target="_blank" rel="noopener noreferrer">
+            Visit site
+          </a>
+        )}
       </div>
     ))
   }

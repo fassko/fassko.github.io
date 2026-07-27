@@ -1,16 +1,23 @@
 export interface Project {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   link?: string;
 }
 
 export const projects: Project[] = [
   {
+    title: 'Flare Network — FAssets',
+    description:
+      'Developer Relations Engineer Lead on FAssets: trustless use of Bitcoin, XRP and other non-smart-contract chains on Flare. Ran closed and open betas, onboarded agents, shipped guides and tooling, and supported conferences and hackathons across Europe and Southeast Asia.',
+    link: 'https://flare.network',
+  },
+  {
     title: 'Salto X',
     description:
-      'Token incentive plans for remote companies: mint a company token, distribute and manage on-chain incentives on Salto X.',
+      'Token incentive plans for remote companies: mint a company token, distribute and manage on-chain incentives on Salto X. Built Solidity contracts on Polygon and a Next.js client with Hardhat and OpenZeppelin Defender.',
     image: 'salto-x-dashboard-nft.png',
+    link: 'https://saltox.co',
   },
   {
     title: 'Sharentic iOS app',
