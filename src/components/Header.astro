@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from '@/components/ThemeToggle.astro';
+
 interface Props {
   selectedSection?: 'blog' | 'talks' | 'about' | null;
 }
@@ -13,7 +15,7 @@ const links = [
   { href: '/about', label: 'about', id: 'about' as const },
 ];
 
-function isCurrent(id: typeof links[number]['id']): boolean {
+function isCurrent(id: (typeof links)[number]['id']): boolean {
   if (id === null) return pathname === '/' || pathname === '';
   return selectedSection === id;
 }
@@ -36,6 +38,7 @@ function isCurrent(id: typeof links[number]['id']): boolean {
           ))
         }
       </ul>
+      <ThemeToggle />
     </nav>
   </div>
 </header>
