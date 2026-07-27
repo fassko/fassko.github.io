@@ -20,6 +20,18 @@ const pageDescription = description ?? siteConfig.description;
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={siteConfig.name} />
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     {refreshTo && <meta http-equiv="refresh" content={`0; url=${refreshTo}`} />}
     <meta property="og:site_name" content={siteConfig.description} />
     <meta property="og:title" content={siteConfig.description} />
