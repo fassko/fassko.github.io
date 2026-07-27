@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Kristaps Grinbergs',
   url: 'https://kristaps.me',
   description:
-    'Kristaps Grinbergs - Blockchain, mobile and fullstack developer. Startup founder. Conference speaker. Mentor. Passionate about building products, sustainability and Web 3.0',
+    'Kristaps Grinbergs — AI, crypto and blockchain builder. Startup founder, conference speaker and mentor focused on smart contracts, Web3 products and applied AI.',
   twitter: '@fassko',
   email: 'fassko@gmail.com',
 } as const;

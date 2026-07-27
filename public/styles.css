@@ -141,7 +141,7 @@ h3 {
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-muted);
-  border-radius: 999px;
+  border-radius: 8px;
   position: relative;
   transition:
     color 0.2s var(--ease),
@@ -233,7 +233,7 @@ h3 {
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.35rem;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-weight: 600;
   transition:
@@ -335,7 +335,7 @@ h3 {
   width: auto;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 8px;
   text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
@@ -548,7 +548,7 @@ h3 {
   display: inline-block;
   margin: 0;
   padding: 0.2rem 0.55rem;
-  border-radius: 999px;
+  border-radius: 6px;
   background: var(--accent-soft);
   border: 1px solid rgba(61, 214, 198, 0.22);
 }
@@ -764,7 +764,7 @@ audio {
   border: 1px solid var(--border);
   color: var(--text);
   padding: 0.4rem 0.75rem;
-  border-radius: 999px;
+  border-radius: 8px;
   transition:
     border-color 0.2s var(--ease),
     color 0.2s var(--ease);
@@ -785,7 +785,7 @@ audio {
 .tag-title {
   background: var(--accent-soft);
   border: 1px solid rgba(61, 214, 198, 0.25);
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
   font-weight: 700;
