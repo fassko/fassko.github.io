@@ -65,11 +65,11 @@ export const projects: Project[] = [
     link: 'https://apps.apple.com/lv/app/augi-draugi/id1475145259',
   },
   {
-    title: 'Weather Latvia iOS app',
+    title: 'Latvia Weather',
     description:
       'Live weather observations across Latvia from national meteorology and road data sources.',
     image: 'weatherlatvia.png',
-    link: 'https://itunes.apple.com/lv/app/weather-latvia/id1350252673?mt=8',
+    link: 'https://latvia-weather.com/',
   },
   {
     title: 'Hashberg - easy hashtag manager',
