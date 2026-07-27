@@ -5,24 +5,29 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import TagList from '@/components/TagList.astro';
 import { postSlug } from '@/utils/post';
+import { slugifyTag } from '@/utils/tag';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const tagMap = new Map<string, typeof posts>();
+  const tagMap = new Map<string, { label: string; posts: typeof posts }>();
 
   for (const post of posts) {
     for (const tag of post.data.tags ?? []) {
-      const key = tag.toLowerCase();
-      const existing = tagMap.get(key) ?? [];
-      existing.push(post);
+      const key = slugifyTag(tag);
+      const existing = tagMap.get(key) ?? { label: tag, posts: [] };
+      // Prefer lowercase label without punctuation for display consistency
+      if (!tagMap.has(key)) {
+        existing.label = key.replace(/-/g, ' ');
+      }
+      existing.posts.push(post);
       tagMap.set(key, existing);
     }
   }
 
-  return [...tagMap.entries()].map(([tag, taggedPosts]) => ({
-    params: { tag },
+  return [...tagMap.entries()].map(([slug, { label, posts: taggedPosts }]) => ({
+    params: { tag: slug },
     props: {
-      tag,
+      tag: label,
       posts: taggedPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
     },
   }));
@@ -51,7 +56,7 @@ function formatDate(date: Date): string {
         posts.map((post) => (
           <div class="blog-item">
             <h2>
-              <a class="blog-title" href={`/blog/${postSlug(post.id)}`}>
+              <a class="blog-title" href={`/blog/${postSlug(post)}`}>
                 {post.data.title}
               </a>
             </h2>
@@ -62,7 +67,7 @@ function formatDate(date: Date): string {
             <div class="blog-content">
               <p>{post.data.description}</p>
             </div>
-            <a class="blog-read-more" href={`/blog/${postSlug(post.id)}`}>
+            <a class="blog-read-more" href={`/blog/${postSlug(post)}`}>
               Read more
             </a>
           </div>

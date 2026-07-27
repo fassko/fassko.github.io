@@ -1,8 +1,7 @@
 ---
-
-
 date: 2024-01-06 00:00
 title: "Understanding tx.origin and msg.sender in Solidity"
+slug: txorigin-vs-msgsender
 tags: ethereum, solidity
 description: "Developers need to understand the difference between `tx.origin` and `msg.sender` in Solidity. These two global variables often need clarification with each other despite their fundamental differences. While they may appear similar at first glance, `tx.origin` and `msg.sender` represent distinct addresses in the context of a transaction. In this blog post, we will delve deeper into the meanings of each of these variables."
 ---

@@ -1,4 +1,6 @@
 ---
+import { slugifyTag } from '@/utils/tag';
+
 interface Props {
   tags: string[];
 }
@@ -11,7 +13,7 @@ const { tags } = Astro.props;
     <ul class="blog-tags">
       {tags.map((tag) => (
         <li>
-          <a href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}>{tag}</a>
+          <a href={`/tags/${slugifyTag(tag)}`}>{tag}</a>
         </li>
       ))}
     </ul>
