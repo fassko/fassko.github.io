@@ -4,6 +4,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 
+function formatMonthYear(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+  });
+}
+
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -11,13 +18,69 @@ function formatDate(dateString: string): string {
     day: 'numeric',
   });
 }
+
+const recent = talks.slice(0, 6);
+
+const gallery = [
+  {
+    src: '/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg',
+    alt: 'Kristaps speaking at NFT Tallinn',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg',
+    alt: 'Panel discussion at NFT Tallinn',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-appbuilders.jpeg',
+    alt: 'Kristaps on stage at App Builders',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-mobile-era.jpg',
+    alt: 'Talk at Mobile Era',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-shareit.jpg',
+    alt: 'Workshop session at ShareIT',
+  },
+];
 ---
 
-<BaseLayout title="Talks">
+<BaseLayout
+  title="Talks"
+  description="Talks and workshops on web3, smart contracts, Swift and developer relations."
+>
   <Header selectedSection="talks" />
   <div class="wrapper">
     <section class="talks">
       <h1 class="page-title">Talks</h1>
+      <p class="talks-lede">
+        40+ talks · Brussels, Riga, Amsterdam, Tallinn, Lisbon
+      </p>
+      <p class="section-label">Photography from stages and workshops</p>
+      <div class="talks-gallery">
+        {
+          gallery.map((shot) => (
+            <img src={shot.src} alt={shot.alt} loading="lazy" />
+          ))
+        }
+      </div>
+
+      <p class="section-label talks-recent-label">Upcoming &amp; recent</p>
+      <ul class="talks-recent">
+        {
+          recent.map((talk) => (
+            <li>
+              <span class="talks-recent-date">{formatMonthYear(talk.date)}</span>
+              <span class="talks-recent-copy">
+                <strong>{talk.title}</strong>
+                <span> · {talk.event}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="section-label talks-all-label">All talks</p>
       {
         talks.map((talk) => (
           <div class="talk-item">
@@ -32,7 +95,8 @@ function formatDate(dateString: string): string {
                   <iframe
                     class="talk-vide-iframe"
                     src={talk.video}
-                    frameborder="0"
+                    title={talk.title}
+                    loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   />

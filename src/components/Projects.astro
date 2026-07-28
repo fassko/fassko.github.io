@@ -5,9 +5,10 @@ import type { Project } from '@/data/projects';
 interface Props {
   items?: Project[];
   showAllLink?: boolean;
+  filterable?: boolean;
 }
 
-const { items = projects, showAllLink = false } = Astro.props;
+const { items = projects, showAllLink = false, filterable = false } = Astro.props;
 
 function isAppStoreLink(link?: string): boolean {
   if (!link) return false;
@@ -24,10 +25,32 @@ function isAppStoreLink(link?: string): boolean {
   )
 }
 
-<section class="projects">
+{
+  filterable && (
+    <div class="project-filters" data-project-filters>
+      <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">
+        all
+      </button>
+      <button type="button" class="project-filter" data-filter="web3" aria-pressed="false">
+        web3
+      </button>
+      <button type="button" class="project-filter" data-filter="ai" aria-pressed="false">
+        ai
+      </button>
+      <button type="button" class="project-filter" data-filter="ios" aria-pressed="false">
+        ios
+      </button>
+    </div>
+  )
+}
+
+<section class="projects" data-projects>
   {
     items.map((project) => (
-      <article class="project-item">
+      <article
+        class="project-item"
+        data-categories={(project.categories ?? []).join(' ')}
+      >
         <div class="project-title-row">
           <h2 class="project-title">
             {project.link ? (
@@ -53,7 +76,10 @@ function isAppStoreLink(link?: string): boolean {
         )}
         {isAppStoreLink(project.link) && (
           <a href={project.link} target="_blank" rel="noopener noreferrer">
-            <img src="/images/download-appstore.svg" alt={`Download ${project.title} on the App Store`} />
+            <img
+              src="/images/download-appstore.svg"
+              alt={`Download ${project.title} on the App Store`}
+            />
           </a>
         )}
         {project.link && !isAppStoreLink(project.link) && (
@@ -65,3 +91,40 @@ function isAppStoreLink(link?: string): boolean {
     ))
   }
 </section>
+
+{
+  filterable && (
+    <script is:inline>
+      (() => {
+        const root = document.querySelector('[data-project-filters]');
+        const list = document.querySelector('[data-projects]');
+        if (!root || !list) return;
+
+        const buttons = [...root.querySelectorAll('[data-filter]')];
+        const items = [...list.querySelectorAll('.project-item')];
+
+        function apply(filter) {
+          buttons.forEach((button) => {
+            const active = button.getAttribute('data-filter') === filter;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+
+          items.forEach((item) => {
+            const categories = (item.getAttribute('data-categories') || '')
+              .split(/\s+/)
+              .filter(Boolean);
+            const show = filter === 'all' || categories.includes(filter);
+            item.hidden = !show;
+          });
+        }
+
+        root.addEventListener('click', (event) => {
+          const target = event.target.closest('[data-filter]');
+          if (!target) return;
+          apply(target.getAttribute('data-filter'));
+        });
+      })();
+    </script>
+  )
+}

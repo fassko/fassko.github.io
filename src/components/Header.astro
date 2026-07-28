@@ -27,7 +27,19 @@ function isCurrent(id: (typeof links)[number]['id']): boolean {
     <div class="main-title">
       <a href="/">Kristaps Grinbergs</a>
     </div>
-    <nav class="nav-container" aria-label="Primary">
+    <button
+      type="button"
+      class="nav-toggle"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <nav class="nav-container" id="site-nav" data-nav aria-label="Primary">
       <ul class="nav">
         {
           links.map((link) => (
@@ -43,3 +55,29 @@ function isCurrent(id: (typeof links)[number]['id']): boolean {
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script>
