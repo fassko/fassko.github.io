@@ -3,9 +3,56 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SocialItems from '@/components/SocialItems.astro';
+
+const timeline = [
+  {
+    role: 'DevRel Engineer Lead',
+    org: 'Flare Network',
+    href: 'https://flare.network',
+    when: '2023 — present',
+    copy: 'FAssets, protocol tooling, agent onboarding and developer education.',
+  },
+  {
+    role: 'Smart contracts & product',
+    org: 'Salto X',
+    href: 'https://saltox.co',
+    when: '2022 — 2023',
+    copy: 'Tokenised employee ownership — Solidity on Polygon and a Next.js client.',
+  },
+  {
+    role: 'Technical co-founder',
+    org: 'Qminder',
+    href: 'https://www.qminder.com',
+    when: 'earlier',
+    copy: 'Queue management at global scale — Bolt, Uber, Lyft and The Olympic Games.',
+  },
+];
+
+const gallery = [
+  {
+    src: '/assets/speaking/kristaps-grinbergs-appbuilders.jpeg',
+    alt: 'Kristaps speaking at App Builders',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg',
+    alt: 'Kristaps presenting at NFT Tallinn',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg',
+    alt: 'Panel at NFT Tallinn',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-mobile-era.jpg',
+    alt: 'Talk at Mobile Era',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-shareit.jpg',
+    alt: 'ShareIT workshop',
+  },
+];
 ---
 
-<BaseLayout title="About">
+<BaseLayout title="About" description="About Kristaps Grinbergs — Web3 and AI developer based in Riga.">
   <Header selectedSection="about" />
   <div class="wrapper">
     <section class="about-me">
@@ -28,15 +75,7 @@ import SocialItems from '@/components/SocialItems.astro';
           for multiple system roles, maintains Docker-based service setups, and works with C-level,
           engineering, marketing, design and ecosystem stakeholders. He also speaks at industry
           events, supports Flare-sponsored hackathon tracks, and explains FAssets through blogs,
-          videos and conference demos — including an app that shows on-chain token prices and the
-          math behind the system.
-        </p>
-        <p>
-          Before Flare he built Solidity and full-stack products at
-          <a href="https://saltox.co" target="_blank" rel="noopener noreferrer">Salto X</a>, and was
-          technical co-founder at
-          <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer">Qminder</a>,
-          which scaled globally with customers like Bolt, Uber, Lyft and The Olympic Games.
+          videos and conference demos.
         </p>
         <p>
           He mentors through
@@ -50,19 +89,41 @@ import SocialItems from '@/components/SocialItems.astro';
           and others. Hobbies: orienteering, cycling and gardening.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="mailto:fassko@gmail.com">Email me</a>
+          <a class="button button-primary" href="mailto:fassko@gmail.com">Get in touch →</a>
           <a class="button button-ghost" href="/projects">See the projects</a>
         </div>
       </div>
+
+      <div class="about-me-images">
+        {
+          gallery.map((shot) => (
+            <img src={shot.src} alt={shot.alt} loading="lazy" />
+          ))
+        }
+      </div>
+
+      <div class="about-timeline">
+        <p class="section-label">Timeline</p>
+        <ol class="timeline-list">
+          {
+            timeline.map((item) => (
+              <li>
+                <p class="timeline-when">{item.when}</p>
+                <p class="timeline-role">
+                  {item.role} ·
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    {item.org}
+                  </a>
+                </p>
+                <p class="timeline-copy">{item.copy}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
       <div class="about-me-social-items">
         <SocialItems />
-      </div>
-      <div class="about-me-images">
-        <img src="/assets/speaking/kristaps-grinbergs-appbuilders.jpeg" alt="" />
-        <img src="/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg" alt="" />
-        <img src="/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg" alt="" />
-        <img src="/assets/speaking/kristaps-grinbergs-mobile-era.jpg" alt="" />
-        <img src="/assets/speaking/kristaps-grinbergs-shareit.jpg" alt="" />
       </div>
     </section>
   </div>

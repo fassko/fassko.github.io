@@ -1,3 +1,5 @@
+export type ProjectCategory = 'web3' | 'ai' | 'ios';
+
 export interface Project {
   title: string;
   description: string;
@@ -5,7 +7,15 @@ export interface Project {
   link?: string;
   live?: boolean;
   tags?: string[];
+  categories?: ProjectCategory[];
 }
+
+export const projectFilters: { id: 'all' | ProjectCategory; label: string }[] = [
+  { id: 'all', label: 'all' },
+  { id: 'web3', label: 'web3' },
+  { id: 'ai', label: 'ai' },
+  { id: 'ios', label: 'ios' },
+];
 
 export const projects: Project[] = [
   {
@@ -15,6 +25,7 @@ export const projects: Project[] = [
     link: 'https://flare.network',
     live: true,
     tags: ['solidity', 'typescript', 'protocol'],
+    categories: ['web3'],
   },
   {
     title: 'Salto X',
@@ -23,6 +34,13 @@ export const projects: Project[] = [
     image: 'salto-x-dashboard-nft.png',
     link: 'https://saltox.co',
     tags: ['solidity', 'nextjs', 'web3'],
+    categories: ['web3'],
+  },
+  {
+    title: 'Docs agent',
+    description: 'Retrieval over protocol docs — answers grounded in the source, not guesswork.',
+    tags: ['ai', 'rag', 'typescript'],
+    categories: ['ai'],
   },
   {
     title: 'Sharentic',
@@ -30,6 +48,7 @@ export const projects: Project[] = [
       'On-demand rental platform built with SwiftUI and Firebase, with Stripe payments and an internal ops dashboard.',
     image: 'sharentic.png',
     tags: ['ios', 'swiftui'],
+    categories: ['ios'],
   },
   {
     title: 'Vaal Dashboard',
@@ -45,12 +64,14 @@ export const projects: Project[] = [
     image: 'vibur.png',
     link: 'https://apps.apple.com/us/app/vibur/id1592169625',
     tags: ['ios', 'swiftui'],
+    categories: ['ios'],
   },
   {
     title: 'Qminder Apple TV',
     description: 'Queue displays over websockets using the Qminder Swift API.',
     image: 'qminder-apple-tv.png',
     tags: ['tvos', 'websockets'],
+    categories: ['ios'],
   },
   {
     title: 'Qminder iPad',
@@ -58,6 +79,7 @@ export const projects: Project[] = [
       'Self-service sign-in for customers — native GPU animations with a JavaScript bridge.',
     image: 'qminder-sign-in.png',
     tags: ['ios', 'ipad'],
+    categories: ['ios'],
   },
   {
     title: 'Dodies.lv',
@@ -65,6 +87,7 @@ export const projects: Project[] = [
     image: 'dodies.png',
     link: 'https://itunes.apple.com/lv/app/dodies-lv/id1080800199?mt=8',
     tags: ['ios', 'swiftui', 'maps'],
+    categories: ['ios'],
   },
   {
     title: 'Augi & Draugi',
@@ -72,6 +95,7 @@ export const projects: Project[] = [
     image: 'augidraugi.png',
     link: 'https://apps.apple.com/lv/app/augi-draugi/id1475145259',
     tags: ['ios'],
+    categories: ['ios'],
   },
   {
     title: 'Latvia Weather',
@@ -87,5 +111,6 @@ export const projects: Project[] = [
     image: 'hashberg.png',
     link: 'https://apps.apple.com/us/app/hashberg-easy-hashtag-manager/id1549468659',
     tags: ['ios'],
+    categories: ['ios'],
   },
 ];

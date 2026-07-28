@@ -3,49 +3,75 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import TagList from '@/components/TagList.astro';
 import { postSlug } from '@/utils/post';
+import { formatPostMeta, readingTimeMinutes } from '@/utils/reading-time';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout title="Blog" description="Notes on web3, AI, Swift and building products.">
   <Header selectedSection="blog" />
   <div class="wrapper">
     <section class="blog-list">
-      <h1 class="page-title">Blog</h1>
+      <div class="blog-index-header">
+        <h1 class="page-title">Blog</h1>
+        <a class="blog-tags-link" href="/tags">tags ▾</a>
+      </div>
+      <label class="blog-search">
+        <span class="visually-hidden">Search posts</span>
+        <input
+          type="search"
+          name="q"
+          placeholder="Search posts…"
+          data-blog-search
+          autocomplete="off"
+        />
+      </label>
       {
-        posts.map((post) => (
-          <div class="blog-item">
-            <h2>
-              <a class="blog-title" href={`/blog/${postSlug(post)}`}>
-                {post.data.title}
-              </a>
-            </h2>
-            <div class="blog-date">
-              <TagList tags={post.data.tags ?? []} />
-              {formatDate(post.data.date)}
-            </div>
-            <div class="blog-content">
-              <p>{post.data.description}</p>
-            </div>
-            <a class="blog-read-more" href={`/blog/${postSlug(post)}`}>
-              Read more
+        posts.map((post) => {
+          const minutes = readingTimeMinutes(post.body);
+          const tags = post.data.tags ?? [];
+          const meta = formatPostMeta(post.data.date, minutes, tags);
+          const haystack = [post.data.title, post.data.description ?? '', ...tags]
+            .join(' ')
+            .toLowerCase();
+          return (
+            <a
+              class="blog-row"
+              href={`/blog/${postSlug(post)}`}
+              data-blog-row
+              data-search={haystack}
+            >
+              <p class="blog-meta">{meta}</p>
+              <h2 class="blog-title">{post.data.title}</h2>
             </a>
-          </div>
-        ))
+          );
+        })
       }
+      <p class="blog-empty" data-blog-empty hidden>No posts match that search.</p>
     </section>
   </div>
   <Footer />
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const input = document.querySelector('[data-blog-search]');
+    const rows = [...document.querySelectorAll('[data-blog-row]')];
+    const empty = document.querySelector('[data-blog-empty]');
+    if (!input) return;
+
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+      rows.forEach((row) => {
+        const match = !query || (row.getAttribute('data-search') || '').includes(query);
+        row.hidden = !match;
+        if (match) visible += 1;
+      });
+      if (empty) empty.hidden = visible > 0;
+    });
+  })();
+</script>
