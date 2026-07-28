@@ -3,9 +3,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Hero from '@/components/Hero.astro';
-import Divider from '@/components/Divider.astro';
-import SocialItems from '@/components/SocialItems.astro';
 import Projects from '@/components/Projects.astro';
+import { projects } from '@/data/projects';
+
+const featured = projects.slice(0, 4);
 ---
 
 <BaseLayout>
@@ -13,50 +14,8 @@ import Projects from '@/components/Projects.astro';
   <div class="wrapper">
     <Hero />
   </div>
-  <Divider title="about" />
-  <div class="wrapper">
-    <section class="about">
-      <div class="text">
-        <p class="text-paragraph">
-          Developer Relations Engineer Lead at
-          <a href="https://flare.network" target="_blank" rel="noopener noreferrer">Flare Network</a>
-          — the blockchain that enables smart contracts and cross-chain interoperability for networks
-          like Bitcoin and XRP.
-        </p>
-        <p class="text-paragraph">
-          Leads technical work on
-          <strong>FAssets</strong>, Flare’s flagship product for using non-smart-contract chains
-          trustlessly on Flare. Runs beta programs, onboards agents, writes guides and tooling, and
-          works across engineering, product and ecosystem teams.
-        </p>
-        <p class="text-paragraph">
-          Previously technical co-founder at
-          <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer">Qminder</a>,
-          scaled globally with customers like Bolt, Uber, Lyft and The Olympic Games.
-        </p>
-      </div>
-      <SocialItems />
-    </section>
-  </div>
-  <Divider title="hire me" />
-  <div class="wrapper">
-    <section class="hire">
-      <div class="text">
-        <p class="text-paragraph">
-          Open to CTO and hands-on roles in AI, crypto and blockchain — smart contract architecture,
-          cross-chain products, developer experience and applied AI. Reach out to talk about your
-          venture.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="mailto:fassko@gmail.com">Email me</a>
-          <a class="button button-ghost" href="/about">About</a>
-        </div>
-      </div>
-    </section>
-  </div>
-  <Divider title="projects" />
-  <div class="wrapper">
-    <Projects />
+  <div class="wrapper home-projects">
+    <Projects items={featured} showAllLink />
   </div>
   <Footer />
 </BaseLayout>

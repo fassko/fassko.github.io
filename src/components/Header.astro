@@ -2,22 +2,23 @@
 import ThemeToggle from '@/components/ThemeToggle.astro';
 
 interface Props {
-  selectedSection?: 'blog' | 'talks' | 'about' | null;
+  selectedSection?: 'projects' | 'blog' | 'talks' | 'about' | null;
 }
 
 const { selectedSection = null } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const links = [
-  { href: '/', label: 'home', id: null as null },
-  { href: '/blog', label: 'blog', id: 'blog' as const },
-  { href: '/talks', label: 'talks', id: 'talks' as const },
-  { href: '/about', label: 'about', id: 'about' as const },
+  { href: '/', label: '/home', id: null as null },
+  { href: '/projects', label: '/projects', id: 'projects' as const },
+  { href: '/blog', label: '/blog', id: 'blog' as const },
+  { href: '/talks', label: '/talks', id: 'talks' as const },
+  { href: '/about', label: '/about', id: 'about' as const },
 ];
 
 function isCurrent(id: (typeof links)[number]['id']): boolean {
   if (id === null) return pathname === '/' || pathname === '';
-  return selectedSection === id;
+  return selectedSection === id || pathname.startsWith(`/${id}`);
 }
 ---
 

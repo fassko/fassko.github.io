@@ -1,5 +1,13 @@
 ---
 import { projects } from '@/data/projects';
+import type { Project } from '@/data/projects';
+
+interface Props {
+  items?: Project[];
+  showAllLink?: boolean;
+}
+
+const { items = projects, showAllLink = false } = Astro.props;
 
 function isAppStoreLink(link?: string): boolean {
   if (!link) return false;
@@ -7,34 +15,53 @@ function isAppStoreLink(link?: string): boolean {
 }
 ---
 
+{
+  showAllLink && (
+    <div class="home-projects-header">
+      <p class="section-label">Selected projects</p>
+      <a href="/projects">All projects →</a>
+    </div>
+  )
+}
+
 <section class="projects">
   {
-    projects.map((project) => (
-      <div class="project-item">
-        <div class="project-title">
-          {project.link ? (
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              {project.title}
-            </a>
-          ) : (
-            project.title
-          )}
+    items.map((project) => (
+      <article class="project-item">
+        <div class="project-title-row">
+          <h2 class="project-title">
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                {project.title}
+              </a>
+            ) : (
+              project.title
+            )}
+          </h2>
+          {project.live && <span class="badge-live">live</span>}
         </div>
-        <div class="project-description">{project.description}</div>
+        <p class="project-description">{project.description}</p>
+        {project.tags && project.tags.length > 0 && (
+          <ul class="project-tags">
+            {project.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )}
         {project.image && (
           <img class="project-image" src={`/images/${project.image}`} alt={project.title} />
         )}
         {isAppStoreLink(project.link) && (
           <a href={project.link} target="_blank" rel="noopener noreferrer">
-            <img src="/images/download-appstore.svg" alt="Download on the App Store" />
+            <img src="/images/download-appstore.svg" alt={`Download ${project.title} on the App Store`} />
           </a>
         )}
         {project.link && !isAppStoreLink(project.link) && (
-          <a class="blog-read-more" href={project.link} target="_blank" rel="noopener noreferrer">
-            Visit site
+          <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">
+            Visit site →
           </a>
         )}
-      </div>
+      </article>
     ))
   }
 </section>

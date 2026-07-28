@@ -33,9 +33,9 @@ const pageDescription = description ?? siteConfig.description;
       })();
     </script>
     {refreshTo && <meta http-equiv="refresh" content={`0; url=${refreshTo}`} />}
-    <meta property="og:site_name" content={siteConfig.description} />
-    <meta property="og:title" content={siteConfig.description} />
-    <meta property="og:description" content={siteConfig.description} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content="https://kristaps.me/og-image.png" />
     <meta property="og:image:secure_url" content="https://kristaps.me/og-image.png" />
     <meta property="og:type" content="website" />
@@ -43,8 +43,14 @@ const pageDescription = description ?? siteConfig.description;
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content={siteConfig.twitter} />
     <meta name="twitter:title" content={siteConfig.name} />
-    <meta name="twitter:description" content={siteConfig.description} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content="fb-og.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles.css" />
     <link
       rel="apple-touch-icon-precomposed"
