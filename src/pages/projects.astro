@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Projects from '@/components/Projects.astro';
+---
+
+<BaseLayout title="Projects">
+  <Header selectedSection="projects" />
+  <div class="wrapper">
+    <section class="blog-list">
+      <h1 class="page-title">Projects</h1>
+      <p class="section-label" style="margin-top:-0.5rem;margin-bottom:1.75rem;">
+        Work across web3, AI and product
+      </p>
+      <Projects />
+    </section>
+  </div>
+  <Footer />
+</BaseLayout>
