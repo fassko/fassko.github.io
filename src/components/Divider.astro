@@ -1,15 +1,14 @@
 ---
 interface Props {
   title: string;
+  href: string;
+  count?: number;
 }
 
-const { title } = Astro.props;
+const { title, href, count } = Astro.props;
 ---
 
-<div class="divider">
-  <div class="divider-wrapper">
-    <div class="divider-left-element"></div>
-    <div class="divider-title">{title}</div>
-    <div class="divider-right-element"></div>
-  </div>
+<div class="section-divider">
+  <a class="section-divider-label" href={href}>{title}</a>
+  <a class="section-divider-link" href={href}>{count !== undefined ? `all ${count} →` : 'all →'}</a>
 </div>

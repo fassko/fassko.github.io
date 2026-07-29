@@ -10,10 +10,10 @@ const pathname = Astro.url.pathname;
 
 const links = [
   { href: '/', label: '/home', id: null as null },
-  { href: '/projects', label: '/projects', id: 'projects' as const },
-  { href: '/blog', label: '/blog', id: 'blog' as const },
-  { href: '/talks', label: '/talks', id: 'talks' as const },
-  { href: '/about', label: '/about', id: 'about' as const },
+  { href: '/projects/', label: '/projects', id: 'projects' as const },
+  { href: '/blog/', label: '/blog', id: 'blog' as const },
+  { href: '/talks/', label: '/talks', id: 'talks' as const },
+  { href: '/about/', label: '/about', id: 'about' as const },
 ];
 
 function isCurrent(id: (typeof links)[number]['id']): boolean {

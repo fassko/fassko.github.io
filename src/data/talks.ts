@@ -9,6 +9,7 @@ export interface Talk {
   date: string;
   title: string;
   event: string;
+  description?: string;
   video?: string;
   slides?: string;
   audio?: string;

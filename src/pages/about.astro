@@ -3,6 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SocialItems from '@/components/SocialItems.astro';
+import Lightbox from '@/components/Lightbox.astro';
+
+const yearsBuilding = new Date().getFullYear() - 2004;
 
 const timeline = [
   {
@@ -30,6 +33,18 @@ const timeline = [
 
 const gallery = [
   {
+    src: '/assets/speaking/kristaps-grinbergs-dappcon26.jpg',
+    alt: 'Kristaps speaking at DappCon',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-w3n25.jpg',
+    alt: 'Panel discussion at W3N',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-w3n25-2.jpg',
+    alt: 'On stage with fellow panelists at W3N',
+  },
+  {
     src: '/assets/speaking/kristaps-grinbergs-appbuilders.jpeg',
     alt: 'Kristaps speaking at App Builders',
   },
@@ -49,6 +64,10 @@ const gallery = [
     src: '/assets/speaking/kristaps-grinbergs-shareit.jpg',
     alt: 'ShareIT workshop',
   },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-ethcc24.jpg',
+    alt: 'Kristaps at EthCC',
+  },
 ];
 ---
 
@@ -56,31 +75,52 @@ const gallery = [
   <Header selectedSection="about" />
   <div class="wrapper">
     <section class="about-me">
-      <div class="about-me-text">
+      <div class="about-top">
+        <div class="about-me-text">
         <h1 class="page-title">About</h1>
         <p>
           Kristaps is Developer Relations Engineer Lead at
           <a href="https://flare.network" target="_blank" rel="noopener noreferrer">Flare Network</a>
-          (since Sep 2023). Flare enables smart contracts and cross-chain interoperability for
-          blockchains like Bitcoin and XRP, with secure communication and DeFi capabilities.
+          (since Sep 2023). Flare brings assets, data and accounts from other chains onto a single
+          smart contract layer, through four core products:
+          <a href="https://flare.network/products/fassets" target="_blank" rel="noopener noreferrer"
+            >FAssets</a
+          > (trustless bridging for non-smart-contract assets like Bitcoin and XRP), the
+          <a
+            href="https://flare.network/products/flare-data-connector"
+            target="_blank"
+            rel="noopener noreferrer">Flare Data Connector</a
+          > (verified external data on-chain),
+          <a
+            href="https://flare.network/products/flare-smart-accounts"
+            target="_blank"
+            rel="noopener noreferrer">Flare Smart Accounts</a
+          > (DeFi access straight from an XRPL wallet) and
+          <a href="https://dev.flare.network/fcc/overview" target="_blank" rel="noopener noreferrer"
+            >Flare Confidential Compute</a
+          > (TEE-based off-chain computation and attestation).
         </p>
         <p>
-          His focus is <strong>FAssets</strong> — Flare’s cornerstone product that lets assets from
-          non-smart-contract chains be used trustlessly on Flare. He runs technical beta processes,
-          onboards FAssets system agents, and has managed closed betas with 50+ community
-          participants and open betas with thousands of users.
+          Before Flare, he spent a decade as co-founder and technical lead at
+          <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer">Qminder</a>,
+          building queue management software used by Bolt, Uber, Lyft and the Olympic Games.
         </p>
         <p>
-          Day to day he tests FAssets algorithms and tooling, fixes bugs, writes participant guides
-          for multiple system roles, maintains Docker-based service setups, and works with C-level,
-          engineering, marketing, design and ecosystem stakeholders. He also speaks at industry
-          events, supports Flare-sponsored hackathon tracks, and explains FAssets through blogs,
-          videos and conference demos.
+          Day to day he builds and tests developer tooling across Flare's products, fixes bugs,
+          writes participant guides and documentation, and maintains Docker-based service setups.
+          He works with C-level, engineering, marketing, design and ecosystem stakeholders —
+          increasingly on AI agents, the x402 payment protocol, and tools like
+          <a
+            href="https://dev.flare.network/network/guides/flare-ai-skills"
+            target="_blank"
+            rel="noopener noreferrer">Flare AI Skills</a
+          > that help AI coding assistants build on Flare. He also speaks at industry events, runs
+          hackathon tracks, and explains it all through blogs, videos and conference demos.
         </p>
         <p>
           He mentors through
-          <a href="http://www.rigatechgirls.com/" target="_blank" rel="noopener noreferrer"
-            >Riga Tech Girls</a
+          <a href="https://www.startuphouse.lv/preaccelerator" target="_blank" rel="noopener noreferrer"
+            >Startup House</a
           >
           and volunteers with
           <a href="https://www.dzivniekubriviba.lv/" target="_blank" rel="noopener noreferrer"
@@ -90,8 +130,17 @@ const gallery = [
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="mailto:fassko@gmail.com">Get in touch →</a>
-          <a class="button button-ghost" href="/projects">See the projects</a>
+          <a class="button button-ghost" href="/projects/">See the projects</a>
         </div>
+      </div>
+
+      <div class="about-portrait-col">
+        <img class="about-portrait" src="/images/kristaps.png" alt="Kristaps Grinbergs" />
+        <div class="about-quickfacts">
+          {yearsBuilding} years building<br />
+          30+ talks given
+        </div>
+      </div>
       </div>
 
       <div class="about-me-images">
@@ -128,4 +177,5 @@ const gallery = [
     </section>
   </div>
   <Footer />
+  <Lightbox />
 </BaseLayout>

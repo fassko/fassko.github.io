@@ -5,36 +5,65 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Hero from '@/components/Hero.astro';
 import Projects from '@/components/Projects.astro';
+import Divider from '@/components/Divider.astro';
 import { projects } from '@/data/projects';
+import { siteConfig } from '@/site.config';
 import { postSlug } from '@/utils/post';
 
-const featuredTitles = ['Flare · FAssets', 'Salto X', 'Dodies.lv', 'Docs agent'];
+const featuredTitles = ['Flare Network', 'Flare AI Skills', 'Latvia Weather', 'Qminder iPad'];
 const featured = featuredTitles
   .map((title) => projects.find((project) => project.title === title))
   .filter((project): project is (typeof projects)[number] => Boolean(project));
-const recentPosts = (await getCollection('blog'))
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 4);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    author: { '@type': 'Person', name: siteConfig.name },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    email: siteConfig.email,
+    jobTitle: 'Developer Relations Engineer Lead',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Flare Network',
+      url: 'https://flare.network',
+    },
+    sameAs: [...siteConfig.sameAs],
+    image: siteConfig.ogImage,
+  },
+];
 ---
 
-<BaseLayout>
+<BaseLayout canonicalURL="/" jsonLd={jsonLd}>
   <Header />
   <div class="wrapper">
     <Hero />
   </div>
   <div class="wrapper home-projects">
-    <Projects items={featured} showAllLink />
+    <Projects items={featured} showAllLink layout="home" />
   </div>
   <div class="wrapper home-blog">
-    <div class="home-projects-header">
-      <p class="section-label">Blog</p>
-      <a href="/blog">All posts →</a>
-    </div>
+    <Divider title="Blog" href="/blog/" />
     <div class="home-blog-list">
       {
         recentPosts.map((post) => (
-          <a class="home-blog-item" href={`/blog/${postSlug(post)}`}>
-            {post.data.title}
+          <a class="home-blog-item" href={`/blog/${postSlug(post)}/`}>
+            <span>{post.data.title}</span>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <span class="home-blog-item-tags">{post.data.tags.join(' · ')}</span>
+            )}
           </a>
         ))
       }

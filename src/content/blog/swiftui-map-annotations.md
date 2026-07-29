@@ -63,7 +63,7 @@ struct PlaceAnnotationView: View {
 
 We can use it in our 'Map' closure block now.
 
-```Swift
+```swift
   Map(coordinateRegion: $region,
         annotationItems: [empireStateBuilding]
     ) { place in

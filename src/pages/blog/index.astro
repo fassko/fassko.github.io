@@ -17,7 +17,7 @@ const posts = (await getCollection('blog')).sort(
     <section class="blog-list">
       <div class="blog-index-header">
         <h1 class="page-title">Blog</h1>
-        <a class="blog-tags-link" href="/tags">tags ▾</a>
+        <a class="blog-tags-link" href="/tags/">tags ▾</a>
       </div>
       <label class="blog-search">
         <span class="visually-hidden">Search posts</span>
@@ -40,12 +40,15 @@ const posts = (await getCollection('blog')).sort(
           return (
             <a
               class="blog-row"
-              href={`/blog/${postSlug(post)}`}
+              href={`/blog/${postSlug(post)}/`}
               data-blog-row
               data-search={haystack}
             >
               <p class="blog-meta">{meta}</p>
               <h2 class="blog-title">{post.data.title}</h2>
+              {post.data.description && (
+                <p class="blog-intro">{post.data.description}</p>
+              )}
             </a>
           );
         })

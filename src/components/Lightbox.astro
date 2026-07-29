@@ -1,0 +1,64 @@
+---
+---
+
+<div class="lightbox" data-lightbox hidden>
+  <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">✕</button>
+  <button type="button" class="lightbox-prev" data-lightbox-prev aria-label="Previous photo">‹</button>
+  <img class="lightbox-image" data-lightbox-image alt="" />
+  <button type="button" class="lightbox-next" data-lightbox-next aria-label="Next photo">›</button>
+</div>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-lightbox]');
+    if (!root) return;
+
+    const imageEl = root.querySelector('[data-lightbox-image]');
+    const closeButton = root.querySelector('[data-lightbox-close]');
+    const prevButton = root.querySelector('[data-lightbox-prev]');
+    const nextButton = root.querySelector('[data-lightbox-next]');
+
+    const items = [...document.querySelectorAll('.talks-gallery img, .about-me-images img')];
+    if (!items.length) return;
+
+    let index = 0;
+
+    function show(nextIndex) {
+      index = (nextIndex + items.length) % items.length;
+      const img = items[index];
+      imageEl.src = img.currentSrc || img.src;
+      imageEl.alt = img.alt || '';
+    }
+
+    function open(startIndex) {
+      show(startIndex);
+      root.hidden = false;
+      document.documentElement.classList.add('lightbox-open');
+    }
+
+    function close() {
+      root.hidden = true;
+      imageEl.src = '';
+      document.documentElement.classList.remove('lightbox-open');
+    }
+
+    items.forEach((img, i) => {
+      img.addEventListener('click', () => open(i));
+    });
+
+    closeButton.addEventListener('click', close);
+    prevButton.addEventListener('click', () => show(index - 1));
+    nextButton.addEventListener('click', () => show(index + 1));
+
+    root.addEventListener('click', (event) => {
+      if (event.target === root) close();
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (root.hidden) return;
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+  })();
+</script>

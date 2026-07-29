@@ -2,10 +2,10 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 /** Alias for the pre-rename Astro slug; Publish used /blog/txorigin-vs-msgsender. */
-const redirectTo = '/blog/txorigin-vs-msgsender';
+const redirectTo = '/blog/txorigin-vs-msgsender/';
 ---
 
-<BaseLayout refreshTo={redirectTo}>
+<BaseLayout refreshTo={redirectTo} noindex canonicalURL={redirectTo}>
   <p>
     Redirecting to <a href={redirectTo}>{redirectTo}</a>...
   </p>

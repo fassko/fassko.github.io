@@ -1,15 +1,45 @@
 ---
 import { siteConfig } from '@/site.config';
+import { absoluteUrl, pageTitle as formatPageTitle, seoDescription } from '@/utils/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  /** Open Graph type. Use `article` for blog posts. */
+  ogType?: 'website' | 'article';
+  /** Absolute or site-relative image for OG/Twitter. Defaults to site OG image. */
+  image?: string;
+  /** Override canonical URL (absolute or path). Defaults to current page URL. */
+  canonicalURL?: string;
+  /** Soft-redirect fallback when host has no HTTP 301 support. */
   refreshTo?: string;
+  /** Prevent indexing (redirect stubs, thin pages). */
+  noindex?: boolean;
+  publishedTime?: Date | string;
+  modifiedTime?: Date | string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, refreshTo } = Astro.props;
-const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
-const pageDescription = description ?? siteConfig.description;
+const {
+  title,
+  description,
+  ogType = 'website',
+  image = '/og-image.png',
+  canonicalURL,
+  refreshTo,
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  jsonLd,
+} = Astro.props;
+
+const pageTitle = formatPageTitle(title);
+const pageDescription = seoDescription(description);
+const canonical = absoluteUrl(canonicalURL ?? Astro.url.pathname);
+const ogImage = absoluteUrl(image);
+const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+
+const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -20,6 +50,8 @@ const pageDescription = description ?? siteConfig.description;
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content={siteConfig.name} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonical} />
     <script is:inline>
       (() => {
         const stored = localStorage.getItem('theme');
@@ -36,15 +68,27 @@ const pageDescription = description ?? siteConfig.description;
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content="https://kristaps.me/og-image.png" />
-    <meta property="og:image:secure_url" content="https://kristaps.me/og-image.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteConfig.url} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    {ogType === 'article' && publishedTime && (
+      <meta
+        property="article:published_time"
+        content={publishedTime instanceof Date ? publishedTime.toISOString() : publishedTime}
+      />
+    )}
+    {ogType === 'article' && modifiedTime && (
+      <meta
+        property="article:modified_time"
+        content={modifiedTime instanceof Date ? modifiedTime.toISOString() : modifiedTime}
+      />
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={siteConfig.twitter} />
-    <meta name="twitter:title" content={siteConfig.name} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content="fb-og.png" />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,7 +101,18 @@ const pageDescription = description ?? siteConfig.description;
       sizes="120x120"
       href="/apple-touch-icon-120x120.png"
     />
-    <link rel="alternate" type="application/rss+xml" title={`Subscribe to ${siteConfig.name}`} href="/feed.rss" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`Subscribe to ${siteConfig.name}`}
+      href="/feed.rss"
+    />
+    {
+      jsonLdBlocks.map((block) => (
+        <script type="application/ld+json" set:html={JSON.stringify(block)} />
+      ))
+    }
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script>
     <script src="/scripts/ga.js" is:inline></script>
   </head>

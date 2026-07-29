@@ -15,7 +15,7 @@ This time I want to discuss some advanced topics using GraphQL with Apollo SDK a
 
 At first, what is a **fragment** in GraphQL? It is a reusable piece of the query. For instance, if you need the same field in multiple queries you can extract that into a reusable piece called [GraphQL fragment](https://graphql.org/learn/queries/#fragments).
 
-```no-highlight
+```text
 query Users($id: userID) {
   users(id $id) {
     ...UserDetails
@@ -39,7 +39,7 @@ When you use fragments in your Swift project queries, Apollo iOS SDK [generates 
 
 In GraphQL a [scalar type](https://graphql.org/learn/schema/#scalar-types) is a field that has to resolve to some concrete type. In Swift language it can be `Date` or `enum`. Once you download schema JSON file you can see it like this:
 
-```no-highlight
+```text
 "type": {
   "kind": "SCALAR",
   "name": "Date",
