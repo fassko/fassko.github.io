@@ -76,6 +76,14 @@ function isCurrent(id: (typeof links)[number]['id']): boolean {
       link.addEventListener('click', () => setOpen(false));
     });
 
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') setOpen(false);
     });
