@@ -1,12 +1,40 @@
 ---
-const year = new Date().getFullYear();
+import { socialItems } from '@/data/social';
+
+const footerLinkIds = ['email', 'x', 'github', 'linkedin', 'telegram'] as const;
+const footerLinks = footerLinkIds
+  .map((id) => socialItems.find((item) => item.id === id))
+  .filter((item): item is (typeof socialItems)[number] => Boolean(item));
 ---
 
 <footer class="footer">
-  <p>© {year} Kristaps Grinbergs</p>
-  <p>
-    <a href="https://x.com/fassko" target="_blank" rel="noopener noreferrer">X</a>
-    <a href="/feed.rss">RSS</a>
-    <a href="mailto:fassko@gmail.com">Contact</a>
-  </p>
+  <div class="footer-inner">
+    <div class="footer-cta">
+      <h2 class="footer-title">Building something at the edge of AI and Web3?</h2>
+      <p class="footer-copy">
+        Open to CTO and hands-on engineering roles. Also happy to discuss speaking,
+        workshops and advisory.
+      </p>
+    </div>
+    <ul class="footer-links">
+      {
+        footerLinks.map((item) => (
+          <li>
+            <a
+              class="footer-link"
+              href={item.link}
+              target={item.link.startsWith('mailto:') ? undefined : '_blank'}
+              rel={item.link.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            >
+              <span class="footer-link-label">
+                <img class="footer-link-icon" src={`/images/${item.id}.svg`} alt="" />
+                {item.id}
+              </span>
+              <span class="footer-link-value">{item.text}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </footer>

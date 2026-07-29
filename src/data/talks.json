@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-06-16",
+    "event": "DappCon · Radialsystem, Berlin",
+    "title": "Confidential Computing in Web3: TEEs on Flare",
+    "description": "Trusted Execution Environments (TEEs) provide hardware-based guarantees for secure computation, but integrating them into trust-minimized blockchain systems requires careful design. This workshop examines how Flare Confidential Compute leverages TEEs to enable verifiable, privacy-preserving computation within Web3. We will dive into the architecture of Flare's approach, including how off-chain execution inside TEEs can be attested and anchored on-chain, preserving both confidentiality and integrity. Developers will gain practical insight into building dApps that handle sensitive data securely, unlocking new patterns for private DeFi, data marketplaces, and regulated applications.",
+    "video": "https://www.youtube.com/embed/tP1698noOZw"
+  },
+  {
     "date": "2023-08-22",
     "event": "Founderly",
     "title": "Decoding Smart Contracts: From Creation to NFT Integration",
@@ -59,14 +66,12 @@
     "date": "2021-09-30",
     "event": "Tech Stash by Mintos, Riga, Latvia",
     "title": "A journey into the SwiftUI world",
-    "video": "https://www.youtube.com/embed/MkDtmDHeJrQ",
     "slides": "e5f7dbb7f5e24b5680036e0fb767015e"
   },
   {
     "date": "2021-08-25",
     "event": "360|iDev",
     "title": "How to use SwiftUI for rapid development",
-    "video": "https://player.vimeo.com/video/601260523?h=31af3a39bb",
     "slides": "c29d0e18afc34ef19eb3d57c412e3410"
   },
   {

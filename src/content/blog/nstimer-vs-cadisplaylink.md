@@ -59,7 +59,7 @@ init() {
 
 When you create a `DisplayLink` it should be linked to an object and specified an `objc` function as a selector. This function will be fired as soon as redraw on the screen happens. We can see it by printing out the timestamp.
 
-```no-highlight
+```text
   ...
   93095.013681187
   93095.11224511401

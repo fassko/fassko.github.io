@@ -20,7 +20,10 @@ for (const post of posts) {
 const tags = [...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 ---
 
-<BaseLayout title="Browse all tags">
+<BaseLayout
+  title="Browse all tags"
+  description="Browse blog posts by topic — Solidity, SwiftUI, web3 and more."
+>
   <Header />
   <div class="wrapper">
     <section class="tags">
@@ -29,7 +32,7 @@ const tags = [...tagMap.entries()].sort((a, b) => a[0].localeCompare(b[0]));
         {
           tags.map(([slug, label]) => (
             <li class="tag">
-              <a href={`/tags/${slug}`}>{label}</a>
+              <a href={`/tags/${slug}/`}>{label}</a>
             </li>
           ))
         }

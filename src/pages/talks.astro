@@ -3,13 +3,8 @@ import talks from '@/data/talks';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-
-function formatMonthYear(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-  });
-}
+import Lightbox from '@/components/Lightbox.astro';
+import { siteConfig } from '@/site.config';
 
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -19,9 +14,23 @@ function formatDate(dateString: string): string {
   });
 }
 
-const recent = talks.slice(0, 6);
-
 const gallery = [
+  {
+    src: '/assets/speaking/kristaps-grinbergs-dappcon26.jpg',
+    alt: 'Kristaps speaking at DappCon',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-w3n25.jpg',
+    alt: 'Panel discussion at W3N',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-w3n25-2.jpg',
+    alt: 'On stage with fellow panelists at W3N',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-appbuilders.jpeg',
+    alt: 'Kristaps on stage at App Builders',
+  },
   {
     src: '/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg',
     alt: 'Kristaps speaking at NFT Tallinn',
@@ -31,16 +40,16 @@ const gallery = [
     alt: 'Panel discussion at NFT Tallinn',
   },
   {
-    src: '/assets/speaking/kristaps-grinbergs-appbuilders.jpeg',
-    alt: 'Kristaps on stage at App Builders',
-  },
-  {
     src: '/assets/speaking/kristaps-grinbergs-mobile-era.jpg',
     alt: 'Talk at Mobile Era',
   },
   {
     src: '/assets/speaking/kristaps-grinbergs-shareit.jpg',
     alt: 'Workshop session at ShareIT',
+  },
+  {
+    src: '/assets/speaking/kristaps-grinbergs-ethcc24.jpg',
+    alt: 'Kristaps at EthCC',
   },
 ];
 ---
@@ -53,10 +62,10 @@ const gallery = [
   <div class="wrapper">
     <section class="talks">
       <h1 class="page-title">Talks</h1>
-      <p class="talks-lede">
-        40+ talks · Brussels, Riga, Amsterdam, Tallinn, Lisbon
-      </p>
-      <p class="section-label">Photography from stages and workshops</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href={`mailto:${siteConfig.email}`}>Get in touch →</a>
+      </div>
+      <p class="section-label talks-gallery-label">Photography from stages and workshops</p>
       <div class="talks-gallery">
         {
           gallery.map((shot) => (
@@ -64,21 +73,6 @@ const gallery = [
           ))
         }
       </div>
-
-      <p class="section-label talks-recent-label">Upcoming &amp; recent</p>
-      <ul class="talks-recent">
-        {
-          recent.map((talk) => (
-            <li>
-              <span class="talks-recent-date">{formatMonthYear(talk.date)}</span>
-              <span class="talks-recent-copy">
-                <strong>{talk.title}</strong>
-                <span> · {talk.event}</span>
-              </span>
-            </li>
-          ))
-        }
-      </ul>
 
       <p class="section-label talks-all-label">All talks</p>
       {
@@ -88,6 +82,7 @@ const gallery = [
             <div class="talk-date">
               {formatDate(talk.date)} | {talk.event}
             </div>
+            {talk.description && <p class="talk-description">{talk.description}</p>}
             {talk.video && (
               <>
                 <h3>Video</h3>
@@ -149,4 +144,5 @@ const gallery = [
     </section>
   </div>
   <Footer />
+  <Lightbox />
 </BaseLayout>

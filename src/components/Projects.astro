@@ -1,27 +1,27 @@
 ---
 import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
+import Divider from '@/components/Divider.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
 
 interface Props {
   items?: Project[];
   showAllLink?: boolean;
   filterable?: boolean;
+  layout?: 'home' | 'page';
 }
 
-const { items = projects, showAllLink = false, filterable = false } = Astro.props;
+const { items = projects, showAllLink = false, filterable = false, layout = 'page' } = Astro.props;
 
-function isAppStoreLink(link?: string): boolean {
-  if (!link) return false;
-  return link.includes('apps.apple.com') || link.includes('itunes.apple.com');
-}
+const [featured, ...rest] = items;
+const featuredVariant = layout === 'home' ? 'featured' : 'featured-wide';
+const secondaryVariant = layout === 'home' ? 'row' : 'grid';
+const gridClass = layout === 'home' ? 'home-projects-grid' : 'projects-grid';
 ---
 
 {
   showAllLink && (
-    <div class="home-projects-header">
-      <p class="section-label">Selected projects</p>
-      <a href="/projects">All projects →</a>
-    </div>
+    <Divider title="Selected projects" href="/projects/" />
   )
 }
 
@@ -45,51 +45,20 @@ function isAppStoreLink(link?: string): boolean {
 }
 
 <section class="projects" data-projects>
-  {
-    items.map((project) => (
-      <article
-        class="project-item"
-        data-categories={(project.categories ?? []).join(' ')}
-      >
-        <div class="project-title-row">
-          <h2 class="project-title">
-            {project.link ? (
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
-                {project.title}
-              </a>
-            ) : (
-              project.title
-            )}
-          </h2>
-          {project.live && <span class="badge-live">live</span>}
+  <div class={gridClass}>
+    {featured && <ProjectCard project={featured} variant={featuredVariant} />}
+    {
+      layout === 'home' ? (
+        <div class="home-projects-list">
+          {rest.map((project) => (
+            <ProjectCard project={project} variant={secondaryVariant} />
+          ))}
         </div>
-        <p class="project-description">{project.description}</p>
-        {project.tags && project.tags.length > 0 && (
-          <ul class="project-tags">
-            {project.tags.map((tag) => (
-              <li>{tag}</li>
-            ))}
-          </ul>
-        )}
-        {project.image && (
-          <img class="project-image" src={`/images/${project.image}`} alt={project.title} />
-        )}
-        {isAppStoreLink(project.link) && (
-          <a href={project.link} target="_blank" rel="noopener noreferrer">
-            <img
-              src="/images/download-appstore.svg"
-              alt={`Download ${project.title} on the App Store`}
-            />
-          </a>
-        )}
-        {project.link && !isAppStoreLink(project.link) && (
-          <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">
-            Visit site →
-          </a>
-        )}
-      </article>
-    ))
-  }
+      ) : (
+        rest.map((project) => <ProjectCard project={project} variant={secondaryVariant} />)
+      )
+    }
+  </div>
 </section>
 
 {
@@ -101,7 +70,7 @@ function isAppStoreLink(link?: string): boolean {
         if (!root || !list) return;
 
         const buttons = [...root.querySelectorAll('[data-filter]')];
-        const items = [...list.querySelectorAll('.project-item')];
+        const items = [...list.querySelectorAll('.project-card')];
 
         function apply(filter) {
           buttons.forEach((button) => {

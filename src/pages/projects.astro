@@ -3,7 +3,6 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Projects from '@/components/Projects.astro';
-import { projects } from '@/data/projects';
 ---
 
 <BaseLayout title="Projects" description="Selected work across web3, AI and iOS.">
@@ -11,10 +10,8 @@ import { projects } from '@/data/projects';
   <div class="wrapper">
     <section class="blog-list">
       <h1 class="page-title">Projects</h1>
-      <p class="section-label projects-intro">
-        {projects.length} things shipped — imagery does the talking
-      </p>
-      <Projects filterable />
+      <p class="section-label projects-intro">Imagery does the talking</p>
+      <Projects filterable layout="page" />
     </section>
   </div>
   <Footer />

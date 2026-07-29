@@ -43,7 +43,7 @@ After that, we can create the `Caller` smart contract.
 
 ![Deploy `Caller` contract](/assets//solidity-delegatecall/interact-caller-executor.png)
 
-```solidy
+```solidity
 contract Caller {
   uint256 public luckyNumber;
   address public sender;

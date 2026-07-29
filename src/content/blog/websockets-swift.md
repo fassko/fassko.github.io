@@ -18,7 +18,7 @@ WebSockets are widely used in chat apps, streaming real-time notifications, and 
 
 The [handshake](https://tools.ietf.org/html/rfc6455#section-4) app is the web part in WebSockets. It's the bridge from HTTP to WebSocket. The client sends a pretty standard HTTP GET [request](https://tools.ietf.org/html/rfc6455#section-4.2.1) to the server:
 
-```no-highlight
+```text
 GET /chat HTTP/1.1
 Host: example.com:8000
 Upgrade: websocket
@@ -32,7 +32,7 @@ The most interesting thing here is `Sec-WebSocket-Key` which is needed for secur
 
 The server validates the request and, if everything is fine, sends back an HTTP [response](https://tools.ietf.org/html/rfc6455#section-4.2.2):
 
-```no-highlight
+```text
 HTTP/1.1 101 Switching Protocols
 Upgrade: websocket
 Connection: Upgrade

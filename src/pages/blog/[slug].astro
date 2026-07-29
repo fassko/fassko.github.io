@@ -4,7 +4,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import TagList from '@/components/TagList.astro';
+import { siteConfig } from '@/site.config';
 import { postSlug } from '@/utils/post';
+import { absoluteUrl, seoDescription } from '@/utils/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -16,6 +18,15 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const slug = postSlug(post);
+const canonicalPath = `/blog/${slug}/`;
+const description = seoDescription(post.data.description);
+
+const sortedPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const currentIndex = sortedPosts.findIndex((p) => postSlug(p) === slug);
+const nextPost = currentIndex >= 0 ? sortedPosts[currentIndex + 1] : undefined;
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
@@ -24,27 +35,106 @@ function formatDate(date: Date): string {
     day: 'numeric',
   });
 }
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: post.data.date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': absoluteUrl(canonicalPath),
+  },
+  image: siteConfig.ogImage,
+  keywords: (post.data.tags ?? []).join(', '),
+  url: absoluteUrl(canonicalPath),
+};
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout
+  title={post.data.title}
+  description={description}
+  ogType="article"
+  canonicalURL={canonicalPath}
+  publishedTime={post.data.date}
+  jsonLd={jsonLd}
+>
   <Header selectedSection="blog" />
   <div class="wrapper">
     <section class="blog-list">
       <div class="blog-item">
         <h1>
-          <a class="blog-title" href={`/blog/${postSlug(post)}`}>
+          <a class="blog-title" href={`/blog/${slug}/`}>
             {post.data.title}
           </a>
         </h1>
         <div class="blog-date">
           <TagList tags={post.data.tags ?? []} />
-          {formatDate(post.data.date)}
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
         </div>
+        {post.data.description && <p class="post-dek">{post.data.description}</p>}
         <div class="blog-content">
           <Content />
+          {
+            nextPost && (
+              <a class="post-next" href={`/blog/${postSlug(nextPost)}/`}>
+                Next → {nextPost.data.title}
+              </a>
+            )
+          }
         </div>
       </div>
     </section>
   </div>
   <Footer />
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>
