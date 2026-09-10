@@ -37,6 +37,7 @@ node_modules/
 
 # Astro build output
 dist/
+Output/
 
 # Astro generated types
 .astro/

@@ -1,10 +1,54 @@
 [
   {
+    "date": "2026-08-28",
+    "event": "AI Connect · Riga",
+    "title": "AI agents need payment rails and a confidential place to execute",
+    "description": "Panel at AI Connect 2026 in Riga. Agents cannot click through checkout. They need a payment rail (x402) and a place to keep secrets (Flare Confidential Compute).",
+    "location": { "name": "AI Connect", "city": "Riga", "country": "LV" }
+  },
+  {
+    "date": "2026-08-18",
+    "event": "Flare Builder Online Workshops",
+    "title": "Building Paid AI APIs with x402 and Flare Confidential Compute",
+    "description": "Workshop on combining x402 for API payments, Flare Confidential Compute for secret management, and AI agents that call paid tools.",
+    "video": "https://www.youtube.com/embed/Kk5vuiGZGto",
+    "link": {
+      "href": "https://github.com/flare-foundation/fce-weather-insurance-x402-agent",
+      "text": "Demo code"
+    }
+  },
+  {
     "date": "2026-06-16",
     "event": "DappCon · Radialsystem, Berlin",
     "title": "Confidential Computing in Web3: TEEs on Flare",
     "description": "Trusted Execution Environments (TEEs) provide hardware-based guarantees for secure computation, but integrating them into trust-minimized blockchain systems requires careful design. This workshop examines how Flare Confidential Compute leverages TEEs to enable verifiable, privacy-preserving computation within Web3. We will dive into the architecture of Flare's approach, including how off-chain execution inside TEEs can be attested and anchored on-chain, preserving both confidentiality and integrity. Developers will gain practical insight into building dApps that handle sensitive data securely, unlocking new patterns for private DeFi, data marketplaces, and regulated applications.",
-    "video": "https://www.youtube.com/embed/tP1698noOZw"
+    "video": "https://www.youtube.com/embed/tP1698noOZw",
+    "image": "speaking/kristaps-grinbergs-dappcon26.jpg",
+    "location": { "name": "Radialsystem", "city": "Berlin", "country": "DE" }
+  },
+  {
+    "date": "2025-12-05",
+    "event": "W3N Conference · Narva, Estonia",
+    "title": "Hack Me If You Can — Securing Web3",
+    "description": "Security panel at W3N 2025 on what it takes to keep Web3 secure, representing Flare Network.",
+    "image": "speaking/kristaps-grinbergs-w3n25-2.jpg",
+    "location": { "name": "W3N Conference", "city": "Narva", "country": "EE" }
+  },
+  {
+    "date": "2025-12-04",
+    "event": "W3N Conference · Narva, Estonia",
+    "title": "Evolution of Data and AI Architecture",
+    "description": "Panel at W3N 2025 on how data, AI, and Web3 systems are changing, representing Flare Network.",
+    "image": "speaking/kristaps-grinbergs-w3n25.jpg",
+    "location": { "name": "W3N Conference", "city": "Narva", "country": "EE" }
+  },
+  {
+    "date": "2024-07-09",
+    "event": "EthCC · Brussels",
+    "title": "Flare Network at EthCC",
+    "description": "On site at EthCC 7 in Brussels for Flare Network, talking to builders about data, interoperability, and developer tooling.",
+    "image": "speaking/kristaps-grinbergs-ethcc24.jpg",
+    "location": { "name": "EthCC", "city": "Brussels", "country": "BE" }
   },
   {
     "date": "2023-08-22",

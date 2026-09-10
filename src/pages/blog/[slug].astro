@@ -7,6 +7,7 @@ import TagList from '@/components/TagList.astro';
 import { siteConfig } from '@/site.config';
 import { postSlug } from '@/utils/post';
 import { absoluteUrl, seoDescription } from '@/utils/seo';
+import { personRef } from '@/utils/jsonld';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -36,31 +37,44 @@ function formatDate(date: Date): string {
   });
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  headline: post.data.title,
-  description,
-  datePublished: post.data.date.toISOString(),
-  dateModified: post.data.date.toISOString(),
-  author: {
-    '@type': 'Person',
-    name: siteConfig.name,
-    url: siteConfig.url,
+const modifiedTime = post.data.updated ?? post.data.date;
+const faq = post.data.faq ?? [];
+const author = personRef();
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': ['Article', 'BlogPosting'],
+    headline: post.data.title,
+    description,
+    datePublished: post.data.date.toISOString(),
+    dateModified: modifiedTime.toISOString(),
+    author,
+    publisher: author,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': absoluteUrl(canonicalPath),
+    },
+    image: siteConfig.ogImage,
+    keywords: (post.data.tags ?? []).join(', '),
+    url: absoluteUrl(canonicalPath),
   },
-  publisher: {
-    '@type': 'Person',
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-  mainEntityOfPage: {
-    '@type': 'WebPage',
-    '@id': absoluteUrl(canonicalPath),
-  },
-  image: siteConfig.ogImage,
-  keywords: (post.data.tags ?? []).join(', '),
-  url: absoluteUrl(canonicalPath),
-};
+];
+
+if (faq.length) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  });
+}
 ---
 
 <BaseLayout
@@ -69,6 +83,7 @@ const jsonLd = {
   ogType="article"
   canonicalURL={canonicalPath}
   publishedTime={post.data.date}
+  modifiedTime={modifiedTime}
   jsonLd={jsonLd}
 >
   <Header selectedSection="blog" />
@@ -83,10 +98,38 @@ const jsonLd = {
         <div class="blog-date">
           <TagList tags={post.data.tags ?? []} />
           <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          {
+            post.data.updated &&
+              post.data.updated.getTime() !== post.data.date.getTime() && (
+                <time datetime={post.data.updated.toISOString()}>
+                  Updated {formatDate(post.data.updated)}
+                </time>
+              )
+          }
         </div>
         {post.data.description && <p class="post-dek">{post.data.description}</p>}
         <div class="blog-content">
           <Content />
+          {
+            faq.length > 0 && (
+              <section class="post-faq">
+                <h2>FAQ</h2>
+                {faq.map((item) => (
+                  <div>
+                    <h3>{item.question}</h3>
+                    <p>{item.answer}</p>
+                  </div>
+                ))}
+              </section>
+            )
+          }
+          <aside class="post-author">
+            <p>
+              <a href="/about/">{siteConfig.name}</a>
+              {' · '}
+              DevRel Engineer Lead at Flare Network
+            </p>
+          </aside>
           {
             nextPost && (
               <a class="post-next" href={`/blog/${postSlug(nextPost)}/`}>

@@ -1,9 +1,11 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { projects } from '@/data/projects';
+import { projectHref, projectPages } from '@/data/projects';
 import { socialItems } from '@/data/social';
 import { siteConfig } from '@/site.config';
 import { absoluteUrl } from '@/utils/seo';
 import { postSlug } from '@/utils/post';
+
+const FEATURED_POSTS = ['x402-ai-agent-stablecoin-payments'];
 
 function linkLine(title: string, href: string, note?: string): string {
   const url =
@@ -27,7 +29,7 @@ function siteIntro(): string[] {
     '',
     `> ${siteConfig.description}`,
     '',
-    'Personal site of Kristaps Grinbergs — Developer Relations Engineer Lead at Flare Network, based in Riga. Writing on Web3, Solidity, Swift/SwiftUI, and AI. Previously smart contracts at Salto X and technical co-founder at Qminder.',
+    'Kristaps Grinbergs is Developer Relations Engineer Lead at Flare Network, based in Riga. He ships x402 payment integrations, AI agents that pay with stablecoins, Flare Confidential Compute (TEE) demos, and Flare AI Skills for coding agents.',
     '',
   ];
 }
@@ -36,10 +38,10 @@ function pagesSection(): string[] {
   return [
     '## Pages',
     '',
-    linkLine('Home', '/', 'Overview, featured projects, and recent posts'),
-    linkLine('About', '/about/', 'Background, roles, and contact'),
-    linkLine('Projects', '/projects/', 'Web3, AI, and iOS work'),
-    linkLine('Talks', '/talks/', 'Conference talks and workshops'),
+    linkLine('About', '/about/', 'Background, Flare, x402, AI agents, and contact'),
+    linkLine('Home', '/', 'Overview and recent posts'),
+    linkLine('Talks', '/talks/', 'AI Connect, W3N, DappCon TEEs, EthCC, Flare Builders x402 workshop'),
+    linkLine('Projects', '/projects/', 'Index of Web3, AI, and iOS work'),
     linkLine('Blog', '/blog/', 'All articles'),
     '',
   ];
@@ -47,8 +49,8 @@ function pagesSection(): string[] {
 
 function projectsSection(): string[] {
   const lines = ['## Projects', ''];
-  for (const project of projects) {
-    const href = project.link ?? '/projects/';
+  for (const project of projectPages()) {
+    const href = projectHref(project) ?? '/projects/';
     lines.push(linkLine(project.title, href, project.description));
   }
   lines.push('');
@@ -56,8 +58,13 @@ function projectsSection(): string[] {
 }
 
 function blogSection(posts: CollectionEntry<'blog'>[]): string[] {
-  const lines = ['## Blog', ''];
-  for (const post of posts) {
+  const bySlug = new Map(posts.map((post) => [postSlug(post), post]));
+  const featured = FEATURED_POSTS.map((slug) => bySlug.get(slug)).filter(
+    (post): post is CollectionEntry<'blog'> => Boolean(post),
+  );
+
+  const lines = ['## Writing', ''];
+  for (const post of featured) {
     const note = post.data.description?.trim() || undefined;
     lines.push(linkLine(post.data.title, `/blog/${postSlug(post)}/`, note));
   }
@@ -69,6 +76,9 @@ function optionalSection(): string[] {
   const lines = [
     '## Optional',
     '',
+    linkLine('llms-full.txt', '/llms-full.txt', 'Full post bodies, including older Solidity and SwiftUI'),
+    linkLine('SwiftUI posts', '/tags/swiftui/', 'iOS and SwiftUI notes'),
+    linkLine('Solidity posts', '/tags/solidity/', 'Language and ERC tutorials'),
     linkLine('RSS feed', '/feed.xml', 'Subscribe to new posts'),
     linkLine('Tags', '/tags/', 'Browse posts by topic'),
   ];
@@ -130,7 +140,7 @@ export async function renderLlmsFullTxt(): Promise<string> {
       parts.push(`- Summary: ${post.data.description}`);
     }
     parts.push('');
-    parts.push(post.body.trim());
+    parts.push((post.body ?? '').trim());
     parts.push('');
     parts.push('---');
     parts.push('');

@@ -1,5 +1,16 @@
+/* Space Grotesk's ()[]{} are near-circles and read as oversized O at display size.
+   Pull those glyphs from Public Sans (already loaded) so headings stay Grotesk. */
+@font-face {
+  font-family: "Display Marks";
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ7QwOk1.woff2") format("woff2");
+  unicode-range: U+0028-0029, U+005B-005D, U+007B-007D;
+}
+
 :root {
-  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Display Marks", "Space Grotesk", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --radius: 8px;
@@ -64,10 +75,12 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
@@ -160,7 +173,7 @@ h3 {
 
 .main-title {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   flex-shrink: 0;
@@ -661,6 +674,17 @@ html.nav-open .nav-toggle span:nth-child(3) {
   font-size: 0.95rem;
 }
 
+.project-description a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.project-description a:hover {
+  opacity: 1;
+}
+
 .project-card-row .project-description,
 .project-card-grid .project-description {
   font-size: 0.88rem;
@@ -678,11 +702,6 @@ html.nav-open .nav-toggle span:nth-child(3) {
 .project-card-appstore {
   margin-top: 0.35rem;
   width: fit-content;
-}
-
-.projects-intro {
-  margin-top: -0.5rem;
-  margin-bottom: 1.25rem;
 }
 
 .project-filters {
@@ -1007,12 +1026,6 @@ html.nav-open .nav-toggle span:nth-child(3) {
   align-items: start;
 }
 
-.about-portrait-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .about-portrait {
   width: 100%;
   aspect-ratio: 230 / 270;
@@ -1021,27 +1034,14 @@ html.nav-open .nav-toggle span:nth-child(3) {
   border: 1px solid var(--border);
 }
 
-.about-quickfacts {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
 @media (max-width: 760px) {
   .about-top {
     grid-template-columns: 1fr;
   }
 
-  .about-portrait-col {
-    flex-direction: row;
-    align-items: center;
-  }
-
   .about-portrait {
-    width: 120px;
+    width: 160px;
     aspect-ratio: 1;
-    flex-shrink: 0;
   }
 }
 
@@ -1305,8 +1305,8 @@ html.lightbox-open {
 }
 
 .talk-vide-iframe {
+  display: block;
   width: 100%;
-  max-width: 640px;
   aspect-ratio: 16 / 9;
   height: auto;
   border: 0;
@@ -1553,6 +1553,66 @@ audio {
   margin: 0;
   border: none;
   border-radius: 0;
+}
+
+.blog-content table {
+  width: 100%;
+  max-width: var(--measure-wide);
+  border-collapse: collapse;
+  margin: 0 0 1.35rem;
+  font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.blog-content th,
+.blog-content td {
+  border: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-content th {
+  color: var(--text);
+  font-weight: 600;
+  background: var(--accent-soft);
+}
+
+.blog-content td {
+  color: var(--text-muted);
+}
+
+.post-faq {
+  max-width: var(--measure-wide);
+  padding-top: 0.5rem;
+}
+
+.post-author {
+  max-width: var(--measure-wide);
+  margin: 1.25rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.post-author a {
+  color: var(--text);
+}
+
+.project-page {
+  padding-bottom: 3rem;
+}
+
+.project-page .section-label a {
+  color: var(--text-muted);
+}
+
+.project-page-image {
+  display: block;
+  width: 100%;
+  max-width: var(--measure-wide);
+  margin: 1.25rem 0 1.75rem;
+  border-radius: 4px;
 }
 
 .post-next {

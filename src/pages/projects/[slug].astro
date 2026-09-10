@@ -1,0 +1,126 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { projectPages, type Project } from '@/data/projects';
+import { siteConfig } from '@/site.config';
+import { personRef } from '@/utils/jsonld';
+import { absoluteUrl } from '@/utils/seo';
+
+export function getStaticPaths() {
+  return projectPages().map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const path = `/projects/${project.slug}/`;
+const description = project.overview?.[0] ?? project.description;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareSourceCode',
+  name: project.title,
+  description,
+  url: absoluteUrl(path),
+  codeRepository: project.link,
+  programmingLanguage: project.stack?.join(', '),
+  author: personRef(),
+  keywords: (project.tags ?? []).join(', '),
+};
+---
+
+<BaseLayout
+  title={project.title}
+  description={description}
+  canonicalURL={path}
+  jsonLd={jsonLd}
+>
+  <Header selectedSection="projects" />
+  <div class="wrapper">
+    <article class="project-page">
+      <p class="section-label"><a href="/projects/">Projects</a></p>
+      <h1 class="page-title">{project.title}</h1>
+      {project.tags && project.tags.length > 0 && (
+        <p class="project-tags">{project.tags.join(' · ')}</p>
+      )}
+      {
+        project.image && (
+          <img
+            class="project-page-image"
+            src={`/images/${project.image}`}
+            alt={project.title}
+          />
+        )
+      }
+      <div class="blog-content">
+        {project.overview?.map((paragraph) => <p>{paragraph}</p>)}
+
+        {
+          project.stack && project.stack.length > 0 && (
+            <>
+              <h2>Stack</h2>
+              <ul>
+                {project.stack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+
+        {
+          project.architecture && project.architecture.length > 0 && (
+            <>
+              <h2>Architecture</h2>
+              {project.architecture.map((section) => (
+                <>
+                  <h3>{section.title}</h3>
+                  <p>{section.copy}</p>
+                </>
+              ))}
+            </>
+          )
+        }
+
+        {
+          project.links && project.links.length > 0 && (
+            <>
+              <h2>Links</h2>
+              <ul>
+                {project.links.map((item) => {
+                  const external = item.href.startsWith('http');
+                  return (
+                    <li>
+                      <a
+                        href={item.href}
+                        target={external ? '_blank' : undefined}
+                        rel={external ? 'noopener noreferrer' : undefined}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )
+        }
+
+        <aside class="post-author">
+          <p>
+            <a href="/about/">{siteConfig.name}</a>
+            {' · '}
+            DevRel Engineer Lead at Flare Network
+          </p>
+        </aside>
+      </div>
+    </article>
+  </div>
+  <Footer />
+</BaseLayout>

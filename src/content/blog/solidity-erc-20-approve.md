@@ -2,6 +2,7 @@
 
 
 date: 2025-07-05 00:00
+updated: 2026-09-10 00:00
 title: "Understanding approve() in ERC-20: Why It Matters and How to Use It Safely"
 tags: Solidity, web3, ERC20
 description: "This post takes a closer look at the `approve()` function in the ERC-20 token standard. While commonly used in DeFi applications, it introduces a huge risk if not handled correctly. Learn how to use it safely and avoid known vulnerabilities."
@@ -47,7 +48,7 @@ The `approve()` function of the ERC-20 standard permits a smart contract (or ano
 It is a key part of token transfers in DeFi applications.
 Be careful and always reset to 0 before updating allowances to avoid race conditions.
 
-The ERC-20 standard may seem simple, but subtle details like this one can expose users to a real risk of losing money.
+The ERC-20 standard may seem simple, but subtle details like this one can expose users to a real risk of losing money. AI agents paying per API call still hit `approve()` unless the flow uses gasless EIP-3009. I wrote up that pattern in [What is x402?](/blog/x402-ai-agent-stablecoin-payments/).
 
 ## Links
 

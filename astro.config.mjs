@@ -11,12 +11,15 @@ export default defineConfig({
   site: 'https://kristaps.me',
   output: 'static',
   trailingSlash: 'always',
+  // Astro 7 defaults to JSX whitespace (strips newlines around tags).
+  // HTML-aware compression keeps spaces around inline links in prose.
+  compressHTML: true,
   integrations: [
     sitemap({
       filter: (page) => {
         if (redirectPaths.has(page)) return false;
-        // Individual tag pages are often thin; keep /tags/ only
         if (/^https:\/\/kristaps\.me\/tags\/.+/i.test(page)) return false;
+        if (/^https:\/\/kristaps\.me\/index\/?$/i.test(page)) return false;
         return true;
       },
     }),

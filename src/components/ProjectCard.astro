@@ -1,5 +1,6 @@
 ---
 import type { Project } from '@/data/projects';
+import { isExternalProjectHref, projectHref } from '@/data/projects';
 
 interface Props {
   project: Project;
@@ -7,10 +8,29 @@ interface Props {
 }
 
 const { project, variant } = Astro.props;
+const href = projectHref(project);
+const external = isExternalProjectHref(project);
+const image = project.image ? `/images/${project.image}` : undefined;
 
 function isAppStoreLink(link?: string): boolean {
   if (!link) return false;
   return link.includes('apps.apple.com') || link.includes('itunes.apple.com');
+}
+
+function inlineMarkdownLinks(text: string): string {
+  const escaped = text
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+
+  return escaped.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]+)\)/g,
+    (_match, label: string, link: string) => {
+      const isExternal = link.startsWith('http://') || link.startsWith('https://');
+      const attrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${link}"${attrs}>${label}</a>`;
+    },
+  );
 }
 ---
 
@@ -19,20 +39,22 @@ function isAppStoreLink(link?: string): boolean {
   data-categories={(project.categories ?? []).join(' ')}
 >
   {
-    project.image && (
-      <img
-        class="project-card-image"
-        src={`/images/${project.image}`}
-        alt={project.title}
-        loading="lazy"
-      />
+    image && href && (
+      <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+        <img class="project-card-image" src={image} alt={project.title} loading="lazy" />
+      </a>
+    )
+  }
+  {
+    image && !href && (
+      <img class="project-card-image" src={image} alt={project.title} loading="lazy" />
     )
   }
   <div class="project-card-body">
     <div class="project-title-row">
       <h2 class="project-title">
-        {project.link ? (
-          <a href={project.link} target="_blank" rel="noopener noreferrer">
+        {href ? (
+          <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
             {project.title}
           </a>
         ) : (
@@ -40,7 +62,7 @@ function isAppStoreLink(link?: string): boolean {
         )}
       </h2>
     </div>
-    <p class="project-description">{project.description}</p>
+    <p class="project-description" set:html={inlineMarkdownLinks(project.description)} />
     {project.tags && project.tags.length > 0 && <p class="project-tags">{project.tags.join(' · ')}</p>}
     {
       isAppStoreLink(project.link) && (

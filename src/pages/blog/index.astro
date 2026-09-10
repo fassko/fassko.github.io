@@ -11,7 +11,7 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<BaseLayout title="Blog" description="Notes on web3, AI, Swift and building products.">
+<BaseLayout title="Blog" description="Notes on x402, AI agents, stablecoins, Solidity and building on Flare.">
   <Header selectedSection="blog" />
   <div class="wrapper">
     <section class="blog-list">
@@ -31,7 +31,7 @@ const posts = (await getCollection('blog')).sort(
       </label>
       {
         posts.map((post) => {
-          const minutes = readingTimeMinutes(post.body);
+          const minutes = readingTimeMinutes(post.body ?? '');
           const tags = post.data.tags ?? [];
           const meta = formatPostMeta(post.data.date, minutes, tags);
           const haystack = [post.data.title, post.data.description ?? '', ...tags]

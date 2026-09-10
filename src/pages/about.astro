@@ -4,8 +4,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SocialItems from '@/components/SocialItems.astro';
 import Lightbox from '@/components/Lightbox.astro';
-
-const yearsBuilding = new Date().getFullYear() - 2004;
+import { personJsonLd } from '@/utils/jsonld';
 
 const timeline = [
   {
@@ -13,7 +12,7 @@ const timeline = [
     org: 'Flare Network',
     href: 'https://flare.network',
     when: '2023 — present',
-    copy: 'FAssets, protocol tooling, agent onboarding and developer education.',
+    copy: 'FAssets, x402 integrations, Flare AI Skills, and developer education.',
   },
   {
     role: 'Smart contracts & product',
@@ -71,7 +70,11 @@ const gallery = [
 ];
 ---
 
-<BaseLayout title="About" description="About Kristaps Grinbergs — Web3 and AI developer based in Riga.">
+<BaseLayout
+  title="About"
+  description="About Kristaps Grinbergs — DevRel at Flare Network, working on x402 payments, AI agents, and Web3."
+  jsonLd={personJsonLd()}
+>
   <Header selectedSection="about" />
   <div class="wrapper">
     <section class="about-me">
@@ -79,9 +82,9 @@ const gallery = [
         <div class="about-me-text">
         <h1 class="page-title">About</h1>
         <p>
-          Kristaps is Developer Relations Engineer Lead at
+          Kristaps is Developer Relations Engineer Lead at{' '}
           <a href="https://flare.network" target="_blank" rel="noopener noreferrer">Flare Network</a>
-          (since Sep 2023). Flare brings assets, data and accounts from other chains onto a single
+          {' '}(since Sep 2023). Flare brings assets, data and accounts from other chains onto a single
           smart contract layer, through four core products:
           <a href="https://flare.network/products/fassets" target="_blank" rel="noopener noreferrer"
             >FAssets</a
@@ -109,13 +112,21 @@ const gallery = [
           Day to day he builds and tests developer tooling across Flare's products, fixes bugs,
           writes participant guides and documentation, and maintains Docker-based service setups.
           He works with C-level, engineering, marketing, design and ecosystem stakeholders —
-          increasingly on AI agents, the x402 payment protocol, and tools like
+          increasingly on AI agents,
+          <a
+            href="https://dev.flare.network/fxrp/token-interactions/x402-payments"
+            target="_blank"
+            rel="noopener noreferrer">x402</a
+          >
+          payment integrations, and
           <a
             href="https://dev.flare.network/network/guides/flare-ai-skills"
             target="_blank"
             rel="noopener noreferrer">Flare AI Skills</a
-          > that help AI coding assistants build on Flare. He also speaks at industry events, runs
-          hackathon tracks, and explains it all through blogs, videos and conference demos.
+          >
+          plus related agent projects that help coding assistants build on Flare. He also speaks at
+          industry events, runs hackathon tracks, and explains it all through blogs, videos and
+          conference demos.
         </p>
         <p>
           He mentors through
@@ -135,11 +146,13 @@ const gallery = [
       </div>
 
       <div class="about-portrait-col">
-        <img class="about-portrait" src="/images/kristaps.png" alt="Kristaps Grinbergs" />
-        <div class="about-quickfacts">
-          {yearsBuilding} years building<br />
-          30+ talks given
-        </div>
+        <img
+          class="about-portrait"
+          src="/images/kristaps.jpg"
+          alt="Kristaps Grinbergs"
+          width="1024"
+          height="1024"
+        />
       </div>
       </div>
 
