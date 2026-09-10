@@ -26,7 +26,7 @@ const {
   title,
   description,
   ogType = 'website',
-  image = '/og-image.png',
+  image = siteConfig.ogImage,
   canonicalURL,
   refreshTo,
   noindex = false,
@@ -39,6 +39,7 @@ const pageTitle = formatPageTitle(title);
 const pageDescription = seoDescription(description);
 const canonical = absoluteUrl(canonicalURL ?? Astro.url.pathname);
 const ogImage = absoluteUrl(image);
+const ogImageAlt = `${siteConfig.name} — Full-Stack, AI, Mobile & Blockchain developer`;
 const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 
 const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
@@ -76,6 +77,10 @@ const stylesHash = createHash('sha1')
     <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     {ogType === 'article' && publishedTime && (
@@ -95,6 +100,7 @@ const stylesHash = createHash('sha1')
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
