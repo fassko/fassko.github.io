@@ -4,6 +4,10 @@ on:
   push:
     branches: [ develop ]
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   build:
     name: Deploy
@@ -32,6 +36,34 @@ jobs:
         allow_empty_commit: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Wait for GitHub Pages
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        since=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+        echo "Waiting for pages-build-deployment after $since"
+        for i in $(seq 1 30); do
+          runs=$(gh run list \
+            --workflow=pages-build-deployment \
+            --branch=master \
+            --limit 5 \
+            --json status,conclusion,createdAt)
+          echo "$runs" | jq -c '.[]'
+          if echo "$runs" | jq -e --arg since "$since" \
+            '[.[] | select(.createdAt >= $since and .conclusion == "failure")] | length > 0' >/dev/null; then
+            echo "GitHub Pages build failed"
+            exit 1
+          fi
+          if echo "$runs" | jq -e --arg since "$since" \
+            '[.[] | select(.createdAt >= $since and .status == "completed" and .conclusion == "success")] | length > 0' >/dev/null; then
+            echo "GitHub Pages is live"
+            sleep 15
+            exit 0
+          fi
+          sleep 10
+        done
+        echo "Timed out waiting for GitHub Pages; purging Cloudflare anyway"
 
     - name: Clear cache
       run: |

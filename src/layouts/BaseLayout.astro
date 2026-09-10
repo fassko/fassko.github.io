@@ -1,4 +1,6 @@
 ---
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { siteConfig } from '@/site.config';
 import { absoluteUrl, pageTitle as formatPageTitle, seoDescription } from '@/utils/seo';
 
@@ -40,6 +42,10 @@ const ogImage = absoluteUrl(image);
 const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 
 const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const stylesHash = createHash('sha1')
+  .update(readFileSync(new URL('../../public/styles.css', import.meta.url)))
+  .digest('hex')
+  .slice(0, 10);
 ---
 
 <!doctype html>
@@ -95,7 +101,7 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href={`/styles.css?v=${stylesHash}`} />
     <link
       rel="apple-touch-icon-precomposed"
       sizes="120x120"
