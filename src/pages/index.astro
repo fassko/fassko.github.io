@@ -9,8 +9,14 @@ import Divider from '@/components/Divider.astro';
 import { projects } from '@/data/projects';
 import { siteConfig } from '@/site.config';
 import { postSlug } from '@/utils/post';
+import { personJsonLd } from '@/utils/jsonld';
 
-const featuredTitles = ['Flare Network', 'Flare AI Skills', 'Latvia Weather', 'Qminder iPad'];
+const featuredTitles = [
+  'Flare Network',
+  'Flare AI Skills',
+  'x402 Weather Insurance Agent',
+  'Qminder iPad',
+];
 const featured = featuredTitles
   .map((title) => projects.find((project) => project.title === title))
   .filter((project): project is (typeof projects)[number] => Boolean(project));
@@ -26,23 +32,9 @@ const jsonLd = [
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
-    author: { '@type': 'Person', name: siteConfig.name },
+    author: { '@id': `${siteConfig.url}/#person` },
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: siteConfig.name,
-    url: siteConfig.url,
-    email: siteConfig.email,
-    jobTitle: 'Developer Relations Engineer Lead',
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Flare Network',
-      url: 'https://flare.network',
-    },
-    sameAs: [...siteConfig.sameAs],
-    image: siteConfig.ogImage,
-  },
+  personJsonLd(),
 ];
 ---
 

@@ -2,6 +2,7 @@
 
 
 date: 2023-01-28 00:00
+updated: 2026-09-10 00:00
 title: "What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask?"
 tags: Solidity, web3, Metamask
 description: "Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask."
@@ -149,6 +150,8 @@ This data can be used on behalf of the signer to execute a smart contract on the
 ## TL;DR
 
 The EIP-712 standard opens doors to sign a transaction and allows someone else to use this transaction. It helps to implement gasless transactions to avoid our users paying the gas fee and figuring out how to get native tokens like Ethereum, Matic, and others. This standard describes how to format the message in human-readable form in a crypto wallet like Metamask when a user signs it. After it is signed, we can use this signed transaction in a smart contract, but more on that in one of the following blog posts.
+
+That signing step is how gasless x402 works on Flare (EIP-3009 `transferWithAuthorization`). The weather-insurance agent I shipped uses `approve` plus `transferFrom` instead, because the fee has to be atomic with the gated call. Write-up: [What is x402?](/blog/x402-ai-agent-stablecoin-payments/).
 
 ## Links
 

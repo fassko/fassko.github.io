@@ -2,6 +2,7 @@
 
 
 date: 2025-06-20 00:00
+updated: 2026-09-10 00:00
 title: "Back from Berlin Blockchain Week: Thoughts on DappCon, Privacy, and Where Blockchain Goes Next"
 tags: web3, blockchain
 description: "DappCon in Berlin brought together builders tackling the big questions in Web3 - stablecoins, privacy, regulation, and UX. Berlin's deep-rooted values of privacy and self-expression made it the perfect setting. This post shares key insights from the conference and reflects on what still needs fixing to bring blockchain to everyday life."
@@ -33,6 +34,8 @@ It is a gathering of creators trying to solve deep problems with blockchain—an
 One huge hope is that stablecoins will finally bring millions into crypto - not for speculation, but for real use.
 However, there is a twist here: money is currently managed by governments.
 Are we comfortable trusting private companies to hold and manage our digital assets instead?
+
+I have been using them as the unit an AI agent pays with. [x402 on Flare](/blog/x402-ai-agent-stablecoin-payments/) is HTTP 402 plus an ERC-20 pull, so a model can buy a weather API call without a credit card.
 
 ### 🏛️ Governments & Big Tech Enter the Chat
 

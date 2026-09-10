@@ -1,9 +1,9 @@
 import type { CollectionEntry } from 'astro:content';
 
-/** Prefer Astro slug (respects frontmatter); fall back to id without extension. */
+/** Collection `id` is the URL slug in the Content Layer API. */
 export function postSlug(post: CollectionEntry<'blog'> | string): string {
   if (typeof post === 'string') {
     return post.replace(/\.md$/, '');
   }
-  return post.slug || post.id.replace(/\.md$/, '');
+  return post.id.replace(/\.md$/, '');
 }

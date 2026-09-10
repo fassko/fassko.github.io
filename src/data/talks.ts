@@ -5,6 +5,12 @@ export interface TalkLink {
   text: string;
 }
 
+export interface TalkLocation {
+  name: string;
+  city: string;
+  country: string;
+}
+
 export interface Talk {
   date: string;
   title: string;
@@ -15,6 +21,7 @@ export interface Talk {
   audio?: string;
   image?: string;
   link?: TalkLink;
+  location?: TalkLocation;
 }
 
 const talks = talksData as Talk[];

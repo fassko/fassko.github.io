@@ -5,6 +5,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Lightbox from '@/components/Lightbox.astro';
 import { siteConfig } from '@/site.config';
+import { eventJsonLd, personJsonLd } from '@/utils/jsonld';
 
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -52,11 +53,13 @@ const gallery = [
     alt: 'Kristaps at EthCC',
   },
 ];
+const jsonLd = [personJsonLd(), ...talks.map((talk) => eventJsonLd(talk))];
 ---
 
 <BaseLayout
   title="Talks"
-  description="Talks and workshops on web3, smart contracts, Swift and developer relations."
+  description="Talks and workshops on x402, AI agents, TEEs, smart contracts, and developer relations."
+  jsonLd={jsonLd}
 >
   <Header selectedSection="talks" />
   <div class="wrapper">

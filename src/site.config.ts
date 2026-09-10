@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Kristaps Grinbergs',
   url: 'https://kristaps.me',
   description:
-    'Web3 and AI developer, building what comes next. Developer Relations Engineer Lead at Flare Network.',
+    'Developer Relations Engineer Lead at Flare Network. Writing on x402 payments, AI agents, stablecoins, and Web3.',
   twitter: '@fassko',
   email: 'fassko@gmail.com',
   ogImage: 'https://kristaps.me/og-image.png',

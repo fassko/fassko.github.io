@@ -108,6 +108,12 @@ const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       title={`Subscribe to ${siteConfig.name}`}
       href="/feed.rss"
     />
+    <link
+      rel="alternate"
+      type="text/plain"
+      title="llms.txt"
+      href="/llms.txt"
+    />
     {
       jsonLdBlocks.map((block) => (
         <script type="application/ld+json" set:html={JSON.stringify(block)} />

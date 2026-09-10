@@ -9,11 +9,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.7.3",
-    "astro": "^5.8.0"
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2"
   },
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^7.0.2"
   }
 }
