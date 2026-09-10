@@ -1,6 +1,7 @@
 ---
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { siteConfig } from '@/site.config';
 import { absoluteUrl, pageTitle as formatPageTitle, seoDescription } from '@/utils/seo';
 
@@ -44,7 +45,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 
 const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const stylesHash = createHash('sha1')
-  .update(readFileSync(new URL('../../public/styles.css', import.meta.url)))
+  .update(readFileSync(join(process.cwd(), 'public/styles.css')))
   .digest('hex')
   .slice(0, 10);
 ---
