@@ -4,6 +4,7 @@
 date: 2025-06-20 00:00
 updated: 2026-09-10 00:00
 title: "Back from Berlin Blockchain Week: Thoughts on DappCon, Privacy, and Where Blockchain Goes Next"
+seoTitle: "DappCon 2025 and Berlin Blockchain Week"
 tags: web3, blockchain
 description: "DappCon in Berlin brought together builders tackling the big questions in Web3 - stablecoins, privacy, regulation, and UX. Berlin's deep-rooted values of privacy and self-expression made it the perfect setting. This post shares key insights from the conference and reflects on what still needs fixing to bring blockchain to everyday life."
 ---

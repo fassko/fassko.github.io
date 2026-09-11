@@ -6,6 +6,7 @@ import Footer from '@/components/Footer.astro';
 import TagList from '@/components/TagList.astro';
 import { postSlug } from '@/utils/post';
 import { slugifyTag } from '@/utils/tag';
+import { seoDescription } from '@/utils/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -42,11 +43,21 @@ function formatDate(date: Date): string {
     day: 'numeric',
   });
 }
+
+const samples = posts
+  .slice(0, 2)
+  .map((post) => post.data.title)
+  .join('; ');
+const tagDescription = seoDescription(
+  `${posts.length} ${posts.length === 1 ? 'post' : 'posts'} on ${tag} by Kristaps Grinbergs` +
+    (samples ? `: ${samples}` : '') +
+    `. Notes on web3, AI agents, Swift/iOS, and building products.`,
+);
 ---
 
 <BaseLayout
   title={`Tagged with ${tag}`}
-  description={`Blog posts tagged ${tag} — notes on web3, AI, Swift and building products.`}
+  description={tagDescription}
   noindex={posts.length < 3}
 >
   <Header />

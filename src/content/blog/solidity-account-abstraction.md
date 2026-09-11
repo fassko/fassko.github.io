@@ -4,6 +4,7 @@
 date: 2023-10-31 00:00
 updated: 2026-09-10 00:00
 title: "Understanding ERC-4337 and the Future of Ethereum User Experience: Account Abstraction"
+seoTitle: "ERC-4337 account abstraction explained"
 tags: ethereum, solidity
 description: "In Ethereum Improvement Proposal 4337 (ERC-4337), account abstraction simplifies user interaction and the blockchain. It eliminates the need for users to deal with the complexities of wallets, making blockchain applications (dApps) more accessible to users. For instance, users can use social login to interact with dApps, and there is no need for private keys or seed phrases anymore. In this series of posts, I will provide a high-level overview of the topic in this post and dive into the code in the following ones."
 ---

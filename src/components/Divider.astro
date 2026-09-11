@@ -9,6 +9,8 @@ const { title, href, count } = Astro.props;
 ---
 
 <div class="section-divider">
-  <a class="section-divider-label" href={href}>{title}</a>
+  <h2 class="section-divider-label">
+    <a href={href}>{title}</a>
+  </h2>
   <a class="section-divider-link" href={href}>{count !== undefined ? `all ${count} →` : 'all →'}</a>
 </div>
