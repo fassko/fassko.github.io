@@ -3,6 +3,7 @@
 
 date: 2023-03-28 00:00
 title: "Implementing the ERC-2981 NFT royalty standard with Solidity - a game-changer for creators to receive income from every sale"
+seoTitle: "ERC-2981 NFT royalties with Solidity"
 tags: Solidity, web3
 description: "With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered impossible. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payments for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation."
 ---

@@ -16,11 +16,16 @@
     </div>
     <p class="hero-meta">Open to consulting</p>
   </div>
-  <img
-    class="profile-picture"
-    src="/images/kristaps.jpg"
-    alt="Kristaps Grinbergs"
-    width="1024"
-    height="1024"
-  />
+  <picture>
+    <source srcset="/images/kristaps.webp" type="image/webp" />
+    <img
+      class="profile-picture"
+      src="/images/kristaps.jpg"
+      alt="Kristaps Grinbergs"
+      width="680"
+      height="680"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </picture>
 </section>

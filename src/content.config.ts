@@ -6,6 +6,8 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    /** Shorter SERP title; H1 still uses `title` when set. */
+    seoTitle: z.string().optional(),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     description: z.string().optional(),

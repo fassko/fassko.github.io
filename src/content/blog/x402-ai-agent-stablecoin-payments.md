@@ -2,6 +2,7 @@
 date: 2026-09-10 00:00
 updated: 2026-09-10 00:00
 title: "What is x402? How I charged a weather API in stablecoins so an AI agent could pay"
+seoTitle: "What is x402? AI agent stablecoin payments"
 tags: x402, AI agents, stablecoins, web3, flare
 description: "x402 turns HTTP 402 into a payment handshake. I used it on Flare so an AI agent could pay per weather API call in an ERC-20, with the API key locked inside a TEE."
 faq:

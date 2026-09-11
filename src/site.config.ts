@@ -5,7 +5,7 @@ export const siteConfig = {
     'Developer Relations Engineer Lead at Flare Network. Writing on x402 payments, AI agents, stablecoins, and Web3.',
   twitter: '@fassko',
   email: 'fassko@gmail.com',
-  ogImage: 'https://kristaps.me/og-image.png',
+  ogImage: 'https://kristaps.me/og-image.jpg',
   sameAs: [
     'https://twitter.com/fassko',
     'https://github.com/fassko',

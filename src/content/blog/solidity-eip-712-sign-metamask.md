@@ -4,6 +4,7 @@
 date: 2023-01-28 00:00
 updated: 2026-09-10 00:00
 title: "What are meta transactions, the EIP-712 standard, and how to sign a message with Metamask?"
+seoTitle: "EIP-712 meta transactions with MetaMask"
 tags: Solidity, web3, Metamask
 description: "Meta transactions in Ethereum blockchain is an approach that removes the complexity for our users to deal with gas fees. The gas fee is a transaction fee paid to validators for proof of stake (POS) or miners for proof of work (POW) blockchains. With this approach, users sign a transaction, which is sent to a smart contract. It keeps all the security aspects upon which the Ethereum blockchain was created. This article will examine the EIP-712 standard and how to sign transactions with Metamask."
 ---
