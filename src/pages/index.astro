@@ -52,7 +52,7 @@ const jsonLd = [
       {
         recentPosts.map((post) => (
           <a class="home-blog-item" href={`/blog/${postSlug(post)}/`}>
-            <span>{post.data.title}</span>
+            <span class="home-blog-item-title">{post.data.title}</span>
             {post.data.tags && post.data.tags.length > 0 && (
               <span class="home-blog-item-tags">{post.data.tags.join(' · ')}</span>
             )}

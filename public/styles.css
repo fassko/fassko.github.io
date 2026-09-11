@@ -517,6 +517,11 @@ html.nav-open .nav-toggle span:nth-child(3) {
   line-height: 1.3;
 }
 
+.home-blog-item-title {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 .home-blog-item-tags {
   flex-shrink: 0;
   font-family: var(--font-mono);
@@ -525,6 +530,20 @@ html.nav-open .nav-toggle span:nth-child(3) {
   letter-spacing: 0.02em;
   color: var(--text-muted);
   text-transform: lowercase;
+}
+
+@media (max-width: 700px) {
+  .home-blog-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .home-blog-item-tags {
+    flex-shrink: 1;
+    max-width: 100%;
+    line-height: 1.45;
+  }
 }
 
 .home-blog-item:hover {
