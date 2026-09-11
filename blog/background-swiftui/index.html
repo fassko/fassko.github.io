@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Background Color with SwiftUI | Kristaps Grinbergs</title><meta name="description" content="Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/background-swiftui/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="Background Color with SwiftUI | Kristaps Grinbergs"><meta property="og:description" content="Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/background-swiftui/"><meta property="article:published_time" content="2020-12-27T00:00:00.000Z"><meta property="article:modified_time" content="2020-12-27T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="Background Color with SwiftUI | Kristaps Grinbergs"><meta name="twitter:description" content="Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"Background Color with SwiftUI","description":"Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to…","datePublished":"2020-12-27T00:00:00.000Z","dateModified":"2020-12-27T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/background-swiftui/"},"image":"https://kristaps.me/og-image.jpg","keywords":"swift, apple, ios, swiftui","url":"https://kristaps.me/blog/background-swiftui/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/background-swiftui/"> Background Color with SwiftUI </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/apple/">apple</a> </li><li> <a href="/tags/ios/">ios</a> </li><li> <a href="/tags/swiftui/">swiftui</a> </li> </ul> <time datetime="2020-12-27T00:00:00.000Z">Dec 27, 2020</time>  </div> <p class="post-dek">Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let&#39;s look into that today.</p> <div class="blog-content"> <p>Once you create a SwiftUI view, it has the default background color. White for light mode and black for dark mode respectively. But how to change it to something different? Let’s look into that today.</p>
+<p>In this article, we will talk about different techniques that we can use to change the default background for our SwiftUI views.</p>
+<h2 id="using-modifier">Using modifier</h2>
+<p>First approach that comes in mind is using <code>.background()</code> <a href="http://apple.co/3mSzqar">modifier</a>. Sadly Apple hasn’t provided documentation for this. It takes in a view that is set as a background for the view we are adding this modifier to.</p>
+<p>In this case, we want to change the background color. We can pass in, for instance, <code>Color.gray</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Hello, world!"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">background</span><span style="color:#E1E4E8">(Color.gray)</span></span></code></pre>
+<p><img src="/assets/swiftui-background-color/text-background-color.png" alt="Text background color" loading="lazy" decoding="async"></p>
+<p>We see that it sets the background color only for the text view. That is how SwiftUI works. We want to set it for the whole screen. We could approach it using <code>VStack</code>, <code>HStack</code>, and a couple of <code>Spacer()</code> views.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">VStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  Spacer</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">  HStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    Spacer</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">    Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Test"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">    Spacer</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span></span>
+<span class="line"><span style="color:#79B8FF">  Spacer</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">}.</span><span style="color:#79B8FF">background</span><span style="color:#E1E4E8">(Color.gray)</span></span></code></pre>
+<p><img src="/assets/swiftui-background-color/text-background-safearea.png" alt="Text background color not extending safe area" loading="lazy" decoding="async"></p>
+<p>It looks a bit better, but we want to set it for the whole screen, ignoring the safe area. We can do it using <code>.edgesIgnoringSafeArea</code> <a href="http://apple.co/38HHk1c">modifier</a>. Using this modifier, we can tell the SwiftUI layout engine to extend outside the screen’s safe area. It takes in a parameter that defines which edges we can expand. In this case, we will pass in <code>.all</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">background</span><span style="color:#E1E4E8">(Color.gray.</span><span style="color:#79B8FF">edgesIgnoringSafeArea</span><span style="color:#E1E4E8">(.all))</span></span></code></pre>
+<p><img src="/assets/swiftui-background-color/text-background-color-fullscreen.png" alt="Text background color fullscreen" loading="lazy" decoding="async"></p>
+<p>It looks exactly how we wanted. The issue is that the code is quite cumbersome and has a lot of nesting views and spacers. Let’s look at it in another way.
+​</p>
+<h2 id="using-zstack">Using <code>ZStack</code></h2>
+<p>We could dramatically improve the code readability and complexity is to utilize the <code>ZStack</code> <a href="https://developer.apple.com/documentation/swiftui/zstack">view</a>. Using this view, we can layer multiple views on top of each other. Our approach would be to add the background color and then the content on top of it.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  Color.gray</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">edgesIgnoringSafeArea</span><span style="color:#E1E4E8">(.all)</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#79B8FF">  Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Hello, world!"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The code looks much cleaner now, and we have a gray background and text on top of it. The best part of this approach is that we ignore the safe area only for the background color view. Other views won’t extend outside the safe area.</p>
+<p><img src="/assets/swiftui-background-color/zstack-color.png" alt="Background color with ZStack" loading="lazy" decoding="async"></p>
+<blockquote>
+<p><a href="https://twitter.com/gimly">Dimi Chakarov</a> <a href="https://twitter.com/gimly/status/1347300659691999233">posted</a> about how to create <a href="https://gist.github.com/dchakarov/d841e709ccb0bcc961302b2a248912ec">a <code>ViewModifier</code> to apply to a view</a>.</p>
+</blockquote>
+<h2 id="multiple-colors">Multiple colors</h2>
+<p>Now that we know how to change background color to one single color, how about setting it to two colors vertically and horizontally?
+​
+We could achieve that by using the approach with <code>ZStack</code> and wrapping colors in a <code>VStack</code> <a href="https://developer.apple.com/documentation/swiftui/vstack">view</a> for vertical alignment or <code>HStack</code> <a href="https://developer.apple.com/documentation/swiftui/hstack">view</a> for vertical alignment.</p>
+<h3 id="vertical-alignment">Vertical alignment</h3>
+<p>Let’s use two colors - gray and black. By wrapping them in <code>VStack</code> view and using <code>ZStack</code> we can split the screen in half vertically. One of them is filled with gray and the other with black color.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Color.gray</span></span>
+<span class="line"><span style="color:#E1E4E8">    Color.black</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">edgesIgnoringSafeArea</span><span style="color:#E1E4E8">(.all)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/swiftui-background-color/vertical-alignment-background-colors.png" alt="Vertical alignment background colors" loading="lazy" decoding="async"></p>
+<h3 id="horizontal-alignment">Horizontal alignment</h3>
+<p>By changing the <code>VStack</code> to <code>HStack</code> we can fill the screen horizontally with gray and black colors.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  HStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Color.gray</span></span>
+<span class="line"><span style="color:#E1E4E8">    Color.black</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">edgesIgnoringSafeArea</span><span style="color:#E1E4E8">(.all)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/swiftui-background-color/horizontal-alignment-background-colors.png" alt="Horizontal alginment background colors" loading="lazy" decoding="async"></p>
+<h3 id="chess-table-background">Chess table background</h3>
+<p>Let’s do something a bit crazy by building a background that would look like a chess table. We can iterate a couple of times the previous example with multiple colors vertically and horizontally.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">ZStack</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">    ForEach</span><span style="color:#E1E4E8">((</span><span style="color:#79B8FF">1</span><span style="color:#F97583">...</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">).</span><span style="color:#79B8FF">reversed</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">id</span><span style="color:#E1E4E8">: \.</span><span style="color:#F97583">self</span><span style="color:#E1E4E8">) { i </span><span style="color:#F97583">in</span></span>
+<span class="line"><span style="color:#79B8FF">      HStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        ForEach</span><span style="color:#E1E4E8">((</span><span style="color:#79B8FF">1</span><span style="color:#F97583">...</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">).</span><span style="color:#79B8FF">reversed</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">id</span><span style="color:#E1E4E8">: \.</span><span style="color:#F97583">self</span><span style="color:#E1E4E8">) { i </span><span style="color:#F97583">in</span></span>
+<span class="line"><span style="color:#E1E4E8">          Color.gray</span></span>
+<span class="line"><span style="color:#E1E4E8">          Color.black</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#79B8FF">      HStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        ForEach</span><span style="color:#E1E4E8">((</span><span style="color:#79B8FF">1</span><span style="color:#F97583">...</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">).</span><span style="color:#79B8FF">reversed</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">id</span><span style="color:#E1E4E8">: \.</span><span style="color:#F97583">self</span><span style="color:#E1E4E8">) { i </span><span style="color:#F97583">in</span></span>
+<span class="line"><span style="color:#E1E4E8">          Color.black</span></span>
+<span class="line"><span style="color:#E1E4E8">          Color.gray</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }.</span><span style="color:#79B8FF">edgesIgnoringSafeArea</span><span style="color:#E1E4E8">(.all)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Here we see the power of the SwiftUI layout engine and Swift code combined.</p>
+<p><img src="/assets/swiftui-background-color/chess-background.png" alt="Chess table background" loading="lazy" decoding="async"></p>
+<h2 id="tldr">TL;DR</h2>
+<p>SwiftUI views come with default background color - white on light mode and black in dark mode. In many cases, we would like to change it to something else. The first way would be to use the <code>.background</code> modifier and pass <code>Color</code>which is a view in SwiftUI. The second approach would be using <code>ZStack</code> and add one color or multiple colors wrapped in <code>VStack</code> for vertical and <code>HStack</code> for horizontal layout.
+​
+If you have other ideas about changing the background color for a SwiftUI view, let me know. Thank you for reading.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://github.com/fassko/swiftui-view-background-color">Sample code</a></p>
+</li>
+<li>
+<p><a href="https://www.hackingwithswift.com/books/ios-swiftui/colors-and-frames">Colors and frames</a></p>
+</li>
+<li>
+<p><a href="https://www.ioscreator.com/tutorials/swiftui-background-color-tutorial">SwiftUI Background Color Tutorial</a></p>
+</li>
+<li>
+<p><a href="http://apple.co/3mSzqar"><code>.background</code> modifier</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/swiftui-modal-view/">
+Next → How to deal with modal views (a.k.a. sheets) with SwiftUI </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

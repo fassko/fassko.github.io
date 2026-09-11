@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>About | Kristaps Grinbergs</title><meta name="description" content="About Kristaps Grinbergs — DevRel at Flare Network, working on x402 payments, AI agents, and Web3."><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/about/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="About | Kristaps Grinbergs"><meta property="og:description" content="About Kristaps Grinbergs — DevRel at Flare Network, working on x402 payments, AI agents, and Web3."><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="website"><meta property="og:url" content="https://kristaps.me/about/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="About | Kristaps Grinbergs"><meta name="twitter:description" content="About Kristaps Grinbergs — DevRel at Flare Network, working on x402 payments, AI agents, and Web3."><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","email":"fassko@gmail.com","jobTitle":"Developer Relations Engineer Lead","description":"Developer Relations Engineer Lead at Flare Network. Writing on x402 payments, AI agents, stablecoins, and Web3.","image":"https://kristaps.me/og-image.jpg","homeLocation":{"@type":"Place","name":"Riga, Latvia","address":{"@type":"PostalAddress","addressLocality":"Riga","addressCountry":"LV"}},"worksFor":{"@type":"Organization","name":"Flare Network","url":"https://flare.network"},"knowsAbout":["x402","AI agents","stablecoins","Flare","Flare Network","Solidity","Web3","blockchain","Flare Confidential Compute"],"sameAs":["https://twitter.com/fassko","https://github.com/fassko","https://www.linkedin.com/in/kristapsgrinbergs/","https://t.me/kristapsgrinbergs"]}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/" aria-current="page"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="about-me"> <div class="about-top"> <div class="about-me-text"> <h1 class="page-title">About</h1> <p>
+Kristaps is Developer Relations Engineer Lead at  <a href="https://flare.network" target="_blank" rel="noopener noreferrer">Flare Network</a>  (since Sep 2023). Flare brings assets, data and accounts from other chains onto a single
+          smart contract layer, through four core products:
+<a href="https://flare.network/products/fassets" target="_blank" rel="noopener noreferrer">FAssets</a> (trustless bridging for non-smart-contract assets like Bitcoin and XRP), the
+<a href="https://flare.network/products/flare-data-connector" target="_blank" rel="noopener noreferrer">Flare Data Connector</a> (verified external data on-chain),
+<a href="https://flare.network/products/flare-smart-accounts" target="_blank" rel="noopener noreferrer">Flare Smart Accounts</a> (DeFi access straight from an XRPL wallet) and
+<a href="https://dev.flare.network/fcc/overview" target="_blank" rel="noopener noreferrer">Flare Confidential Compute</a> (TEE-based off-chain computation and attestation).
+</p> <p>
+Before Flare, he spent a decade as co-founder and technical lead at
+<a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer">Qminder</a>,
+          building queue management software used by Bolt, Uber, Lyft and the Olympic Games.
+</p> <p>
+Day to day he builds and tests developer tooling across Flare's products, fixes bugs,
+          writes participant guides and documentation, and maintains Docker-based service setups.
+          He works with C-level, engineering, marketing, design and ecosystem stakeholders —
+          increasingly on AI agents,
+<a href="https://dev.flare.network/fxrp/token-interactions/x402-payments" target="_blank" rel="noopener noreferrer">x402</a>
+payment integrations, and
+<a href="https://dev.flare.network/network/guides/flare-ai-skills" target="_blank" rel="noopener noreferrer">Flare AI Skills</a>
+plus related agent projects that help coding assistants build on Flare. He also speaks at
+          industry events, runs hackathon tracks, and explains it all through blogs, videos and
+          conference demos.
+</p> <p>
+He mentors through
+<a href="https://www.startuphouse.lv/preaccelerator" target="_blank" rel="noopener noreferrer">Startup House</a>
+and volunteers with
+<a href="https://www.dzivniekubriviba.lv/" target="_blank" rel="noopener noreferrer">Animal Freedom</a>
+and others. Hobbies: orienteering, cycling and gardening.
+</p> <div class="hero-actions"> <a class="button button-primary" href="mailto:fassko@gmail.com">Get in touch →</a> <a class="button button-ghost" href="/projects/">See the projects</a> </div> </div> <div class="about-portrait-col"> <picture> <source srcset="/images/kristaps.webp" type="image/webp"> <img class="about-portrait" src="/images/kristaps.jpg" alt="Kristaps Grinbergs" width="680" height="680" loading="lazy" decoding="async"> </picture> </div> </div> <div class="about-me-images"> <img src="/assets/speaking/kristaps-grinbergs-dappcon26.jpg" alt="Kristaps speaking at DappCon" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-w3n25.jpg" alt="Panel discussion at W3N" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-w3n25-2.jpg" alt="On stage with fellow panelists at W3N" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-appbuilders.jpeg" alt="Kristaps speaking at App Builders" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-nft-tallinn.jpeg" alt="Kristaps presenting at NFT Tallinn" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-nft-tallinn-panel.jpg" alt="Panel at NFT Tallinn" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-mobile-era.jpg" alt="Talk at Mobile Era" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-shareit.jpg" alt="ShareIT workshop" loading="lazy"><img src="/assets/speaking/kristaps-grinbergs-ethcc24.jpg" alt="Kristaps at EthCC" loading="lazy"> </div> <div class="about-timeline"> <p class="section-label">Timeline</p> <ol class="timeline-list"> <li> <p class="timeline-when">2023 — present</p> <p class="timeline-role"> DevRel Engineer Lead ·
+<a href="https://flare.network" target="_blank" rel="noopener noreferrer"> Flare Network </a> </p> <p class="timeline-copy">FAssets, x402 integrations, Flare AI Skills, and developer education.</p> </li><li> <p class="timeline-when">2022 — 2023</p> <p class="timeline-role"> Smart contracts &amp; product ·
+<a href="https://saltox.co" target="_blank" rel="noopener noreferrer"> Salto X </a> </p> <p class="timeline-copy">Tokenised employee ownership — Solidity on Polygon and a Next.js client.</p> </li><li> <p class="timeline-when">earlier</p> <p class="timeline-role"> Technical co-founder ·
+<a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer"> Qminder </a> </p> <p class="timeline-copy">Queue management at global scale — Bolt, Uber, Lyft and The Olympic Games.</p> </li> </ol> </div> <div class="about-me-social-items"> <div class="social-items"> <a class="social-item-link" href="mailto:fassko@gmail.com" target="_blank" rel="noopener noreferrer"> <img class="social-item-image" src="/images/email.svg" alt=""> fassko@gmail.com </a><a class="social-item-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <img class="social-item-image" src="/images/linkedin.svg" alt=""> kristapsgrinbergs </a><a class="social-item-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <img class="social-item-image" src="/images/x.svg" alt=""> @fassko </a><a class="social-item-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <img class="social-item-image" src="/images/github.svg" alt=""> fassko </a><a class="social-item-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <img class="social-item-image" src="/images/telegram.svg" alt=""> kristapsgrinbergs </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer> <div class="lightbox" data-lightbox hidden> <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">✕</button> <button type="button" class="lightbox-prev" data-lightbox-prev aria-label="Previous photo">‹</button> <img class="lightbox-image" data-lightbox-image alt="" draggable="false"> <button type="button" class="lightbox-next" data-lightbox-next aria-label="Next photo">›</button> </div> <script>
+  (() => {
+    const root = document.querySelector('[data-lightbox]');
+    if (!root) return;
+
+    const imageEl = root.querySelector('[data-lightbox-image]');
+    const closeButton = root.querySelector('[data-lightbox-close]');
+    const prevButton = root.querySelector('[data-lightbox-prev]');
+    const nextButton = root.querySelector('[data-lightbox-next]');
+
+    const items = [...document.querySelectorAll('.talks-gallery img, .about-me-images img')];
+    if (!items.length) return;
+
+    let index = 0;
+
+    function show(nextIndex) {
+      index = (nextIndex + items.length) % items.length;
+      const img = items[index];
+      imageEl.src = img.currentSrc || img.src;
+      imageEl.alt = img.alt || '';
+    }
+
+    function open(startIndex) {
+      show(startIndex);
+      root.hidden = false;
+      document.documentElement.classList.add('lightbox-open');
+    }
+
+    function close() {
+      root.hidden = true;
+      imageEl.src = '';
+      document.documentElement.classList.remove('lightbox-open');
+    }
+
+    items.forEach((img, i) => {
+      img.addEventListener('click', () => open(i));
+    });
+
+    closeButton.addEventListener('click', close);
+    prevButton.addEventListener('click', () => show(index - 1));
+    nextButton.addEventListener('click', () => show(index + 1));
+
+    root.addEventListener('click', (event) => {
+      if (event.target === root) close();
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (root.hidden) return;
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
+    });
+
+    // Touch swipe: left = next, right = previous
+    const SWIPE_THRESHOLD = 50;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let trackingTouch = false;
+
+    root.addEventListener(
+      'touchstart',
+      (event) => {
+        if (root.hidden || event.touches.length !== 1) return;
+        trackingTouch = true;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    root.addEventListener(
+      'touchend',
+      (event) => {
+        if (!trackingTouch || event.changedTouches.length !== 1) return;
+        trackingTouch = false;
+
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        // Ignore taps and mostly-vertical gestures
+        if (absDx < SWIPE_THRESHOLD || absDx < absDy) return;
+
+        if (dx < 0) show(index + 1);
+        else show(index - 1);
+      },
+      { passive: true }
+    );
+
+    root.addEventListener(
+      'touchcancel',
+      () => {
+        trackingTouch = false;
+      },
+      { passive: true }
+    );
+  })();
+</script>  </body> </html>

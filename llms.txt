@@ -1,0 +1,35 @@
+# Kristaps Grinbergs
+
+> Developer Relations Engineer Lead at Flare Network. Writing on x402 payments, AI agents, stablecoins, and Web3.
+
+Kristaps Grinbergs is Developer Relations Engineer Lead at Flare Network, based in Riga. He ships x402 payment integrations, AI agents that pay with stablecoins, Flare Confidential Compute (TEE) demos, and Flare AI Skills for coding agents.
+
+## Pages
+
+- [About](https://kristaps.me/about/): Background, Flare, x402, AI agents, and contact
+- [Home](https://kristaps.me/): Overview and recent posts
+- [Talks](https://kristaps.me/talks/): AI Connect, W3N, DappCon TEEs, EthCC, Flare Builders x402 workshop
+- [Projects](https://kristaps.me/projects/): Index of Web3, AI, and iOS work
+- [Blog](https://kristaps.me/blog/): All articles
+
+## Projects
+
+- [Flare AI Skills](https://kristaps.me/projects/flare-ai-skills/): Agent skills that give AI coding assistants like Cursor, Claude Code, Codex and other coding agents structured domain knowledge of Flare.
+- [x402 Weather Insurance Agent](https://kristaps.me/projects/x402-agent/): Parametric rainfall insurance on Flare. An AI agent pays per weather API call with x402. The TEE verifies on-chain FeeCollected before calling OpenWeatherMap.
+
+## Writing
+
+- [What is x402? How I charged a weather API in stablecoins so an AI agent could pay](https://kristaps.me/blog/x402-ai-agent-stablecoin-payments/): x402 turns HTTP 402 into a payment handshake. I used it on Flare so an AI agent could pay per weather API call in an ERC-20, with the API key locked inside a TEE.
+
+## Optional
+
+- [llms-full.txt](https://kristaps.me/llms-full.txt): Full post bodies, including older Solidity and SwiftUI
+- [SwiftUI posts](https://kristaps.me/tags/swiftui/): iOS and SwiftUI notes
+- [Solidity posts](https://kristaps.me/tags/solidity/): Language and ERC tutorials
+- [RSS feed](https://kristaps.me/feed.xml): Subscribe to new posts
+- [Tags](https://kristaps.me/tags/): Browse posts by topic
+- [Email](mailto:fassko@gmail.com): fassko@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/kristapsgrinbergs/): kristapsgrinbergs
+- [X (Twitter)](https://x.com/fassko): @fassko
+- [GitHub](https://github.com/fassko): fassko
+- [Telegram](https://t.me/kristapsgrinbergs): kristapsgrinbergs

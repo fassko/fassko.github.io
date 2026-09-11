@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How Sidebar works on iPad with SwiftUI | Kristaps Grinbergs</title><meta name="description" content="Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the Human Interface…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/swiftui-sidebar/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="How Sidebar works on iPad with SwiftUI | Kristaps Grinbergs"><meta property="og:description" content="Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the Human Interface…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/swiftui-sidebar/"><meta property="article:published_time" content="2021-10-20T00:00:00.000Z"><meta property="article:modified_time" content="2021-10-20T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="How Sidebar works on iPad with SwiftUI | Kristaps Grinbergs"><meta name="twitter:description" content="Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the Human Interface…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"How Sidebar works on iPad with SwiftUI","description":"Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the Human Interface…","datePublished":"2021-10-20T00:00:00.000Z","dateModified":"2021-10-20T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/swiftui-sidebar/"},"image":"https://kristaps.me/og-image.jpg","keywords":"swift, ios, swiftui, sidebar, ipad","url":"https://kristaps.me/blog/swiftui-sidebar/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/swiftui-sidebar/"> How Sidebar works on iPad with SwiftUI </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/ios/">ios</a> </li><li> <a href="/tags/swiftui/">swiftui</a> </li><li> <a href="/tags/sidebar/">sidebar</a> </li><li> <a href="/tags/ipad/">ipad</a> </li> </ul> <time datetime="2021-10-20T00:00:00.000Z">Oct 20, 2021</time>  </div> <p class="post-dek">Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/). They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let&#39;s check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.</p> <div class="blog-content"> <p>Starting with iPadOS 14, Apple has redesigned the iPad sidebar by making it easier to navigate within an app. They are explaining that in the <a href="https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/">Human Interface Guidelines</a>. They are already using that in apps such as Photos, Files, Notes, Calendar, and more. This time let’s check out how we can build a sidebar for iPad using SwiftUI. Currently, sidebar element is available only for iPads in landscape mode.</p>
+<h2 id="creating-a-sidebar">Creating a Sidebar</h2>
+<p>To create a sidebar for the iPad with SwiftUI, we need to create a <code>List</code> view where we would have all the sections and wrap it in a <code>NavigationView</code>. In the list we need to add a <code>Label</code> element for each section.</p>
+<p>The most crucial step here is to tell SwiftUI that the list should be rendered as the sidebar list type. To do so, we need to set the list style to <code>SidebarListStyle</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">NavigationView</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"About"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">    Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Settings"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"gear"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">listStyle</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">SidebarListStyle</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/swiftui-sidebar/ipad-sidebar.png" alt="iPad sidebar with SwiftUI" loading="lazy" decoding="async"></p>
+<p>Now that we have the Sidebar, let’s add a title that would represent the global name. Developers usually choose to put the app name, or, for instance, the Apple Notes app has <strong>Folders</strong> to mean what the Sidebar holds.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">NavigationView</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"About"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">    Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Settings"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"gear"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">listStyle</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">SidebarListStyle</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">navigationTitle</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Sidebar"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/swiftui-sidebar/ipad-sidebar-name.png" alt="iPad sidebar with name" loading="lazy" decoding="async"></p>
+<h2 id="navigation-from-the-sidebar">Navigation from the Sidebar</h2>
+<p>Now that we have the Sidebar, let’s implement navigation for events after user taps on the section. To do that, we need to wrap the <code>Label</code> in the <code>NavigationLink</code> and provide a destination SwiftUI view.</p>
+<p>For instance, if we would add About section in the app, it could look like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">NavigationLink</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  AboutView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">  Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"About"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/swiftui-sidebar/ipad-sidebar-navigation.png" alt="iPad sidebar selection" loading="lazy" decoding="async"></p>
+<h2 id="default-home-screen">Default Home Screen</h2>
+<p>When a user launches the app, they see an empty view until they select something from the Sidebar.</p>
+<p><img src="/assets/swiftui-sidebar/ipad-sidebar-empty-default-screen.png" alt="" loading="lazy" decoding="async"></p>
+<p>To avoid this misleading behavior, we should tell the SwiftUI layout engine to render a default or call it a home screen. The trick is to add another view inside the <code>NavigationView</code> and it will be the default screen when the app is launched for the first time.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#79B8FF">NavigationView</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  List</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">listStyle</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">SidebarListStyle</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">navigationTitle</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Sidebar"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#79B8FF">  Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Please select section"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>A good home screen would be a dashboard, frequently used features, or similar functionality.</p>
+<p><img src="/assets/swiftui-sidebar/default-home-screen.png" alt="Default home screen" loading="lazy" decoding="async"></p>
+<h2 id="iphone-and-ipad-portrait-mode">iPhone and iPad portrait mode</h2>
+<p>We have only looked at how it would look like in the iPad in landscape mode. But how about in portrait mode or on the iPhone?</p>
+<h3 id="ipad-portrait-mode">iPad portrait mode</h3>
+<p>Currently, a sidebar on the iPad in portrait mode is rendered off the screen. To show it, we need to press either the back button or swipe from the left side of the device.</p>
+<p><img src="/assets/swiftui-sidebar/ipad-sidebar-portrait.gif" alt="iPad sidebar in portrait mode" loading="lazy" decoding="async"></p>
+<h3 id="iphone">iPhone</h3>
+<p>On the iPhone, the Sidebar is rendered as the default home screen with a navigation list.</p>
+<p><img src="/assets/swiftui-sidebar/iphone-sidebar.gif" alt="iPhone rendering sidebar" loading="lazy" decoding="async"></p>
+<p>Usually, this isn’t what we would want, so in this case, we might need to consider changing it on the iPad size devices. This is out of the scope of this post.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>Sidebar is a great way how to divide different parts of the app into iPad apps. Currently, it is rendered on the iPad in landscape mode and partly in portrait mode. After adding a list of the app sections, we should remember to provide a default home screen. Otherwise, our users will see an empty screen. Apple has implemented this approach in their apps as well in macOS.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://github.com/fassko/SwiftUISidebar">Sample code</a></p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/">Human Interface Guidelines - Sidebars</a></p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/sidebarliststyle">Sidebar official documentation</a></p>
+</li>
+<li>
+<p><a href="https://designcode.io/swiftui-handbook-sidebar">Learn how to create a Sidebar navigation for iOS, iPadOS and macOS</a></p>
+</li>
+<li>
+<p><a href="https://swiftwithmajid.com/2020/07/21/sidebar-navigation-in-swiftui/">Sidebar navigation in SwiftUI</a></p>
+</li>
+<li>
+<p><a href="https://sarunw.com/posts/how-to-toggle-sidebar-in-macos/">How to show and hide a sidebar in a SwiftUI macOS app</a></p>
+</li>
+<li>
+<p><a href="https://betterprogramming.pub/using-sidebar-in-swiftui-without-a-navigationview-94f4181c09b">https://betterprogramming.pub/using-sidebar-in-swiftui-without-a-navigationview-94f4181c09b</a></p>
+</li>
+<li>
+<p><a href="https://dev.to/tprezioso/how-to-make-a-sidebar-menu-in-swiftui-ejl">How to Make a Sidebar Menu in SwiftUI</a></p>
+</li>
+<li>
+<p><a href="https://serialcoder.dev/text-tutorials/swiftui/implementing-three-column-navigation-in-swiftui/">Implementing Three Column Navigation in SwiftUI</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/swiftui-three-ways-button/">
+Next → Three brilliant ways to style button with SwiftUI </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

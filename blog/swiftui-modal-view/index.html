@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How to deal with modal views (a.k.a. sheets) with SwiftUI | Kristaps Grinbergs</title><meta name="description" content="When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/swiftui-modal-view/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="How to deal with modal views (a.k.a. sheets) with SwiftUI | Kristaps Grinbergs"><meta property="og:description" content="When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/swiftui-modal-view/"><meta property="article:published_time" content="2020-11-22T00:00:00.000Z"><meta property="article:modified_time" content="2020-11-22T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="How to deal with modal views (a.k.a. sheets) with SwiftUI | Kristaps Grinbergs"><meta name="twitter:description" content="When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"How to deal with modal views (a.k.a. sheets) with SwiftUI","description":"When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with…","datePublished":"2020-11-22T00:00:00.000Z","dateModified":"2020-11-22T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/swiftui-modal-view/"},"image":"https://kristaps.me/og-image.jpg","keywords":"swift, apple, ios, swiftui, modal, sheet","url":"https://kristaps.me/blog/swiftui-modal-view/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/swiftui-modal-view/"> How to deal with modal views (a.k.a. sheets) with SwiftUI </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/apple/">apple</a> </li><li> <a href="/tags/ios/">ios</a> </li><li> <a href="/tags/swiftui/">swiftui</a> </li><li> <a href="/tags/modal/">modal</a> </li><li> <a href="/tags/sheet/">sheet</a> </li> </ul> <time datetime="2020-11-22T00:00:00.000Z">Nov 22, 2020</time>  </div> <p class="post-dek">When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with `presentViewController:animated:completion:` [function](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-presentviewcontroller). However, using SwiftUI, we need to twist our thinking towards using view or environment state, as the modal view is now called a sheet.</p> <div class="blog-content"> <p>When presenting a small piece of extra information on the screen, showing a modal view is essential. With UIKit, we could do this with <code>presentViewController:animated:completion:</code> <a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-presentviewcontroller">function</a>.</p>
+<p>However, using SwiftUI, we need to twist our thinking towards using view or environment state, as the modal view is now called a sheet.</p>
+<p>Let’s check it out in detail.</p>
+<blockquote>
+<p>Thank you <a href="https://twitter.com/janiskirsteins">Jānis Kiršteins</a> for a great <a href="https://twitter.com/janiskirsteins/status/1337398222386434053">suggestion</a> to use <code>@ViewBuilder</code> instead of <code>AnyView</code>.</p>
+</blockquote>
+<h2 id="open-modal-view-aka-sheet">Open modal view (a.k.a. sheet)</h2>
+<p>SwiftUI sheets help us show a modal view to users. <code>sheet</code> is an instance method to the <a href="https://developer.apple.com/documentation/swiftui/view-presentation">View Presentation</a>. It describes how we can show our SwiftUI views, covering specific user journey scenarios.</p>
+<p>Let’s say we want to display information about our app to users.</p>
+<p>Firstly, we need to define whether the app should show a modal view or not, binding this with the <code>Bool</code> value.</p>
+<p>The keyword here is ‘should’ because once we dismiss, the presented view value is set back to <code>false</code>. This value is decorated with a <code>@State</code> property wrapper, or could come from <code>ObservableObject</code> ViewModel. For simplicity reasons, we’re not going to talk about ViewModels in this post.</p>
+<p>Secondly, we need to change the view or, in some cases, the environment state. Once we are using the <code>@State</code> property wrapper, we can just set it to <code>true</code> and SwiftUI will do the rest to present the modal view.</p>
+<p>Let’s look how we can do it in the code:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> ContentView</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">View </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  @State</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> showInfoModalView: </span><span style="color:#79B8FF">Bool</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> body: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Main View"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        showInfoModalView </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Show Info View"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">isPresented</span><span style="color:#E1E4E8">: $showInfoModalView) {</span></span>
+<span class="line"><span style="color:#79B8FF">      InfoView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>When we run the app, we can now open the modal view and see the detailed information.</p>
+<p><img src="/assets/img/modal-view-swiftui/show-modal-view.gif" alt="Show Modal View" loading="lazy" decoding="async"></p>
+<h2 id="close-modal-view-programmatically">Close modal view programmatically</h2>
+<p>Our app users can simply slide the modal view down, and it will hide with a nice animation. Set the state to false to hide this from the view responsible for showing the modal view.</p>
+<p>Now is the question of how to do it from the modal view itself? We have these two options at our disposal:</p>
+<ul>
+<li>using <code>@Environment</code> property <code>presentationMode</code>;</li>
+<li>passing the state to the modal view as binding.</li>
+</ul>
+<h3 id="using-environment">Using Environment</h3>
+<p>Property wrapper <code>@Environment</code> allows us to read and change the values of the view environment state. To hide the modal view, we need to change the <code>presentationMode</code> property.
+At first, we need to define our view. To do this, we add it to the modal view properties. To dismiss the modal view, we need to alter the presentation mode wrapped value.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> InfoView</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">View </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  @Environment</span><span style="color:#E1E4E8">(\.presentationMode) </span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> presentationMode</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> body: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Information view."</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        presentationMode.wrappedValue.</span><span style="color:#79B8FF">dismiss</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Close"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"xmark.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This method is quite cumbersome, and dealing with environmental properties can cause accidental issues that are difficult to track down and debug.</p>
+<h3 id="using-a-binding">Using a binding</h3>
+<p>Using a binding between the view that is presenting the modal view and the modal view itself is another method to hide it from the code.</p>
+<p>First, we need to add a new property to the modal view structure using <code>@Binding</code> property wrapper. This describes that this value comes from somewhere else outside the view scope.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> InfoView</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">View </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  @Binding</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> isPresented: </span><span style="color:#79B8FF">Bool</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> body: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Information view."</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        isPresented </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Close"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"xmark.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now when we are initializing the <code>ModalView</code> we need to pass the  <code>isPresented</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">isPresented</span><span style="color:#E1E4E8">: $showInfoModalView) {</span></span>
+<span class="line"><span style="color:#79B8FF">  InfoView</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">isPresented</span><span style="color:#E1E4E8">: $showInfoModalView)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Using this approach, we are sure that this variable only belongs to these two views. It is more straightforward to test and debug.</p>
+<h2 id="multiple-sheets-on-one-swiftui-view">Multiple sheets on one SwiftUI view</h2>
+<p>Now we know how to present a modal view, but how can we show multiple modal views?</p>
+<p>Imagine we would like to present information about the app and the settings view from the primary app view.</p>
+<p>We can do this using these two approaches:</p>
+<ul>
+<li>using multiple sheets presenting functions;</li>
+<li>using <code>Identifiable</code> enum to keep the state of the currently shown sheet.</li>
+</ul>
+<h3 id="multiple-sheet-functions-in-one-swiftui-view">Multiple sheet functions in one SwiftUI view</h3>
+<p>We can attach <code>sheet</code> function to any SwiftUI view or control, for instance to the <code>Button</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> ContentView</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">View </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  @State</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> showInfoModalView: </span><span style="color:#79B8FF">Bool</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#F97583">  @State</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> showSettingsModalView: </span><span style="color:#79B8FF">Bool</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> body: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Main View"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        showInfoModalView </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Show Info View"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">isPresented</span><span style="color:#E1E4E8">: $showInfoModalView) {</span></span>
+<span class="line"><span style="color:#79B8FF">        InfoView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        showSettingsModalView </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Show Settings View"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"gear"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">isPresented</span><span style="color:#E1E4E8">: $showSettingsModalView) {</span></span>
+<span class="line"><span style="color:#79B8FF">        SettingsView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>It can be fine to have two buttons, but let’s say we have more than that. It can get quite messy, so we should deal with many <code>@State</code> variables.</p>
+<h3 id="using-enumeration-of-all-modal-views">Using enumeration of all modal views</h3>
+<p>If we look at Apple’s official documentation, there is another <a href="https://developer.apple.com/documentation/swiftui/view/actionsheet(item:content:)">function</a> to show a sheet. Let’s try to use it.</p>
+<p>At first, we will define an <code>enum</code> with all modal view options:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">enum</span><span style="color:#B392F0"> Sheet</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Identifiable </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  case</span><span style="color:#79B8FF"> info</span></span>
+<span class="line"><span style="color:#F97583">  case</span><span style="color:#79B8FF"> settings</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now we can use this in the SwiftUI view. We need a new <code>@State</code> variable with the optional type <code>Sheet</code> and  to use this to determine which modal view we would like to present.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">enum</span><span style="color:#B392F0"> Sheet</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Identifiable </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  case</span><span style="color:#79B8FF"> info</span></span>
+<span class="line"><span style="color:#F97583">  case</span><span style="color:#79B8FF"> settings</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> id: </span><span style="color:#79B8FF">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    hashValue</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">struct</span><span style="color:#B392F0"> ContentView</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">View </span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">  @State</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> activeSheet: Sheet</span><span style="color:#F97583">?</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> body: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#79B8FF">    VStack</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">spacing</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      Text</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Main View"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#79B8FF">font</span><span style="color:#E1E4E8">(.largeTitle)</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        activeSheet </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .info</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Show Info View"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"info.circle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#79B8FF">      Button</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">action</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        activeSheet </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> .settings</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">label</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">        Label</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Show Settings View"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">systemImage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"gear"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">item</span><span style="color:#E1E4E8">: $activeSheet) { sheet </span><span style="color:#F97583">in</span></span>
+<span class="line"><span style="color:#F97583">      switch</span><span style="color:#E1E4E8"> sheet {</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> .info</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#79B8FF">        InfoView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> .settings</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#79B8FF">        SettingsView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>We don’t need to stop here. We can declutter this code by adding a computed property to <code>Sheet</code> enum:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#F97583">extension</span><span style="color:#B392F0"> Sheet</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  @ViewBuilder</span></span>
+<span class="line"><span style="color:#F97583">  var</span><span style="color:#E1E4E8"> modalView: </span><span style="color:#F97583">some</span><span style="color:#E1E4E8"> View {</span></span>
+<span class="line"><span style="color:#F97583">    switch</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> .info</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#79B8FF">      InfoView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> .settings</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#79B8FF">      SettingsView</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Then we can use it when opening the sheet:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">item</span><span style="color:#E1E4E8">: $activeSheet) { </span><span style="color:#79B8FF">$0</span><span style="color:#E1E4E8">.modalView }</span></span></code></pre>
+<p>Using the fancy new keypaths functionality in closures, we can simplify this even more:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="swift"><code><span class="line"><span style="color:#E1E4E8">  .</span><span style="color:#79B8FF">sheet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">item</span><span style="color:#E1E4E8">: $activeSheet, </span><span style="color:#79B8FF">content</span><span style="color:#E1E4E8">: \.modalView)</span></span></code></pre>
+<p>One caveat to this approach is that we need to change part of our process to hide the view from the code. To do this, we set it to <code>nil</code> instead of <code>false</code>.</p>
+<p>This approach is much safer, because we use the enumeration type to keep everything well organized.</p>
+<p>Let’s see it in action.</p>
+<p><img src="/assets/img/modal-view-swiftui/show-multiple-modal-views-close.gif" alt="Show Modal View" loading="lazy" decoding="async"></p>
+<h2 id="tldr">TL;DR</h2>
+<p>Modal views in SwiftUI are presented using the sheet modifier on a view or control. The simplest way is to have <code>@State</code> property to indicate when it should be visible.</p>
+<p>To hide the modal view, we can use the environment parameter or pass a binding to the modal view object.
+Showing multiple sheets can be achieved either with multiple sheet modifiers or using an object with all possible modal view enumerations.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://github.com/fassko/ModalViewApp">Demo app - there are multiple branches for everything we talked about</a></p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)">Apple official documention</a></p>
+</li>
+<li>
+<p><a href="https://www.simpleswiftguide.com/how-to-present-sheet-modally-in-swiftui/">How to present a sheet modally in SwiftUI</a></p>
+</li>
+<li>
+<p><a href="https://swiftwithmajid.com/2019/07/24/alerts-actionsheets-modals-and-popovers-in-swiftui/">Alerts, Action Sheets, Modals and Popovers in SwiftUI</a></p>
+</li>
+<li>
+<p><a href="https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-new-view-using-sheets">How to present a new view using sheets</a></p>
+</li>
+<li>
+<p><a href="https://masilotti.com/multiple-sheets-swiftui/">How to manage multiple sheets in SwiftUI</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/58837007/multiple-sheetispresented-doesnt-work-in-swiftui">Thread in StackOverflow</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?feature=player_embedded&#x26;v=7dZfpAn_P2g">Enums for Multiple Sheets</a></p>
+</li>
+<li>
+<p><a href="https://github.com/davdroman/MultiSheet">MultiSheet</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/swiftui-launch-screen/">
+Next → Launch Screen with SwiftUI </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

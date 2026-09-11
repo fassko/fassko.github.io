@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tagged with alert | Kristaps Grinbergs</title><meta name="description" content="1 post on alert by Kristaps Grinbergs: How to use Alert with SwiftUI. Notes on web3, AI agents, Swift/iOS, and building products."><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://kristaps.me/tags/alert/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="Tagged with alert | Kristaps Grinbergs"><meta property="og:description" content="1 post on alert by Kristaps Grinbergs: How to use Alert with SwiftUI. Notes on web3, AI agents, Swift/iOS, and building products."><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="website"><meta property="og:url" content="https://kristaps.me/tags/alert/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="Tagged with alert | Kristaps Grinbergs"><meta name="twitter:description" content="1 post on alert by Kristaps Grinbergs: How to use Alert with SwiftUI. Notes on web3, AI agents, Swift/iOS, and building products."><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="tags"> <h1 class="page-title">
+Tagged with <span class="tag-title">alert</span> </h1> <a class="browse-all-tags" href="/tags/">Browse all tags</a> <div class="blog-item"> <h2> <a class="blog-title" href="/blog/swiftui-alert/"> How to use Alert with SwiftUI </a> </h2> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/ios/">ios</a> </li><li> <a href="/tags/swiftui/">swiftui</a> </li><li> <a href="/tags/alert/">alert</a> </li> </ul> Feb 14, 2021 </div> <div class="blog-content"> <p>Alerts are one of the most crucial building blocks of iOS applications. We can use them to inform users about an error if something takes more time, like downloading a file or ensuring that everything is OK. Another use case with alerts is asking confirmation if our app users want to delete something or make a wire transfer.</p> </div> <a class="blog-read-more" href="/blog/swiftui-alert/">
+Read more
+</a> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html>

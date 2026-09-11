@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How events in Solidity work, and why are they needed | Kristaps Grinbergs</title><meta name="description" content="Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/solidity-events/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="How events in Solidity work, and why are they needed | Kristaps Grinbergs"><meta property="og:description" content="Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/solidity-events/"><meta property="article:published_time" content="2022-05-17T00:00:00.000Z"><meta property="article:modified_time" content="2022-05-17T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="How events in Solidity work, and why are they needed | Kristaps Grinbergs"><meta name="twitter:description" content="Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"How events in Solidity work, and why are they needed","description":"Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and…","datePublished":"2022-05-17T00:00:00.000Z","dateModified":"2022-05-17T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/solidity-events/"},"image":"https://kristaps.me/og-image.jpg","keywords":"swift, Solidity, web3, events","url":"https://kristaps.me/blog/solidity-events/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/solidity-events/"> How events in Solidity work, and why are they needed </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/solidity/">Solidity</a> </li><li> <a href="/tags/web3/">web3</a> </li><li> <a href="/tags/events/">events</a> </li> </ul> <time datetime="2022-05-17T00:00:00.000Z">May 17, 2022</time>  </div> <p class="post-dek">Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and more can listen to specific events and react accordingly. In this post, we will dig deeper into Events and how to use them when developing smart contracts on Ethereum-like blockchains.</p> <div class="blog-content"> <p>Events in Solidity programming language help inform when something has happened in the smart contract. Parties like a web frontend, data gathering tools, and more can listen to specific events and react accordingly. In this post, we will dig deeper into Events and how to use them when developing smart contracts on Ethereum-like blockchains.</p>
+<h2 id="define-an-event">Define an event</h2>
+<p>We need to start with the <code>event</code> keyword to define an event.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">event</span><span style="color:#B392F0"> TicketContractCreated</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<p>An event can have additional parameters. It means that it is a struct that can hold data. Data types are the same that we are using in Solidity language.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">event</span><span style="color:#B392F0"> TicketCreated</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">address</span><span style="color:#FFAB70"> ticketHolder</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<h3 id="parameters">Parameters</h3>
+<p>Event struct can hold multiple parameters. We can name these parameters, but that is optional, and we can provide just the data type.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">event</span><span style="color:#B392F0"> TicketCreated</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">address</span><span style="color:#FFAB70"> ticketHolder</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">uint256</span><span style="color:#FFAB70"> ticketId</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>Suppose we want to filter the logs when listening to the specific events. We need to specify which of the parameters should be indexed. There is a limit that only up to 3 parameters can be indexed. Keep in mind that indexing parameters are cost-efficient and will take more gas fees for the transaction to be mined.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">event</span><span style="color:#B392F0"> TicketCreated</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">address</span><span style="color:#F97583"> indexed</span><span style="color:#FFAB70"> ticketHolder</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">uint256</span><span style="color:#FFAB70"> ticketId</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<h2 id="emit-the-event">Emit the event</h2>
+<p>When a specific action has happened, we can release the event with the <code>emit</code> keyword followed by the event name.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">emit</span><span style="color:#B392F0"> TicketContractCreated</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<p>If an event does have any parameters, we can specify those in the parenthesis in the same order as to how we defined them.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">emit</span><span style="color:#B392F0"> TicketCreated</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">msg.sender</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<h2 id="see-emitted-events">See emitted events</h2>
+<p>To see emitted events can use <a href="https://remix.ethereum.org/">Remix IDE</a>, <a href="https://etherscan.io/">Etherscan</a> block explorer, or any library to interact with Ethereum like chains like <a href="https://docs.ethers.io/v5/">Ethers.js</a>, <a href="https://web3js.readthedocs.io">web3.js</a> or any other. How to do that is out of the scope of this blog post.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>Events in Solidity programming language are a great way to inform other parties that something has happened. We can’t just rely on the transaction status. An event can hold data, and others can filter events and react upon that, for instance, in the web app.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://gist.github.com/fassko/56c1b327f34c3deb2900df4f090af555">Sample code</a></p>
+</li>
+<li>
+<p><a href="https://docs.soliditylang.org/en/v0.8.14/abi-spec.html#events">Official documentation</a></p>
+</li>
+<li>
+<p><a href="https://solidity-by-example.org/events">Solidity by Example - Events</a></p>
+</li>
+<li>
+<p><a href="https://ethereum.org/en/developers/tutorials/logging-events-smart-contracts/">Logging data from smart contracts with events</a></p>
+</li>
+<li>
+<p><a href="https://hackernoon.com/how-to-use-events-in-solidity-pe1735t5">How To Use Events In Solidity</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/solidity-mapping/">
+Next → The Story behind Mapping in Solidity </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

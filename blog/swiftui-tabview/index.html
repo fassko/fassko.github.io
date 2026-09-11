@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The hidden secrets of TabView in iOS with SwiftUI | Kristaps Grinbergs</title><meta name="description" content="TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/swiftui-tabview/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="The hidden secrets of TabView in iOS with SwiftUI | Kristaps Grinbergs"><meta property="og:description" content="TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/swiftui-tabview/"><meta property="article:published_time" content="2021-04-22T00:00:00.000Z"><meta property="article:modified_time" content="2021-04-22T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="The hidden secrets of TabView in iOS with SwiftUI | Kristaps Grinbergs"><meta name="twitter:description" content="TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"The hidden secrets of TabView in iOS with SwiftUI","description":"TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to…","datePublished":"2021-04-22T00:00:00.000Z","dateModified":"2021-04-22T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/swiftui-tabview/"},"image":"https://kristaps.me/og-image.jpg","keywords":"swift, ios, swiftui, tabview","url":"https://kristaps.me/blog/swiftui-tabview/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/swiftui-tabview/"> The hidden secrets of TabView in iOS with SwiftUI </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/swift/">swift</a> </li><li> <a href="/tags/ios/">ios</a> </li><li> <a href="/tags/swiftui/">swiftui</a> </li><li> <a href="/tags/tabview/">tabview</a> </li> </ul> <time datetime="2021-04-22T00:00:00.000Z">Apr 22, 2021</time>  </div> <p class="post-dek">TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to switch between different views or functions quickly. It is a major element of Apple&#39;s apps like Music, Podcasts, and App Store.</p> <div class="blog-content"> <p>TabBar is a vital component of iOS and has been from iOS 2.0. This element appears at the bottom of the iOS and iPadOS devices and allows our app users to switch between different views or functions quickly.</p>
+<p>It is a major element of Apple’s apps like Music, Podcasts, and App Store.</p>
+<p><img src="/assets/swiftui-tabview/appstore-tabview.png" alt="SwiftUI DisclosureGroup" loading="lazy" decoding="async"></p>
+<p>In SwiftUI, we have a new element name <code>TabView</code> instead of <code>UITabBar</code> in UIKit. In this post, we will look into how to use it, especially how the <code>TabView</code> can be used to show page indicators.</p>
+<h2 id="ways-to-initialize-tabview-in-swiftui">Ways to initialize TabView in SwiftUI</h2>
+<p>Right now we have two options to create a tab view with SwiftUI. We can either take control of the selected tab or avoid it whatsoever. Let’s look into both of these approaches.</p>
+<h3 id="create-the-tabview-with-swiftui">Create the TabView with SwiftUI</h3>
+<p>To create a <code>TabView</code> element, we need to pass the <code>Content</code> that is a list of SwiftUI views. To mark this view as a tab bar item, we need to use the <code>tabItem</code> view modifier passing inside a <code>Label</code> that describes a title and image.</p>
+<p>Let’s now put all this together in the code.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>TabView {</span></span>
+<span class="line"><span>  Text("The First Tab")</span></span>
+<span class="line"><span>    .tabItem {</span></span>
+<span class="line"><span>      Label("First", systemImage: "1.square.fill")</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  Text("The Second Tab")</span></span>
+<span class="line"><span>    .tabItem {</span></span>
+<span class="line"><span>      Label("Second", systemImage: "2.square.fill")</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  Text("The Third Tab")</span></span>
+<span class="line"><span>    .tabItem {</span></span>
+<span class="line"><span>      Label("Third", systemImage: "3.square.fill")</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Now we can unpack the code above. Each tab is just a <code>Text</code> view, and the tab item is a <code>Label</code> with a title and system image that is an SF Symbol.</p>
+<p><img src="/assets/swiftui-tabview/swiftui-tabview.gif" alt="SwiftUI DisclosureGroup" loading="lazy" decoding="async"></p>
+<h3 id="control-the-selected-tab-programmatically">Control the selected tab programmatically</h3>
+<p>Suppose we want to control the selected tab programmatically. In that case, we need to use the second approach to initialize the method where besides the content, we need to pass a state variable that keeps the currently selected tab. Another critical step is to mark each tab with a <code>tag</code> modifier with a value that conforms to the <code>Hashable</code> protocol. This is how the SwiftUI layout engine differs between the tabs and can understand the uniqueness.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>TabView(selection: $selectedTab) {</span></span>
+<span class="line"><span>  VStack {</span></span>
+<span class="line"><span>    Button("Move to Second Tab") {</span></span>
+<span class="line"><span>      selectedTab = 2</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tabItem {</span></span>
+<span class="line"><span>    Label("First", systemImage: "1.square.fill")</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tag(1)</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  VStack {</span></span>
+<span class="line"><span>    Button("Move to Third Tab") {</span></span>
+<span class="line"><span>      selectedTab = 3</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tabItem {</span></span>
+<span class="line"><span>    Label("Second", systemImage: "2.square.fill")</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tag(2)</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  VStack {</span></span>
+<span class="line"><span>    Button("Move to First Tab") {</span></span>
+<span class="line"><span>      selectedTab = 1</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tabItem {</span></span>
+<span class="line"><span>    Label("Third", systemImage: "3.square.fill")</span></span>
+<span class="line"><span>  }</span></span>
+<span class="line"><span>  .tag(3)</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>Let’s go over the code above step by step.</p>
+<p>Firstly we are using the <code>VStack</code> views with a <code>Button</code> inside to select the next tab or the last the first accordingly.</p>
+<p>Then we are using the <code>tag</code> modifier for each of the tab items. We are using the <code>Int</code> value type to keep track of the currently selected tab. We are not limited to the <code>Int</code> value type, which conforms to the <code>Hashable</code> protocol, but we can use our type if we want to. For the sake of simplicity, we are using the <code>Int</code> this time.</p>
+<p><img src="/assets/swiftui-tabview/swiftui-tabview-selected-programmatically.gif" alt="Select current tab programmatically" loading="lazy" decoding="async"></p>
+<h2 id="customize-tabview">Customize TabView</h2>
+<p>Sadly there aren’t many options for customizing the <code>TabView</code> in SwiftUI. We can change the image and title for the tabs, but that is quite understandable.</p>
+<p>We can change the default accent color. Let’s change it to purple.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>TabView {</span></span>
+<span class="line"><span> // ...</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>.accentColor(.purple)</span></span></code></pre>
+<p><img src="/assets/swiftui-tabview/swiftui-tabview-accentcolor.png" alt="SwiftUI TabView with accentColor" loading="lazy" decoding="async"></p>
+<h2 id="tabview-styles-in-swiftui">TabView styles in SwiftUI</h2>
+<p>In SwiftUI, we are not limited to the regular tab bar style. Right now, we have three ways how to change the <code>TabView</code> styles:</p>
+<ul>
+<li><code>DefaultTabViewStyle	</code> - regular style that we all know;</li>
+<li><code>PageTabViewStyle</code> - scrolling pages with the page indicator;</li>
+<li><code>CarouselTabViewStyle</code> - specific style for watchOS that we’re not going to look into in this post.</li>
+</ul>
+<h3 id="create-scrolling-pages">Create scrolling pages</h3>
+<p>To create scrolling pages with the <code>TabView</code> in SwiftUI, we need to call the view modifier <code>tabViewStyle	</code> and pass an instance of <code>	PageTabViewStyle</code> style.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>TabView {</span></span>
+<span class="line"><span>  Color.gray</span></span>
+<span class="line"><span>  Color.green</span></span>
+<span class="line"><span>  Color.blue</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>.tabViewStyle(PageTabViewStyle())</span></span></code></pre>
+<p>If we want to hide the page indicator, we specify the <code>indexDisplayMode</code> parameter for the <code>PageTabViewStyle</code> instance and set it to <code>.never</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>TabView {</span></span>
+<span class="line"><span>  // ...</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))</span></span></code></pre>
+<p><img src="/assets/swiftui-tabview/swiftui-tabview-scrolling-pages.gif" alt="SwiftUI TabView with scrolling pages" loading="lazy" decoding="async"></p>
+<h2 id="tldr">TL;DR</h2>
+<p>TabBar on the bottom of the screen is one of the most important building blocks for modern iOS applications. Apple themselves is using it frequently in their apps.</p>
+<p>With SwiftUI, this element now has the new name <code>TabView</code>. It allows us to add the tab view and control the currently selected tab programmatically.</p>
+<p>The hidden feature of the <code>TabView</code> is that we can use it to show the multiple tabs with page indicators, and those can be controlled by scrolling between them. In UIKit, it was <code>UIPageViewController</code>.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://github.com/fassko/SwiftUITabView">Sample code</a></p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/">Human Interface Guidelines - Tab Bars</a></p>
+</li>
+<li>
+<p><a href="https://developer.apple.com/documentation/swiftui/tabview">SwiftUI documentation - TabView</a></p>
+</li>
+<li>
+<p><a href="https://www.iosapptemplates.com/blog/swiftui/tabview-swiftui">How to Create a Tab Bar in SwiftUI with TabView</a></p>
+</li>
+<li>
+<p><a href="https://www.hackingwithswift.com/quick-start/swiftui/adding-tabview-and-tabitem">Adding TabView and tabItem()</a></p>
+</li>
+<li>
+<p><a href="https://www.hackingwithswift.com/quick-start/swiftui/how-to-embed-views-in-a-tab-bar-using-tabview">How to embed views in a tab bar using TabView</a></p>
+</li>
+<li>
+<p><a href="https://www.appcoda.com/swiftui-tabview/">Introducing SwiftUI TabView and Working with Tab Bar Customization</a></p>
+</li>
+<li>
+<p><a href="https://serialcoder.dev/text-tutorials/swiftui/working-with-the-tab-view-in-swiftui/">Working with the Tab View in SwiftUI</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/swiftui-disclosure-group/">
+Next → How to show and hide content with DisclosureGroup using SwiftUI </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

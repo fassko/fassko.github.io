@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ERC-2981 NFT royalties with Solidity | Kristaps Grinbergs</title><meta name="description" content="With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered…"><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/blog/solidity-royalties-eip-2981/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="ERC-2981 NFT royalties with Solidity | Kristaps Grinbergs"><meta property="og:description" content="With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered…"><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="article"><meta property="og:url" content="https://kristaps.me/blog/solidity-royalties-eip-2981/"><meta property="article:published_time" content="2023-03-28T00:00:00.000Z"><meta property="article:modified_time" content="2023-03-28T00:00:00.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="ERC-2981 NFT royalties with Solidity | Kristaps Grinbergs"><meta name="twitter:description" content="With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered…"><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script type="application/ld+json">{"@context":"https://schema.org","@type":["Article","BlogPosting"],"headline":"Implementing the ERC-2981 NFT royalty standard with Solidity - a game-changer for creators to receive income from every sale","description":"With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered…","datePublished":"2023-03-28T00:00:00.000Z","dateModified":"2023-03-28T00:00:00.000Z","author":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"publisher":{"@type":"Person","@id":"https://kristaps.me/#person","name":"Kristaps Grinbergs","url":"https://kristaps.me","jobTitle":"Developer Relations Engineer Lead"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://kristaps.me/blog/solidity-royalties-eip-2981/"},"image":"https://kristaps.me/og-image.jpg","keywords":"Solidity, web3","url":"https://kristaps.me/blog/solidity-royalties-eip-2981/"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/"> /projects </a> </li><li class="nav-item"> <a href="/blog/" aria-current="page"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <div class="blog-item"> <h1> <a class="blog-title" href="/blog/solidity-royalties-eip-2981/"> Implementing the ERC-2981 NFT royalty standard with Solidity - a game-changer for creators to receive income from every sale </a> </h1> <div class="blog-date"> <ul class="blog-tags"> <li> <a href="/tags/solidity/">Solidity</a> </li><li> <a href="/tags/web3/">web3</a> </li> </ul> <time datetime="2023-03-28T00:00:00.000Z">Mar 28, 2023</time>  </div> <p class="post-dek">With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered impossible. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payments for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation.</p> <div class="blog-content"> <p>With the rise of NFTs on the Ethereum blockchain, creators can now monetize their digital art, music, videos, and other media in ways previously considered impossible. However, with the ownership and transfer of NFTs comes the question of royalties when creators receive payments for subsequent sales of their work. In this article, we will explore the concept of royalties in NFTs on Ethereum and how they are changing the landscape of digital ownership and creation.</p>
+<h2 id="the-nft-royalty-standard">The NFT royalty standard</h2>
+<p>The ERC-2981, also known as the NFT Royalty Standard, is a proposal for a new Ethereum token standard that addresses this need. By implementing ERC-2981, creators can receive a percentage of each subsequent sale of their NFTs on the secondary market. It outlines rules for how royalty payments are calculated and transferred automatically to the creator’s wallet whenever their NFT is resold on the secondary market.</p>
+<p>Implementing ERC-2981 would provide a transparent and efficient way for creators to receive a fair share of the profits from their NFTs, regardless of how many times they are resold.</p>
+<h2 id="openzeppelin-nft-royalties-implementation">OpenZeppelin NFT royalties implementation</h2>
+<p>OpenZeppelin is a widely recognized leader in the blockchain industry, and its Royalties Standard for NFTs builds on ERC-2981 to provide an even more comprehensive solution for tracking and distributing royalties. With OpenZeppelin’s Royalties Standard, creators can rest assured that they are fairly compensated for their work and have greater control over how their creations are sold and distributed.</p>
+<p>There are other implementations, or we can create our own according to the ERC-2981 standard, but that is out of the scope of this article.</p>
+<h2 id="using-the-nft-royalty-standard">Using the NFT royalty standard</h2>
+<p>ERC721Royalty extension is one of the many extensions OpenZeppelin provides, which adds a royalty payment mechanism to the ERC721 token standard.</p>
+<p>The ERC721Royalty extension adds a new function to the ERC721 standard called <code>_setTokenRoyalty</code> for a specific NFT or <code>_setDefaultRoyalty</code> for all the NFTs. This function allows a creator of an NFT to set a percentage of each sale that will be paid as a royalty to them. The royalty payment is automatically deducted from the sale price of the NFT and transferred to a creator.</p>
+<p>To use the <code>ERC721Royalty</code> extension, we must inherit our NFT smart contract from the <code>ERC721Royalty</code> and either set royalty. Let’s check out both ways, setting it for all the NFTs and specific ones.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#9ECBFF"> "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">contract</span><span style="color:#B392F0"> Royalties</span><span style="color:#F97583"> is</span><span style="color:#B392F0"> ERC721Royalty</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">// ...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="setting-royalties-per-nft">Setting royalties per NFT</h3>
+<p>To set the royalties fee per specific NFT, we need to use the <code>_setTokenRoyalty</code> function while minting the NFT. We need to provide the royalty-received address and fee numerator. The fee numerator is a percentage. For example, if an NFT is sold for 1 ETH and the royalty fee is set to 10%, the original creator would receive 0.1 ETH for that deal. If an NFT is sold for 2 ETH the next time, the original creator will receive another 0.2 ETH for that next deal, and so on, every time that NFT is sold in the future.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> safeMint</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#79B8FF">  address</span><span style="color:#FFAB70"> to</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#79B8FF">  uint256</span><span style="color:#FFAB70"> tokenId</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#79B8FF">  address</span><span style="color:#FFAB70"> receiver</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#79B8FF">  uint96</span><span style="color:#FFAB70"> feeNumerator</span></span>
+<span class="line"><span style="color:#E1E4E8">) </span><span style="color:#F97583">public</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  _safeMint</span><span style="color:#E1E4E8">(to, tokenId);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  _setTokenRoyalty</span><span style="color:#E1E4E8">(tokenId, receiver, feeNumerator);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Now when minting an NFT, we can provide these values.</p>
+<p><img src="/assets/solidity-erc-721-royalties/royalty-per-nft.png" alt="Royalty per NFT" loading="lazy" decoding="async"></p>
+<p>For the fee numerator, we are specifying it as a percentage without a coma. It means that <strong>1000</strong> is equivalent to <strong>10%</strong>.</p>
+<p>Now receiver will receive 10% from each resale on NFT marketplaces like OpenSea or Rarible.</p>
+<h3 id="setting-royalties-for-all-nfts">Setting royalties for all NFTs</h3>
+<p>The most straightforward way to specify a royalty fee is to configure that for all the NFTs equally. To do that, we can call the <code>_setDefaultRoyalty</code> function when deploying the smart contract. We must provide the royalty fee receiver and fee numerator similar to what we did per each NFT.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="solidity"><code><span class="line"><span style="color:#F97583">constructor</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">address</span><span style="color:#E1E4E8"> _receiver, </span><span style="color:#79B8FF">uint96</span><span style="color:#FFAB70"> feeNumerator</span><span style="color:#E1E4E8">) </span></span>
+<span class="line"><span style="color:#B392F0">  ERC721</span><span style="color:#E1E4E8">("Royalties", "RYLT") {</span></span>
+<span class="line"><span style="color:#B392F0">  _setDefaultRoyalty</span><span style="color:#E1E4E8">(_receiver, feeNumerator);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><img src="/assets/solidity-erc-721-royalties/royalty-all-nfts.png" alt="Royalty for all NFTs" loading="lazy" decoding="async"></p>
+<p>Now, all the NFT resales on marketplaces will require a royalty fee of 10% to be transferred to a creator.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>The NFT royalties enable creators to earn royalties on the secondary market sales of their NFTs, similar to how artists and musicians receive royalties when their work is resold.</p>
+<p>ERC-2981 is a standard for NFTs that specifies how creators of NFTs can receive a percentage of any future sales or transfers of their NFTs.</p>
+<p>The OpenZeppelin ERC721Royalty extension makes adding royalty functionality to your NFTs smart contracts easy.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>
+<p><a href="https://gist.github.com/fassko/e8f7c2b8bb263f8337845126a757f6c0">Sample code</a></p>
+</li>
+<li>
+<p><a href="https://eips.ethereum.org/EIPS/eip-2981">ERC-2981: NFT Royalty Standard</a></p>
+</li>
+<li>
+<p><a href="https://docs.openzeppelin.com/contracts/4.x/api/token/common#ERC2981">The ERC-2981 implementation by OpenZeppelin</a></p>
+</li>
+</ul>  <aside class="post-author"> <p> <a href="/about/">Kristaps Grinbergs</a>  · 
+DevRel Engineer Lead at Flare Network
+</p> </aside> <a class="post-next" href="/blog/solidity-eip-712-sign-ethers-js/">
+Next → Understanding the Signing Process of Solidity Transactions with Ethers.js </a> </div> </div> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html> <script>
+  (() => {
+    document.querySelectorAll('.blog-content pre[data-language]').forEach((pre) => {
+      const lang = pre.getAttribute('data-language') || 'text';
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+
+      const langLabel = document.createElement('span');
+      langLabel.className = 'code-block-lang';
+      langLabel.textContent = lang;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block-copy';
+      button.textContent = 'Copy';
+      button.addEventListener('click', () => {
+        navigator.clipboard.writeText(pre.textContent || '').then(() => {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 1500);
+        });
+      });
+
+      header.appendChild(langLabel);
+      header.appendChild(button);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+  })();
+</script>

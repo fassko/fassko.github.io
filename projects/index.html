@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Projects | Kristaps Grinbergs</title><meta name="description" content="Selected work across Flare, x402 payments, AI agents, and iOS — demos, open-source tools, and product builds by Kristaps Grinbergs."><meta name="author" content="Kristaps Grinbergs"><meta name="robots" content="index, follow"><link rel="canonical" href="https://kristaps.me/projects/"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script><meta property="og:site_name" content="Kristaps Grinbergs"><meta property="og:title" content="Projects | Kristaps Grinbergs"><meta property="og:description" content="Selected work across Flare, x402 payments, AI agents, and iOS — demos, open-source tools, and product builds by Kristaps Grinbergs."><meta property="og:image" content="https://kristaps.me/og-image.jpg"><meta property="og:image:secure_url" content="https://kristaps.me/og-image.jpg"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><meta property="og:type" content="website"><meta property="og:url" content="https://kristaps.me/projects/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@fassko"><meta name="twitter:title" content="Projects | Kristaps Grinbergs"><meta name="twitter:description" content="Selected work across Flare, x402 payments, AI agents, and iOS — demos, open-source tools, and product builds by Kristaps Grinbergs."><meta name="twitter:image" content="https://kristaps.me/og-image.jpg"><meta name="twitter:image:alt" content="Kristaps Grinbergs — Full-Stack, AI, Mobile &amp; Blockchain developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript><link rel="stylesheet" href="/styles.css?v=8d25b6db66"><link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="icon" href="/favicon.png" type="image/png"><link rel="alternate" type="application/rss+xml" title="Subscribe to Kristaps Grinbergs" href="/feed.rss"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',"G-HBCE3H3QVL");</script></head> <body>  <header class="header"> <div class="header-wrapper"> <div class="main-title"> <a href="/">Kristaps Grinbergs</a> </div> <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"> <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span> </button> <nav class="nav-container" id="site-nav" data-nav aria-label="Primary"> <ul class="nav"> <li class="nav-item"> <a href="/"> /home </a> </li><li class="nav-item"> <a href="/projects/" aria-current="page"> /projects </a> </li><li class="nav-item"> <a href="/blog/"> /blog </a> </li><li class="nav-item"> <a href="/talks/"> /talks </a> </li><li class="nav-item"> <a href="/about/"> /about </a> </li> </ul> <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme"> <span class="theme-glyph theme-glyph-dark" aria-hidden="true">◐</span> <span class="theme-glyph theme-glyph-light" aria-hidden="true">◑</span> </button> <script>
+  (() => {
+    const storageKey = 'theme';
+    const root = document.documentElement;
+
+    function preferred() {
+      const stored = localStorage.getItem(storageKey);
+      if (stored === 'light' || stored === 'dark') return stored;
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      if (toggle) {
+        toggle.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+        toggle.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+        );
+      }
+    }
+
+    apply(preferred());
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem(storageKey, next);
+        apply(next);
+      });
+    });
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+      if (localStorage.getItem(storageKey)) return;
+      apply(event.matches ? 'light' : 'dark');
+    });
+  })();
+</script> </nav> </div> </header> <script>
+  (() => {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    if (!toggle || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!document.documentElement.classList.contains('nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!document.documentElement.classList.contains('nav-open')) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || toggle.contains(target)) return;
+      setOpen(false);
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+  })();
+</script> <div class="wrapper"> <section class="blog-list"> <h1 class="page-title">Projects</h1>  <div class="project-filters" data-project-filters> <button type="button" class="project-filter is-active" data-filter="all" aria-pressed="true">
+all
+</button> <button type="button" class="project-filter" data-filter="web3" aria-pressed="false">
+web3
+</button> <button type="button" class="project-filter" data-filter="ai" aria-pressed="false">
+ai
+</button> <button type="button" class="project-filter" data-filter="ios" aria-pressed="false">
+ios
+</button> </div> <section class="projects" data-projects> <div class="projects-grid"> <article class="project-card project-card-featured-wide" data-categories="web3 ai"> <a href="https://flare.network" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/flare-devhub.jpg" alt="Flare Network" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://flare.network" target="_blank" rel="noopener noreferrer"> Flare Network </a> </h2> </div> <p class="project-description">Developer Relations across Flare's product suite: <a href="https://flare.network/products/fassets" target="_blank" rel="noopener noreferrer">FAssets</a> (trustless bridging for Bitcoin and XRP), the <a href="https://flare.network/products/flare-data-connector" target="_blank" rel="noopener noreferrer">Data Connector</a> (verified external data on-chain), <a href="https://flare.network/products/flare-smart-accounts" target="_blank" rel="noopener noreferrer">Smart Accounts</a> (DeFi from an XRPL wallet) and <a href="https://dev.flare.network/fcc/overview" target="_blank" rel="noopener noreferrer">Confidential Compute</a> (TEE-based off-chain computation). Building developer tools, writing documentation, running hackathons and technical onboarding for the agent and builder ecosystem, including <a href="https://dev.flare.network/fxrp/token-interactions/x402-payments" target="_blank" rel="noopener noreferrer">x402</a> payment integrations and <a href="/projects/flare-ai-skills/">Flare AI Skills</a>.</p> <p class="project-tags">solidity · typescript · x402 · ai</p>  </div> </article> <article class="project-card project-card-grid" data-categories="ai web3"> <a href="/projects/flare-ai-skills/"> <img class="project-card-image" src="/images/flare-ai-skills.jpg" alt="Flare AI Skills" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="/projects/flare-ai-skills/"> Flare AI Skills </a> </h2> </div> <p class="project-description">Agent skills that give AI coding assistants like Cursor, Claude Code, Codex and other coding agents structured domain knowledge of Flare.</p> <p class="project-tags">ai · agents · devrel</p>  </div> </article><article class="project-card project-card-grid" data-categories="web3 ai">   <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="/projects/x402-agent/"> x402 Weather Insurance Agent </a> </h2> </div> <p class="project-description">Parametric rainfall insurance on Flare. An AI agent pays per weather API call with x402. The TEE verifies on-chain FeeCollected before calling OpenWeatherMap.</p> <p class="project-tags">x402 · ai-agents · stablecoins</p>  </div> </article><article class="project-card project-card-grid" data-categories> <a href="https://latvia-weather.com/en" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/weather-latvia-com.jpg" alt="Latvia Weather" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://latvia-weather.com/en" target="_blank" rel="noopener noreferrer"> Latvia Weather </a> </h2> </div> <p class="project-description">Live weather observations across Latvia from national meteorology and road data sources.</p> <p class="project-tags">web</p>  </div> </article><article class="project-card project-card-grid" data-categories="web3"> <a href="https://www.saltox.co/" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/salto-x-dashboard-nft.png" alt="Salto X" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://www.saltox.co/" target="_blank" rel="noopener noreferrer"> Salto X </a> </h2> </div> <p class="project-description">Tokenised employee ownership for remote companies — Solidity contracts on Polygon and a Next.js client.</p> <p class="project-tags">solidity · nextjs · web3</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios">  <img class="project-card-image" src="/images/sharentic.png" alt="Sharentic" loading="lazy"> <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> Sharentic </h2> </div> <p class="project-description">On-demand rental platform built with SwiftUI and Firebase, with Stripe payments and an internal ops dashboard.</p> <p class="project-tags">ios · swiftui</p>  </div> </article><article class="project-card project-card-grid" data-categories>  <img class="project-card-image" src="/images/vaal-dashboard.png" alt="Vaal Dashboard" loading="lazy"> <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> Vaal Dashboard </h2> </div> <p class="project-description">Securitization tooling for capital markets — attract financing based on asset quality.</p> <p class="project-tags">react · fintech</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios">  <img class="project-card-image" src="/images/vibur.png" alt="Vibur" loading="lazy"> <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> Vibur </h2> </div> <p class="project-description">Awareness calendar for pleasant and unpleasant events — short in-the-moment prompts.</p> <p class="project-tags">ios · swiftui</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios"> <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/qminder-apple-tv.png" alt="Qminder Apple TV" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer"> Qminder Apple TV </a> </h2> </div> <p class="project-description">Queue displays over websockets using the Qminder Swift API.</p> <p class="project-tags">tvos · websockets</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios"> <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/qminder-sign-in.png" alt="Qminder iPad" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://www.qminder.com" target="_blank" rel="noopener noreferrer"> Qminder iPad </a> </h2> </div> <p class="project-description">Self-service sign-in for customers — native GPU animations with a JavaScript bridge.</p> <p class="project-tags">ios · ipad</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios">  <img class="project-card-image" src="/images/dodies.png" alt="Dodies.lv" loading="lazy"> <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> Dodies.lv </h2> </div> <p class="project-description">Outdoor trails map for Latvia — offline-friendly SwiftUI hiking guide.</p> <p class="project-tags">ios · swiftui · maps</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios">  <img class="project-card-image" src="/images/augidraugi.png" alt="Augi &amp; Draugi" loading="lazy"> <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> Augi &amp; Draugi </h2> </div> <p class="project-description">Map guide to plant-based dining across Latvia.</p> <p class="project-tags">ios</p>  </div> </article><article class="project-card project-card-grid" data-categories="ios"> <a href="https://apps.apple.com/us/app/hashberg-easy-hashtag-manager/id1549468659" target="_blank" rel="noopener noreferrer"> <img class="project-card-image" src="/images/hashberg.png" alt="Hashberg" loading="lazy"> </a>  <div class="project-card-body"> <div class="project-title-row"> <h2 class="project-title"> <a href="https://apps.apple.com/us/app/hashberg-easy-hashtag-manager/id1549468659" target="_blank" rel="noopener noreferrer"> Hashberg </a> </h2> </div> <p class="project-description">Organize hashtags by topic, copy them anywhere, and sync with iCloud.</p> <p class="project-tags">ios</p> <a class="project-card-appstore" href="https://apps.apple.com/us/app/hashberg-easy-hashtag-manager/id1549468659" target="_blank" rel="noopener noreferrer"> <img src="/images/download-appstore.svg" alt="Download Hashberg on the App Store"> </a> </div> </article> </div> </section> <script>
+      (() => {
+        const root = document.querySelector('[data-project-filters]');
+        const list = document.querySelector('[data-projects]');
+        if (!root || !list) return;
+
+        const buttons = [...root.querySelectorAll('[data-filter]')];
+        const items = [...list.querySelectorAll('.project-card')];
+
+        function apply(filter) {
+          buttons.forEach((button) => {
+            const active = button.getAttribute('data-filter') === filter;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+
+          items.forEach((item) => {
+            const categories = (item.getAttribute('data-categories') || '')
+              .split(/\s+/)
+              .filter(Boolean);
+            const show = filter === 'all' || categories.includes(filter);
+            item.hidden = !show;
+          });
+        }
+
+        root.addEventListener('click', (event) => {
+          const target = event.target.closest('[data-filter]');
+          if (!target) return;
+          apply(target.getAttribute('data-filter'));
+        });
+      })();
+    </script> </section> </div> <footer class="footer"> <div class="footer-inner"> <div class="footer-cta"> <h2 class="footer-title">Building something at the edge of AI and Web3?</h2> <p class="footer-copy">
+Open to consulting. Also happy to discuss speaking and workshops.
+</p> </div> <ul class="footer-links"> <li> <a class="footer-link" href="mailto:fassko@gmail.com"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/email.svg" alt=""> email </span> <span class="footer-link-value">fassko@gmail.com</span> </a> </li><li> <a class="footer-link" href="https://x.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/x.svg" alt=""> x </span> <span class="footer-link-value">@fassko</span> </a> </li><li> <a class="footer-link" href="https://github.com/fassko" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/github.svg" alt=""> github </span> <span class="footer-link-value">fassko</span> </a> </li><li> <a class="footer-link" href="https://www.linkedin.com/in/kristapsgrinbergs/" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/linkedin.svg" alt=""> linkedin </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li><li> <a class="footer-link" href="https://t.me/kristapsgrinbergs" target="_blank" rel="noopener noreferrer"> <span class="footer-link-label"> <img class="footer-link-icon" src="/images/telegram.svg" alt=""> telegram </span> <span class="footer-link-value">kristapsgrinbergs</span> </a> </li> </ul> </div> </footer>  </body> </html>
