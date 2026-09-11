@@ -4,7 +4,7 @@
 <div class="lightbox" data-lightbox hidden>
   <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close">✕</button>
   <button type="button" class="lightbox-prev" data-lightbox-prev aria-label="Previous photo">‹</button>
-  <img class="lightbox-image" data-lightbox-image alt="" />
+  <img class="lightbox-image" data-lightbox-image alt="" draggable="false" />
   <button type="button" class="lightbox-next" data-lightbox-next aria-label="Next photo">›</button>
 </div>
 
@@ -60,5 +60,50 @@
       if (event.key === 'ArrowLeft') show(index - 1);
       if (event.key === 'ArrowRight') show(index + 1);
     });
+
+    // Touch swipe: left = next, right = previous
+    const SWIPE_THRESHOLD = 50;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let trackingTouch = false;
+
+    root.addEventListener(
+      'touchstart',
+      (event) => {
+        if (root.hidden || event.touches.length !== 1) return;
+        trackingTouch = true;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    root.addEventListener(
+      'touchend',
+      (event) => {
+        if (!trackingTouch || event.changedTouches.length !== 1) return;
+        trackingTouch = false;
+
+        const dx = event.changedTouches[0].clientX - touchStartX;
+        const dy = event.changedTouches[0].clientY - touchStartY;
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        // Ignore taps and mostly-vertical gestures
+        if (absDx < SWIPE_THRESHOLD || absDx < absDy) return;
+
+        if (dx < 0) show(index + 1);
+        else show(index - 1);
+      },
+      { passive: true }
+    );
+
+    root.addEventListener(
+      'touchcancel',
+      () => {
+        trackingTouch = false;
+      },
+      { passive: true }
+    );
   })();
 </script>

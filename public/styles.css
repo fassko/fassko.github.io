@@ -1165,6 +1165,10 @@ html.nav-open .nav-toggle span:nth-child(3) {
   justify-content: center;
   background: rgba(0, 0, 0, 0.88);
   padding: 2rem;
+  /* Let the lightbox own horizontal swipes (prev/next) on touch devices */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .lightbox[hidden] {
@@ -1179,6 +1183,10 @@ html.nav-open .nav-toggle span:nth-child(3) {
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  touch-action: pan-y;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .lightbox-close,
