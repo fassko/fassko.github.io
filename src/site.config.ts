@@ -6,6 +6,8 @@ export const siteConfig = {
   twitter: '@fassko',
   email: 'fassko@gmail.com',
   ogImage: 'https://kristaps.me/og-image.jpg',
+  /** GA4 Measurement ID (same property as the old Publish site, Aug 2023). Override with PUBLIC_GA_MEASUREMENT_ID. */
+  gaMeasurementId: 'G-HBCE3H3QVL',
   sameAs: [
     'https://twitter.com/fassko',
     'https://github.com/fassko',

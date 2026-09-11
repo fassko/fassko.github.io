@@ -48,6 +48,16 @@ const stylesHash = createHash('sha1')
   .update(readFileSync(join(process.cwd(), 'public/styles.css')))
   .digest('hex')
   .slice(0, 10);
+
+/** GA4: env override, else production default from site config. Skip when unset (e.g. local/dev). */
+const gaIdRaw =
+  (typeof import.meta.env.PUBLIC_GA_MEASUREMENT_ID === 'string'
+    ? import.meta.env.PUBLIC_GA_MEASUREMENT_ID.trim()
+    : '') || (import.meta.env.PROD ? siteConfig.gaMeasurementId : '');
+const gaMeasurementId = /^G-[A-Z0-9]+$/i.test(gaIdRaw) ? gaIdRaw : '';
+const gaInlineScript = gaMeasurementId
+  ? `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(gaMeasurementId)});`
+  : '';
 ---
 
 <!doctype html>
@@ -141,8 +151,17 @@ const stylesHash = createHash('sha1')
         <script type="application/ld+json" set:html={JSON.stringify(block)} />
       ))
     }
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HBCE3H3QVL"></script>
-    <script src="/scripts/ga.js" is:inline></script>
+    {
+      gaMeasurementId && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+          />
+          <script is:inline set:html={gaInlineScript} />
+        </>
+      )
+    }
   </head>
   <body>
     <slot />
